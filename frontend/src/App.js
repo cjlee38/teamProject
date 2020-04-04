@@ -1,38 +1,87 @@
-import React, {useState} from 'react';
-import Todo from './components/Todo'
-import './App.css';
+import React, {useState, useRef} from 'react';
 
 function App() {
-  const [toDoList, setToDoList] = useState([
-    {
-      id: 1, 
-      title: '베트남어 공부', 
-      completed: false
-    },
-    {
-      id: 2, 
-      title: '산타토익', 
-      completed: false
-    },
-    {
-      id: 3, 
-      title: '인강처리', 
-      completed: false
-    },    
-    {
-      id: 4, 
-      title: '스프링공부', 
-      completed: false
-    },
-    {
-      id: 5, 
-      title: '리엑트공부', 
-      completed: false
-    },
-  ]);
+  const [inputs, setInputs] = useState({
+    id: "",
+    password: ""
+  });
+
+  const {id, password} = inputs;
+
+  const idRef = useRef();
+
+  const onChange = e => {
+    const {value, name} = e;
+    console.log(value, name);
+
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  }
+  
+  const reset = () => {
+    setInputs({
+      id : "",
+      password : ""
+    })
+  }
+
+  const tryLogin = () => {
+    console.log(id, password);
+    reset();
+  }
+
+  const trySignUp = () => {
+    reset();
+  }
+
   return (
-    <div className="App">
-      <Todo toDoList={toDoList}/>
+    <div>
+      <div className="head">
+        <div className="leftLogo">
+
+        </div>
+      </div>
+      <div className="body">
+        <div className="welcomeWording">
+          <div>
+            <b>한국외국어대학교</b>
+          </div>
+          <div>
+            <b>시간표 추천 시스템</b>
+          </div>
+          <div>
+            <b>Hankuk University of Foreign Studies</b>
+          </div>
+          <div>
+            <b>Schdule Maker</b>
+          </div>
+        </div>
+        <div className="id,Password">
+          <div className="id">
+              <b>아디</b>
+              <input 
+                placeholder="학번"
+                name="id"
+                onChange={onChange} 
+                value={id}
+                ref={idRef}/>
+          </div>
+          <div className="password">
+              <b>비번</b>
+              <input 
+                placeholder="비번" 
+                name="password" 
+                onChange={onChange} 
+                value={password}/>
+          </div>
+        </div>
+        <div className="Button">
+            <button onClick={tryLogin}>로그인</button>
+            <button onClick={trySignUp}>회원가입</button>
+        </div>
+      </div>
     </div>
   );
 }
