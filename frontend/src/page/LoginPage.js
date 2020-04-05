@@ -1,42 +1,40 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react'
 
-function App() {
-  const [inputs, setInputs] = useState({
-    id: "",
-    password: ""
-  });
-
-  const {id, password} = inputs;
-
-  const idRef = useRef();
-
-  const onChange = e => {
-    const {value, name} = e;
-    console.log(value, name);
-
-    setInputs({
-      ...inputs,
-      [name]: value
+function LoginPage() {
+    const [inputs, setInputs] = useState({
+      id: "",
+      password: ""
     });
-  }
-  
-  const reset = () => {
-    setInputs({
-      id : "",
-      password : ""
-    })
-  }
+    
+    const {id, password} = inputs;
 
-  const tryLogin = () => {
-    console.log(id, password);
-    reset();
-  }
+    const onChange = e => {
+      const {value, name} = e;
+      console.log(value, name);
 
-  const trySignUp = () => {
-    reset();
-  }
+      setInputs({
+          ...inputs,
+          [name]: value
+      });
+    }
+    
+    const reset = () => {
+      setInputs({
+        id : "",
+        password : ""
+      })
+    }
 
-  return (
+    const tryLogin = () => {
+      console.log(id, password);
+      reset();
+    }
+
+    const trySignUp = () => {
+      reset();
+    }
+    
+    return (
     <div>
       <div className="head">
         <div className="leftLogo">
@@ -83,7 +81,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+    )
 }
 
-export default App;
+export default LoginPage
