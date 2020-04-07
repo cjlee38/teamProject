@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import Title from './Title'
+import React, {useState} from 'react';
+import Input from './components/Input';
+import Button from './components/Button';
+import Title from './Title';
+import Logo from '../../image/logo.png';
+//import './LoginPage.scss';
 
 function LoginPage() {
     const [inputs, setInputs] = useState({
@@ -38,10 +40,13 @@ function LoginPage() {
     }
     
     return (
-    <div>
-      <div className="head">
-        <div className="leftLogo">
-
+    <div className="LoginPage">
+      <div className="head" style={{display: 'flex', flexDirection:'row'}}>
+        <div>
+          <img src={Logo} classname="logo" alt="logo" width='15%'/>
+        </div>
+        <div>
+          <b>SIGN IN</b>
         </div>
       </div>
       <div className="body">
@@ -65,6 +70,7 @@ function LoginPage() {
             <Button onClick={trySignUp} name={"회원가입"}/>
         </div>
       </div>
+      <div className="foot"/>
     </div>
     )
 }

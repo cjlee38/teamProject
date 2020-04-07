@@ -1,0 +1,27 @@
+.LoginPage {
+    .head {
+        height: 15vh;
+        width: 100%;
+        justify-content: space-between;
+        margin: 0;
+        .left {
+            padding-left: 1rem;
+            width: 50%;
+        }
+        .right {
+            padding-right: 1rem;
+            width: 50%;
+        }
+    }
+    .body {
+        height: 70vh;
+        width: 100%;
+        justify-content: center;
+        background-color: burlywood;
+    }
+    .foot {
+        height: 15vh;
+        background-color: green;
+    }
+}
+
