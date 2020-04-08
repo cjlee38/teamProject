@@ -113,6 +113,8 @@ def crawl_Table(rq_year, rq_semester):
                     obj.professor = prof
                     obj.credit = credit
                     obj.dept = dept_list[k]
+                    obj.year = rq_year
+                    obj.semester = rq_semester
                 else:
                     Insturction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], year = rq_year, semester = rq_semester).save()
@@ -198,7 +200,10 @@ def crawl_Table(rq_year, rq_semester):
                     obj.time = time2
                     obj.professor = prof
                     obj.credit = credit
-                    obj.dept = dept_list[k]
+                    obj.dept = '교양'
+                    
+                    obj.year = rq_year
+                    obj.semester = rq_semester
                 else:
                     Insturction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept='교양', year = rq_year, semester = rq_semester).save()
