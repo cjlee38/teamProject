@@ -50,6 +50,7 @@ class Insturction(models.Model):
     subject = models.CharField(max_length=200)
     url = models.CharField(max_length=300)
     year = models.IntegerField(blank=True, null=True)
+    semester = models.CharField(max_length=10)
 
     class Meta:
         managed = False
