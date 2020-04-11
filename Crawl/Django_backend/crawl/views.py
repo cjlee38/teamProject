@@ -52,7 +52,7 @@ def signup(request):
         return render(request, 'signup.html')
 
 def user(request):
-    user_Table('201600786', 'hwaitaeng1', request.user)
+    user_Table(std_number, password, request.user)
     return render(request, 'su.html')
 
         
