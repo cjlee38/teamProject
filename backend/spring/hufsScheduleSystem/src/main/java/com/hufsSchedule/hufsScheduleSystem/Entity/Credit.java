@@ -30,8 +30,8 @@ public class Credit {
     @Column(name="total_credit")
     private String totalCredit;
 
-    @OneToOne(mappedBy = "credit")
-    @JoinColumn(name="user_credit", referencedColumnName = "userId")
+    @OneToOne
+    @JoinColumn(name="user_credit", referencedColumnName = "user_id")
     private User user;
 
 }

@@ -10,17 +10,27 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class liberalArt {
+public class LiberalArt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique = true)
     private Long id;
-    @Column(name="user")
-    private String user;
     @Column(name="area")
     private String area;
     @Column(name="number_of_subject")
     private String numberOfSubject;
     @Column(name="acqusition_credits")
     private String acqusitionCredits;
+
+    @ManyToOne
+    @JoinColumn(name = "user", insertable = false, updatable = false)
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+
+        if(!user.getLiberalArts().contains(this)) {
+            user.getLiberalArts().add(this);
+        }
+    }
 }

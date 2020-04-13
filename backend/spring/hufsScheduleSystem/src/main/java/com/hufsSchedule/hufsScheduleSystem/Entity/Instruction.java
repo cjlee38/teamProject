@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class instruction {
+public class Instruction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="instuction_id", unique = true)
@@ -45,5 +47,25 @@ public class instruction {
     private String numberOfPeople;
     @Column(name="note")
     private String note;
+
+    @OneToMany(mappedBy = "instruction", targetEntity = Timetable.class)
+    private List<Timetable> timetables = new ArrayList<Timetable>();
+
+    public void addTimetables(Timetable timetable) {
+        this.timetables.add(timetable);
+        if (timetable.getInstruction() != this) {
+            timetable.setInstruction(this);
+        }
+    }
+
+    @OneToMany(mappedBy = "instruction", targetEntity = Course.class)
+    private List<Course> courses = new ArrayList<Course>();
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+        if (course.getInstruction() != this) {
+            course.setInstruction(this);
+        }
+    }
 
 }
