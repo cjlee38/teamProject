@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    HI
+    <form class="form-signin" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="form-control" placeholder="학번" name="username" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="password" required>
+        <button class="btn btn-lg btn-primary btn-block sign-in" type="submit">
+            Sign in
+        </button>
+    </form>
+</body>
+</html>
