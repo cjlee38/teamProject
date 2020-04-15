@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 class Driver:
     def __init__(self):
         options = webdriver.ChromeOptions()
-        # options.add_argument('headless')
+        options.add_argument('headless')
         options.add_argument(
             "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
 
@@ -35,7 +35,7 @@ class Driver:
                 self.driver.switch_to_frame(name)
                 break
             except:
-                # self.get_default()
+                self.get_default()
                 print(name, 'frame 이동')
                 continue
 

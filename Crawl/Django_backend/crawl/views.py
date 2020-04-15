@@ -25,21 +25,21 @@ def test(request):
 #         return self.request.user
 
 def home(request):
-    # crawl_Table('16', '1')
-    # crawl_Table('16', '2')
+    crawl_Table('16', '1')
+    crawl_Table('16', '2')
 
-    # crawl_Table('17', '1')
+    crawl_Table('17', '1')
 
-    # crawl_Table('17', '2')
+    crawl_Table('17', '2')
 
-    # crawl_Table('18', '1')
+    crawl_Table('18', '1')
 
-    # crawl_Table('18', '2')
+    crawl_Table('18', '2')
 
 
-    # crawl_Table('19', '1')
-    # crawl_Table('19', '2')
-    # crawl_Table('20', '1')
+    crawl_Table('19', '1')
+    crawl_Table('19', '2')
+    crawl_Table('20', '1')
 
     User = get_user_model()
     User.objects.all()
@@ -55,7 +55,7 @@ def login(request):
             return render(request, 'su.html', {'user' : str(request.user)})
 
 def inst(request):
-    obj = Insturction.objects.all()
+    obj = Instruction.objects.all()
     return render(request, 'list.html', {'obj' : obj})
 
 def signup(request):
@@ -71,7 +71,7 @@ def signup(request):
         return render(request, 'signup.html')
 
 def user(request):
-    user_Table('201600786', 'Stork1591!', request.user)
+    # user_Table(id, pw, request.user)
     return render(request, 'su.html')
 
         

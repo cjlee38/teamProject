@@ -8,6 +8,8 @@ def user_Table(id_input, pw_input, user_obj):
     obj = Credit.objects.filter(user_credit = user_obj)
     if not len(obj):
         obj = Credit()
+    else:
+        obj = obj[0]
     obj.user_credit = user_obj
     # ID 입력
     id_box = driver.find_by_name('user_id')
@@ -151,7 +153,7 @@ def user_Table(id_input, pw_input, user_obj):
             course_obj = Course()
             # print(score_year, score_semester)
             # filt = Insturction.objects.filter(instruction_number__contains = temp_list[1], rq_year = score_year, rq_semester = score_semester)
-            filt = Insturction.objects.filter(instruction_number__contains = temp_list[1])
+            filt = Instruction.objects.filter(instruction_number__contains = temp_list[1])
 
             print(temp_list[1], type(temp_list[1]))
             # print(filt)
@@ -180,7 +182,6 @@ def user_Table(id_input, pw_input, user_obj):
     user_obj.year = (major_dict['이수 학기'] // 2) + 1
     # print(courses_list)
     # print(user_df)
-    obj.save()
 
 
 
@@ -216,16 +217,15 @@ def user_Table(id_input, pw_input, user_obj):
         
         area_name = tds[area].text.split('(')[0]
 
-        obj = Liberal_Art()
-        if len(Liberal_Art.objects.filter(user = user_obj, area = area_name)):
-            obj = Liberal_Art.objects.filter(user = user_obj, area = area_name)[0]
-        obj.user = user_obj
-        obj.area = area_name
+        lib_obj = LiberalArt()
+        if len(LiberalArt.objects.filter(user = user_obj, area = area_name)):
+            lib_obj = LiberalArt.objects.filter(user = user_obj, area = area_name)[0]
+        lib_obj.user = user_obj
+        lib_obj.area = area_name
         number_of_subject = int(tds[count].text)
-        obj.number_of_subject = number_of_subject
+        lib_obj.number_of_subject = number_of_subject
         acquisition_credits = int(tds[got_credits].text)
-        obj.acquisition_credits = acquisition_credits
-        obj.save()
+        lib_obj.acquisition_credits = acquisition_credits
 
         # temp_list.append(area)    # 행 요소 종합
         # temp_list.append(number_of_subject)    # 행 요소 종합
@@ -253,6 +253,10 @@ def user_Table(id_input, pw_input, user_obj):
         user_obj.teaching = True
     else:
         user_obj.teaching = False
+
+
+    obj.save()
+    lib_obj.save()
     user_obj.save()
 
     # 창 종료

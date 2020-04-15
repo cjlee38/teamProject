@@ -103,7 +103,7 @@ def crawl_Table(rq_year, rq_semester):
             restrict_num = tds[15].get_text().split('/')[1].strip()
             note = tds[16].get_text().strip()
             try:
-                obj = Insturction.objects.filter(instruction_number = course_num)
+                obj = Instruction.objects.filter(instruction_number = course_num)
                 if len(obj):
                     obj.area = area
                     obj.year = year
@@ -119,7 +119,7 @@ def crawl_Table(rq_year, rq_semester):
                     obj.rq_year = rq_year
                     obj.rq_semester = rq_semester
                 else:
-                    Insturction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
+                    Instruction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], rq_year = rq_year, rq_semester = rq_semester).save()
 
             except Exception as err:
@@ -193,7 +193,7 @@ def crawl_Table(rq_year, rq_semester):
             restrict_num = tds[15].get_text().split('/')[1].strip()
             note = tds[16].get_text().strip()
             try:
-                obj = Insturction.objects.filter(instruction_number = course_num)
+                obj = Instruction.objects.filter(instruction_number = course_num)
                 if len(obj):
                     obj.area = area
                     obj.year = year
@@ -210,7 +210,7 @@ def crawl_Table(rq_year, rq_semester):
                     obj.rq_year = rq_year
                     obj.rq_semester = rq_semester
                 else:
-                    Insturction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
+                    Instruction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept='교양', rq_year = rq_year, rq_semester = rq_semester).save()
             except Exception as err:
                 print(err)
