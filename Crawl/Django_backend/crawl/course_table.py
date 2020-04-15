@@ -1,7 +1,7 @@
 from .selenium_class import *
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup as bs
-from .models import Insturction
+from .models import Instruction
 import time
 
 

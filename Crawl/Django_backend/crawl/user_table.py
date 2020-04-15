@@ -1,12 +1,12 @@
 from .selenium_class import *
-from .models import User, Credit, Course, Insturction, Liberal_Art
+from .models import User, Credit, Course, Instruction, LiberalArt
 
 def user_Table(id_input, pw_input, user_obj):
     
     driver = Driver()
     driver.get_url("https://wis.hufs.ac.kr/src08/jsp/index.jsp")    # 종합정보시스템 페이지 로딩
-    obj = Credit.objects.filter(user_credit = user_obj)[0]
-    if not obj:
+    obj = Credit.objects.filter(user_credit = user_obj)
+    if not len(obj):
         obj = Credit()
     obj.user_credit = user_obj
     # ID 입력

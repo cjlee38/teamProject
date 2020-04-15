@@ -4,6 +4,25 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model
 from .models import *
 from .user_table import user_Table
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import UserSerializer
+
+
+
+@api_view(["GET"])
+def test(request):
+    user = get_user_model().objects.get(student_number = request.user.student_number)
+    serialize = UserSerializer(user)
+    return Response(serialize.data)
+
+    
+# class UserAPI(generics.RetrieveAPIView):
+#     permission_classes = [permissions.IsAuthenticated]
+#     serializer_class = UserSerializer
+
+#     def get_object(self):
+#         return self.request.user
 
 def home(request):
     # crawl_Table('16', '1')
@@ -52,7 +71,7 @@ def signup(request):
         return render(request, 'signup.html')
 
 def user(request):
-    user_Table(std_number, password, request.user)
+    user_Table('201600786', 'Stork1591!', request.user)
     return render(request, 'su.html')
 
         
