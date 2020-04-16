@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crawl',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -74,34 +76,34 @@ WSGI_APPLICATION = 'Django_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'innodb',
-#         'USER': 'hufs',
-#         'PASSWORD': 'rhtjrgns12',
-#         'HOST': 'hufsscheduleservice.cvazzjdw6jxq.ap-northeast-2.rds.amazonaws.com',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
-#         }
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysite',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': 'innodb',
+        'USER': 'hufs',
+        'PASSWORD': 'rhtjrgns12',
+        'HOST': 'hufsscheduleservice.cvazzjdw6jxq.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mysite',
+#         'USER': 'root',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
+#         }
+#     }
+# }
 
 
 # Password validation

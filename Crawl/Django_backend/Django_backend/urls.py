@@ -24,6 +24,7 @@ urlpatterns = [
     path('list', views.inst, name='list'),
     path('signup/', views.signup, name='signup'),
     path('user', views.user, name='user'),
+    path('test', views.test),
 
 
 

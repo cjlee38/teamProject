@@ -40,52 +40,52 @@ class Driver:
                 continue
 
     def find_by_xpath(self, xpath): # Xpath로 단일 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
                         EC.presence_of_element_located(
                             (By.XPATH, xpath)))
 
     def find_by_class(self, class_name): # class name으로 단일 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
                         EC.presence_of_element_located(
                             (By.CLASS_NAME, class_name)))
 
     def find_by_tag(self, tag): # tag로 단일 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
                 (By.TAG_NAME, tag)))
 
 
     def find_by_name(self, name): # name으로 단일 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
                 (By.NAME, name)))
 
     def find_all_by_class(self, class_name): # class name으로 모든 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.TAG_NAME, class_name)))
 
     def find_all_by_tag(self, tag): # tag로 모든 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.TAG_NAME, tag)))
 
     def find_all_by_name(self, name): # name으로 모든 요소 찾기
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.NAME, name)))
 
     def find_all_by_tag_with_obj(self, obj, name): # name으로 모든 요소 찾기
-        return WebDriverWait(obj, 5).until(
+        return WebDriverWait(obj, 10).until(
             EC.presence_of_all_elements_located(
                 (By.TAG_NAME, name)))
 
     def find_by_tag_with_obj(self, obj, name): # name으로 모든 요소 찾기
-        return WebDriverWait(obj, 5).until(
+        return WebDriverWait(obj, 10).until(
             EC.presence_of_element_located(
                 (By.TAG_NAME, name)))
     def find_by_link(self, text):
-        return WebDriverWait(self.driver, 5).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
                 (By.LINK_TEXT, text)))
 
