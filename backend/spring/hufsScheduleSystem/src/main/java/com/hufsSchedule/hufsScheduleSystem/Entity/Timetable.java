@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name="Timetable")
 public class Timetable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

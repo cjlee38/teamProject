@@ -12,12 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name="User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id", unique = true)
     private Long userId;
 
+    private String password;
     @Column(name="student_number", unique = true)
     private Long studentNumber;
     private String name;
