@@ -1,6 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.Entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,13 @@ public class User {
     private String year;
     private String foreign;
     private String teaching;
+
+    @Builder
+    public User(Long studentNumber, String password) {
+        this.studentNumber = studentNumber;
+        this.password = password;
+    }
+
 
     @OneToOne(mappedBy = "user")
     private Credit credit;
