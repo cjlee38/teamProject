@@ -12,14 +12,16 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CreditService {
-    private final CreditRepository creditRepository;
     private final UserRepository userRepository;
 
-    public Optional<User> findByUserId(Long userId){
-        return userRepository.findById(userId);
+    public User findByUserId(Long userId){
+        final Optional<User> user = userRepository.findById(userId);
+        return user.get();
     }
 
-    public Optional<Credit> getMyCredit(Long userId){
-        return creditRepository.findByUser(findByUserId(userId));
+    public Credit getMyCredit(Long userId){
+        final User user = findByUserId(userId);
+        final Credit credit = user.getCredit();
+        return credit;
     }
 }
