@@ -6,11 +6,13 @@ import com.hufsSchedule.hufsScheduleSystem.ResultForm.CommonResult;
 import com.hufsSchedule.hufsScheduleSystem.Service.ResponseService;
 import com.hufsSchedule.hufsScheduleSystem.Service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("web/v1/user")
@@ -20,14 +22,14 @@ public class UserController {
 
     @GetMapping("/Login")
     public CommonResult login(
-            @RequestParam(value = "studentNumber", required =  true)Long studentNumber,
+            @RequestParam(value = "studentNumber", required =  true)String studentNumber,
             @RequestParam(value = "password", required = true)String password
     )throws Exception {
         return responseService.getSingleResult(userService.login(studentNumber,password));
     }
 
     @PostMapping("/SignUp")
-    public User signUp(@RequestBody @Valid final UserDto.SignUpReq dto) {
+    public User signUp(@RequestBody UserDto.SignUpReq dto ) {
         return userService.signUp(dto);
     }
 }

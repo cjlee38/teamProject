@@ -14,15 +14,12 @@ public class UserDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SignUpReq{
-        @NotEmpty
-        @NotBlank(message = "학번을 작성해주세요.")
-        private Long studentNumber;
-        @NotEmpty
+        private String studentNumber;
         @NotBlank(message = "비밀번호를 작성해주세요.")
         private String password;
 
         @Builder
-        public SignUpReq(Long studentNumber, String password){
+        public SignUpReq(String studentNumber, String password){
             this.studentNumber = studentNumber;
             this.password = password;
         }

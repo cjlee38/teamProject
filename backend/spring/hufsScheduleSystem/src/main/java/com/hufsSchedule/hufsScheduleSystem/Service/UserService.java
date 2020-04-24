@@ -15,16 +15,15 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User login(Long studentNumber, String password) {
+    public User login(String studentNumber, String password) {
         return userRepository.findByStudentNumberAndPassword(studentNumber,password).orElseThrow(UserNotFoundException::new);
     }
 
-    private void isExitedStudentNumber (Long studentNumber){
+    private void isExitedStudentNumber (String studentNumber){
         if(userRepository.findByStudentNumber(studentNumber).orElse(null) != null){
             throw new UserDuplicationException(studentNumber);
         }
     }
-
 
     public User signUp(UserDto.SignUpReq dto){
         isExitedStudentNumber(dto.getStudentNumber());

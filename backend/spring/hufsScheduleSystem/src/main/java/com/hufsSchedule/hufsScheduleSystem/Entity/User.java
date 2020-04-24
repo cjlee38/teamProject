@@ -13,26 +13,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name="User")
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id", unique = true)
     private Long userId;
-
     private String password;
-    @Column(name="student_number", unique = true)
-    private Long studentNumber;
+    @Column(name="student_number")
+    private String studentNumber;
     private String name;
     private String major;
-    private String second_major;
+    @Column(name="second_major")
+    private String secondMajor;
     private String minor;
     private String year;
-    private String foreign;
+    private String foreigner;
     private String teaching;
 
     @Builder
-    public User(Long studentNumber, String password) {
+    public User(String studentNumber, String password) {
         this.studentNumber = studentNumber;
         this.password = password;
     }
