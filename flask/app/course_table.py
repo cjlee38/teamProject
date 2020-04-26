@@ -134,7 +134,7 @@ def crawl_Table(rq_year, rq_semester, db):
                     sql_insert = sql_insert.format(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], rq_year = int(rq_year), rq_semester = int(rq_semester))
                     insert_row = db_class.execute_all(sql_insert)
-                    print(sql_insert)
+                    # print(sql_insert)
                     # db.commit()
                     # Instruction(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     # number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], rq_year = rq_year, rq_semester = rq_semester).save()
@@ -178,6 +178,7 @@ def crawl_Table(rq_year, rq_semester, db):
     VALUES (\"{area}\", \"{class_time}\", {credit}, \"{dept}\", \"{instruction_number}\", \"{note}\", \"{number_of_people}\",
     \"{professor}\", {required}, {rq_semester}, {rq_year}, \"{subject}\", {time}, \"{url}\", {year});"""
 
+
             sql_search = """SELECT * FROM instruction WHERE instruction_number=\"{inst_num}\";"""
 
             sql_update = """UPDATE instruction SET area=\"{area}\", class_time=\"{class_time}\", credit={credit}, dept=\"{dept}\", note=\"{note}\", number_of_people=\"{number_of_people}\",
@@ -192,7 +193,7 @@ def crawl_Table(rq_year, rq_semester, db):
             try:
                 year = int(tds[2].get_text().strip())
             except:
-                year = None
+                year = "NULL"
             course_num = tds[3].get_text().strip()
 
             subject_name = tds[4].get_text().strip().splitlines()
@@ -235,12 +236,14 @@ def crawl_Table(rq_year, rq_semester, db):
                     sql_update = sql_update.format(inst=course_num, area=area, year=year, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept='교양', rq_year = int(rq_year), rq_semester = int(rq_semester))
                     update = db_class.execute_all(sql_update)
-                    print(update)
+                    # print(sql_update)
                 else:
+
                     sql_insert = sql_insert.format(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
                     number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept='교양', rq_year = int(rq_year), rq_semester = int(rq_semester))
+
                     insert_row = db_class.execute_all(sql_insert)
-                    print(insert_row)
+                    
             except Exception as err:
                 print(err)
                 print(subject_name, prof, class_time)
