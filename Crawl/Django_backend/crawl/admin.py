@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from .models import User, Insturction
+from .models import User, Instruction
 
 class LogAdmin(admin.ModelAdmin):
     list_display = ('action_time','user','content_type','change_message','is_addition','is_change','is_deletion')
@@ -78,5 +78,5 @@ class Course_Admin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Insturction)
+admin.site.register(Instruction)
 admin.site.unregister(Group)

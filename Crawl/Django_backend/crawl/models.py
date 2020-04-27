@@ -41,7 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table="User"
 
 
-class Liberal_Art(models.Model):
+class LiberalArt(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING)
     area = models.CharField(max_length=100)
     number_of_subject = models.IntegerField()
@@ -69,13 +70,15 @@ class Credit(models.Model):
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
     user_course = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='user_course')
-    course_inst_num = models.ForeignKey('Insturction', models.DO_NOTHING, db_column='instruction_number')
+    course_inst_num = models.ForeignKey('Instruction', models.DO_NOTHING, db_column='instruction_number')
+    grade = models.CharField(max_length=4)
     
     class Meta:
         db_table="Course"
 
-class Insturction(models.Model):
-    instruction_number = models.CharField(primary_key=True, max_length=10)
+class Instruction(models.Model):
+    Insturction_id = models.AutoField(primary_key=True)
+    instruction_number = models.CharField(unique=True, max_length=10)
     area = models.CharField(max_length=40)
     dept = models.CharField(max_length=100)
     required = models.IntegerField()
@@ -88,7 +91,6 @@ class Insturction(models.Model):
     subject = models.CharField(max_length=200)
     url = models.CharField(max_length=300)
     year = models.IntegerField(blank=True, null=True)
-
     rq_year = models.CharField(max_length=10)
     rq_semester = models.CharField(max_length=10)
     
@@ -99,7 +101,7 @@ class Insturction(models.Model):
 class Timetable(models.Model):
     table_id = models.AutoField(primary_key=True)
     user_table = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='user_table')
-    timetable_inst_num = models.ForeignKey(Insturction, models.DO_NOTHING, db_column='instruction_number')
+    timetable_inst_num = models.ForeignKey(Instruction, models.DO_NOTHING, db_column='instruction_number')
     
     class Meta:
         db_table="Timetable"

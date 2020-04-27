@@ -1,4 +1,5 @@
 import React from 'react'
+import "./Input.scss"
 
 function Input(props) {
 
@@ -8,8 +9,9 @@ function Input(props) {
 
     return (
         <div className="Input">
-            <b>{props.placeholder}</b>
+            <b className="InputName">{props.name}</b>
             <input 
+            className="InputBox"
             placeholder={props.placeholder}
             name={props.name}
             onChange={onChange} 
