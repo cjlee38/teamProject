@@ -1,0 +1,12 @@
+.Title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.titleWord {
+    font-size: 25pt;
+    line-height: 30pt;
+    text-align: center;
+    font-weight: bold;
+}

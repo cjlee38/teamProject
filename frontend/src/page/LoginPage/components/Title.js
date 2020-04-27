@@ -1,19 +1,20 @@
 import React from 'react'
+import './Title.scss'
 
 export default function Title() {
     return (
-        <div className="welcomeWording">
+        <div className="Title">
           <div>
-            <b>한국외국어대학교</b>
+            <b className="titleWord">한국외국어대학교</b>
           </div>
           <div>
-            <b>시간표 추천 시스템</b>
+            <b className="titleWord">시간표 추천 시스템</b>
           </div>
           <div>
-            <b>Hankuk University of Foreign Studies</b>
+            <b className="titleWord">Hankuk University of Foreign Studies</b>
           </div>
           <div>
-            <b>Schdule Maker</b>
+            <b className="titleWord">Schdule Maker</b>
           </div>
         </div>
     )
