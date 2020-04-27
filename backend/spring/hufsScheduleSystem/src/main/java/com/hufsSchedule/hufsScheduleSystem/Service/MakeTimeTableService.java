@@ -14,7 +14,8 @@ public class MakeTimeTableService {
 
     public void checkCondition(Long userId){
         ConditionDto.courseIdRes condition = conditionCheckService.checkConditionForTimeTable(userId);
-        // GrdCond.Major major = new Business()
+        // getUsersInfo --> studentYear, firstMajorName, secondMajorName.
+
 
         // 전공클래스 / 교양클래스로부터 데이터 받아오고
         // e.g. Major Buisness = new Business(init by condition);
