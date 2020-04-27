@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './page/LoginPage/LoginPage';
+//import Login from './page/LoginPage/LoginPage';
+import Home from './page/Homepage/Homebutton';
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
 

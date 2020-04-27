@@ -3,6 +3,7 @@ import Input from './components/Input';
 import Button from './components/Button';
 import Title from './Title';
 import Logo from '../../image/logo.png';
+//import Homebutton from '../Homepage/Homebutton';
 //import './LoginPage.scss';
 
 function LoginPage() {
@@ -44,9 +45,6 @@ function LoginPage() {
       <div className="head" style={{display: 'flex', flexDirection:'row'}}>
         <div>
           <img src={Logo} classname="logo" alt="logo" width='15%'/>
-        </div>
-        <div>
-          <b>SIGN IN</b>
         </div>
       </div>
       <div className="body">
