@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Input from './components/Input';
 import Button from './components/Button';
-import Title from './Title';
+import Title from './components/Title';
 import Logo from '../../image/logo.png';
 //import './LoginPage.scss';
 
@@ -30,8 +30,15 @@ function LoginPage() {
       })
     }
 
-    const tryLogin = () => {
+    const tryLogin = async() => {
       console.log(id, password);
+      try {
+        let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
+        let json = await response.json();
+        console.log(json.success);
+      } catch (error) {
+        console.log(error);
+      };
       reset();
     }
 
@@ -41,12 +48,9 @@ function LoginPage() {
     
     return (
     <div className="LoginPage">
-      <div className="head" style={{display: 'flex', flexDirection:'row'}}>
+      <div className="head">
         <div>
-          <img src={Logo} classname="logo" alt="logo" width='15%'/>
-        </div>
-        <div>
-          <b>SIGN IN</b>
+          <img src={Logo} className="logo" alt="logo"/>
         </div>
       </div>
       <div className="body">
