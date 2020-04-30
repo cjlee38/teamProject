@@ -36,8 +36,8 @@ class RegistUser(Resource):
 
             _std_num = args['std_num']
             _Password = args['password']
-            # sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
-            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test3')
+            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
+            # sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test3')
             row = db_class.execute_all(sql_user_search)
             row = "" if not row else row
             if len(row):
