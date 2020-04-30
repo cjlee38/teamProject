@@ -9,7 +9,7 @@ function Button(props) {
     return (
         <div>
             <button className={props.value}
-            onClick={onClick}>{props.name}</button>
+           >{props.name}</button>
         </div>
     )
 }

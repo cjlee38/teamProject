@@ -25,14 +25,28 @@ class Table2 extends Component {
   }
 }*/
 
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 
-       'react-bootstrap-table'
+       'react-bootstrap-table';
+import axios from 'axios';
 //import '../css/Table.css'
 //import '../dist/react-bootstrap-table-all.min.css'
  
  
 class Table extends Component {
+
+  componentDidMount() {
+    this._dbTest();
+  }
+  
+  _dbTest = async() => {
+    const res = await axios.get('/api/host');
+    console.log(res.data)
+  }
+
+
+
+
   render() {
     return (
       <div>
@@ -50,7 +64,7 @@ class Table extends Component {
                             }>
             
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='1전공'
+          <TableHeaderColumn dataField='first_major'
                              dataAlign='center'
                              headerAlign="center"
                              width="13%"
@@ -60,7 +74,7 @@ class Table extends Component {
 
             1전공
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='이중'
+          <TableHeaderColumn dataField='second_major'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
@@ -69,25 +83,25 @@ class Table extends Component {
                              headerAlign="center">
             이중전공
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='부전공'
+          <TableHeaderColumn dataField='sub_major'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
                              headerAlign="center">
-          부전공
+          2전공
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='교양외국어'
+          <TableHeaderColumn dataField='out_door'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
                              headerAlign="center">
-            교양외국어
+            실외
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='교양'
+          <TableHeaderColumn dataField='liberal_arts'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
@@ -96,7 +110,16 @@ class Table extends Component {
                              headerAlign="center">
             교양
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='교직'
+          <TableHeaderColumn dataField='minor'
+                             dataAlign='center'
+                             width="13.5%"
+                             thStyle={
+                                {fontWeight: 'heavy', 
+                                backgroundColor: '#CCCCCC'}}
+                             headerAlign="center">
+            부전공
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='teaching'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
@@ -105,15 +128,34 @@ class Table extends Component {
                              headerAlign="center">
             교직
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='외국어'
+          <TableHeaderColumn dataField='optional'
                              dataAlign='center'
                              width="13.5%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
                              headerAlign="center">
-            외국어
+            자선
           </TableHeaderColumn>
+          <TableHeaderColumn dataField='total_credit'
+                             dataAlign='center'
+                             width="13.5%"
+                             thStyle={
+                                {fontWeight: 'heavy', 
+                                backgroundColor: '#CCCCCC'}}
+                             headerAlign="center">
+            총취득
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='average_score'
+                             dataAlign='center'
+                             width="13.5%"
+                             thStyle={
+                                {fontWeight: 'heavy', 
+                                backgroundColor: '#CCCCCC'}}
+                             headerAlign="center">
+            총평점
+          </TableHeaderColumn>
+          
         </BootstrapTable>
       </div>
     )

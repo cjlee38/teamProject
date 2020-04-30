@@ -16,4 +16,4 @@ class Campus extends React.Component {
     }
   }
 
-  export default CampusSelect;
+  export default Campus;
