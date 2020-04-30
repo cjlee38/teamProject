@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from flask_restful import reqparse
 import database
 from course_table import *
+from user_table import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,24 +25,66 @@ class RegistUser(Resource):
         row = "" if not row else row
         print(row)
 
+    def post(self):
+        db_class = database.Database()
+
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('std_num', type=str)
+            parser.add_argument('password', type=str)
+            args = parser.parse_args()
+
+            _std_num = args['std_num']
+            _Password = args['password']
+            # sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
+            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test3')
+            row = db_class.execute_all(sql_user_search)
+            row = "" if not row else row
+            if len(row):
+                print(row)
+                user_id = row[0]['user_id']
+                sql_liberal_delete= """DELETE FROM liberal_art WHERE user={user_id};""".format(user_id=user_id)
+                db_class.execute(sql_liberal_delete)
+
+                sql_course_delete = """DELETE FROM course WHERE user_course={user_id};""".format(user_id=user_id)
+                db_class.execute(sql_course_delete)
+                
+                user_Table('201600786', "Hwaitaeng1!", user_id, db_class)
+
+                # while True:
+                #     try:
+                #         # user_Table(_std_num,_Password, user_id, db_class)
+                #         user_Table('201600786', "Hwaitaeng1!", user_id, db_class)
+                #         break
+                #     except Exception as e:
+                #         print(e)
+                #         pass
+                db_class.commit()
+                return {'status': 'success'}
+
+            else:
+                raise Exception('아이디를 다시 입력')
+           
+        except Exception as e:
+            return {'error': str(e)}
+
 class ReigstInst(Resource):
-    def insert(self):
+    def post(self):
         db_class = database.Database()
-        sql = "INSERT INTO instruction VALUES ()"
+        parser = reqparse.RequestParser()
+        parser.add_argument('rq_year', type=str)
+        parser.add_argument('rq_sem', type=str)
+        args = parser.parse_args()
 
-    def get(self):
-        db_class = database.Database()
-        # sql = "SELECT * FROM instruction WHERE instruction_number={inst}".format(inst=inst_num)
-        # sql = "SELECT * FROM instruction WHERE instruction_number='D03310101'"
-        # row = db_class.execute_all(sql)
-        # row = "" if not row else row
-        # print(row)    
-        crawl_Table('14', '1', db_class)
-        pass
+        rq_year = args['rq_year']
+        rq_sem = args['rq_sem']
+        crawl_Table(rq_year, rq_sem, db_class)
 
+        return {'status': 'success'}
 
 
-api.add_resource(RegistUser, '/user')
+
+api.add_resource(RegistUser, '/user_profile')
 api.add_resource(ReigstInst, '/inst_update')
 
 
