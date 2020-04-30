@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
-import Input from './components/Input';
-import Button from './components/Button';
-import Title from './Title';
+import Input from '../LoginPage/components/Input';
+import Button from '../LoginPage/components/Button';
+import Title from '../LoginPage/components/Title';
 import Logo from '../../image/logo.png';
 import Table from './components/Table';
 
@@ -23,8 +23,7 @@ function Check() {
       <div className="body">
         <h1>1.학점</h1>
         <Table data={data}/>
-        <Chart/>
-        <Chart/>
+       
       </div>
 
       <div className="foot">

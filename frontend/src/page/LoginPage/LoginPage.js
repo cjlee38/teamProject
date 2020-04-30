@@ -1,11 +1,36 @@
 import React, {useState} from 'react';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Input from './components/Input';
 import Button from './components/Button';
 import Title from './components/Title';
 import Logo from '../../image/logo.png';
 import './LoginPage.scss';
+import Signuppage from '../Signuppage/Signuppage';
+import MainPage from '../MainPage/MainPage';
 
-function LoginPage() {
+
+function LoginPage () {
+  return (
+      <Router> 
+          <div style={{margin:20}}> 
+               
+              <div>   
+               <hr />
+               <Switch>
+                  <Route path="/" exact={true} component={Login} />
+                  <Route path="/Main/:id/:password" component={MainPage}/>
+                  <Route path="/Singup" component={Signuppage}/>
+               </Switch>
+              </div>
+              
+          </div> 
+      </Router>
+  )
+} 
+
+
+
+const Login = () => {
     const [inputs, setInputs] = useState({
       id: "",
       password: ""
@@ -31,6 +56,7 @@ function LoginPage() {
     }
 
     const tryLogin = async() => {
+      console.log('sdffd')
       console.log(id, password);
       try {
         let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
@@ -58,20 +84,26 @@ function LoginPage() {
         <div className="idPassword">
           <Input 
             placeholder={"ex)195002215"}
-            name={"학번"}
+            name={"id"}
             onChange={onChange}
             value={id}
+            text={"학번"}
             />
           <Input 
             placeholder={"ex)12345678"}
-            name={"비밀번호"}
+            name={"password"}
             onChange={onChange}
             value={password}
+            text={"비밀번호"}
             />
         </div>
         <div className="Button">
+          <Link to="/Main">
             <Button onClick={tryLogin} name={"로그인"} value={"login"}/>
+          </Link>
+          <Link to="/Signup">
             <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
+          </Link>  
         </div>
       </div>
       <div className="foot"/>
