@@ -36,8 +36,8 @@ class RegistUser(Resource):
 
             _std_num = args['std_num']
             _Password = args['password']
-            # sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
-            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test3')
+            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
+            # sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test3')
             row = db_class.execute_all(sql_user_search)
             row = "" if not row else row
             if len(row):
@@ -48,17 +48,15 @@ class RegistUser(Resource):
 
                 sql_course_delete = """DELETE FROM course WHERE user_course={user_id};""".format(user_id=user_id)
                 db_class.execute(sql_course_delete)
-                
-                user_Table('201600786', "Hwaitaeng1!", user_id, db_class)
 
-                # while True:
-                #     try:
-                #         # user_Table(_std_num,_Password, user_id, db_class)
-                #         user_Table('201600786', "Hwaitaeng1!", user_id, db_class)
-                #         break
-                #     except Exception as e:
-                #         print(e)
-                #         pass
+
+                while True:
+                    try:
+                        user_Table(_std_num,_Password, user_id, db_class)
+                        break
+                    except Exception as e:
+                        print(e)
+                        pass
                 db_class.commit()
                 return {'status': 'success'}
 
