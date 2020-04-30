@@ -251,3 +251,4 @@ def crawl_Table(rq_year, rq_semester, db):
 
     db.commit()
     driver.driver.quit()
+    

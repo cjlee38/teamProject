@@ -87,16 +87,6 @@ def user_Table(id_input, pw_input, user_id, db):
     for i in major_list:    # major_dict에 저장
         text = i.split()
         major_dict[text[1].strip('[]')] = text[2]
-    major = list(major_dict.values())
-    if '이중전공' in major_dict.keys():
-        user_major = major[0]
-        user_second_major = major[1]
-    else:
-        if len(major) > 1:
-            user_major = major[0]
-            user_minor = major[1]
-        else:
-            user_major = major[0]
 
     # 아래쪽 frame
     # 년도/학기별 취득 성적
@@ -193,7 +183,7 @@ def user_Table(id_input, pw_input, user_id, db):
     else:
         major_dict['교직'] = False
 
-    print(domain_dict)  # credit 테이블 용
+    # print(domain_dict)  # credit 테이블 용
 
 
     # credit table insert
@@ -235,23 +225,34 @@ def user_Table(id_input, pw_input, user_id, db):
 
     # user table insert
     user_year = (major_dict['이수 학기'] // 2) + 1
-    if '이중전공' in major_dict.keys():
-        sql_user_insert ="""  UPDATE user SET major=\"{major}\", second_major=\"{second_major}\", year={year}, foreigner={foreigner}, teaching={teaching}
-    WHERE user_id={user_id};"""
-        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], second_major=major_dict['이중전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'], user_id=user_id)
 
-    elif '부전공' in major_dict.keys():
-        sql_user_insert = """  UPDATE user SET major=\"{major}\", minor=\"{minor}\", year={year}, foreigner={foreigner}, teaching={teaching}
+    intensive = False
+    keys = list(major_dict.keys())
+    if (user_year != 1 and len(keys) == 1) or '전공심화' in keys[1]:
+        intensive = True
+
+    if '이중전공' in keys:
+        sql_user_insert ="""  UPDATE user SET major=\"{major}\", second_major=\"{second_major}\", year={year}, foreigner={foreigner}, teaching={teaching}, intensive_major={intensive}
     WHERE user_id={user_id};"""
-        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], minor=major_dict['부전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'])
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], second_major=major_dict['이중전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'], intensive=intensive, user_id=user_id)
+
+    elif '전공심화(부전공)' in keys or '부전공' in keys:
+        minor = None
+        if intensive:
+            minor = major_dict['전공심화(부전공)']
+        else:
+            minor = major_dict['부전공']
+        sql_user_insert = """  UPDATE user SET major=\"{major}\", minor=\"{minor}\", year={year}, foreigner={foreigner}, teaching={teaching}, intensive_major={intensive}
+    WHERE user_id={user_id};"""
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], minor=minor, year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'], intensive=intensive, user_id=user_id)
     else:
-        sql_user_insert = """  UPDATE user SET major=\"{major}\", year={year}, foreigner={foreigner}, teaching={teaching}
+        sql_user_insert = """  UPDATE user SET major=\"{major}\", year={year}, foreigner={foreigner}, teaching={teaching}, intensive_major={intensive}
     WHERE user_id={user_id};"""
-        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'])
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'], intensive=intensive, user_id=user_id)
 
     db_class.execute(sql_user_insert)
 
-    print(major_dict)   # user 테이블용
+    # print(major_dict)   # user 테이블용
 
 
     # course table insert
@@ -284,7 +285,7 @@ def user_Table(id_input, pw_input, user_id, db):
         db_class.execute(sql_lib_insert)
 
 
-    print(credits_list)  # liberal_art 테이블용
+    # print(credits_list)  # liberal_art 테이블용
 
 
 
