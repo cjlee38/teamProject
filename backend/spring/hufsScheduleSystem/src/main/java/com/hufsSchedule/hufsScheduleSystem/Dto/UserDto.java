@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 public class UserDto {
@@ -33,7 +34,30 @@ public class UserDto {
 
     @Getter
     public static class Res {
+        private Long userId;
+        private String password;
+        private String studentNumber;
+        private String name;
+        private String major;
+        private String secondMajor;
+        private String minor;
+        private Integer year;
+        private Boolean foreigner;
+        private Boolean teaching;
 
+        @Builder
+        public Res(Long userId, String password, String studentNumber, String name, String major, String secondMajor, String minor, int year, boolean foreigner, boolean teaching){
+            this.userId = userId;
+            this.password = password;
+            this.studentNumber = studentNumber;
+            this.name = name;
+            this.major = major;
+            this.secondMajor = secondMajor;
+            this.minor = minor;
+            this.year = year;
+            this.foreigner = foreigner;
+            this.teaching = teaching;
+        }
     }
 
 }

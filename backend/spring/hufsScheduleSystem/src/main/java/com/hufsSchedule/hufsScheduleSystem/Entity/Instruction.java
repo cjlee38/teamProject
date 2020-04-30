@@ -2,6 +2,7 @@ package com.hufsSchedule.hufsScheduleSystem.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,14 +12,14 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Table(name="Instruction")
 public class Instruction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="instuction_id", unique = true)
+    @Column(name="instruction_id", unique = true)
     private Long instructionId;
-    @Column(name="instuction_number", unique = true)
+    @Column(name="instruction_number", unique = true)
     private Long instructionNumber;
     @Column(name="rq_year")
     private Long rqYear;
@@ -29,7 +30,7 @@ public class Instruction {
     @Column(name="area")
     private String area;
     @Column(name="year")
-    private String year;
+    private int year;
     @Column(name="subject")
     private String subject;
     @Column(name="professor")
@@ -37,13 +38,13 @@ public class Instruction {
     @Column(name="url")
     private String url;
     @Column(name="credit")
-    private String credit;
+    private int credit;
     @Column(name="time")
-    private String time;
+    private int time;
     @Column(name="class_time")
     private String classTime;
     @Column(name="required")
-    private String required;
+    private boolean required;
     @Column(name="number_of_people")
     private String numberOfPeople;
     @Column(name="note")

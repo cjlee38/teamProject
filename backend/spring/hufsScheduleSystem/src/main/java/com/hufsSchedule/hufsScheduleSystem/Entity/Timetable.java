@@ -2,6 +2,7 @@ package com.hufsSchedule.hufsScheduleSystem.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Table(name="Timetable")
 public class Timetable {
     @Id
@@ -17,7 +18,7 @@ public class Timetable {
     @Column(name="table_id")
     private Long tableId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_table", insertable = false, updatable = false)
     private User user;
 
@@ -29,7 +30,7 @@ public class Timetable {
         }
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "timetable_inst_num", insertable = false, updatable = false)
     private Instruction instruction;
 

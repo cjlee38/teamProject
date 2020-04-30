@@ -2,6 +2,9 @@ package com.hufsSchedule.hufsScheduleSystem.Service;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
+import com.hufsSchedule.hufsScheduleSystem.Repository.CreditRepositorySupport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,20 +13,20 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ConditionCheckService {
-    private final CreditService creditService;
-    private final CourseService courseService;
+    private final CreditRepositorySupport creditRepositorySupport;
+    private final CourseRepositorySupport courseRepositorySupport;
 
     public ConditionDto.courseNameRes checkCondition(Long userId){
-        final Credit credit = creditService.getMyCredit(userId);
-        final List<String> instructions = courseService.getMyCourses(userId);
-        ConditionDto.courseNameRes res = new ConditionDto.courseNameRes(credit, instructions);
+        Credit credit = creditRepositorySupport.findByUser(userId);
+        List<String> courses = courseRepositorySupport.findInstructionNameByUser(userId);
+        ConditionDto.courseNameRes res = new ConditionDto.courseNameRes(credit, courses);
         return res;
     }
 
-    public ConditionDto.courseIdRes checkConditionForTimeTable(Long userId){
-        final Credit credit = creditService.getMyCredit(userId);
-        final List<Long> instructionsId = courseService.getMyCoursesId(userId);
-        ConditionDto.courseIdRes res = new ConditionDto.courseIdRes(credit, instructionsId);
+    public ConditionDto.courseInstructionRes checkConditionForTimeTable(Long userId){
+        Credit credit = creditRepositorySupport.findByUser(userId);
+        List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
+        ConditionDto.courseInstructionRes res = new ConditionDto.courseInstructionRes(credit, courses);
         return res;
     }
 

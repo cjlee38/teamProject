@@ -1,9 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +9,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Table(name="user")
 public class User {
     @Id
@@ -27,9 +24,9 @@ public class User {
     @Column(name="second_major")
     private String secondMajor;
     private String minor;
-    private String year;
-    private String foreigner;
-    private String teaching;
+    private Integer year;
+    private Boolean foreigner;
+    private Boolean teaching;
 
     @Builder
     public User(String studentNumber, String password) {
@@ -70,7 +67,5 @@ public class User {
             liberalArt.setUser(this);
         }
     }
-
-
 
 }

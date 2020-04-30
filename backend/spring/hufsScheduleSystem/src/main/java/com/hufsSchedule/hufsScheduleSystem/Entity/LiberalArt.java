@@ -2,6 +2,7 @@ package com.hufsSchedule.hufsScheduleSystem.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Table(name="Liberal_Art")
 public class LiberalArt {
     @Id
@@ -19,11 +20,11 @@ public class LiberalArt {
     @Column(name="area")
     private String area;
     @Column(name="number_of_subject")
-    private String numberOfSubject;
+    private int numberOfSubject;
     @Column(name="acqusition_credits")
-    private String acqusitionCredits;
+    private int acqusitionCredits;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", insertable = false, updatable = false)
     private User user;
 

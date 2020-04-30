@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/SignUp")
-    public User signUp(@RequestBody UserDto.SignUpReq dto ) {
+    public boolean signUp(@RequestBody UserDto.SignUpReq dto ) {
         return userService.signUp(dto);
     }
 }

@@ -1,6 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,12 @@ public class ConditionDto {
     }
 
     @NoArgsConstructor(access= AccessLevel.PROTECTED)
-    public static class courseIdRes {
+    public static class courseInstructionRes {
         private Credit credit;
-        private List<Long> instructions;
+        private List<Instruction> instructions;
 
         @Builder
-        public courseIdRes(Credit credit, List<Long> instructions){
+        public courseInstructionRes(Credit credit, List<Instruction> instructions){
             this.credit = credit;
             this.instructions = instructions;
         }

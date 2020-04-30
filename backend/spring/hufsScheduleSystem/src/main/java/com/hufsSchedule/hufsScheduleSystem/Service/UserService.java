@@ -15,8 +15,21 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User login(String studentNumber, String password) {
-        return userRepository.findByStudentNumberAndPassword(studentNumber,password).orElseThrow(UserNotFoundException::new);
+    public UserDto.Res login(String studentNumber, String password) {
+        User user = userRepository.findByStudentNumberAndPassword(studentNumber,password).orElseThrow(UserNotFoundException::new);
+        UserDto.Res result = UserDto.Res.builder()
+                .userId(user.getUserId())
+                .password(user.getPassword())
+                .studentNumber(user.getStudentNumber())
+                .name(user.getName())
+                .major(user.getMajor())
+                .secondMajor(user.getSecondMajor())
+                .minor(user.getMinor())
+                .year(user.getYear())
+                .foreigner(user.getForeigner())
+                .teaching(user.getTeaching())
+                .build();
+        return result;
     }
 
     private void isExitedStudentNumber (String studentNumber){
@@ -25,8 +38,9 @@ public class UserService {
         }
     }
 
-    public User signUp(UserDto.SignUpReq dto){
+    public boolean signUp(UserDto.SignUpReq dto){
         isExitedStudentNumber(dto.getStudentNumber());
-        return userRepository.save(dto.toEntity());
+        userRepository.save(dto.toEntity());
+        return true;
     }
 }

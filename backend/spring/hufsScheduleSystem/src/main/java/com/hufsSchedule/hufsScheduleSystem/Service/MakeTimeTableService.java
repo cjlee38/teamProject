@@ -13,7 +13,7 @@ public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
 
     public void checkCondition(Long userId){
-        ConditionDto.courseIdRes condition = conditionCheckService.checkConditionForTimeTable(userId);
+        ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(userId);
         // getUsersInfo --> studentYear, firstMajorName, secondMajorName.
 
 
