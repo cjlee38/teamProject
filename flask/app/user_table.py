@@ -1,16 +1,11 @@
 from selenium_class import *
-# from .models import User, Credit, Course, Instruction, LiberalArt
 
-def user_Table(id_input, pw_input, user_obj):
-    
+def user_Table(id_input, pw_input, user_id, db):
+    db_class = db
     driver = Driver()
     driver.get_url("https://wis.hufs.ac.kr/src08/jsp/index.jsp")    # 종합정보시스템 페이지 로딩
-    obj = Credit.objects.filter(user_credit = user_obj)
-    if not len(obj):
-        obj = Credit()
-    else:
-        obj = obj[0]
-    obj.user_credit = user_obj
+
+
     # ID 입력
     id_box = driver.find_by_name('user_id')
     id_box.send_keys(id_input)
@@ -20,9 +15,6 @@ def user_Table(id_input, pw_input, user_obj):
     # 로그인
     login_btn = driver.find_by_xpath('/html/body/div/form[3]/div[2]/div/div[2]/div/a')
     driver.click(login_btn)
-
-
-
 
     # 비밀번호 변경 안내 예외 처리
     try:
@@ -47,15 +39,17 @@ def user_Table(id_input, pw_input, user_obj):
     driver.click(ent)
 
     driver.get_fra('ifr_tab1')
-
+    
     tds = driver.find_all_by_tag('td')
-    if tds[1].text == '정원외신입 / 특례모집' or '외국인' in tds[1].text:
-        obj.foreign = True
-        print('재외국민')
-    else:
-        obj.foreign = False
+    major_dict = {}
 
+    _foreign = None
+    if tds[1].text == '정원외신입 / 특례모집' or '외국인' in tds[1].text:
+        _foreign = True
+    else:
+        _foreign = False
         print('내국인')
+    major_dict['재외국민'] = _foreign
 
 
 
@@ -81,26 +75,10 @@ def user_Table(id_input, pw_input, user_obj):
     th = driver.find_all_by_tag_with_obj(domain_grade, 'th')    # 영역 이름
     td = driver.find_all_by_tag_with_obj(domain_grade, 'td')    # 이수 학점
 
-    for i in range(1, len(th) - 1):
-        domain_dict[th[i].text] = int(td[i].text)
-
-    print(domain_dict)
-    val = list(domain_dict.values())
-    obj.first_major = val[0]
-    obj.second_major = val[1]
-    obj.sub_major = val[2]
-    obj.outdoor = val[3]
-    obj.liberal_arts = val[4]
-    obj.minor = val[5]
-    obj.teaching = val[6]
-    obj.optional = val[7]
-    obj.total_credit = val[8]
-    obj.average_score = float(td[len(th) - 1].text)
-
-
+    for i in range(1, len(th)):
+        domain_dict[th[i].text] = td[i].text
     
     # 이수 전공
-    major_dict = {}
 
     domain_grade = tables[1]
     td = driver.find_by_tag_with_obj(domain_grade, 'td')    # 이수 전공
@@ -111,14 +89,14 @@ def user_Table(id_input, pw_input, user_obj):
         major_dict[text[1].strip('[]')] = text[2]
     major = list(major_dict.values())
     if '이중전공' in major_dict.keys():
-        user_obj.major = major[0]
-        user_obj.second_major = major[1]
+        user_major = major[0]
+        user_second_major = major[1]
     else:
         if len(major) > 1:
-            user_obj.major = major[0]
-            user_obj.minor = major[1]
+            user_major = major[0]
+            user_minor = major[1]
         else:
-            user_obj.major = major[0]
+            user_major = major[0]
 
     # 아래쪽 frame
     # 년도/학기별 취득 성적
@@ -129,9 +107,8 @@ def user_Table(id_input, pw_input, user_obj):
     tables = driver.find_all_by_tag('table')[1]    # 년도/학기별 취득 성적 테이블
 
     tr = driver.find_all_by_tag_with_obj(tables, 'tr')  # 테이블 요소
-    # columns = tr[0].text.split()    # columns 구분
 
-    # courses_list = []
+    courses_list = []
     global score_year 
     global score_semester
 
@@ -143,25 +120,8 @@ def user_Table(id_input, pw_input, user_obj):
                 temp_list.append(i.text.strip())
             if temp_list[5] == "F":
                 continue
-            check = Course.objects.filter(user_course = user_obj)     
-            for i in check:
-                if temp_list[1] in i.course_inst_num.instruction_number:
-                    print(temp_list[1])
-                    continue
-                else:
-                    break
-            course_obj = Course()
-            # print(score_year, score_semester)
-            # filt = Insturction.objects.filter(instruction_number__contains = temp_list[1], rq_year = score_year, rq_semester = score_semester)
-            filt = Instruction.objects.filter(instruction_number__contains = temp_list[1])
+            courses_list.append(temp_list[1:])
 
-            print(temp_list[1], type(temp_list[1]))
-            # print(filt)
-            course_obj.course_inst_num = filt[0]
-            course_obj.user_course = user_obj
-
-            course_obj.save()
-            # courses_list.append(temp_list[1:])  # 수강 과목 리스트에 각 과목 추가
         else:
             if '이수 학기' in major_dict.keys():
                 major_dict['이수 학기'] += 1
@@ -171,19 +131,6 @@ def user_Table(id_input, pw_input, user_obj):
             score_time = tr[i].text.split()
             score_year = score_time[0][2:]
             score_semester = score_time[2]
-
-
-    # 유저 데이터 프레임 생성
-    # user_df = pd.DataFrame(courses_list, columns=columns[1:])
-    # # pd.set_option('display.max_columns', 500)
-    # user_df.set_index(columns[1], inplace=True)
-
-    print(major_dict)
-    user_obj.year = (major_dict['이수 학기'] // 2) + 1
-    # print(courses_list)
-    # print(user_df)
-
-
 
 
     # 교양 영역별 취득 현황
@@ -212,27 +159,19 @@ def user_Table(id_input, pw_input, user_obj):
         if '계' in trs[i].text:   # (소계) 제외
             continue
         tds = driver.find_all_by_tag_with_obj(trs[i], 'td') # 행 요소
-        # temp_list = []
+        temp_list = []
         
         
         area_name = tds[area].text.split('(')[0]
 
-        lib_obj = LiberalArt()
-        if len(LiberalArt.objects.filter(user = user_obj, area = area_name)):
-            lib_obj = LiberalArt.objects.filter(user = user_obj, area = area_name)[0]
-        lib_obj.user = user_obj
-        lib_obj.area = area_name
         number_of_subject = int(tds[count].text)
-        lib_obj.number_of_subject = number_of_subject
         acquisition_credits = int(tds[got_credits].text)
-        lib_obj.acquisition_credits = acquisition_credits
 
-        # temp_list.append(area)    # 행 요소 종합
-        # temp_list.append(number_of_subject)    # 행 요소 종합
-        # temp_list.append(acquisition_credits)    # 행 요소 종합
-        # if len(temp_list):
-        #     credits_list.append(temp_list)  # 교양 영역에 각 행 추가
-    print(credits_list)
+        temp_list.append(area_name)    # 행 요소 종합
+        temp_list.append(number_of_subject)    # 행 요소 종합
+        temp_list.append(acquisition_credits)    # 행 요소 종합
+        if len(temp_list):
+            credits_list.append(temp_list)  # 교양 영역에 각 행 추가
 
 
     # 교직 이수 여부
@@ -250,16 +189,106 @@ def user_Table(id_input, pw_input, user_obj):
     td = driver.find_all_by_tag('td')  # 교직 이수 현황 행 찾기
 
     if td[0].text == '1':   # 순번이 있다면
-        user_obj.teaching = True
+        major_dict['교직'] = True
     else:
-        user_obj.teaching = False
+        major_dict['교직'] = False
+
+    print(domain_dict)  # credit 테이블 용
 
 
-    obj.save()
-    lib_obj.save()
-    user_obj.save()
+    # credit table insert
+    val = list(domain_dict.values())
+    print(val)
+    _first_major = int(val[0])
+    _second_major = int(val[1])
+    _sub_major = int(val[2])
+    _outdoor = int(val[3])
+    _liberal_arts = int(val[4])
+    _minor = int(val[5])
+    _teaching = int(val[6])
+    _optional = int(val[7])
+    _total_credit = int(val[8])
+    _average_score = float(val[9])
+
+    sql_credit_search = """SELECT credit_id FROM credit WHERE user_credit={user_id};""".format(user_id=user_id)
+    row = db_class.execute_all(sql_credit_search) 
+    row = "" if not row else row
+    if len(row):
+        # 이미 credit row 존재하니깐 update문으로
+        sql_credit_update = """UPDATE credit SET  
+    first_major={first_major}, liberal_arts={liberal_arts}, minor={minor}, optional={optional}, out_door={out_door}, second_major={second_major}, sub_major={sub_major},
+    teaching={teaching}, total_credit={total_credit}, average_score={average_score} WHERE user_credit={user_id};"""
+        sql_credit_update = sql_credit_update.format(first_major=_first_major, liberal_arts=_liberal_arts, minor=_minor, optional=_optional,
+    out_door=_outdoor, second_major=_second_major, sub_major=_sub_major, teaching=_teaching, total_credit=_total_credit, average_score=_average_score, user_id=user_id)
+        db_class.execute_all(sql_credit_update)
+    else:
+        # 새로운 credit 생성, insert문으로
+        sql_credit_insert = """INSERT INTO credit 
+    (first_major, liberal_arts, minor, optional, out_door, second_major, sub_major,
+    teaching, total_credit, average_score, user_credit) 
+    VALUES ({first_major}, {liberal_arts}, {minor}, {optional}, {out_door}, {second_major}, {sub_major},
+    {teaching}, {total_credit}, {average_score}, {user_id});"""
+        sql_credit_insert = sql_credit_insert.format(first_major=_first_major, liberal_arts=_liberal_arts, minor=_minor, optional=_optional,
+    out_door=_outdoor, second_major=_second_major, sub_major=_sub_major, teaching=_teaching, total_credit=_total_credit, average_score=_average_score, user_id=user_id)
+        db_class.execute_all(sql_credit_insert)
+
+
+    # user table insert
+    user_year = (major_dict['이수 학기'] // 2) + 1
+    if '이중전공' in major_dict.keys():
+        sql_user_insert ="""  UPDATE user SET major=\"{major}\", second_major=\"{second_major}\", year={year}, foreigner={foreigner}, teaching={teaching}
+    WHERE user_id={user_id};"""
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], second_major=major_dict['이중전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'], user_id=user_id)
+
+    elif '부전공' in major_dict.keys():
+        sql_user_insert = """  UPDATE user SET major=\"{major}\", minor=\"{minor}\", year={year}, foreigner={foreigner}, teaching={teaching}
+    WHERE user_id={user_id};"""
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], minor=major_dict['부전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'])
+    else:
+        sql_user_insert = """  UPDATE user SET major=\"{major}\", year={year}, foreigner={foreigner}, teaching={teaching}
+    WHERE user_id={user_id};"""
+        sql_user_insert = sql_user_insert.format(major=major_dict['1전공'], year = user_year, foreigner=major_dict['재외국민'], teaching=major_dict['교직'])
+
+    db_class.execute(sql_user_insert)
+
+    print(major_dict)   # user 테이블용
+
+
+    # course table insert
+
+    for i in courses_list:
+        inst_num = i[0]
+        course_area = i[2]
+        sql_inst_search = """SELECT instruction_id FROM instruction WHERE  instruction_number LIKE \"{inst_num}%\";""".format(inst_num=inst_num)
+        inst_id = db_class.execute_all(sql_inst_search)
+        inst_id = inst_id[0]['instruction_id']
+        
+        sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area) VALUES ({course_inst_num}, {user_id}, \"{course_area}\");""".format(course_inst_num=inst_id, user_id=user_id, course_area = course_area)
+        db_class.execute(sql_course_insert)
+    
+    print(courses_list)  # course 테이블용
+
+
+    # liberal_art table insert
+
+    for i in credits_list:
+        area = i[0]
+        count = int(i[1])
+        credit = int(i[2])
+        sql_lib_insert = """
+        INSERT INTO liberal_art 
+            (acqusition_credits, area, number_of_subject, user) 
+            VALUES ({acqusition_credits}, \"{area}\", {number_of_subject}, {user_id});
+        """
+        sql_lib_insert = sql_lib_insert.format(acqusition_credits=credit, area=area, number_of_subject=count, user_id=user_id)
+        db_class.execute(sql_lib_insert)
+
+
+    print(credits_list)  # liberal_art 테이블용
+
+
 
     # 창 종료
-
+    print('FINISH')
     driver.driver.quit()
 

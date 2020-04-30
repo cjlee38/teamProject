@@ -116,7 +116,7 @@ def crawl_Table(rq_year, rq_semester, db):
             class_time = tds[14].get_text().split('(')[0].split()
             class_time = "".join(class_time)
             restrict_num = tds[15].get_text().split('/')[1].strip()
-            note = tds[16].get_text().strip()
+            note = tds[16].get_text().strip().replace("\"", "\'")
             try:
                 sql_search = sql_search.format(inst_num=course_num)
                 # print(sql_search)
