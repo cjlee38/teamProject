@@ -58,15 +58,17 @@ function LoginPage() {
         <div className="idPassword">
           <Input 
             placeholder={"ex)195002215"}
-            name={"학번"}
+            name={"id"}
             onChange={onChange}
             value={id}
+            text={"학번"}
             />
           <Input 
             placeholder={"ex)12345678"}
-            name={"비밀번호"}
+            name={"password"}
             onChange={onChange}
             value={password}
+            text={"비밀번호"}
             />
         </div>
         <div className="Button">

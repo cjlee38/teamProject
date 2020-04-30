@@ -9,9 +9,10 @@ function Input(props) {
 
     return (
         <div className="Input">
-            <b className="InputName">{props.name}</b>
+            <b className="InputName">{props.text}</b>
             <input 
             className="InputBox"
+            //type = "password"
             placeholder={props.placeholder}
             name={props.name}
             onChange={onChange} 
