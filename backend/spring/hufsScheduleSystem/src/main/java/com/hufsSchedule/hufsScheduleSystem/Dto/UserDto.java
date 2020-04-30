@@ -17,11 +17,13 @@ public class UserDto {
         private String studentNumber;
         @NotBlank(message = "비밀번호를 작성해주세요.")
         private String password;
+        private String name;
 
         @Builder
-        public SignUpReq(String studentNumber, String password){
+        public SignUpReq(String studentNumber, String password, String name){
             this.studentNumber = studentNumber;
             this.password = password;
+            this.name = name;
         }
 
         public User toEntity() {
