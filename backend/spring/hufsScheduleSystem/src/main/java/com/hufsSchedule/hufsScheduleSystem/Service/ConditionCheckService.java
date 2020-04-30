@@ -24,6 +24,7 @@ public class ConditionCheckService {
     }
 
     public ConditionDto.courseInstructionRes checkConditionForTimeTable(Long userId){
+
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
         ConditionDto.courseInstructionRes res = new ConditionDto.courseInstructionRes(credit, courses);

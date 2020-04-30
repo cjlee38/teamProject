@@ -12,9 +12,9 @@ import java.util.List;
 public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
 
-    public void checkCondition(Long userId){
-        ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(userId);
-        // getUsersInfo --> studentYear, firstMajorName, secondMajorName.
+    public void checkCondition(TimetableDto.Req req){
+        ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
+        // TimetableDto.Req req 안에 user 데이터 들어있음
 
 
         // 전공클래스 / 교양클래스로부터 데이터 받아오고
