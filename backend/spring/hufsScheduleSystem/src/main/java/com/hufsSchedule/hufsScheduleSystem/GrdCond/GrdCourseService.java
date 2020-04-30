@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.Majors;
-import com.hufsSchedule.hufsScheduleSystem.LibArtsCond.LibArts;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.LibArts;
 
 
 import java.util.ArrayList;

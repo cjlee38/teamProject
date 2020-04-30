@@ -2,6 +2,7 @@ package com.hufsSchedule.hufsScheduleSystem.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Table(name="Credit")
 public class Credit {
     @Id
@@ -17,20 +18,21 @@ public class Credit {
     @Column(name="credit_id", unique = true)
     private Long creditId;
     @Column(name="first_major")
-    private String firstMajor;
+    private int firstMajor;
     @Column(name="second_major")
-    private String secondMajor;
+    private int secondMajor;
     @Column(name="sub_major")
-    private String subMajor;
-    private String minor;
-    private String outDoor;
+    private int subMajor;
+    private int minor;
+    private int outDoor;
     @Column(name="liberal_arts")
-    private String liberalArts;
-    private String teaching;
-    private String optional;
+    private int liberalArts;
+    private int teaching;
+    private int optional;
     @Column(name="total_credit")
-    private String totalCredit;
-
+    private int totalCredit;
+    @Column(name = "average_score")
+    private float averageScore;
     @OneToOne
     @JoinColumn(name="user_credit", referencedColumnName = "user_id")
     private User user;

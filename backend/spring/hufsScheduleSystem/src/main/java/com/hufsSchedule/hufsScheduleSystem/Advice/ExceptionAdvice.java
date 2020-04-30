@@ -19,10 +19,8 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected CommonResult defaultException(HttpServletRequest request, UserNotFoundException e){
-
+    protected CommonResult UserNotFoundException(HttpServletRequest request, UserNotFoundException e){
         return responseService.getFailResult();
     }
-
 
 }

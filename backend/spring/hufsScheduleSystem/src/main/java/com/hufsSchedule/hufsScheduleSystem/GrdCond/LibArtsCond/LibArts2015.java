@@ -1,6 +1,5 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond;
 
-import MajorCond.SoftwareConvergence;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -76,11 +76,11 @@ class Driver:
                 (By.NAME, name)))
 
     def find_all_by_tag_with_obj(self, obj, name): # name으로 모든 요소 찾기
-        return WebDriverWait(obj, 10).until(
+        return WebDriverWait(obj, 20).until(
             EC.presence_of_all_elements_located(
                 (By.TAG_NAME, name)))
 
-    def find_by_tag_with_obj(self, obj, name): # name으로 모든 요소 찾기
+    def find_by_tag_with_obj(self, obj, name): # name으로 요소 찾기
         return WebDriverWait(obj, 10).until(
             EC.presence_of_element_located(
                 (By.TAG_NAME, name)))
