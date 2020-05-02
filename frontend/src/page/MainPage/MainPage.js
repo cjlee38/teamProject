@@ -1,32 +1,43 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Button from './components/Button';
 import Title from './components/Title';
 import Logo from '../../image/logo.png';
 import './MainPage.scss';
 import Recommend from "../Homepage/Recommend";
 import Check from '../Homepage/Check';
+import LoginPage from '../LoginPage/LoginPage';
 
 
 function MainPage () {
+    console.log('mainpage')
     return (
         <Router> 
             <div style={{margin:20}}> 
                  
                 <div>   
-                 <hr />
-                    <Route path="/" exact={true} component={Main} />
+                <hr />
+                <Switch>
+
+                <Route path="/" exact={true} component={Main} />
+                <Route path="/Main" exact={true} component={Main} />
+                <Route path="/Login" component={LoginPage} />
+
                     <Route path="/Check" component={Check} />
                     <Route path="/Recommend" component={Recommend} />
+                </Switch>
+
                 </div>
                 
             </div> 
         </Router>
+
     )
 } 
 
 
 const Main = () => {
+    console.log("!@#321332")
     return (
         <div className="Main">
             <img src={Logo} className="logo" alt="logo"/>
@@ -37,6 +48,9 @@ const Main = () => {
                 </Link>
                 <Link to="/Recommend">
                     <Button name={"시간표 추천받기"} value={"check"}/>
+                </Link>
+                <Link to="/Login">
+                    <Button name={"로그인"} value={"check"}/>
                 </Link>
             </div>
         </div>

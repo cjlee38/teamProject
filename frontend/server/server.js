@@ -3,6 +3,8 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const db = require('./config/db');
 
+db.connect();
+
 app.get('/api/host', (req, res) => {
     res.send({ host : 'sejun' });
 })

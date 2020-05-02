@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from './node_modules/react';
 
 
-const mysql =require('mysql');
+const mysql =require('./node_modules/mysql');
 const db= mysql.createPool({
     host:'hufsscheduleservice.cvazzjdw6jxq.ap-northeast-2.rds.amazonaws.com',
     port:'3306',
@@ -10,6 +10,5 @@ const db= mysql.createPool({
     database:'innodb',
 
 });
-db.connect();
 
 module.exports=db;

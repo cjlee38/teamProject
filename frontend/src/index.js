@@ -7,5 +7,5 @@ import Login from './page/LoginPage/LoginPage';
 import Main from './page/MainPage/MainPage';
 import Signup from './page/Signuppage/Signuppage'
 
-ReactDOM.render(<Main/>, document.getElementById('root'));
+ReactDOM.render(<Login />, document.getElementById('root'));
 

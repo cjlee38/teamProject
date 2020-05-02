@@ -40,7 +40,7 @@ class Table extends Component {
   }
   
   _dbTest = async() => {
-    const res = await axios.get('/api/host');
+    const res = await axios.get('/api/test');
     console.log(res.data)
   }
 
