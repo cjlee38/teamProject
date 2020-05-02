@@ -1,11 +1,9 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
-public class LibArts2015 implements LibArts{
+public class LibArts2015 implements IfcLibArts {
     enum LibArts2015Enum {
         Y12101("미네르바인문(1)읽기와쓰기", "Minerva Humanities Reading and Writing"),
         Y12102("미네르바인문(2)읽기와토의.토론", "Minerva Humanities Reading and Discussion & Debate");
@@ -39,28 +37,23 @@ public class LibArts2015 implements LibArts{
         ArrayList<String> baseCourseList = new ArrayList<String>();
         Arrays.asList(LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e.getCourseID()));
 
-        ArrayList<String> retCourseList = modifyCourseListByStudentYear(
+        ArrayList<String> retCourseList =
                 modifyCourseListBySecondMajor(
                         modifyCourseListByFirstMajor(baseCourseList, this.firstMajorName),
-                        this.secondMajorName),
-                this.studentYear
-        );
+                        this.secondMajorName);
         return retCourseList;
     }
 
-    @Override
-    public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear) {
-        return null;
-    }
 
+    // need to fixed
     @Override
     public ArrayList<String> modifyCourseListByFirstMajor(ArrayList<String> courseList, String firstMajorName) {
-        return null;
+        return courseList;
     }
 
     @Override
     public ArrayList<String> modifyCourseListBySecondMajor(ArrayList<String> courseList, String secondMajorName) {
-        return null;
+        return courseList;
     }
 
 
