@@ -1,20 +1,15 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCond2015;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.IfcCreditCond;
 
 public class GrdCreditService {
-    private String studentYear;
+
     private CreditCondObj creditCondObj;
-    private Boolean bIntensiveMajor, bSecondMajor, bMinor;
 
     public GrdCreditService(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
-        this.studentYear = studentYear;
-        this.bIntensiveMajor = bIntensiveMajor;
-        this.bSecondMajor = bSecondMajor;
-        this.bMinor = bMinor;
-
-        this.creditCondObj = makeGrdCreditByInfo(studentYear, this.bIntensiveMajor, this.bSecondMajor, this.bMinor);
+         this.creditCondObj = makeGrdCreditByInfo(studentYear, bIntensiveMajor, bSecondMajor, bMinor);
     }
 
     public CreditCondObj makeGrdCreditByInfo(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
@@ -26,7 +21,6 @@ public class GrdCreditService {
                     .newInstance(bIntensiveMajor, bSecondMajor, bMinor);
         } catch (Exception e) {
             creditCond = null;
-            System.out.println(className);
             System.out.println("error in makeGrdCreditByInfo occured");
         }
 

@@ -14,9 +14,10 @@ public class MakeTimeTableService {
 
     public void checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
-        // GrdCompareService
         // TimetableDto.Req req 안에 user 데이터 들어있음
 
+
+        // 일단 GrdCond에 때려박은 뒤에, 후에 분류
         // Credit정보 매칭 -> done
         // List<Instruction>에서 학수번호만 따로 추출 & 비교 -> yet
 
