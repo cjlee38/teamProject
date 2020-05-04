@@ -16,9 +16,9 @@ public class GrdCompareService {
     private Integer remainLibArtsFieldCredit;
 
     public GrdCompareService(ConditionDto.courseInstructionRes user, GrdCondService GrdCond) {
-        this.remainCourseList = compareCourseList(user.instructions, GrdCond.getGrdCourse()); // needs getter
-        this.remainCredit = compareCredit(user.credit, GrdCond.getGrdCredit()); // needs getter
-        this.remainLibArtsFieldCredit = compareLibArtsFieldCredit(user.instructions, GrdCond.getGrdFieldCredit());
+        //this.remainCourseList = compareCourseList(user.instructions, GrdCond.getGrdCourse()); // needs getter
+        //this.remainCredit = compareCredit(user.credit, GrdCond.getGrdCredit()); // needs getter
+        //this.remainLibArtsFieldCredit = compareLibArtsFieldCredit(user.instructions, GrdCond.getGrdFieldCredit());
     }
 
     public List<String> extractCourseNumber(List<Instruction> userInstructions) {
