@@ -4,24 +4,46 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.List;
 
 public class ConditionDto {
 
+    @Getter
     @NoArgsConstructor(access= AccessLevel.PROTECTED)
     public static class courseNameRes {
-        private Credit credit;
+        private int firstMajor;
+        private int secondMajor;
+        private int subMajor;
+        private int minor;
+        private int outDoor;
+        private int liberalArts;
+        private int teaching;
+        private int optional;
+        private int totalCredit;
+        private float averageScore;
         private List<String> instructions;
 
         @Builder
-        public courseNameRes(Credit credit, List<String> instructions){
-            this.credit = credit;
+        public courseNameRes(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<String> instructions){
+            this.firstMajor = firstMajor;
+            this.secondMajor = secondMajor;
+            this.subMajor = subMajor;
+            this.minor = minor;
+            this. outDoor = outDoor;
+            this.liberalArts = liberalArts;
+            this.teaching = teaching;
+            this.optional = optional;
+            this.totalCredit = totalCredit;
+            this.averageScore = averageScore;
             this.instructions = instructions;
         }
     }
 
+    @Getter
     @NoArgsConstructor(access= AccessLevel.PROTECTED)
     public static class courseInstructionRes {
         private Credit credit;
