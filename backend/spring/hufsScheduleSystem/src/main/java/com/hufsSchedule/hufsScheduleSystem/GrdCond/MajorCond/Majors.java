@@ -6,5 +6,5 @@ import java.util.List;
 public interface Majors {
     public ArrayList<String> getMajorCourseList();
     public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear);
-    public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, boolean bSecondMajor);
+    public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, Boolean bSecondMajor);
 }

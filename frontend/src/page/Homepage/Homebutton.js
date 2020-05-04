@@ -3,16 +3,16 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //import Home from "./Home";
 import Recommend from "./Recommend";
 import Check from "./Check";
-import Input from './components/Input';
-import Button from './components/Button';
-import Title from './Title';
+import Input from'../LoginPage/components/Input';
+import Button from '../LoginPage/components/Button';
+import Title from '../LoginPage/components/Title';
 import Logo from '../../image/logo.png';
 
 function Home () {
     return (
         <Router> 
             <div style={{margin:20}}> 
-                <HelloHeader/>   
+                 
                 <div>   
                  <hr />
                     <Route path="/" exact={true} component={Homebutton} />
@@ -31,17 +31,17 @@ const Homebutton = () => {
             <div className="head" style={{display: 'flex', flexDirection:'row'}}>
                 <div>
                     <img src={Logo} classname="logo" alt="logo" width='15%'/>
-                    <HelloHeader/>
+                    <HelloHeader/> 
                 </div>
             </div>
 
             <div className="body">
                <h1><b>Welcome</b><br></br></h1>
                 <Link to="/Check">
-                    <Button>졸업요건 확인하기</Button><br/><br/>
+                    <button>졸업요건 확인하기</button><br/><br/>
                 </Link>
                 <Link to="/Recommend">
-                    <Button>시간표 추천받기</Button>
+                    <button>시간표 추천받기</button>
                 </Link>
             </div>
 

@@ -17,11 +17,10 @@ public class MakeTimeTableService {
         // TimetableDto.Req req 안에 user 데이터 들어있음
 
 
-        // 전공클래스 / 교양클래스로부터 데이터 받아오고
-        // e.g. Major Buisness = new Business(init by condition);
-        // LiberalArts liberal = new liberal2015(init by condition);
-        // 비교작업하고 --> 여기서?
-        // 나머지 강의 / 학점 정보 전달.
+        // 일단 GrdCond에 때려박은 뒤에, 후에 분류
+        // Credit정보 매칭 -> done
+        // List<Instruction>에서 학수번호만 따로 추출 & 비교 -> yet
+
 
         // 학생의 학점 정보(Credit 객체) + 수강했던 강의 이름(List<String>) 을 불러오는 메소드
         // 자세 정보를 알고 싶다면, Dto/CondtionDto 의 courseIdRes를 체크.
