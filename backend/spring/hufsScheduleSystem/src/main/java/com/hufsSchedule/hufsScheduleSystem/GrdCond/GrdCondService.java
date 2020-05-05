@@ -1,30 +1,29 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
+import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditLibArtsField;
 
-import java.util.ArrayList;
+import java.util.List;
 
-//GrdCond Result
 public class GrdCondService {
-    private GrdCourseService grdCourse;
-    private GrdCreditService grdCredit;
-    private CreditLibArtsField grdFieldCredit;
+    GrdCourseService grdCourseService;
+    GrdCreditService grdCreditService;
+    CreditLibArtsField creditLibArtsField;
 
-    public GrdCondService(String studentYear, String firstMajorName, String secondMajorName,
-                          Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
-        this.grdCourse = new GrdCourseService(studentYear, firstMajorName, secondMajorName);
-        this.grdCredit = new GrdCreditService(studentYear, bIntensiveMajor, bSecondMajor, bMinor);
-        this.grdFieldCredit = new CreditLibArtsField(studentYear);
+    public GrdCondObj makeGrdCondByUserInfo(TimetableDto.Req req) {
+        String studentYear = GrdCondEct.getStudentYear(req.getStudentNumber());
+
+        List<String> courses = grdCourseService.makeAllGrdCourseList(studentYear, req.getMajor(), req.getSecondMajor());
+        /* needs recheck credit field with req */
+        CreditCondObj credit = grdCreditService.makeGrdCreditByInfo(studentYear, false, true, false);
+        Integer libArtsField = creditLibArtsField.makeFieldCreditByStudentYear(studentYear);
+
+        GrdCondObj grdCondObj = new GrdCondObj(courses, credit, libArtsField);
+
+        return grdCondObj;
+
     }
 
-    public GrdCourseService getGrdCourse() {
-        return grdCourse;
-    }
-
-    public GrdCreditService getGrdCredit() {
-        return grdCredit;
-    }
-
-    public CreditLibArtsField getGrdFieldCredit() { return grdFieldCredit; }
 
 }

@@ -8,18 +8,6 @@ import java.util.List;
 
 public class GrdCourseService {
 
-    private String studentYear;
-    private List<String> firstMajorCourses, secondMajorCourses, libArtsCourses;
-
-    public GrdCourseService(String studentNumber, String firstMajorName, String secondMajorName) {
-        this.studentYear = getStudentYear(studentNumber);
-
-        this.firstMajorCourses = makeMajorCoursesByInfo(studentYear, firstMajorName, false);
-        this.secondMajorCourses = makeMajorCoursesByInfo(studentYear, secondMajorName, true);
-        this.libArtsCourses = makeLibArtsCourseByInfo(studentYear, firstMajorName, secondMajorName);
-
-    }
-
     public List<String> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
         IfcMajors courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond."+majorName;
@@ -58,31 +46,16 @@ public class GrdCourseService {
 
     }
 
-    public String getStudentYear(String studentNumber) {
-        if (studentNumber.length() != 9) { return null; }
-        return studentNumber.substring(0, 4);
+    public List<String> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
+        List<String> courseList = new ArrayList<String>();
+
+        courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));
+        courseList.addAll(makeMajorCoursesByInfo(studentYear, secondMajorName, true));
+        courseList.addAll(makeLibArtsCourseByInfo(studentYear, firstMajorName, secondMajorName));
+
+        return courseList;
     }
 
-    public List<String> getAllGrdCourseList() {
-        List<String> allCourses = new ArrayList<String>();
 
-        allCourses.addAll(this.getFirstMajorCourses());
-        allCourses.addAll(this.getSecondMajorCourses());
-        allCourses.addAll(this.getLibArtsCourses());
-
-        return allCourses;
-    }
-
-    public List<String> getFirstMajorCourses() {
-        return firstMajorCourses;
-    }
-
-    public List<String> getSecondMajorCourses() {
-        return secondMajorCourses;
-    }
-
-    public List<String> getLibArtsCourses() {
-        return libArtsCourses;
-    }
 
 }

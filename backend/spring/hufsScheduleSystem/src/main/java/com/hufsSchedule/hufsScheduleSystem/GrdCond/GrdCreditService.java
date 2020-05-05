@@ -1,16 +1,12 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
+import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCond2015;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditLibArtsField;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.IfcCreditCond;
 
 public class GrdCreditService {
-
-    private CreditCondObj creditCondObj;
-
-    public GrdCreditService(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
-         this.creditCondObj = makeGrdCreditByInfo(studentYear, bIntensiveMajor, bSecondMajor, bMinor);
-    }
 
     public CreditCondObj makeGrdCreditByInfo(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
         IfcCreditCond creditCond;
@@ -27,8 +23,5 @@ public class GrdCreditService {
         return creditCond.getCreditCondList();
     }
 
-    public CreditCondObj getCreditCondObj() { return creditCondObj; }
-
-    //get user info and boolean infos from it
 }
 

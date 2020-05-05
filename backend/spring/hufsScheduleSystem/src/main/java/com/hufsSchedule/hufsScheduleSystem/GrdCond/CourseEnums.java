@@ -1,5 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
+//1. MajorCond의 major class의 enum을 static하게 만들기
 public interface CourseEnums {
     public String getCourseKorName();
     public String getCourseEngName();
@@ -32,7 +33,7 @@ public interface CourseEnums {
         }
     }
 
-    enum SoftwareEnum implements CourseEnums{
+    enum SoftwareConvergenceEnum implements CourseEnums{
         F05102("컴퓨터프로그래밍1", "Computer Programming 1"),
         T05202("컴퓨터프로그래밍2", "Computer Programming 2"),
         V44303("자료구조", "Data Structure"),
@@ -42,7 +43,7 @@ public interface CourseEnums {
 
         final private String korName, engName;
 
-        SoftwareEnum(String korName, String engName) {
+        SoftwareConvergenceEnum(String korName, String engName) {
             this.korName = korName;
             this.engName = engName;
         }

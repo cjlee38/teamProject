@@ -2,6 +2,10 @@ package com.hufsSchedule.hufsScheduleSystem.Service;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
+import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +15,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
+    private GrdCondService grdCondService;
+    private GrdCompareService grdCompareService;
 
     public void checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
+        GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
+
+        GrdCondObj remains = grdCompareService.compareGrdAndUser(condition, GrdCond);
+
         // TimetableDto.Req req 안에 user 데이터 들어있음
 
 

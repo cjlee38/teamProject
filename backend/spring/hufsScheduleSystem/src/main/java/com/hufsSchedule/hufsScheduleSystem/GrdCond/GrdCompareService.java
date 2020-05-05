@@ -7,40 +7,43 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditLibArtsField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GrdCompareService {
-    private CreditCondObj remainCredit;
-    private List<String> remainCourseList;
-    private Integer remainLibArtsFieldCredit;
+    public GrdCondObj compareGrdAndUser(ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
+        List<String> remainCourseList = compareCourseList(extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
+        CreditCondObj remainCredit = compareCredit(user.getCredit(), grdCond.getGrdCredit());
+        Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(user.getInstructions()), grdCond.getGrdCreditField());
 
-    public GrdCompareService(ConditionDto.courseInstructionRes user, GrdCondService GrdCond) {
-        //this.remainCourseList = compareCourseList(user.instructions, GrdCond.getGrdCourse()); // needs getter
-        //this.remainCredit = compareCredit(user.credit, GrdCond.getGrdCredit()); // needs getter
-        //this.remainLibArtsFieldCredit = compareLibArtsFieldCredit(user.instructions, GrdCond.getGrdFieldCredit());
+        GrdCondObj remainCondObj = new GrdCondObj(remainCourseList, remainCredit, remainLibArtsFieldCredit);
+        return remainCondObj;
     }
 
     public List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
-
-        for(Instruction s : userInstructions) {
-            courseNumbers.add(s.getInstructionNumber()); // why Long?
-        }
+        userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber()));
 
         return courseNumbers;
     }
 
     public Integer extractUserFieldCredit(List<Instruction> userInstructions) {
         Integer userFieldCredit = 0;
-        // do something;
+        List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
+        List<String> userAreas = new ArrayList<>();
+        userInstructions.stream().distinct().forEach(i -> userAreas.add(i.getArea()));
+
+        for(String s : userAreas) {
+            if(libArtsArea.contains(s)) { userFieldCredit++;}
+        }
 
         return userFieldCredit;
     }
 
-    public Integer compareLibArtsFieldCredit(List<Instruction> userInstructions, CreditLibArtsField grdFieldCredit) {
+    public Integer compareLibArtsFieldCredit(Integer userFieldCredit, Integer grdFieldCredit) {
         Integer remainFieldCredit;
-        remainFieldCredit = grdFieldCredit.getiFieldCredit() - extractUserFieldCredit(userInstructions);
+        remainFieldCredit = grdFieldCredit - userFieldCredit;
 
         return remainFieldCredit;
     }

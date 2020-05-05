@@ -7,7 +7,7 @@ public class CreditLibArtsField {
         iFieldCredit = makeFieldCreditByStudentYear(studentYear);
     }
 
-    private Integer makeFieldCreditByStudentYear(String studentYear) {
+    public Integer makeFieldCreditByStudentYear(String studentYear) {
         Integer credit;
 
         if (studentYear == "2015") {
