@@ -4,9 +4,12 @@ from flask_restful import reqparse
 import database
 from course_table import *
 from user_table import *
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
+
 class RegistUser(Resource):
     def get(self):
         #parser = reqparse.RequestParser()
