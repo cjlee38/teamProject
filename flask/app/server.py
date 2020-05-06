@@ -30,7 +30,7 @@ class RegistUser(Resource):
         db_class = database.Database()
         try:
             parser = reqparse.RequestParser()
-            parser.add_argument('td_num's, type=str)
+            parser.add_argument('std_num', type=str)
             parser.add_argument('password', type=str)
             args = parser.parse_args()
 
