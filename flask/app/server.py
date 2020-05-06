@@ -27,7 +27,7 @@ class RegistUser(Resource):
         db_class = database.Database()
         try:
             parser = reqparse.RequestParser()
-            parser.add_argument('std_num', type=str)
+            parser.add_argument('td_num's, type=str)
             parser.add_argument('password', type=str)
             args = parser.parse_args()
 
@@ -55,6 +55,7 @@ class RegistUser(Resource):
                 return {'status': 'success'}
 
             else:
+                db_class.rollback()
                 raise Exception('아이디를 다시 입력')
            
         except Exception as e:
