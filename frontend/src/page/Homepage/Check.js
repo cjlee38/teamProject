@@ -10,7 +10,7 @@ import api from './crawl'
 import Recommend from "../Homepage/Recommend";
 import LoginPage from '../LoginPage/LoginPage';
 import Main from '../MainPage/MainPage';
-import Check1 from '../Homepage/Check';
+
 
 
 class Check extends React.Component {
@@ -39,10 +39,12 @@ handlingSubmit = async (event) =>{
   console.log("크롤링 시작")
   let result = await api.crawlUser({std_num : this.state.std, password : this.state.password})
   console.log(result.data)
+  this.setState({std:"", password:""})
 }
   
 
 render () {
+  console.log("ch")
   return(
     <>
             
@@ -55,15 +57,15 @@ render () {
       <div className="body">
         <h1>1.학점</h1>
         <Table data={this.data}/>
-       
-      </div>
-      <div className="Crwaler">
+        <div className="Crwaler">
             <form onSubmit={this.handlingSubmit}>
-            <input name="std" value={this.state.std} onChange={this.handlingChange} />
-            <input name="password" value={this.state.password} type="password" onChange={this.handlingChange} />
-            <button type="submit">유저 크롤링</button>
+            <input name="std" placeholder="학번" value={this.state.std} onChange={this.handlingChange} />
+            <input name="password" placeholder="종정시 비밀번호"value={this.state.password} type="password" onChange={this.handlingChange} />
+            <button type="submit" onSubmit={this.handlingSubmit}>유저 크롤링</button>
             </form>
         </div>
+      </div>
+      
       <div className="foot">
       </div>
     </div>
@@ -71,4 +73,31 @@ render () {
   );
 }
 }
-export default Check;
+
+function CheckPage () {
+  console.log('mainpage')
+  return (
+      <Router> 
+          <div style={{margin:20}}> 
+               
+              <div>   
+              <hr />
+              <Switch>
+
+              <Route path="/" exact={true} component={Main} />
+              <Route path="/Main" exact={true} component={Main} />
+              <Route path="/Login" component={LoginPage} />
+
+                  <Route path="/Check" component={Check} />
+                  <Route path="/Recommend" component={Recommend} />
+              </Switch>
+
+              </div>
+              
+          </div> 
+      </Router>
+
+  )
+} 
+
+export default CheckPage;

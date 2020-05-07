@@ -8,15 +8,13 @@ import './LoginPage.scss';
 import Signuppage from '../Signuppage/Signuppage';
 import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
+import { Container } from 'react-bootstrap';
 
 
 function LoginPage () {
   return (
       <Router> 
-          <div style={{margin:20}}> 
-               
-              <div>   
-               <hr />
+
                <Switch>
 
                   <Route path="/" exact={true} component={LoginP} />
@@ -25,9 +23,7 @@ function LoginPage () {
                   <Route path="/Main" component={Main}/>
                   <Route path="/Signup" component={Signuppage}/>
                </Switch>
-              </div>
-              
-          </div> 
+
       </Router>
   )
 } 
@@ -79,11 +75,12 @@ const LoginP = () => {
     
     return (
     <div className="LoginPage">
-      <div className="head">
+      {/* <div className="head">
         <div>
           <img src={Logo} classname="logo" alt="logo" width='15%'/>
         </div>
-      </div>
+      </div> */}
+      <Container maxWidth="lg">
       <div className="body">
         <Title/>
         <div className="idPassword">
@@ -112,6 +109,7 @@ const LoginP = () => {
         </div>
       </div>
       <div className="foot"/>
+      </Container>
     </div>
     )
 }

@@ -13,10 +13,10 @@ function MainPage () {
     console.log('mainpage')
     return (
         <Router> 
-            <div style={{margin:20}}> 
+         
                  
-                <div>   
-                <hr />
+ 
+
                 <Switch>
 
                 <Route path="/" exact={true} component={Main} />
@@ -27,9 +27,8 @@ function MainPage () {
                     <Route path="/Recommend" component={Recommend} />
                 </Switch>
 
-                </div>
                 
-            </div> 
+   
         </Router>
 
     )
