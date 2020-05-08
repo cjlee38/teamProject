@@ -9,8 +9,8 @@ import Check from '../Homepage/Check';
 import LoginPage from '../LoginPage/LoginPage';
 
 
-function MainPage (match) {
-    console.log(match)
+function MainPage () {
+    console.log('mainpage')
     return (
         <Router> 
             <div style={{margin:20}}> 
@@ -20,9 +20,7 @@ function MainPage (match) {
                 <Switch>
 
                 <Route path="/" exact={true} component={Main} />
-                <Route path="/Main" component={Main}/>
-
-                <Route path="/Main/:id/:password" component={Main}/>
+                <Route path="/Main"  component={Main} />
                 <Route path="/Login" component={LoginPage} />
 
                 <Route path="/Check" component={Check} />
