@@ -38,7 +38,7 @@ const Main = ({ match }) => {
     return (
 
         <div className="Main">
-            {/* <img src={Logo} className="logo" alt="logo"/> */}
+            <img src={Logo} className="logo" alt="logo"/>
             <div className="body">
                 <Title />
                 <Link to="/Check">
@@ -55,7 +55,6 @@ const Main = ({ match }) => {
         </div>
     )
 }
-
 
 
 
