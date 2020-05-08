@@ -14,8 +14,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-
-
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import './Check.scss'
 
 class Check extends React.Component {
 
@@ -55,7 +56,22 @@ render () {
     <div className="CheckPage">
       <div className="body">
         <h1>1.학점</h1>
-        <Table data={this.data}/>
+       
+
+  <Tabs defaultActiveKey="profile"  className="tabs">
+  <Tab eventKey="home" title="Home">
+    <Table data={this.data}  style={{backgroundColor: "black"}} />
+  </Tab>
+  <Tab eventKey="profile" title="Profile">
+  <Table data={this.data} />
+
+  </Tab>
+  <Tab eventKey="contact" title="Contact">
+  <Table data={this.data} />
+
+  </Tab>
+</Tabs>
+
         <div className="Crwaler">
             <form onSubmit={this.handlingSubmit}>
 

@@ -1,30 +1,3 @@
-/*import React, { Component } from 'react';
-import {BootstrapTable, 
-       TableHeaderColumn} from 'react-bootstrap-table';
-// in ECMAScript 6
-var ReactBSTable = require('react-bootstrap-table');  
-// or in ECMAScript 5
-
-class Table2 extends Component {
-  render() {
-    return (
-      <div>
-        <BootstrapTable data={this.props.data}>
-          <TableHeaderColumn isKey dataField='id'>
-            ID
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>
-            Name
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='value'>
-            Value
-          </TableHeaderColumn>
-        </BootstrapTable>
-      </div>
-    );
-  }
-}*/
-
 import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 
        'react-bootstrap-table';
@@ -33,9 +6,6 @@ import {BootstrapTable, TableHeaderColumn} from
  
  
 class Table extends Component {
-
-
-
   render() {
     return (
       <div>
@@ -74,7 +44,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='sub_major'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -83,7 +53,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='out_door'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -92,7 +62,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='liberal_arts'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -101,7 +71,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='minor'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -110,7 +80,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='teaching'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -119,7 +89,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='optional'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -128,7 +98,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='total_credit'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
@@ -137,7 +107,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='average_score'
                              dataAlign='center'
-                             width="13.5%"
+                             width="13%"
                              thStyle={
                                 {fontWeight: 'heavy', 
                                 backgroundColor: '#CCCCCC'}}
