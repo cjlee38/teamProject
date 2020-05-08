@@ -12,15 +12,23 @@ import Check from '../Homepage/Check';
 
 function LoginPage () {
   return (
-      <Router> 
-               <Switch>
-                  <Route path="/" exact={true} component={LoginP} />
-                  <Route path="/Login"  component={LoginP} />
+    <Router>
+    <Switch>
 
-                  <Route path="/Main/:id/:password" component={Main}/>
-                  <Route path="/Signup" component={Signuppage}/>
-               </Switch>
-      </Router>
+        <Route path="/" exact={true} component={Main} />
+        <Route path="/Main" component={Main} />
+
+        <Route path="/Main/:id/:password" component={Main} />
+        <Route path="/Login" component={LoginP} />
+
+        <Route path="/Check" component={Check} />
+        <Route path="/Recommend" component={Recommend} />
+    </Switch>
+
+
+
+</Router>
+
   )
 } 
 
