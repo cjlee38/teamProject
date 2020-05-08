@@ -20,7 +20,7 @@ function LoginPage () {
         <Route path="/Main" component={Main} />
 
         <Route path="/Main/:id/:password" component={Main} />
-        <Route path="/Login" component={LoginPage} />
+        <Route path="/Login" component={LoginP} />
 
         <Route path="/Check" component={Check} />
         <Route path="/Recommend" component={Recommend} />
