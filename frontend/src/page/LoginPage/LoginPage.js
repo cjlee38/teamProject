@@ -8,27 +8,28 @@ import './LoginPage.scss';
 import Signuppage from '../Signuppage/Signuppage';
 import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
+import Recommend from "../Homepage/Recommend";
 
 
 function LoginPage () {
   return (
-      <Router> 
-          <div style={{margin:20}}> 
-               
-              <div>   
-               <hr />
-               <Switch>
+    <Router>
+    <Switch>
 
-                  <Route path="/" exact={true} component={LoginP} />
-                  <Route path="/Login"  component={LoginP} />
+        <Route path="/" exact={true} component={Main} />
+        <Route path="/Main" component={Main} />
 
-                  <Route path="/Main/:id/:password" component={Main}/>
-                  <Route path="/Signup" component={Signuppage}/>
-               </Switch>
-              </div>
-              
-          </div> 
-      </Router>
+        <Route path="/Main/:id/:password" component={Main} />
+        <Route path="/Login" component={LoginPage} />
+
+        <Route path="/Check" component={Check} />
+        <Route path="/Recommend" component={Recommend} />
+    </Switch>
+
+
+
+</Router>
+
   )
 } 
 
@@ -79,11 +80,6 @@ const LoginP = () => {
     
     return (
     <div className="LoginPage">
-      <div className="head">
-        <div>
-          <img src={Logo} classname="logo" alt="logo" width='15%'/>
-        </div>
-      </div>
       <div className="body">
         <Title/>
         <div className="idPassword">

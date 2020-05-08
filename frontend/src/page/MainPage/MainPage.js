@@ -37,8 +37,6 @@ const Main = ({ match }) => {
     console.log(match.params.id)
     return (
 
-        <div className="Main">
-            <img src={Logo} className="logo" alt="logo"/>
             <div className="body">
                 <Title />
                 <Link to="/Check">
@@ -51,7 +49,7 @@ const Main = ({ match }) => {
                     <Button name={"로그인"} value={"check"} />
                 </Link>
 
-            </div>
+
         </div>
     )
 }

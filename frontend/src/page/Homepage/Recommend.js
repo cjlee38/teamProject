@@ -13,11 +13,6 @@ function Recommend_1(){//선제조건 1: 듣고싶은강의 선택
     console.log("reco")
     return(
         <div className="select_1">
-            <div className="head">
-                <div>
-                    <img/>
-                </div>
-            </div>
 
             <div className="body">
                 <h2>1.듣고 싶은 과목 설정</h2>

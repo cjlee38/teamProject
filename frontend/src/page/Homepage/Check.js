@@ -53,11 +53,6 @@ render () {
     <>
             
     <div className="CheckPage">
-      <div calssName="head" style={{display: 'flex', flexDirection:'row'}}>
-        <div>
-          <img src={Logo} classname="logo" alt="logo" width='15%'/>
-        </div>
-      </div>
       <div className="body">
         <h1>1.학점</h1>
         <Table data={this.data}/>
@@ -96,25 +91,23 @@ render () {
 function CheckPage () {
   console.log('mainpage')
   return (
-      <Router> 
-          <div style={{margin:20}}> 
-               
-              <div>   
-              <hr />
-              <Switch>
+    <Router>
+    <Switch>
 
-              <Route path="/" exact={true} component={Main} />
-              <Route path="/Main" exact={true} component={Main} />
-              <Route path="/Login" component={LoginPage} />
+        <Route path="/" exact={true} component={Main} />
+        <Route path="/Main" component={Main} />
 
-                  <Route path="/Check" component={Check} />
-                  <Route path="/Recommend" component={Recommend} />
-              </Switch>
+        <Route path="/Main/:id/:password" component={Main} />
+        <Route path="/Login" component={LoginPage} />
 
-              </div>
-              
-          </div> 
-      </Router>
+        <Route path="/Check" component={Check} />
+        <Route path="/Recommend" component={Recommend} />
+    </Switch>
+
+
+
+</Router>
+
 
   )
 } 
