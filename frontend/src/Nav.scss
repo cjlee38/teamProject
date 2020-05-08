@@ -1,0 +1,21 @@
+.Navigation {
+    font-size: large;
+}
+.title{
+    font-size: large !important;
+    font-weight: 700;
+    padding-top: 0.7%;
+}
+.nav-link {
+    margin-right: 1%;;
+    // width: 100%;
+}
+.mr-auto {
+    // margin-right: 0% !important;
+}
+#responsive-navbar-nav > div.mr-auto.navbar-nav{
+    width: 50%;
+}
+// .navbar-nav{
+//     width: 20%;
+// }
