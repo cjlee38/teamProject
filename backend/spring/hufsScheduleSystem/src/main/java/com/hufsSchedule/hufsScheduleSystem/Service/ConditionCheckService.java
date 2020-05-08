@@ -19,7 +19,20 @@ public class ConditionCheckService {
     public ConditionDto.courseNameRes checkCondition(Long userId){
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<String> courses = courseRepositorySupport.findInstructionNameByUser(userId);
-        ConditionDto.courseNameRes res = new ConditionDto.courseNameRes(credit, courses);
+
+        ConditionDto.courseNameRes res = ConditionDto.courseNameRes.builder()
+                .firstMajor(credit.getFirstMajor())
+                .secondMajor(credit.getSecondMajor())
+                .subMajor(credit.getSubMajor())
+                .minor(credit.getMinor())
+                .outDoor(credit.getOutDoor())
+                .liberalArts(credit.getLiberalArts())
+                .teaching(credit.getTeaching())
+                .optional(credit.getOptional())
+                .totalCredit(credit.getTotalCredit())
+                .averageScore(credit.getAverageScore())
+                .instructions(courses)
+                .build();
         return res;
     }
 

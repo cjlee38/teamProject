@@ -20,7 +20,7 @@ public class ConditionCheckController {
     private final ConditionCheckService conditionCheckService;
 
     @GetMapping("/try")
-    public CommonResult checkMyCondition(@RequestParam(value = "studentNumber", required =  true)Long userId)throws Exception {
+    public CommonResult checkMyCondition(@RequestParam(value = "userId", required =  true)Long userId)throws Exception {
         return responseService.getSingleResult(conditionCheckService.checkCondition(userId));
     }
 }

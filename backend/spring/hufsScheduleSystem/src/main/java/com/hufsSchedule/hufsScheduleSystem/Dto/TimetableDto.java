@@ -1,6 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +42,11 @@ public class TimetableDto {
 
     @Getter
     public static class Res {
+        private GrdCondObj remains;
+
+        public Res(GrdCondObj remains) {
+            this.remains = remains;
+        }
 
     }
 

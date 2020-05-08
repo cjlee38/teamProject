@@ -28,22 +28,11 @@ class Table2 extends Component {
 import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 
        'react-bootstrap-table';
-import axios from 'axios';
 //import '../css/Table.css'
 //import '../dist/react-bootstrap-table-all.min.css'
  
  
 class Table extends Component {
-
-  componentDidMount() {
-    this._dbTest();
-  }
-  
-  _dbTest = async() => {
-    const res = await axios.get('/api/host');
-    console.log(res.data)
-  }
-
 
 
 

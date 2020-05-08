@@ -5,8 +5,8 @@
     width: 12%
 }
 .body {
-    margin: 0 auto; // 중앙 배치
-
+    // margin: 0 auto; // 중앙 배치
+    margin-top: 10%;
     background-color: green($color: #000000);
 
     display: flex;

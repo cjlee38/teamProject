@@ -18,3 +18,7 @@
 [0415/212831.316:ERROR:exception_snapshot_win.cc(98)] thread ID 35724 not found in process
 [0415/212831.360:ERROR:process_reader_win.cc(123)] NtOpenThread: {액세스 거부} 프로세스가 개체에 액세스를 요구했지만 액세스 권한이 없습니다. (0xc0000022)
 [0415/212831.360:ERROR:exception_snapshot_win.cc(98)] thread ID 29492 not found in process
+[0419/191824.644:ERROR:process_reader_win.cc(123)] NtOpenThread: {액세스 거부} 프로세스가 개체에 액세스를 요구했지만 액세스 권한이 없습니다. (0xc0000022)
+[0419/191824.695:ERROR:exception_snapshot_win.cc(98)] thread ID 24092 not found in process
+[0419/191824.783:ERROR:process_reader_win.cc(123)] NtOpenThread: {액세스 거부} 프로세스가 개체에 액세스를 요구했지만 액세스 권한이 없습니다. (0xc0000022)
+[0419/191824.784:ERROR:exception_snapshot_win.cc(98)] thread ID 19352 not found in process

@@ -20,7 +20,7 @@ public class Instruction {
     @Column(name="instruction_id", unique = true)
     private Long instructionId;
     @Column(name="instruction_number", unique = true)
-    private Long instructionNumber;
+    private String instructionNumber;
     @Column(name="rq_year")
     private Long rqYear;
     @Column(name="rq_semester")
