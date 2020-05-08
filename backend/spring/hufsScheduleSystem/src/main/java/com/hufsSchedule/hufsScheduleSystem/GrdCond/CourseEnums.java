@@ -57,5 +57,7 @@ public interface CourseEnums {
         }
     }
 
+    enum
+
 
 }

@@ -21,7 +21,7 @@ public class GrdCourseService {
             System.out.println("error in making major courses occured");
         }
 
-        List<String> courseList = courseInstance.getMajorCourseList();
+        List<String> courseList = courseInstance.makeMajorCourseList(studentYear, bSecondMajor);
 
         return courseList;
     }

@@ -7,22 +7,13 @@ import java.util.Arrays;
 
 public class SoftwareConvergence implements IfcMajors {
 
-
-    private String studentYear;
-    private Boolean bSecondMajor;
-
-    public SoftwareConvergence(String studentYear, Boolean bSecondMajor) {
-        this.studentYear = studentYear;
-        this.bSecondMajor = bSecondMajor;
-    }
-
     @Override
-    public ArrayList<String> getMajorCourseList() {
+    public ArrayList<String> getMajorCourseList(String studentYear, Boolean bSecondMajor) {
         ArrayList<String> baseCourseList = new ArrayList<String>();
         Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e.name()));
 
         ArrayList<String> retCourseList = modifyCourseListByStudentYear(
-                modifyCourseListBybSecondMajor(baseCourseList, this.bSecondMajor), this.studentYear
+                modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }

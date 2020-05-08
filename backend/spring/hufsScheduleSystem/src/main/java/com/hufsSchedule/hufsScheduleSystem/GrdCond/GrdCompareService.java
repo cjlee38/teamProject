@@ -24,6 +24,7 @@ public class GrdCompareService {
     public List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
         userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber()));
+        courseNumbers.stream().forEach(i -> i.substring(0,6));
 
         return courseNumbers;
     }

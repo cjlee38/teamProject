@@ -17,6 +17,7 @@ public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
     private GrdCondService grdCondService;
     private GrdCompareService grdCompareService;
+    private TimetableDto.Res res;
 
     public void checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
@@ -24,12 +25,9 @@ public class MakeTimeTableService {
 
         GrdCondObj remains = grdCompareService.compareGrdAndUser(condition, GrdCond);
 
+        res = new TimetableDto.Res(remains);
+
         // TimetableDto.Req req 안에 user 데이터 들어있음
-
-
-        // 일단 GrdCond에 때려박은 뒤에, 후에 분류
-        // Credit정보 매칭 -> done
-        // List<Instruction>에서 학수번호만 따로 추출 & 비교 -> yet
 
 
         // 학생의 학점 정보(Credit 객체) + 수강했던 강의 이름(List<String>) 을 불러오는 메소드

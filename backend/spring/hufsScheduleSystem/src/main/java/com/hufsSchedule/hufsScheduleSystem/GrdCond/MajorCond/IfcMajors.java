@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IfcMajors {
-    public ArrayList<String> getMajorCourseList();
+    public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor);
     public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear);
     public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, Boolean bSecondMajor);
 }
