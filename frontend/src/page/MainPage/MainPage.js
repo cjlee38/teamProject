@@ -39,7 +39,7 @@ const Main = () => {
     console.log("!@#321332")
     return (
         <div className="Main">
-            <img src={Logo} className="logo" alt="logo"/>
+            {/* <img src={Logo} className="logo" alt="logo"/> */}
             <div className="body">
                 <Title/>
                 <Link to="/Check">
