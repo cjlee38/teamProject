@@ -103,7 +103,7 @@ const LoginP = () => {
             />
         </div>
         <div className="Button">
-          <Link to={"/Main/${id},${password}"}>
+          <Link to={`/Main/${id}/${password}`}>
             <Button onClick={tryLogin} name={"로그인"} value={"login"}/>
           </Link>
           <Link to="/Signup">
