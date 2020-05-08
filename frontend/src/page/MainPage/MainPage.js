@@ -13,34 +13,33 @@ function MainPage () {
     console.log('mainpage')
     return (
         <Router> 
-         
+            <div style={{margin:20}}> 
                  
- 
-
+                <div>   
+                <hr />
                 <Switch>
 
                 <Route path="/" exact={true} component={Main} />
-                <Route path="/Main" exact={true} component={Main} />
+                <Route path="/Main"  component={Main} />
                 <Route path="/Login" component={LoginPage} />
 
-                    <Route path="/Check" component={Check} />
-                    <Route path="/Recommend" component={Recommend} />
+                <Route path="/Check" component={Check} />
+                <Route path="/Recommend" component={Recommend} />
                 </Switch>
-
                 
-   
+                </div>
+                
+            </div> 
         </Router>
 
     )
 } 
 
 
-const Main = ({match}) => {
-    console.log(match.params.id)
+const Main = () => {
     return (
-        
         <div className="Main">
-            {/* <img src={Logo} className="logo" alt="logo"/> */}
+            <img src={Logo} className="logo" alt="logo"/>
             <div className="body">
                 <Title/>
                 <Link to="/Check">
@@ -59,6 +58,15 @@ const Main = ({match}) => {
 }
 
 
+const Login=({match}) =>{
+    console.log(match.params)
+    return (
+        <div>
+            id: {this.props.match.params.id}
+            password:{this.props.match.params.password}
+        </div>
+    )
 
+}
 
 export default MainPage
