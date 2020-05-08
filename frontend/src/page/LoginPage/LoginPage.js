@@ -8,6 +8,7 @@ import './LoginPage.scss';
 import Signuppage from '../Signuppage/Signuppage';
 import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
+import Recommend from '../Homepage/Recommend';
 
 
 function LoginPage () {
