@@ -22,7 +22,7 @@ function LoginPage () {
                   <Route path="/" exact={true} component={LoginP} />
                   <Route path="/Login"  component={LoginP} />
 
-                  <Route path="/Main/:id,:password" component={Main}/>
+                  <Route path="/Main/:id/:password" component={Main}/>
                   <Route path="/Signup" component={Signuppage}/>
                </Switch>
               </div>
