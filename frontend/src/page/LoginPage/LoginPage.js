@@ -6,10 +6,12 @@ import Title from './components/Title';
 import Logo from '../../image/logo.png';
 import './LoginPage.scss';
 import Signuppage from '../Signuppage/Signuppage';
-import MainPage from '../MainPage/MainPage';
+import Main from '../MainPage/MainPage';
+import Check from '../Homepage/Check';
 
 
 function LoginPage () {
+
   return (
       <Router> 
           <div style={{margin:20}}> 
@@ -17,9 +19,11 @@ function LoginPage () {
               <div>   
                <hr />
                <Switch>
-                  <Route path="/" exact={true} component={Login} />
-                  <Route path="/Main/:id/:password" component={MainPage}/>
-                  <Route path="/Singup" component={Signuppage}/>
+                  <Route path="/" exact={true} component={LoginP} />
+                  <Route path="/Login"  component={LoginP} />
+
+                  <Route path="/Main/:id/:password" component={Main}/>
+                  <Route path="/Signup" component={Signuppage}/>
                </Switch>
               </div>
               
@@ -30,7 +34,7 @@ function LoginPage () {
 
 
 
-const Login = () => {
+const LoginP = () => {
     const [inputs, setInputs] = useState({
       id: "",
       password: ""
@@ -62,6 +66,7 @@ const Login = () => {
         let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
         let json = await response.json();
         console.log(json.success);
+      console.log(1)
       } catch (error) {
         console.log(error);
       };
@@ -98,7 +103,7 @@ const Login = () => {
             />
         </div>
         <div className="Button">
-          <Link to="/Main">
+          <Link to={"/Main/${id}/${password}"}>
             <Button onClick={tryLogin} name={"로그인"} value={"login"}/>
           </Link>
           <Link to="/Signup">
@@ -110,5 +115,8 @@ const Login = () => {
     </div>
     )
 }
+
+
+
 
 export default LoginPage
