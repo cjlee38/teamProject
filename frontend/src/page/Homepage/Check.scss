@@ -4,14 +4,19 @@
 }
 
 .crawlingbtn{
-    height: 39px;
+    height: 45px;
     margin-top: 16px !important;
     margin-bottom: 8px !important;
 }
 
-input, .input{
-    margin-right: 3% !important;
-    height: 2px !important;
+.MuiOutlinedInput-input{
+    height: 0 !important;
+    padding: 22.5px 14px !important;
+
+}
+.MuiFormControl-marginNormal{
+    margin-right: 2% !important;
+
 }
 
 .head {
@@ -19,7 +24,7 @@ input, .input{
 }
 
 .Crwaler {
-    width: 90%;
+    width: 100%;
 }
 
 form{

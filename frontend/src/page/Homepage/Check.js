@@ -65,14 +65,14 @@ class Check extends React.Component {
 
 
                 <TextField
-                  className="input" margin="normal"
+                  className="text" margin="normal"
                   id="standard-textarea"
                   label="학번"
                   name="std" variant="outlined"
                   placeholder="학번" value={this.state.std} onChange={this.handlingChange}
                 />
                 <TextField
-                  className="input" margin="normal"
+                  className="text" margin="normal"
                   id="standard-textarea"
                   label="종합정보시스템 비밀번호"
                   name="password" variant="outlined"
