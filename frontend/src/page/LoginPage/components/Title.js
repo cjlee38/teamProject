@@ -5,10 +5,9 @@ export default function Title() {
     return (
         <div className="Title">
           <div>
-            <b className="titleWord">한국외국어대학교</b>
-          </div>
-          <div>
-            <b className="titleWord">시간표 추천 시스템</b>
+            <b className="titleWord">한국외국어대학교 시간표 추천 시스템 </b>
+          
+       
           </div>
           <div>
             <b className="titleWord">Hankuk University of Foreign Studies</b>
