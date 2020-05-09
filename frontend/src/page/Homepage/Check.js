@@ -60,9 +60,6 @@ class Check extends React.Component {
         <div className="CheckPage">
           <div className="body">
             <div className="head">내 졸업 요건 확인</div>
-            <TabContent />
-            <Crawler />
-
             <div className="Crwaler">
               <form onSubmit={this.handlingSubmit}>
 
@@ -85,6 +82,11 @@ class Check extends React.Component {
                   업데이트      </Button>
               </form>
             </div>
+            {/* <Crawler /> */}
+
+            <TabContent />
+
+
           </div>
 
           <div className="foot">

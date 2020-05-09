@@ -14,7 +14,6 @@ export default class TabContent extends Component {
           {trow:'졸업학점'},
           {trow: '현재학점'},
           {trow:'남은 학점'}
-         
         ];}
 
     render() {
