@@ -93,6 +93,7 @@ const LoginP = () => {
           <Input 
             placeholder={"ex)12345678"}
             name={"password"}
+            type={"password"}
             onChange={onChange}
             value={password}
             text={"비밀번호"}

@@ -12,7 +12,7 @@ function Input(props) {
             <b className="InputName">{props.text}</b>
             <input 
             className="InputBox"
-            //type = "password"
+            type = {props.type}
             placeholder={props.placeholder}
             name={props.name}
             onChange={onChange} 
