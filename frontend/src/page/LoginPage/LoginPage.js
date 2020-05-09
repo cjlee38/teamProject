@@ -80,11 +80,6 @@ const LoginP = () => {
     
     return (
     <div className="LoginPage">
-      <div className="head">
-        <div>
-          <img src={Logo} classname="logo" alt="logo" width='15%'/>
-        </div>
-      </div>
       <div className="body">
         <Title/>
         <div className="idPassword">

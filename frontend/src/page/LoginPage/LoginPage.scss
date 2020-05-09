@@ -11,13 +11,19 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    line-height: 500%;
 
-    height: 50vh;
-    width: 50%;
+    height: 45vh;
+    // width: 50%;
 }
-.idPassword {
-    margin-top: 50px;
-}
+// .idPassword {
+//     margin-top: 50px;
+// }
 .LoginPage {
     margin-top: 15%;
+}
+
+.Title{
+    // line-height: 500%;
+
 }
