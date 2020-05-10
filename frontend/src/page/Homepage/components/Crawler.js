@@ -27,56 +27,66 @@ class crawler extends React.Component {
   handlingChange = (event) => {
     this.setState({ [event.target.name]: event.target.value, loading: false })
     console.log(event.target.name, "change  ")
-  } 
+  }
 
-  handlingSubmit = (event) => {
-    console.log("크롤링 시작")
+
+  handlingSubmit = async (event) => {
     event.preventDefault()
-
-    this.setState({ loading: true }, (event) => {
-      console.log(this.state.std, this.state.password)
-
-      api.crawlUser({ std_num: this.state.std, password: this.state.password })
-        .then(result => this.setState({
-          loading: false,
-          data: [...result.data],
-        }))
-        .catch(function (error) {alert(error)});
-    });
-
-    // let result = await 
-    console.log(this.data)
+    this.setState({ loading: true });
+    console.log("크롤링 시작")
+    let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
+    this.setState({ loading: false });
+    if (result.data.error) {
+      alert(result.data.error)
+      
+    }
+    console.log(result)
+    
     this.setState({ std: "", password: "" })
   }
 
   render() {
-    const { loading } = async () => {await this.state.loading}
-    console.log(loading)
+    // const { loading } = async () => { this.state.loading}
+    console.log(this.state.loading)
 
     return (
 
       <div className="Crwaler">
         <form onSubmit={this.handlingSubmit}>
 
-
-          <TextField
-            className="input" margin="normal"
+          {this.state.loading ? <TextField
+            className="input" margin="normal" disabled
             id="standard-textarea"
             label="학번"
             name="std" variant="outlined"
             placeholder="학번" value={this.state.std} onChange={this.handlingChange}
-          />
-          <TextField
-            className="input" margin="normal"
-            id="standard-textarea"
-            label="종합정보시스템 비밀번호"
-            name="password" variant="outlined"
-            placeholder="종정시 비밀번호" value={this.state.password} type="password" onChange={this.handlingChange}
-          />
+          /> :
+            <TextField
+              className="input" margin="normal"
+              id="standard-textarea"
+              label="학번"
+              name="std" variant="outlined"
+              placeholder="학번" value={this.state.std} onChange={this.handlingChange}
+            />}
 
+          {this.state.loading ?
+            <TextField
+              className="input" margin="normal" disabled
+              id="standard-textarea"
+              label="종합정보시스템 비밀번호"
+              name="password" variant="outlined"
+              placeholder="종정시 비밀번호" value={this.state.password} type="password" onChange={this.handlingChange}
+            /> :
+            <TextField
+              className="input" margin="normal"
+              id="standard-textarea"
+              label="종합정보시스템 비밀번호"
+              name="password" variant="outlined"
+              placeholder="종정시 비밀번호" value={this.state.password} type="password" onChange={this.handlingChange}
+            />}
 
-          {loading ? <Spinner /> : <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={this.handlingSubmit} className="crawlingbtn">
-              업데이트      </Button>}
+          {this.state.loading ? <Spinner /> : <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={this.handlingSubmit} className="crawlingbtn">
+            업데이트      </Button>}
 
         </form>
       </div>

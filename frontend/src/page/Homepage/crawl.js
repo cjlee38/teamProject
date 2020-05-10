@@ -16,12 +16,14 @@ export default {
         return axios.post("/inst_update", data)
     },
 
-    crawlUser(data) {
+    async crawlUser(data) {
         let config = {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },
         };
-        return axios.post('/user_profile', data, config)
+        let result = await axios.post('/user_profile', data, config)
+
+        return result
     }
 }

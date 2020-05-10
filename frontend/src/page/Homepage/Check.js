@@ -63,8 +63,10 @@ class Check extends React.Component {
 
   // handlingSubmit = async (event) => {
   //   // event.preventDefault()
+  //   this.setState({loading:true});
   //   console.log("크롤링 시작")
   //   let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
+  //   this.setState({loading:false});
   //   alert(result.data)
   //   this.setState({ std: "", password: "" })
   // }

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 export default function Spin () {
     return (
-        <Button variant="primary" disabled>
+        <Button variant="secondary" disabled>
             <Spinner
               as="span"
               animation="grow"
@@ -13,7 +13,7 @@ export default function Spin () {
               role="status"
               aria-hidden="true"
             />
-    Loading...
+    Loading..약 1분 소요
   </Button>
     );
 }
