@@ -69,7 +69,6 @@ const LoginP = () => {
         let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
         let json = await response.json();
         console.log(json.success);
-      console.log(1)
       } catch (error) {
         console.log(error);
       };
