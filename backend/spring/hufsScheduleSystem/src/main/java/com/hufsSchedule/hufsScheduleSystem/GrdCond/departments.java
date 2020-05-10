@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
-public enum departments { //스페인
+public enum departments {
     ENGLISH1("ELTT/영어학과", "ELTT"),
     ENGLISH2("영미문학.문화학과", "EnglishLitAndCult"),
     ENGLISH3("영어통번역학과", "English"), //////
@@ -15,6 +15,7 @@ public enum departments { //스페인
     WESTERN8("포르투갈어과", "Portuguese"),
     WESTERN9("네덜란드어과", "Dutch"),
     WESTERN10("스칸디나비아어과","Scandinavian"),
+    WSTERN11("스페인어과", "Spanish"),
     ASIA1("마인어과", "MalayIndonesian"),
     ASIA2("아랍어과", "Arabic"),
     ASIA3("태국어과", "Thai"),
