@@ -8,7 +8,7 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.IfcCreditCond;
 
 public class GrdCreditService {
 
-    public CreditCondObj makeGrdCreditByInfo(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
+    public static CreditCondObj makeGrdCreditByInfo(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
         IfcCreditCond creditCond;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCond" + studentYear;
         try {

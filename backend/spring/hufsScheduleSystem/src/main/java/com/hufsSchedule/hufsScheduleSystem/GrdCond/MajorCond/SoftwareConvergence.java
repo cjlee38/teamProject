@@ -8,34 +8,27 @@ import java.util.Arrays;
 public class SoftwareConvergence implements IfcMajors {
 
     @Override
-    public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<String> baseCourseList = new ArrayList<String>();
-        Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e.name()));
+    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+        Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<String> retCourseList = modifyCourseListByStudentYear(
+        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear) {
-        ArrayList<String> copiedCourseList =(ArrayList<String>) courseList.clone();
-
-        if (studentYear.equals("2015")) {
-            copiedCourseList.add("MODIFIED_BY_STUDENT_YEAR");
-        }
+    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
+        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
 
         return copiedCourseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, Boolean bSecondMajor) {
-        ArrayList<String> copiedCourseList =(ArrayList<String>) courseList.clone();
+    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
+        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
 
-        if (bSecondMajor == true) {
-            copiedCourseList.add("MODIFIED_BY_BOOL_SECOND_MAJOR");
-        }
         return copiedCourseList;
     }
 
