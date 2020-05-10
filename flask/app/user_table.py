@@ -1,5 +1,14 @@
 from selenium_class import *
 import time
+from selenium.webdriver.common.alert import Alert
+
+
+def get_alert(driver):
+    alert = WebDriverWait(driver, 1).until(
+                    EC.alert_is_present(
+                        ))
+    return alert
+
 
 def user_Table(id_input, pw_input, user_id, db):
     db_class = db
@@ -20,10 +29,19 @@ def user_Table(id_input, pw_input, user_id, db):
     time.sleep(0.5)
 
     try:
-        if driver.driver.switch_to_alert():
-            raise Exception("아이디 비번 확인!")
-    except:
-        pass
+        driver.driver.switch_to.alert.accept()
+        driver.get_default()
+        driver.driver.close()
+        return (Exception("아이디나 비밀번호를 확인해주세요!"), driver.driver)
+
+
+            # raise Exception("아이디 비번 확인!")
+            
+    except Exception as e:
+        print(e)
+
+  
+
 
     # 비밀번호 변경 안내 예외 처리
     try:

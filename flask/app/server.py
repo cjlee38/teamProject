@@ -36,9 +36,10 @@ class RegistUser(Resource):
 
             _std_num = args['std_num']
             _Password = args['password']
-            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num='test2')
+            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
             row = db_class.execute_all(sql_user_search)
             row = "" if not row else row
+            driver = None
             if len(row):
                 print(row)
                 user_id = row[0]['user_id']
@@ -48,23 +49,25 @@ class RegistUser(Resource):
                 sql_course_delete = """DELETE FROM course WHERE user_course={user_id};""".format(user_id=user_id)
                 db_class.execute(sql_course_delete)
                 # while True:
-                try:
-                    user_Table(_std_num,_Password, user_id, db_class)
-                    db_class.commit()
-                    return {'status': 'success'}
+                # try:
+                driver = user_Table(_std_num,_Password, user_id, db_class)
+                if driver:
+                    # driver[1].close()
+                    raise driver[0]
+                db_class.commit()
+                return {'status': 'success'}
 
 
-                except Exception as e:
-                    print(e)
-                    db_class.rollback()
-                    return {'error': str(e)}
-
+                # except Exception as e:
+                #     raise e
 
             else:
-                db_class.rollback()
-                raise Exception('아이디를 다시 입력')
+                raise Exception('아이디를 다시 입력해주세요!')
            
         except Exception as e:
+            print(e)
+            # driver.driver.close()
+            db_class.rollback()
             return {'error': str(e)}
 
 class ReigstInst(Resource):
