@@ -38,7 +38,7 @@ public class LibArts2015 implements IfcLibArts {
     @Override
     public List<String> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
         List<String> baseCourseList = new ArrayList<String>();
-        Arrays.asList(LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e.name()));
+        Arrays.asList(LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e.getKorName()));
 
         List<String> retCourseList =
                 modifyCourseListBySecondMajor(

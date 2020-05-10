@@ -8,17 +8,18 @@ import java.util.List;
 
 public class GrdCourseService {
 
-    public List<String> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
+    public static List<String> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
         IfcMajors courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond."+majorName;
         try {
             courseInstance = (IfcMajors)Class.forName(className)
-                    .getDeclaredConstructor(String.class, Boolean.class)
-                    .newInstance(studentYear, bSecondMajor);
+                    .newInstance();
 
         } catch(Exception e) {
             courseInstance = null;
-            System.out.println("error in making major courses occured");
+            System.out.println(e);
+//            System.out.println("error in making major courses occured");
+
         }
 
         List<String> courseList = courseInstance.makeMajorCourseList(studentYear, bSecondMajor);
@@ -26,7 +27,7 @@ public class GrdCourseService {
         return courseList;
     }
 
-    public List<String> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
+    public static List<String> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
         IfcLibArts courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.LibArts" + studentYear;
 
@@ -46,7 +47,7 @@ public class GrdCourseService {
 
     }
 
-    public List<String> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
+    public static List<String> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
         List<String> courseList = new ArrayList<String>();
 
         courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));

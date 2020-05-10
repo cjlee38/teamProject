@@ -2,7 +2,6 @@ package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
 import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 
-//1. MajorCond의 major class의 enum을 static하게 만들기
 public interface CourseEnums {
     public String getKorName();
     public String getEngName();

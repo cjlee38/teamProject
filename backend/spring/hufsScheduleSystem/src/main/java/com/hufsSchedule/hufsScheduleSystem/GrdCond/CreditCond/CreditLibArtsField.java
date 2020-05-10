@@ -1,16 +1,16 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond;
 
 public class CreditLibArtsField {
-    private Integer iFieldCredit;
+//    private Integer iFieldCredit;
+//
+//    public CreditLibArtsField(String studentYear) {
+//        iFieldCredit = makeFieldCreditByStudentYear(studentYear);
+//    }
 
-    public CreditLibArtsField(String studentYear) {
-        iFieldCredit = makeFieldCreditByStudentYear(studentYear);
-    }
-
-    public Integer makeFieldCreditByStudentYear(String studentYear) {
+    public static Integer makeFieldCreditByStudentYear(String studentYear) {
         Integer credit;
 
-        if (studentYear == "2015") {
+        if (studentYear.equals("2015")) {
             credit = 3;
         } else {
             credit = -1;
@@ -18,7 +18,7 @@ public class CreditLibArtsField {
         return credit;
     }
 
-    public Integer getiFieldCredit() {
-        return iFieldCredit;
-    }
+//    public Integer getiFieldCredit() {
+//        return iFieldCredit;
+//    }
 }

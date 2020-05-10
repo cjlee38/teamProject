@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GrdCompareService {
-    public GrdCondObj compareGrdAndUser(ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
+    public static GrdCondObj compareGrdAndUser(ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
         List<String> remainCourseList = compareCourseList(extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(user.getCredit(), grdCond.getGrdCredit());
         Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(user.getInstructions()), grdCond.getGrdCreditField());
@@ -20,7 +20,7 @@ public class GrdCompareService {
         return remainCondObj;
     }
 
-    public List<String> extractCourseNumber(List<Instruction> userInstructions) {
+    public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
         userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber()));
         courseNumbers.stream().forEach(i -> i.substring(0,6));
@@ -28,7 +28,7 @@ public class GrdCompareService {
         return courseNumbers;
     }
 
-    public Integer extractUserFieldCredit(List<Instruction> userInstructions) {
+    public static Integer extractUserFieldCredit(List<Instruction> userInstructions) {
         Integer userFieldCredit = 0;
         List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
         List<String> userAreas = new ArrayList<>();
@@ -41,7 +41,7 @@ public class GrdCompareService {
         return userFieldCredit;
     }
 
-    public Integer compareLibArtsFieldCredit(Integer userFieldCredit, Integer grdFieldCredit) {
+    public static Integer compareLibArtsFieldCredit(Integer userFieldCredit, Integer grdFieldCredit) {
         Integer remainFieldCredit;
         remainFieldCredit = grdFieldCredit - userFieldCredit;
 
@@ -50,13 +50,13 @@ public class GrdCompareService {
 
 
 
-    public List<String> compareCourseList(List<String> userCourseList, List<String> grdCourseList) {
+    public static List<String> compareCourseList(List<String> userCourseList, List<String> grdCourseList) {
         List<String> resultCourseList = grdCourseList.stream().filter(aObject ->
                 !userCourseList.contains(aObject)).collect(Collectors.toList());
         return resultCourseList;
     }
 
-    public CreditCondObj compareCredit(Credit userCredit, CreditCondObj grdCredit) {
+    public static CreditCondObj compareCredit(Credit userCredit, CreditCondObj grdCredit) {
 
         CreditCondObj remainCredit = new CreditCondObj();
 

@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Business implements IfcMajors {
-    // might be replaced
+
     @Override
     public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
         ArrayList<String> baseCourseList = new ArrayList<String>();
-        Arrays.asList(CourseEnums.BusinessEnum.values()).forEach(e -> baseCourseList.add(e.name()));
+        Arrays.asList(CourseEnums.BusinessEnum.values()).forEach(e -> baseCourseList.add(e.getKorName()));
 
         ArrayList<String> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
