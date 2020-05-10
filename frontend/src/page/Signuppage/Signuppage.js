@@ -26,6 +26,27 @@ const Signuppage = () => {
         });
     }
 
+    const trySignUp = () => {
+        try {
+          let response = await fetch('http://localhost:1415/web/v1/user/SignUp', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "studentNumber" : usernum,
+            "password" : password,
+            "name" : username
+          })
+        });
+        const json = await response.json();
+        console.log(json);
+          } catch (error) {
+            console.log(error);
+          };
+      }
+
     return(
         <div className="SignupPage">
             <div className="body">
@@ -55,7 +76,7 @@ const Signuppage = () => {
                 </div>
                 <div className="Button">
                 <Link to="/Login">
-            <Button onClick name={"회원가입"} value={"signUp"}/>
+            <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
           </Link> 
                 </div>
             </div>
