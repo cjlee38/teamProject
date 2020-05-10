@@ -26,7 +26,7 @@ const Signuppage = () => {
         });
     }
 
-    const trySignUp = () => {
+    const trySignUp = async() => {
         try {
           let response = await fetch('http://localhost:1415/web/v1/user/SignUp', {
           method: 'POST',
