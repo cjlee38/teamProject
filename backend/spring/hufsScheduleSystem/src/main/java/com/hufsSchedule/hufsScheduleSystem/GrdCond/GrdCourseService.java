@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GrdCourseService {
 
-    public static List<CourseEnums> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
+    public static IfcMajors makeMajorObjsByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
         IfcMajors courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond."+majorName;
         try {
@@ -22,10 +22,22 @@ public class GrdCourseService {
 
         }
 
-        List<CourseEnums> courseList = courseInstance.makeMajorCourseList(studentYear, bSecondMajor);
+
+        return courseInstance;
+    }
+
+    public static List<CourseEnums> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
+        IfcMajors majorObj = makeMajorObjsByInfo(studentYear, majorName, bSecondMajor);
+        List<CourseEnums> courseList = majorObj.makeMajorCourseList(studentYear, bSecondMajor);
 
         return courseList;
     }
+
+//    public static List<CourseEnums> modifySpecialCourses(String studentYear, String majorName, Boolean bSecondMajor) {
+//        IfcMajors majorObj = makeMajorObjsByInfo(studentYear, majorName, bSecondMajor);
+//        majorObj.modifySpecialCourseList();
+//    }
+
 
     public static List<CourseEnums> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
         IfcLibArts courseInstance;
@@ -50,7 +62,9 @@ public class GrdCourseService {
         List<CourseEnums> courseList = new ArrayList<CourseEnums>();
 
         courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));
-        courseList.addAll(makeMajorCoursesByInfo(studentYear, secondMajorName, true));
+        if (secondMajorName != null) {
+            courseList.addAll(makeMajorCoursesByInfo(studentYear, secondMajorName, true));
+        }
         courseList.addAll(makeLibArtsCourseByInfo(studentYear, firstMajorName, secondMajorName));
 
         return courseList;

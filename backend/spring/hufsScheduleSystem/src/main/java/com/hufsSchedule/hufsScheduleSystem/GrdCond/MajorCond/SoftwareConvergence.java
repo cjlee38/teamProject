@@ -4,32 +4,36 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SoftwareConvergence implements IfcMajors {
 
     @Override
-    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
+        List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
-        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear) {
 
-        return copiedCourseList;
+        return courseList;
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
-        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
+    public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor) {
 
-        return copiedCourseList;
+        return courseList;
+    }
+
+    @Override
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+        return remainCourseList;
     }
 
 }

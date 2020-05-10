@@ -10,29 +10,34 @@ import java.util.List;
 public class Business implements IfcMajors {
 
     @Override
-    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.BusinessEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
+        List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
-        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear) {
+        // temporary
+        List<String> removeList = new ArrayList<String>(Arrays.asList("D01314"));
 
-        return copiedCourseList;
+        return GrdCondEct.removeCourseListByNumber(courseList, removeList);
+
 
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
-        ArrayList<CourseEnums> copiedCourseList =(ArrayList<CourseEnums>) courseList.clone();
+    public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor) {
+        return courseList;
+    }
 
-        return copiedCourseList;
+    @Override
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+        return remainCourseList;
     }
 
 }

@@ -9,19 +9,7 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.IfcMajors;
 
 import java.util.List;
 
-public class GrdCondTester {
-    private GrdCondService gcs;
-    private Long userId;
-    private String password;
-    private String studentNumber;
-    private String name;
-    private String major;
-    private String secondMajor;
-    private String minor;
-    private Integer year;
-    private Boolean foreigner;
-    private Boolean teaching;
-    private Boolean intensiveMajor;
+public class GrdCondTester_TEMP {
     public static void main(String[] args) {
 
         TimetableDto.Req req = new TimetableDto.Req((long) 1123123, "1234", "201502674", "lcj", "경영학부", "융복합소프트웨어전공",
@@ -33,6 +21,12 @@ public class GrdCondTester {
 
         for (CourseEnums c : result1) {
             System.out.println(c.getCourseNumber());
+        }
+
+        List<String> result2 = GrdCompareService.extractKorName(result1);
+
+        for (String s : result2) {
+            System.out.println(s);
         }
 
 
