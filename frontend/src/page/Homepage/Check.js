@@ -42,13 +42,32 @@ class Check extends React.Component {
     console.log(event.target.name, "촘  ")
   }
 
-  handlingSubmit = async (event) => {
-    // event.preventDefault()
-    console.log("크롤링 시작")
-    let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
-    console.log(result.data)
-    this.setState({ std: "", password: "" })
-  }
+
+  // handlingSubmit = (event) => {
+  //   console.log("크롤링 시작")
+
+  //   this.setState({ loading: true }, () => {
+  //     api.crawlUser({ std_num: this.state.std, password: this.state.password })
+  //       .then(result => this.setState({
+  //         loading: false,
+  //         data: [...result.data],
+  //       }))
+  //       .catch(function (error) {alert(error)});
+  //   });
+  //   // event.preventDefault()
+
+  //   // let result = await 
+  //   console.log(this.data)
+  //   this.setState({ std: "", password: "" })
+  // }
+
+  // handlingSubmit = async (event) => {
+  //   // event.preventDefault()
+  //   console.log("크롤링 시작")
+  //   let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
+  //   alert(result.data)
+  //   this.setState({ std: "", password: "" })
+  // }
 
 
   render() {
@@ -60,7 +79,7 @@ class Check extends React.Component {
         <div className="CheckPage">
           <div className="body">
             <div className="head">내 졸업 요건 확인</div>
-            <div className="Crwaler">
+            {/* <div className="Crwaler">
               <form onSubmit={this.handlingSubmit}>
 
 
@@ -81,8 +100,9 @@ class Check extends React.Component {
                 <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={this.handlingSubmit} className="crawlingbtn">
                   업데이트      </Button>
               </form>
-            </div>
-            {/* <Crawler /> */}
+            </div> */}
+
+            <Crawler />
 
             <TabContent />
 

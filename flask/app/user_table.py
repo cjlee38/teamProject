@@ -1,4 +1,5 @@
 from selenium_class import *
+import time
 
 def user_Table(id_input, pw_input, user_id, db):
     db_class = db
@@ -15,6 +16,14 @@ def user_Table(id_input, pw_input, user_id, db):
     # 로그인
     login_btn = driver.find_by_xpath('/html/body/div/form[3]/div[2]/div/div[2]/div/a')
     driver.click(login_btn)
+
+    time.sleep(0.5)
+
+    try:
+        if driver.driver.switch_to_alert():
+            raise Exception("아이디 비번 확인!")
+    except:
+        pass
 
     # 비밀번호 변경 안내 예외 처리
     try:
