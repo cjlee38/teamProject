@@ -1,8 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond;
 
 public class CreditCondObj {
-
-//    private Long creditId;
     private Integer firstMajor;
     private Integer secondMajor;
     private Integer subMajor; // 2전공

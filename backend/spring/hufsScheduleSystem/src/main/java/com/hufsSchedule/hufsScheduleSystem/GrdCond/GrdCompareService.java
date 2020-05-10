@@ -4,7 +4,6 @@ import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditLibArtsField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +57,7 @@ public class GrdCompareService {
     }
 
     public CreditCondObj compareCredit(Credit userCredit, CreditCondObj grdCredit) {
+
         CreditCondObj remainCredit = new CreditCondObj();
 
         remainCredit.setFirstMajor(grdCredit.getFirstMajor() - userCredit.getFirstMajor());
@@ -73,13 +73,6 @@ public class GrdCompareService {
         return remainCredit;
     }
 
-    private static Integer getCreditAsInteger(String sCredit) {
-        try {
-            return Integer.parseInt(sCredit);
-        } catch (Exception e) {
-            System.out.println("Error occured while parsing String into Integer");
-            return getCreditAsInteger(sCredit);
-        }
-    }
+
 
 }

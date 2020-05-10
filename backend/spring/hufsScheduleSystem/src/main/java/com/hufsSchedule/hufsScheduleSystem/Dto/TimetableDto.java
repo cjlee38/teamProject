@@ -24,9 +24,10 @@ public class TimetableDto {
         private Integer year;
         private Boolean foreigner;
         private Boolean teaching;
+        private Boolean intensiveMajor;
 
         @Builder
-        public Req(Long userId, String password, String studentNumber, String name, String major, String secondMajor, String minor, int year, boolean foreigner, boolean teaching){
+        public Req(Long userId, String password, String studentNumber, String name, String major, String secondMajor, String minor, int year, boolean foreigner, boolean teaching, boolean intensiveMajor){
             this.userId = userId;
             this.password = password;
             this.studentNumber = studentNumber;
@@ -37,6 +38,7 @@ public class TimetableDto {
             this.year = year;
             this.foreigner = foreigner;
             this.teaching = teaching;
+            this.intensiveMajor = intensiveMajor;
         }
     }
 

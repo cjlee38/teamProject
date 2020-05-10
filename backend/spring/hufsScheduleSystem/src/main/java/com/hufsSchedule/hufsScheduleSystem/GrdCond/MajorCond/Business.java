@@ -1,19 +1,13 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond;
 
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Business implements IfcMajors {
-//    private String studentYear;
-//    private Boolean bSecondMajor;
-//
-//    public Business(String studentYear, Boolean bSecondMajor) {
-//        this.studentYear = studentYear;
-//        this.bSecondMajor = bSecondMajor;
-//    }
-
     // might be replaced
     @Override
     public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {

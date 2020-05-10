@@ -13,10 +13,9 @@ public class GrdCondService {
 
     public GrdCondObj makeGrdCondByUserInfo(TimetableDto.Req req) {
         String studentYear = GrdCondEct.getStudentYear(req.getStudentNumber());
-
-        List<String> courses = grdCourseService.makeAllGrdCourseList(studentYear, req.getMajor(), req.getSecondMajor());
-        /* needs recheck credit field with req */
-        CreditCondObj credit = grdCreditService.makeGrdCreditByInfo(studentYear, false, true, false);
+        
+        List<String> courses = grdCourseService.makeAllGrdCourseList(studentYear, GrdCondEct.getEngFromKorMajor(req.getMajor()), GrdCondEct.getEngFromKorMajor(req.getSecondMajor()));
+        CreditCondObj credit = grdCreditService.makeGrdCreditByInfo(studentYear, req.getIntensiveMajor(), GrdCondEct.getStudentBool(req.getSecondMajor()), GrdCondEct.getStudentBool(req.getMinor()));
         Integer libArtsField = creditLibArtsField.makeFieldCreditByStudentYear(studentYear);
 
         GrdCondObj grdCondObj = new GrdCondObj(courses, credit, libArtsField);
