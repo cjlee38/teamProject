@@ -29,18 +29,11 @@ public class GrdCondTester {
 
         GrdCondObj gco = GrdCondService.makeGrdCondByUserInfo(req);
 
-        List<String> res1 = gco.getGrdCourse();
-        for (String s : res1) {
-            System.out.println(s);
-        }
-        Integer a = gco.getGrdCreditField();
-        System.out.println(a);
+        List<CourseEnums> result1 = gco.getGrdCourse();
 
-        CreditCondObj credit = gco.getGrdCredit();
-        System.out.println(credit.getTotalCredit());
-        System.out.println(credit.getFirstMajor());
-        System.out.println(credit.getSecondMajor());
-        System.out.println(credit.getMinor());
+        for (CourseEnums c : result1) {
+            System.out.println(c.getCourseNumber());
+        }
 
 
 

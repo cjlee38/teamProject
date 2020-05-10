@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GrdCourseService {
 
-    public static List<String> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
+    public static List<CourseEnums> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
         IfcMajors courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond."+majorName;
         try {
@@ -22,33 +22,32 @@ public class GrdCourseService {
 
         }
 
-        List<String> courseList = courseInstance.makeMajorCourseList(studentYear, bSecondMajor);
+        List<CourseEnums> courseList = courseInstance.makeMajorCourseList(studentYear, bSecondMajor);
 
         return courseList;
     }
 
-    public static List<String> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
+    public static List<CourseEnums> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
         IfcLibArts courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.LibArts" + studentYear;
 
         try {
             courseInstance = (IfcLibArts)Class.forName(className)
-                    .getConstructor(String.class, String.class, String.class)
-                    .newInstance(studentYear, firstMajorName, secondMajorName);
+                    .newInstance();
         } catch (Exception e) {
             courseInstance = null;
             System.out.println("Libarts init error occured");
         }
 
-        List<String> courseList = courseInstance.getLibArtsCourseList();
+        List<CourseEnums> courseList = courseInstance.makeLibArtsCourseList(firstMajorName, secondMajorName);
 
         return courseList;
 
 
     }
 
-    public static List<String> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
-        List<String> courseList = new ArrayList<String>();
+    public static List<CourseEnums> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
+        List<CourseEnums> courseList = new ArrayList<CourseEnums>();
 
         courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));
         courseList.addAll(makeMajorCoursesByInfo(studentYear, secondMajorName, true));

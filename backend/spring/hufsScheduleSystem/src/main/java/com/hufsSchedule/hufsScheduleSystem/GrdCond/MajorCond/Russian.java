@@ -9,23 +9,23 @@ public class Russian implements IfcMajors{
 
     // might be replaced
     @Override
-    public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<String> baseCourseList = new ArrayList<String>();
-        Arrays.asList(CourseEnums.RussianEnum.values()).forEach(e -> baseCourseList.add(e.getKorName()));
+    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+        Arrays.asList(CourseEnums.RussianEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<String> retCourseList = modifyCourseListByStudentYear(
+        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear) {
+    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
         return courseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, Boolean bSecondMajor) {
+    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
         return courseList;
     }
 }

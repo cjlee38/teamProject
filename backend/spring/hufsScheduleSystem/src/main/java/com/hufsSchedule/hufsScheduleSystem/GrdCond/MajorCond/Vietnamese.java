@@ -8,29 +8,29 @@ import java.util.Arrays;
 
 public class Vietnamese implements IfcMajors {
     @Override
-    public ArrayList<String> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<String> baseCourseList = new ArrayList<String>();
-        Arrays.asList(CourseEnums.VietnameseEnum.values()).forEach(e -> baseCourseList.add(e.getKorName()));
+    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+        Arrays.asList(CourseEnums.VietnameseEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<String> retCourseList = modifyCourseListByStudentYear(
+        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListByStudentYear(ArrayList<String> courseList, String studentYear) {
-        ArrayList<String> emptyCourseList;
+    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
+        ArrayList<CourseEnums> emptyCourseList;
         if (GrdCondEct.getInteger(studentYear) >= 2017) {
             emptyCourseList = new ArrayList<>();
         } else {
-            emptyCourseList = (ArrayList<String>) courseList.clone();
+            emptyCourseList = (ArrayList<CourseEnums>) courseList.clone();
         }
         return emptyCourseList;
     }
 
     @Override
-    public ArrayList<String> modifyCourseListBybSecondMajor(ArrayList<String> courseList, Boolean bSecondMajor) {
+    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
         return courseList;
     }
 }

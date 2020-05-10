@@ -10,7 +10,7 @@ public class GrdCondService {
     public static GrdCondObj makeGrdCondByUserInfo(TimetableDto.Req req) {
         String studentYear = GrdCondEct.getStudentYear(req.getStudentNumber());
         
-        List<String> courses = GrdCourseService.makeAllGrdCourseList(studentYear, GrdCondEct.getEngFromKorMajor(req.getMajor()), GrdCondEct.getEngFromKorMajor(req.getSecondMajor()));
+        List<CourseEnums> courses = GrdCourseService.makeAllGrdCourseList(studentYear, GrdCondEct.getEngFromKorMajor(req.getMajor()), GrdCondEct.getEngFromKorMajor(req.getSecondMajor()));
         CreditCondObj credit = GrdCreditService.makeGrdCreditByInfo(studentYear, req.getIntensiveMajor(), GrdCondEct.getStudentBool(req.getSecondMajor()), GrdCondEct.getStudentBool(req.getMinor()));
         Integer libArtsField = CreditLibArtsField.makeFieldCreditByStudentYear(studentYear);
 

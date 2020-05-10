@@ -5,6 +5,7 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 public interface CourseEnums {
     public String getKorName();
     public String getEngName();
+    public String getCourseNumber();
 
     enum BusinessEnum implements CourseEnums{
         D012033("경영학원론", "Principle of MajorCond.Business Management"),
@@ -32,6 +33,8 @@ public interface CourseEnums {
         public String getEngName() {
             return engName;
         }
+        @Override
+        public String getCourseNumber() { return name(); }
     }
 
     enum SoftwareConvergenceEnum implements CourseEnums{
@@ -56,6 +59,8 @@ public interface CourseEnums {
         public String getEngName() {
             return engName;
         }
+        @Override
+        public String getCourseNumber() { return name(); }
     }
 
     enum RussianEnum implements CourseEnums {
@@ -76,6 +81,8 @@ public interface CourseEnums {
         public String getKorName() { return korName; }
         @Override
         public String getEngName() { return engName; }
+        @Override
+        public String getCourseNumber() { return name(); }
     }
 
     enum VietnameseEnum implements  CourseEnums {
@@ -102,7 +109,38 @@ public interface CourseEnums {
         public String getEngName() {
             return engName;
         }
+        @Override
+        public String getCourseNumber() { return name(); }
     }
+
+    enum LibArts2015Enum implements CourseEnums {
+        Y12101("미네르바인문(1)읽기와쓰기", "Minerva Humanities Reading and Writing"),
+        Y12102("미네르바인문(2)읽기와토의.토론", "Minerva Humanities Reading and Discussion & Debate"),
+        U7618("신입생세미나", "Seminar for Freshmen"),
+        Y12104("HUFS Career Design 진로설정과취.창업경력개발", "HUFS Career Design (Defining Career Path & Development)");
+
+        final private String korName, engName;
+
+        LibArts2015Enum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+        @Override
+        public String getCourseNumber() {
+            return name();
+        }
+
+    }
+
 
 
 }
