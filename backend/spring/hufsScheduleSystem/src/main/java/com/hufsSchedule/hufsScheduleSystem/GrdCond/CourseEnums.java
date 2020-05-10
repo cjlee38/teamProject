@@ -8,7 +8,7 @@ public interface CourseEnums {
     public String getCourseNumber();
 
     enum BusinessEnum implements CourseEnums{
-        D012033("경영학원론", "Principle of MajorCond.Business Management"),
+        D01203("경영학원론", "Principle of MajorCond.Business Management"),
         D01205("회계원리", "Principles of Accounting"),
         D03103("경영통계학", "MajorCond.Business Statistics"),
         D03210("운영관리", "Operations Management"),
@@ -17,7 +17,7 @@ public interface CourseEnums {
         D01311("재무관리", "Financial Management"),
         D03205("재무회계(1)", "Intermediate Accounting (1)"),
         D01305("국제경영론", "International MajorCond.Business Managemnet"),
-        P042052("경영정보학개론", "Introduction to Management Information System");
+        P04205("경영정보학개론", "Introduction to Management Information System");
 
         final private String korName, engName;
 
@@ -91,7 +91,9 @@ public interface CourseEnums {
         B06222("중급베트남어회화(1)", "Intermediate Vietnamese Conversation(1)"),
         B06223("중급베트남어회화(2)", "Intermediate Vietnamese Conversation(2)"),
         B06311("고급베트남어회화(1)", "Intermediate Vietnamese Conversation(1)"),
-        B06312("고급베트남어회화(2)", "Intermediate Vietnamese Conversation(2)");
+        B06312("고급베트남어회화(2)", "Intermediate Vietnamese Conversation(2)"),
+        Z99999("베트남역사_최소과목", "History of Vietnamese"),
+        Z99998("베트남문학이해_최소과목", "Understanding of Vietnamese Literature");
 
         final private String korName, engName;
 

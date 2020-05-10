@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IfcMajors {
-    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor);
-    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear);
-    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor);
+    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor);
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear);
+    public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor);
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList);
 }

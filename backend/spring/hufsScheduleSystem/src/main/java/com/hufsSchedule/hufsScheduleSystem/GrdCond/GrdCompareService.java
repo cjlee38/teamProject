@@ -1,9 +1,11 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
+import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.IfcMajors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractCourseNumber;
+import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractUserFieldCredit;
+import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCourseService.makeMajorObjsByInfo;
+
 public class GrdCompareService {
-    public static GrdCondObj compareGrdAndUser(ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
-        List<CourseEnums> remainCourseList = compareCourseList(extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
+    public static GrdCondObj compareGrdAndUser(TimetableDto.Req userInfo, ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
+        List<CourseEnums> remainCourseList = compareCourseList(userInfo, extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(user.getCredit(), grdCond.getGrdCredit());
         Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(user.getInstructions()), grdCond.getGrdCreditField());
 
@@ -21,25 +27,7 @@ public class GrdCompareService {
         return remainCondObj;
     }
 
-    public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
-        List<String> courseNumbers = new ArrayList<String>();
-        userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber().substring(0,6)));
 
-        return courseNumbers;
-    }
-
-    public static Integer extractUserFieldCredit(List<Instruction> userInstructions) {
-        Integer userFieldCredit = 0;
-        List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
-        List<String> userAreas = new ArrayList<>();
-        userInstructions.stream().distinct().forEach(i -> userAreas.add(i.getArea()));
-
-        for(String s : userAreas) {
-            if(libArtsArea.contains(s)) { userFieldCredit++;}
-        }
-
-        return userFieldCredit;
-    }
 
     public static Integer compareLibArtsFieldCredit(Integer userFieldCredit, Integer grdFieldCredit) {
         Integer remainFieldCredit;
@@ -48,15 +36,26 @@ public class GrdCompareService {
         return remainFieldCredit;
     }
 
+    public static List<CourseEnums> compareCourseList(TimetableDto.Req userInfo, List<String> userCourseList, List<CourseEnums> grdCourseList) {
+        List<CourseEnums> remainCourses;
 
+        // 전공필수이수과목 삭제
+        String studentYear = GrdCondEct.getStudentYear(userInfo.getStudentNumber());
+        List<CourseEnums> removedCourses = GrdCondEct.removeCourseListByNumber(grdCourseList, userCourseList);
 
-    public static List<CourseEnums> compareCourseList(List<String> userCourseList, List<CourseEnums> grdCourseList) {
-        List<CourseEnums> resultCourseList = grdCourseList.stream()
-                .filter(x -> !userCourseList.contains(x.getCourseNumber()))
-                .collect(Collectors.toList());
+        // 1전공 특수케이스 과목 삭제
+        IfcMajors firstMajorObj = GrdCourseService.makeMajorObjsByInfo(studentYear, userInfo.getMajor(), false);
+        remainCourses = firstMajorObj.modifySpecialCourseList(removedCourses);
 
-        return resultCourseList;
+        // 2전공 특수케이스 과목 삭제
+        if (userInfo.getSecondMajor() != null) {
+            IfcMajors secondMajorObj = GrdCourseService.makeMajorObjsByInfo(studentYear, userInfo.getSecondMajor(), true);
+            remainCourses = secondMajorObj.modifySpecialCourseList(remainCourses);
+        }
+        
+        return remainCourses;
     }
+
 
     public static CreditCondObj compareCredit(Credit userCredit, CreditCondObj grdCredit) {
 

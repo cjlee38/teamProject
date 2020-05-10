@@ -1,7 +1,12 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
+import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
+import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GrdCondEct {
@@ -38,27 +43,35 @@ public class GrdCondEct {
         return engMajorName;
     }
 
-//    public static List<String> makeMajorCourseByName(String majorName) {
-//        List<String> resultCourses = new ArrayList<String>();
-//        String majorEnumName;
-//
-//        majorEnumName = Stream.of(departments.values())
-//                .filter(s -> majorName.equals(s.name()))
-//                .map(s -> s.getEnumName())
-//                .findFirst()
-//                .orElse(null);
-//
-//        if (majorEnumName != null) {
-//            try {
-//                Class<?> clz = Class.forName(majorEnumName);
-//                Stream.of(clz.getEnumConstants())
-//                        .forEach(s -> resultCourses.add(String.valueOf(s)));
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//
-//        return resultCourses;
-//    }
+    public static List<CourseEnums> removeCourseListByNumber(List<CourseEnums> courseList, List<String> removeList) {
+        List<CourseEnums> resultCourseList;
+
+        resultCourseList = courseList.stream()
+                .filter(x -> !removeList.contains(x.getCourseNumber()))
+                .collect(Collectors.toList());
+
+        return resultCourseList;
+    }
+
+    public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
+        List<String> courseNumbers = new ArrayList<String>();
+        userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber().substring(0,6)));
+
+        return courseNumbers;
+    }
+
+    public static Integer extractUserFieldCredit(List<Instruction> userInstructions) {
+        Integer userFieldCredit = 0;
+        List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
+        List<String> userAreas = new ArrayList<>();
+        userInstructions.stream().distinct().forEach(i -> userAreas.add(i.getArea()));
+
+        for (String s : userAreas) {
+            if (libArtsArea.contains(s)) {
+                userFieldCredit++;
+            }
+        }
+
+        return userFieldCredit;
+    }
 }

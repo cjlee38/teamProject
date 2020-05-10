@@ -1,36 +1,56 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond;
 
+import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Vietnamese implements IfcMajors {
     @Override
-    public ArrayList<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
-        ArrayList<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+        List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.VietnameseEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        ArrayList<CourseEnums> retCourseList = modifyCourseListByStudentYear(
+        List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
         );
         return retCourseList;
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListByStudentYear(ArrayList<CourseEnums> courseList, String studentYear) {
-        ArrayList<CourseEnums> emptyCourseList;
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear) {
+        List<CourseEnums> emptyCourseList;
         if (GrdCondEct.getInteger(studentYear) >= 2017) {
             emptyCourseList = new ArrayList<>();
         } else {
-            emptyCourseList = (ArrayList<CourseEnums>) courseList.clone();
+            emptyCourseList = courseList;
         }
         return emptyCourseList;
     }
 
     @Override
-    public ArrayList<CourseEnums> modifyCourseListBybSecondMajor(ArrayList<CourseEnums> courseList, Boolean bSecondMajor) {
+    public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor) {
         return courseList;
+    }
+
+    @Override
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+        List<String> historyOfVietnamese = new ArrayList<String>(Arrays.asList("B06137", "B06135", "B06136", "B06138"));
+        List<String> UnderstandingVietnameseLiterature = new ArrayList<String>(Arrays.asList("B06466", "B06467")); // 베트남문학이해2(B06467) 없음.
+        Long history = remainCourseList.stream().filter(s -> historyOfVietnamese.contains(s.getCourseNumber())).count();
+        Long Literature = remainCourseList.stream().filter(s -> UnderstandingVietnameseLiterature.contains(s.getCourseNumber())).count();
+
+        if (history >= 1) {
+            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99999"));
+        }
+
+        if (Literature >= 1) {
+            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99998"));
+        }
+
+        return remainCourseList;
     }
 }
