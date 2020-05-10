@@ -9,6 +9,7 @@ import Signuppage from '../Signuppage/Signuppage';
 import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
 import Recommend from '../Homepage/Recommend';
+import Singuppage from '../Signuppage/Signuppage';
 
 
 function LoginPage () {
@@ -21,6 +22,7 @@ function LoginPage () {
 
         <Route path="/Main/:id/:password" component={Main} />
         <Route path="/Login" component={LoginP} />
+        <Route path="/Signup" component={Signuppage} />
 
         <Route path="/Check" component={Check} />
         <Route path="/Recommend" component={Recommend} />

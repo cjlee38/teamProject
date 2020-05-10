@@ -1,11 +1,13 @@
 import React, { useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Input from '../LoginPage/components/Input';
 import Title from '../LoginPage/components/Title';
 import Button from '../LoginPage/components/Button';
 import Logo from '../../image/logo.png';
-
+import Recommend from "../Homepage/Recommend";
+import LoginPage from '../LoginPage/LoginPage';
+import Main from '../MainPage/MainPage';
 
 const Signuppage = () => {
     console.log("hi")
@@ -26,11 +28,6 @@ const Signuppage = () => {
 
     return(
         <div className="SignupPage">
-            <div className="head">
-                <div>
-                    <img src={Logo} classname="logo" alt="logo" width='15%'/>
-                </div>
-            </div>
             <div className="body">
                 <Title/>
                 <div className="useridpassword">
@@ -57,7 +54,9 @@ const Signuppage = () => {
                     />
                 </div>
                 <div className="Button">
-                    <button>회원가입</button>
+                <Link to="/Login">
+            <Button onClick name={"회원가입"} value={"signUp"}/>
+          </Link> 
                 </div>
             </div>
         </div>
@@ -67,4 +66,29 @@ const Signuppage = () => {
 
 }
 
-export default Signuppage
+
+  
+function SignUp () {
+      console.log('mainpage')
+      return (
+        <Router>
+          <Switch>
+    
+            <Route path="/" exact={true} component={Main} />
+            <Route path="/Main" component={Main} />
+    
+            <Route path="/Main/:id/:password" component={Main} />
+            <Route path="/Login" component={LoginPage} />
+    
+            <Route path="/Signup" component={Signuppage} />
+          </Switch>
+    
+    
+    
+        </Router>
+    
+    
+      )
+    };
+
+    export default SignUp

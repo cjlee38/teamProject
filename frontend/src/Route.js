@@ -4,6 +4,7 @@ import Recommend from "./page/Homepage/Recommend";
 import Check from './page/Homepage/Check';
 import LoginPage from './page/LoginPage/LoginPage';
 import Main from './page/MainPage/MainPage';
+import Signuppage from './page/Signuppage/Signuppage';
 
 
 function route() {
@@ -21,6 +22,8 @@ function route() {
                         <Route path="/Login" component={LoginPage} />
                         <Route path="/Check" component={Check} />
                         <Route path="/Recommend" component={Recommend} />
+                        <Route path="/Signup" component={Signuppage} />
+
                     </Switch>
 
                 </div>
