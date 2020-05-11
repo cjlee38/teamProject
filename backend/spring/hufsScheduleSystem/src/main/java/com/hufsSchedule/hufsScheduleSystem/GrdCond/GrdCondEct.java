@@ -53,6 +53,7 @@ public class GrdCondEct {
         return resultCourseList;
     }
 
+
     public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
         userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber().substring(0,6)));
@@ -60,18 +61,21 @@ public class GrdCondEct {
         return courseNumbers;
     }
 
-    public static Integer extractUserFieldCredit(List<Instruction> userInstructions) {
-        Integer userFieldCredit = 0;
-        List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
+    public static List<String> extractUserFieldCredit( List<Instruction> userInstructions) {
         List<String> userAreas = new ArrayList<>();
-        userInstructions.stream().distinct().forEach(i -> userAreas.add(i.getArea()));
+        userInstructions.stream().forEach(x -> userAreas.add(x.getArea()));
 
-        for (String s : userAreas) {
-            if (libArtsArea.contains(s)) {
-                userFieldCredit++;
-            }
-        }
+        List<String> userUniqueAreas = new ArrayList<String>();
+        userAreas.stream().distinct().forEach(x -> userUniqueAreas.add(x));
 
-        return userFieldCredit;
+        return userUniqueAreas;
+
+//        for (String s : userUniqueAreas) {
+//            if (libArtsArea.contains(s)) {
+//                userFieldCredit++;
+//            }
+//        }
+//
+//        return userFieldCredit;
     }
 }

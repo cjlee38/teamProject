@@ -1,17 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond;
 
 public class CreditCond2015 implements IfcCreditCond {
-    private CreditCondObj creditCondObj;
-
-
-    public CreditCond2015(Boolean bIntensiveMajor,Boolean bSecondMajor, Boolean bMinor) {
-        this.creditCondObj = makeCreditCond(bIntensiveMajor, bSecondMajor, bMinor);
-
-    }
-
-    public CreditCondObj getCreditCondList() {
-        return creditCondObj;
-    }
 
     public CreditCondObj makeCreditCond(Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
         CreditCondObj creditCondObj = new CreditCondObj();
@@ -24,6 +13,7 @@ public class CreditCond2015 implements IfcCreditCond {
         creditCondObj.setMinor(0); // 부전공
         creditCondObj.setTeaching(0);
         creditCondObj.setOptional(0);
+        creditCondObj.setTotalGet(0);
         creditCondObj.setTotalCredit(134);
 
         modifyCreditCondBybIntensiveMajor(creditCondObj, bIntensiveMajor);

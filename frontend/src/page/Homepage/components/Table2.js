@@ -26,7 +26,7 @@ class Table extends Component {
           <TableHeaderColumn dataField='first_major'
             dataAlign='center'
             headerAlign="center"
-            width="30%"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -37,7 +37,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='second_major'
             dataAlign='center'
-            width="30%"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -49,7 +49,7 @@ class Table extends Component {
      
           <TableHeaderColumn dataField='liberal_arts'
             dataAlign='center'
-            width="30%"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -57,6 +57,32 @@ class Table extends Component {
               }}
             headerAlign="center">
             교양
+          
+          
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='liberal_arts'
+            dataAlign='center'
+            width="18%"
+            thStyle={
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}
+            headerAlign="center">
+            교직
+          
+          
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='liberal_arts'
+            dataAlign='center'
+            width="18%"
+            thStyle={
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}
+            headerAlign="center">
+            자선
           
           
           </TableHeaderColumn>

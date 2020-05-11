@@ -24,11 +24,14 @@
 }
 
 .Crwaler {
-    width: 100%;
+    width: 80%;
+    // float: right;
+    margin-bottom: 1%;
 }
 
 form{
-    width: 40%;
+    padding : 0 auto !important;
+    width: 45%;
     float: right;
     // margin: 0 auto;
 }
@@ -38,7 +41,8 @@ th {
 }
 
 .table4{
-    width: 80%;
+    width: 50%;
+    float: left !important;
 }
 
 .nav-pills .active{

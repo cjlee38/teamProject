@@ -5,6 +5,5 @@ public interface IfcCreditCond {
     public void modifyCreditCondBybIntensiveMajor(CreditCondObj creditCondObj, Boolean bIntensiveMajor);
     public void modifyCreditCondBybSecondMajor(CreditCondObj creditCondObj, Boolean bSecondMajor);
     public void modifyCreditCondBybMinor(CreditCondObj creditCondObj, Boolean bSubMajor);
-    public CreditCondObj getCreditCondList();
 
 }

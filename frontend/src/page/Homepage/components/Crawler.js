@@ -51,8 +51,7 @@ class crawler extends React.Component {
 
     return (
 
-      <div className="Crwaler">
-        <form onSubmit={this.handlingSubmit}>
+        <form onSubmit={this.handlingSubmit} method="POST">
 
           {this.state.loading ? <TextField
             className="input" margin="normal" disabled
@@ -89,7 +88,6 @@ class crawler extends React.Component {
             업데이트      </Button>}
 
         </form>
-      </div>
     )
   }
 }

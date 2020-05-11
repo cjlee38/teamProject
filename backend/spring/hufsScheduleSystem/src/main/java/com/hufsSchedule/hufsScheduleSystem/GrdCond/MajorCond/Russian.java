@@ -10,7 +10,7 @@ public class Russian implements IfcMajors{
 
     // might be replaced
     @Override
-    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+    public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.RussianEnum.values()).forEach(e -> baseCourseList.add(e));
 
@@ -21,7 +21,7 @@ public class Russian implements IfcMajors{
     }
 
     @Override
-    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear) {
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, Integer studentYear) {
         return courseList;
     }
 

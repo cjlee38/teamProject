@@ -10,10 +10,10 @@ import java.util.List;
 public class GrdCondObj {
     private List<CourseEnums> grdCourse;
     private CreditCondObj grdCredit;
-    private Integer grdCreditField;
+    private List<String> grdCreditField;
 
 
-    public GrdCondObj(List<CourseEnums> grdCourse, CreditCondObj grdCredit, Integer grdCreditField) {
+    public GrdCondObj(List<CourseEnums> grdCourse, CreditCondObj grdCredit, List<String> grdCreditField) {
         this.grdCourse = grdCourse;
         this.grdCredit = grdCredit;
         this.grdCreditField = grdCreditField;
