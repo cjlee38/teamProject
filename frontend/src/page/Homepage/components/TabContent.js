@@ -38,10 +38,10 @@ export default class TabContent extends Component {
                     <div label="학점" className="tab-content">
                     <Table data={this.data} />
                     </div>
-                    <div label="졸업요건" className="tab-content">
+                    <div label="이수 과목" className="tab-content">
                     <Table2 data={this.data2} />
                     </div>
-                    <div label="기타" className="tab-content">
+                    <div label="졸업 요건" className="tab-content">
                     <Table3 data={this.data3} />
                     </div>
                 </TabList>
