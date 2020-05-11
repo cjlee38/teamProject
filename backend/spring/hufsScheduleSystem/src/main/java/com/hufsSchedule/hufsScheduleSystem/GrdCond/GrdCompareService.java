@@ -21,7 +21,7 @@ public class GrdCompareService {
     public static GrdCondObj compareGrdAndUser(TimetableDto.Req userInfo, ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
         List<CourseEnums> remainCourseList = compareCourseList(userInfo, extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(user.getCredit(), grdCond.getGrdCredit());
-        Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(user.getInstructions()), grdCond.getGrdCreditField());
+        Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(GrdCondEct.getInteger(userInfo.getStudentNumber()) , user.getInstructions()), grdCond.getGrdCreditField());
 
         GrdCondObj remainCondObj = new GrdCondObj(remainCourseList, remainCredit, remainLibArtsFieldCredit);
         return remainCondObj;
@@ -40,7 +40,7 @@ public class GrdCompareService {
         List<CourseEnums> remainCourses;
 
         // 전공필수이수과목 삭제
-        String studentYear = GrdCondEct.getStudentYear(userInfo.getStudentNumber());
+        // String studentYear = GrdCondEct.getStudentYear(userInfo.getStudentNumber());
         List<CourseEnums> removedCourses = GrdCondEct.removeCourseListByNumber(grdCourseList, userCourseList);
 
         // 1전공 특수케이스 과목 삭제

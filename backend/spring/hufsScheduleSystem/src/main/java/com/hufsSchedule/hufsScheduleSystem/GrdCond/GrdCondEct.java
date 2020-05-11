@@ -60,13 +60,22 @@ public class GrdCondEct {
         return courseNumbers;
     }
 
-    public static Integer extractUserFieldCredit(List<Instruction> userInstructions) {
+    public static Integer extractUserFieldCredit(Integer studentYear, List<Instruction> userInstructions) {
         Integer userFieldCredit = 0;
-        List<String> libArtsArea = new ArrayList<>(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
-        List<String> userAreas = new ArrayList<>();
-        userInstructions.stream().distinct().forEach(i -> userAreas.add(i.getArea()));
+        List<String> libArtsArea = new ArrayList<>();
+        if (studentYear == 2015 || studentYear == 2016) {
+            libArtsArea.addAll(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술"));
+        } else if (studentYear == 2017) {
+            libArtsArea.addAll(Arrays.asList("언어와문학", "문화와예술", "역사와철학", "인간과사회", "과학과기술", "핵심인문기초"));
+        }
 
-        for (String s : userAreas) {
+        List<String> userAreas = new ArrayList<>();
+        userInstructions.stream().forEach(x -> userAreas.add(x.getArea()));
+
+        List<String> userUniqueAreas = new ArrayList<String>();
+        userAreas.stream().distinct().forEach(x -> userUniqueAreas.add(x));
+
+        for (String s : userUniqueAreas) {
             if (libArtsArea.contains(s)) {
                 userFieldCredit++;
             }
