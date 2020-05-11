@@ -136,28 +136,28 @@ class Check extends React.Component {
   }
 }
 
-function CheckPage() {
-  console.log('mainpage')
-  return (
-    <Router>
-      <Switch>
+// function CheckPage() {
+//   console.log('mainpage')
+//   return (
+//     <Router>
+//       <Switch>
 
-        <Route path="/" exact={true} component={Main} />
-        <Route path="/Main" component={Main} />
+//         <Route path="/" exact={true} component={Main} />
+//         <Route path="/Main" component={Main} />
 
-        <Route path="/Main/:id/:password" component={Main} />
-        <Route path="/Login" component={LoginPage} />
+//         <Route path="/Main/:id/:password" component={Main} />
+//         <Route path="/Login" component={LoginPage} />
 
-        <Route path="/Check" component={Check} />
-        <Route path="/Recommend" component={Recommend} />
-      </Switch>
-
-
-
-    </Router>
+//         <Route path="/Check" component={Check} />
+//         <Route path="/Recommend" component={Recommend} />
+//       </Switch>
 
 
-  )
-}
 
-export default CheckPage;
+//     </Router>
+
+
+//   )
+// }
+
+export default Check;
