@@ -37,8 +37,8 @@ public class Course {
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
 
-        if(!instruction.getCourses().contains(this)) {
+        /*if(!instruction.getCourses().contains(this)) {
             instruction.getCourses().add(this);
-        }
+        }*/
     }
 }
