@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -32,6 +34,7 @@ public class ConditionCheckService {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
+        List<String> instructionName = courses.stream().map(Instruction::getSubject).collect(Collectors.toList());
 
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(user);
         List<String> gCourses = GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse());
@@ -60,7 +63,7 @@ public class ConditionCheckService {
                 .optional(credit.getOptional())
                 .totalCredit(credit.getTotalCredit())
                 .averageScore(credit.getAverageScore())
-                .instructions(courses)
+                .instructions(instructionName)
 
                 .grdCourses(gCourses)
                 .grdFirstMajor(gCredit.getFirstMajor())

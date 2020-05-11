@@ -26,7 +26,7 @@ public class ConditionDto {
         private int optional;
         private int totalCredit;
         private float averageScore;
-        private List<Instruction> instructions;
+        private List<String> takenCourses;
 
         private List<String> grdCourses;
         private int grdFirstMajor;
@@ -54,9 +54,10 @@ public class ConditionDto {
 
 
         @Builder
-        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<Instruction> instructions,
+        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<String> instructions,
                                  List<String> remainCourses, int remainFirstMajor, int remainSecondMajor, int remainSubMajor, int remainMinor, int remainOutdoor, int remainLiberalArts, int remainTeaching, int remainOptional, int remainTotalCredit, float remainAverageScore,
                                  List<String> grdCourses, int grdFirstMajor, int grdSecondMajor, int grdSubMajor, int grdMinor, int grdOutDoor, int grdLiberalArts, int grdTeaching, int grdOptional, int grdTotalCredit, float grdAverageScore){
+
             this.firstMajor = firstMajor;
             this.secondMajor = secondMajor;
             this.subMajor = subMajor;
@@ -67,7 +68,7 @@ public class ConditionDto {
             this.optional = optional;
             this.totalCredit = totalCredit;
             this.averageScore = averageScore;
-            this.instructions = instructions;
+            this.takenCourses = instructions;
 
             this.grdCourses = grdCourses;
             this.grdFirstMajor = grdFirstMajor;
