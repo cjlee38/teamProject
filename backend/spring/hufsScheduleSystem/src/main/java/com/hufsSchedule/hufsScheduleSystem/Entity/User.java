@@ -27,18 +27,18 @@ public class User {
     private Integer year;
     private Boolean foreigner;
     private Boolean teaching;
+    @Column(name="intensive_major")
+    private String intensiveMajor;
+
 
     @Builder
-    public User(String studentNumber, String password) {
+    public User(String studentNumber, String password, String name) {
         this.studentNumber = studentNumber;
         this.password = password;
+        this.name = name;
     }
 
-
-    @OneToOne(mappedBy = "user")
-    private Credit credit;
-
-    @OneToMany(mappedBy = "user", targetEntity = Timetable.class)
+    /*@OneToMany(mappedBy = "user", targetEntity = Timetable.class)
     private List<Timetable> timetables = new ArrayList<Timetable>();
 
     public void addTimetables(Timetable timetable) {
@@ -66,6 +66,6 @@ public class User {
         if (liberalArt.getUser() != this) {
             liberalArt.setUser(this);
         }
-    }
+    }*/
 
 }

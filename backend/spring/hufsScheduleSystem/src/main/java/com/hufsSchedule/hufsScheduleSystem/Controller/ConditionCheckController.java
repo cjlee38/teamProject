@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("web/v1/checkCondition")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class ConditionCheckController {
     private final ResponseService responseService;
     private final ConditionCheckService conditionCheckService;

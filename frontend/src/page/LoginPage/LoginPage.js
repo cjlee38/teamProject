@@ -10,7 +10,7 @@ import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
 import Recommend from '../Homepage/Recommend';
 import Singuppage from '../Signuppage/Signuppage';
-
+import Axios from 'axios';
 
 function LoginPage () {
   return (
@@ -62,20 +62,18 @@ const LoginP = () => {
       })
     }
 
-    const tryLogin = async() => {
+    const tryLogin = () => {
       console.log('sdffd')
       console.log(id, password);
-      try {
-        let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
-        let json = await response.json();
-        console.log(json.success);
-      } catch (error) {
+      Axios.get('http://localhost:1415/web/v1/user/Login', {
+        params: { studentNumber:id, password:password }
+      })
+      .then((response) => {
+        console.log("userId : ", response.data.userId);
+      })
+      .catch(function (error) {
         console.log(error);
-      };
-      reset();
-    }
-
-    const trySignUp = () => {
+      });
       reset();
     }
     
@@ -105,7 +103,7 @@ const LoginP = () => {
             <Button onClick={tryLogin} name={"로그인"} value={"login"}/>
           </Link>
           <Link to="/Signup">
-            <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
+            <Button name={"회원가입"} value={"signUp"}/>
           </Link>  
         </div>
       </div>

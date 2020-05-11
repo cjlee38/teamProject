@@ -8,14 +8,16 @@ import Logo from '../../image/logo.png';
 import Recommend from "../Homepage/Recommend";
 import LoginPage from '../LoginPage/LoginPage';
 import Main from '../MainPage/MainPage';
+import Axios from 'axios';
 
 const Signuppage = () => {
-    console.log("hi")
     const [inputs, setInputs]=useState({
         username:"",
         usernum:"",
         password:""
     });
+
+
     const {username, usernum, password}=inputs;
 
     const onChange=e=>{
@@ -24,27 +26,23 @@ const Signuppage = () => {
             ...inputs,
             [name]:value
         });
+
+        console.log(username,usernum,password);
     }
 
     const trySignUp = async() => {
-        try {
-          let response = await fetch('http://localhost:1415/web/v1/user/SignUp', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            "studentNumber" : usernum,
-            "password" : password,
-            "name" : username
-          })
+        console.log(username,usernum,password);
+        Axios.post('http://localhost:1415/web/v1/user/SignUp', {
+          "studentNumber" : usernum,
+          "password" : password,
+          "name" : username
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-        const json = await response.json();
-        console.log(json);
-          } catch (error) {
-            console.log(error);
-          };
       }
 
     return(
@@ -76,8 +74,8 @@ const Signuppage = () => {
                 </div>
                 <div className="Button">
                 <Link to="/Login">
-            <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
-          </Link> 
+                  <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
+                </Link> 
                 </div>
             </div>
         </div>

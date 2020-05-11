@@ -34,7 +34,8 @@ function MainPage(match) {
 
 
 const Main = ({ match }) => {
-    console.log(match.params.id)
+
+    console.log(match.params.id);
     return (
 
             <div className="body">

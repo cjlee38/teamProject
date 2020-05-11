@@ -30,7 +30,7 @@ public class Credit {
     private int totalCredit;
     @Column(name = "average_score")
     private float averageScore;
-    @OneToOne
+    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name="user_credit", referencedColumnName = "user_id")
     private User user;
 

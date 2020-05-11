@@ -33,6 +33,7 @@ public class ConditionCheckService {
                 .averageScore(credit.getAverageScore())
                 .instructions(courses)
                 .build();
+
         return res;
     }
 

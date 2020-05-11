@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: hufs
     password: rhtjrgns12
-    url: jdbc:mysql://hufsscheduleservice.cvazzjdw6jxq.ap-northeast-2.rds.amazonaws.com:3306/innodb
+    url: jdbc:mysql://hufsscheduleservice.cvazzjdw6jxq.ap-northeast-2.rds.amazonaws.com:3306/innodb?useSSL=false&useUnicode=true&characterEncoding=utf8
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

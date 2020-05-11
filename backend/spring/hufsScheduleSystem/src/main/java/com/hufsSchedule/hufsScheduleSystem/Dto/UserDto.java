@@ -30,6 +30,7 @@ public class UserDto {
             return User.builder()
                     .studentNumber(this.studentNumber)
                     .password(this.password)
+                    .name(this.name)
                     .build();
         }
     }
