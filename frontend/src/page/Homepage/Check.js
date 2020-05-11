@@ -20,6 +20,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import './Check.scss'
 import TabContent from './components/TabContent';
+import Table4 from './components/Table4'
 
 class Check extends React.Component {
 
@@ -105,6 +106,7 @@ class Check extends React.Component {
             </div> */}
 
             <Crawler />
+            <Table4 />
 
             <TabContent />
 
