@@ -3,19 +3,16 @@ package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.IfcMajors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractCourseNumber;
-import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractUserFieldCredit;
-import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCourseService.makeMajorObjsByInfo;
+
 
 public class GrdCompareService {
     public static GrdCondObj compareGrdAndUser(TimetableDto.Req userInfo, ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
@@ -26,7 +23,6 @@ public class GrdCompareService {
         GrdCondObj remainCondObj = new GrdCondObj(remainCourseList, remainCredit, remainLibArtsFieldCredit);
         return remainCondObj;
     }
-
 
 
     public static List<String> compareLibArtsFieldCredit(List<String> userField, List<String> grdField) {

@@ -29,8 +29,8 @@ public class Instruction {
     private String dept;
     @Column(name="area")
     private String area;
-    @Column(name="year")
-    private int year;
+    //@Column(name="year")
+    //private int year;
     @Column(name="subject")
     private String subject;
     @Column(name="professor")

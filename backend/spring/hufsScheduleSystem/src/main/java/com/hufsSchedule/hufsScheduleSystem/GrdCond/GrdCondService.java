@@ -12,7 +12,7 @@ public class GrdCondService {
         
         List<CourseEnums> courses = GrdCourseService.makeAllGrdCourseList(studentYear, GrdCondEct.getEngFromKorMajor(req.getMajor()), GrdCondEct.getEngFromKorMajor(req.getSecondMajor()));
         CreditCondObj credit = GrdCreditService.makeGrdCreditByInfo(studentYear, req.getIntensiveMajor(), GrdCondEct.getStudentBool(req.getSecondMajor()), GrdCondEct.getStudentBool(req.getMinor()));
-        Integer libArtsField = CreditLibArtsField.makeFieldCreditByStudentYear(studentYear);
+        List<String> libArtsField = CreditLibArtsField.makeFieldCreditByStudentYear(studentYear);
 
         GrdCondObj grdCondObj = new GrdCondObj(courses, credit, libArtsField);
 

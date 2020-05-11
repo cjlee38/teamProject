@@ -13,6 +13,7 @@ public class CreditCond2015 implements IfcCreditCond {
         creditCondObj.setMinor(0); // 부전공
         creditCondObj.setTeaching(0);
         creditCondObj.setOptional(0);
+        creditCondObj.setTotalGet(0);
         creditCondObj.setTotalCredit(134);
 
         modifyCreditCondBybIntensiveMajor(creditCondObj, bIntensiveMajor);

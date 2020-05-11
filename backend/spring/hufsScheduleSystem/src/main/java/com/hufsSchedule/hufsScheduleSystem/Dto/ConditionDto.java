@@ -14,7 +14,7 @@ public class ConditionDto {
 
     @Getter
     @NoArgsConstructor(access= AccessLevel.PROTECTED)
-    public static class courseNameRes {
+    public static class ResultOfCondition {
         private int firstMajor;
         private int secondMajor;
         private int subMajor;
@@ -25,10 +25,10 @@ public class ConditionDto {
         private int optional;
         private int totalCredit;
         private float averageScore;
-        private List<String> instructions;
+        private List<Instruction> instructions;
 
         @Builder
-        public courseNameRes(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<String> instructions){
+        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<Instruction> instructions){
             this.firstMajor = firstMajor;
             this.secondMajor = secondMajor;
             this.subMajor = subMajor;

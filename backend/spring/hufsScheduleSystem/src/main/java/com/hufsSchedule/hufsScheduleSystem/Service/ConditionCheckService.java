@@ -16,11 +16,11 @@ public class ConditionCheckService {
     private final CreditRepositorySupport creditRepositorySupport;
     private final CourseRepositorySupport courseRepositorySupport;
 
-    public ConditionDto.courseNameRes checkCondition(Long userId){
+    public ConditionDto.ResultOfCondition checkCondition(Long userId){
         Credit credit = creditRepositorySupport.findByUser(userId);
-        List<String> courses = courseRepositorySupport.findInstructionNameByUser(userId);
+        List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
 
-        ConditionDto.courseNameRes res = ConditionDto.courseNameRes.builder()
+        ConditionDto.ResultOfCondition res = ConditionDto.ResultOfCondition.builder()
                 .firstMajor(credit.getFirstMajor())
                 .secondMajor(credit.getSecondMajor())
                 .subMajor(credit.getSubMajor())
