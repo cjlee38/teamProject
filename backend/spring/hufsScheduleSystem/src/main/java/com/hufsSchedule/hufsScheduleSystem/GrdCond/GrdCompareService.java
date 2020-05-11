@@ -21,7 +21,7 @@ public class GrdCompareService {
     public static GrdCondObj compareGrdAndUser(TimetableDto.Req userInfo, ConditionDto.courseInstructionRes user, GrdCondObj grdCond) {
         List<CourseEnums> remainCourseList = compareCourseList(userInfo, extractCourseNumber(user.getInstructions()), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(user.getCredit(), grdCond.getGrdCredit());
-        Integer remainLibArtsFieldCredit = compareLibArtsFieldCredit(extractUserFieldCredit(GrdCondEct.getInteger(userInfo.getStudentNumber()) , user.getInstructions()), grdCond.getGrdCreditField());
+        List<String> remainLibArtsFieldCredit = compareLibArtsFieldCredit(GrdCondEct.extractUserFieldCredit(user.getInstructions()), grdCond.getGrdCreditField());
 
         GrdCondObj remainCondObj = new GrdCondObj(remainCourseList, remainCredit, remainLibArtsFieldCredit);
         return remainCondObj;
@@ -29,11 +29,14 @@ public class GrdCompareService {
 
 
 
-    public static Integer compareLibArtsFieldCredit(Integer userFieldCredit, Integer grdFieldCredit) {
-        Integer remainFieldCredit;
-        remainFieldCredit = grdFieldCredit - userFieldCredit;
+    public static List<String> compareLibArtsFieldCredit(List<String> userField, List<String> grdField) {
+        List<String> resultField;
 
-        return remainFieldCredit;
+        resultField = grdField.stream().
+                filter(x -> !userField.contains(x))
+                .collect(Collectors.toList());
+
+        return resultField;
     }
 
     public static List<CourseEnums> compareCourseList(TimetableDto.Req userInfo, List<String> userCourseList, List<CourseEnums> grdCourseList) {
