@@ -63,6 +63,36 @@ public interface CourseEnums {
         public String getCourseNumber() { return name(); }
     }
 
+    enum ELTTEnum implements CourseEnums {
+
+        A01121("영어학개론(1)", "Introduction to English Linguistics (1)"),
+        A01122("영어학개론(2)", "Introduction to English Linguistics (2)"),
+        A10203("언어공학개론", "Introduction to Linguistics & Language Technology"),
+        A01127("고급영어문법(1)", "Advanced English Grammar(1)"),
+        A01128("고급영어문법(2)", "Advanced English Grammar(2)"),
+        A01740("", "Critical Writing(General 1)"),
+        A01741("", "Critical Writing(Honors 1)"),
+        A10104("", "Critical Writing(General 2)"),
+        A10105("", "Critical Writing(Honors 2)");
+        // 1617 영어학개론 1,2 고급영어문법 1,2
+        // 18 영어학개론1, 언어공학개론, 고급영어문법1,2, critical writing 1,2
+
+        final private String korName, engName;
+
+        ELTTEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() { return korName; }
+        @Override
+        public String getEngName() { return engName; }
+        @Override
+        public String getCourseNumber() { return name(); }
+
+    }
+
     enum RussianEnum implements CourseEnums {
 
         A04131("러시아어말하기(1)", "Russian Conversation(1)"),
@@ -113,6 +143,65 @@ public interface CourseEnums {
         }
         @Override
         public String getCourseNumber() { return name(); }
+    }
+
+    enum GermanEnum implements CourseEnums {
+        A03209("독일어연습B2", "German Excercise B2"),
+        A03224("어휘와구문4", "German Words and Sentence 4"),
+        A03202("Lesekurs Deutsch2", "German Reading Course 2");
+
+        final private String korName, engName;
+
+        GermanEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+    }
+
+    enum ItalianEnum implements  CourseEnums {
+        A06105("초급시청각이탈리아어(1)", "Elementry Italian (A/V)(1)"),
+        A06215("초급시청각이탈리아어(2)", "Elementry Italian (A/V)(2)"),
+        A06103("초급이탈리아어문법(1)", "Elementry Italian Grammar (1)"),
+        A06213("초급이탈리아어문법(2)", "Elementry Italian Grammar (2)"),
+        A06102("중급이탈리아어강독(1)", "Readings in Intermediate Italian(2)"),
+        A06212("중급이탈리아어강독(2)", "Readings in Intermediate Italian(2)");
+
+        final private String korName, engName;
+
+        ItalianEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
     }
 
     enum LibArts2015Enum implements CourseEnums {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GrdCourseService {
 
-    public static IfcMajors makeMajorObjsByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
+    public static IfcMajors makeMajorObjsByInfo(String majorName) {
         IfcMajors courseInstance;
         String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond."+majorName;
         try {
@@ -17,31 +17,24 @@ public class GrdCourseService {
 
         } catch(Exception e) {
             courseInstance = null;
-            System.out.println(e);
+//            System.out.println(e);
 //            System.out.println("error in making major courses occured");
-
         }
 
 
         return courseInstance;
     }
 
-    public static List<CourseEnums> makeMajorCoursesByInfo(String studentYear, String majorName, Boolean bSecondMajor) {
-        IfcMajors majorObj = makeMajorObjsByInfo(studentYear, majorName, bSecondMajor);
+    public static List<CourseEnums> makeMajorCoursesByInfo(Integer studentYear, String majorName, Boolean bSecondMajor) {
+        IfcMajors majorObj = makeMajorObjsByInfo(majorName);
         List<CourseEnums> courseList = majorObj.makeMajorCourseList(studentYear, bSecondMajor);
 
         return courseList;
     }
 
-//    public static List<CourseEnums> modifySpecialCourses(String studentYear, String majorName, Boolean bSecondMajor) {
-//        IfcMajors majorObj = makeMajorObjsByInfo(studentYear, majorName, bSecondMajor);
-//        majorObj.modifySpecialCourseList();
-//    }
-
-
-    public static List<CourseEnums> makeLibArtsCourseByInfo(String studentYear, String firstMajorName, String secondMajorName) {
+    public static List<CourseEnums> makeLibArtsCourseByInfo(Integer studentYear, String firstMajorName, String secondMajorName) {
         IfcLibArts courseInstance;
-        String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.LibArts" + studentYear;
+        String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.LibArts" + studentYear.toString();
 
         try {
             courseInstance = (IfcLibArts)Class.forName(className)
@@ -58,7 +51,7 @@ public class GrdCourseService {
 
     }
 
-    public static List<CourseEnums> makeAllGrdCourseList(String studentYear, String firstMajorName, String secondMajorName) {
+    public static List<CourseEnums> makeAllGrdCourseList(Integer studentYear, String firstMajorName, String secondMajorName) {
         List<CourseEnums> courseList = new ArrayList<CourseEnums>();
 
         courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));

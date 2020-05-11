@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Vietnamese implements IfcMajors {
+public class ELTT implements IfcMajors{
     @Override
     public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
-        Arrays.asList(CourseEnums.VietnameseEnum.values()).forEach(e -> baseCourseList.add(e));
+        Arrays.asList(CourseEnums.ELTTEnum.values()).forEach(e -> baseCourseList.add(e));
 
         List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
@@ -22,13 +22,17 @@ public class Vietnamese implements IfcMajors {
 
     @Override
     public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, Integer studentYear) {
-        List<CourseEnums> emptyCourseList;
-        if (studentYear >= 2017) {
-            emptyCourseList = new ArrayList<>();
-        } else {
-            emptyCourseList = courseList;
+        List<String> removeList = new ArrayList<>();
+
+        if (studentYear <= 2015) {
+            courseList.stream().forEach(s -> removeList.add(s.getCourseNumber())); // 전체삭제
+        } else if (studentYear <= 2017) {
+            removeList.addAll(Arrays.asList("A01740","A01741","A10104","A10105","A10203"));
+        } else if (studentYear >= 2018) {
+            removeList.addAll(Arrays.asList("A01122"));
         }
-        return emptyCourseList;
+
+        return GrdCondEct.removeCourseListByNumber(courseList, removeList);
     }
 
     @Override
@@ -38,19 +42,6 @@ public class Vietnamese implements IfcMajors {
 
     @Override
     public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
-        List<String> historyOfVietnamese = new ArrayList<String>(Arrays.asList("B06137", "B06135", "B06136", "B06138"));
-        List<String> UnderstandingVietnameseLiterature = new ArrayList<String>(Arrays.asList("B06466", "B06467")); // 베트남문학이해2(B06467) 없음.
-        Long history = remainCourseList.stream().filter(s -> historyOfVietnamese.contains(s.getCourseNumber())).count();
-        Long Literature = remainCourseList.stream().filter(s -> UnderstandingVietnameseLiterature.contains(s.getCourseNumber())).count();
-
-        if (history >= 1) {
-            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99999"));
-        }
-
-        if (Literature >= 1) {
-            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99998"));
-        }
-
         return remainCourseList;
     }
 }

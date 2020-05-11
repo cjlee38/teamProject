@@ -10,7 +10,7 @@ import java.util.List;
 public class Business implements IfcMajors {
 
     @Override
-    public List<CourseEnums> makeMajorCourseList(String studentYear, Boolean bSecondMajor) {
+    public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.BusinessEnum.values()).forEach(e -> baseCourseList.add(e));
 
@@ -21,9 +21,14 @@ public class Business implements IfcMajors {
     }
 
     @Override
-    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, String studentYear) {
-        // temporary
-        List<String> removeList = new ArrayList<String>(Arrays.asList("D01314"));
+    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, Integer studentYear) {
+        //temp
+        List<String> removeList = new ArrayList<>();
+        if (studentYear != 2015) {
+            removeList.addAll(Arrays.asList("D01314"));
+
+        }
+
 
         return GrdCondEct.removeCourseListByNumber(courseList, removeList);
 

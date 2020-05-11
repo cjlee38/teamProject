@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SoftwareConvergence implements IfcMajors {
-
+public class German implements IfcMajors{
     @Override
     public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
-        Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e));
+        Arrays.asList(CourseEnums.GermanEnum.values()).forEach(e -> baseCourseList.add(e));
 
         List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
                 modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
@@ -21,13 +20,11 @@ public class SoftwareConvergence implements IfcMajors {
 
     @Override
     public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, Integer studentYear) {
-
         return courseList;
     }
 
     @Override
     public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor) {
-
         return courseList;
     }
 
@@ -35,5 +32,4 @@ public class SoftwareConvergence implements IfcMajors {
     public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
         return remainCourseList;
     }
-
 }

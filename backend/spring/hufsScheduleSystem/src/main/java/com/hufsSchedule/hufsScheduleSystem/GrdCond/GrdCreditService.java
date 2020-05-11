@@ -8,19 +8,18 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.IfcCreditCond;
 
 public class GrdCreditService {
 
-    public static CreditCondObj makeGrdCreditByInfo(String studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
+    public static CreditCondObj makeGrdCreditByInfo(Integer studentYear, Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
         IfcCreditCond creditCond;
-        String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCond" + studentYear;
+        String className = "com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCond" + studentYear.toString();
         try {
             creditCond = (IfcCreditCond) Class.forName(className)
-                    .getDeclaredConstructor(Boolean.class, Boolean.class, Boolean.class)
-                    .newInstance(bIntensiveMajor, bSecondMajor, bMinor);
+                    .newInstance();
         } catch (Exception e) {
             creditCond = null;
             System.out.println("error in makeGrdCreditByInfo occured");
         }
 
-        return creditCond.getCreditCondList();
+        return creditCond.makeCreditCond(bIntensiveMajor, bSecondMajor, bMinor);
     }
 
 }
