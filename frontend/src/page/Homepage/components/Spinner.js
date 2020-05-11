@@ -13,7 +13,8 @@ export default function Spin () {
               role="status"
               aria-hidden="true"
             />
-    Loading..약 1분 소요
+    Loading..
+    <br />약 1분 소요
   </Button>
     );
 }
