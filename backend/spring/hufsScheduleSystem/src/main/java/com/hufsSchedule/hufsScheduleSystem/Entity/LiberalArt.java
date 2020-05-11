@@ -31,8 +31,8 @@ public class LiberalArt {
     public void setUser(User user) {
         this.user = user;
 
-        if(!user.getLiberalArts().contains(this)) {
+        /*if(!user.getLiberalArts().contains(this)) {
             user.getLiberalArts().add(this);
-        }
+        }*/
     }
 }

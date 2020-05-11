@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class GrdCondService {
-    public static GrdCondObj makeGrdCondByUserInfo(Optional<User> oUser) {
-        User user = oUser.get();
+    public static GrdCondObj makeGrdCondByUserInfo(User user) {
+        System.out.println(user.getStudentNumber());
         Integer studentYear = GrdCondEct.getInteger(GrdCondEct.getStudentYear(user.getStudentNumber()));
         
         List<CourseEnums> courses = GrdCourseService.makeAllGrdCourseList(studentYear, GrdCondEct.getEngFromKorMajor(user.getMajor()), GrdCondEct.getEngFromKorMajor(user.getSecondMajor()));

@@ -25,9 +25,9 @@ public class Course {
     public void setUser(User user) {
         this.user = user;
 
-        if(!user.getCourses().contains(this)) {
+        /*if(!user.getCourses().contains(this)) {
             user.getCourses().add(this);
-        }
+        }*/
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,8 +37,8 @@ public class Course {
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
 
-        if(!instruction.getCourses().contains(this)) {
+        /*if(!instruction.getCourses().contains(this)) {
             instruction.getCourses().add(this);
-        }
+        }*/
     }
 }

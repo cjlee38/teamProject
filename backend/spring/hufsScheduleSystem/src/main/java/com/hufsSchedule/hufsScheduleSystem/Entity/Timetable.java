@@ -25,9 +25,9 @@ public class Timetable {
     public void setUser(User user) {
         this.user = user;
 
-        if(!user.getTimetables().contains(this)) {
+        /*if(!user.getTimetables().contains(this)) {
             user.getTimetables().add(this);
-        }
+        }*/
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,8 +37,8 @@ public class Timetable {
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
 
-        if(!instruction.getTimetables().contains(this)) {
+        /*if(!instruction.getTimetables().contains(this)) {
             instruction.getTimetables().add(this);
-        }
+        }*/
     }
 }

@@ -26,11 +26,12 @@ function Home () {
 } 
 
 const Homebutton = () => {
+
     return(
         <div className="Homebutton">
             <div className="head" style={{display: 'flex', flexDirection:'row'}}>
                 <div>
-                    <img src={Logo} classname="logo" alt="logo" width='15%'/>
+                    <img src={Logo} className="logo" alt="logo" width='15%'/>
                     <HelloHeader/> 
                 </div>
             </div>

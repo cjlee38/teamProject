@@ -1,11 +1,14 @@
 package com.hufsSchedule.hufsScheduleSystem.Service;
 
+import com.hufsSchedule.hufsScheduleSystem.Advice.Exception.UserNotFoundException;
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
+import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
 import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
@@ -17,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractStringFromEnums;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +29,24 @@ public class ConditionCheckService {
     private final UserRepository userRepository;
 
     public ConditionDto.ResultOfCondition checkCondition(Long userId){
-        Optional<User> user = userRepository.findById(userId);
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
 
+        GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(user);
+        List<String> gCourses = GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse());
+        CreditCondObj gCredit = GrdObj.getGrdCredit();
+
+        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(user, courses, credit, GrdObj);
+        List<String> remainCourses = GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse());
+        CreditCondObj remainCredit = remainObj.getGrdCredit();
+
+        System.out.println("# ---------------- #");
+        for(String s : remainCourses) {
+            System.out.println(s);
+        }
+
+        System.out.println(remainCredit.getTotalCredit());
 
 
         ConditionDto.ResultOfCondition res = ConditionDto.ResultOfCondition.builder()
@@ -45,8 +61,32 @@ public class ConditionCheckService {
                 .totalCredit(credit.getTotalCredit())
                 .averageScore(credit.getAverageScore())
                 .instructions(courses)
-//                .grdCourses(courseList)
+
+                .grdCourses(gCourses)
+                .grdFirstMajor(gCredit.getFirstMajor())
+                .grdSecondMajor(gCredit.getSecondMajor())
+                .grdSubMajor(gCredit.getSubMajor())
+                .grdMinor(gCredit.getMinor())
+                .grdOutDoor(gCredit.getOutDoor())
+                .grdLiberalArts(gCredit.getLiberalArts())
+                .grdTeaching(gCredit.getTeaching())
+                .grdOptional(gCredit.getOptional())
+                .grdTotalCredit(gCredit.getTotalCredit())
+                .grdAverageScore(gCredit.getAverageScore())
+
+                .remainCourses(remainCourses)
+                .remainFirstMajor(remainCredit.getFirstMajor())
+                .remainSecondMajor(remainCredit.getSecondMajor())
+                .remainSubMajor(remainCredit.getSubMajor())
+                .remainMinor(remainCredit.getMinor())
+                .remainOutdoor(remainCredit.getOutDoor())
+                .remainLiberalArts(remainCredit.getLiberalArts())
+                .remainTeaching(remainCredit.getTeaching())
+                .remainOptional(remainCredit.getOptional())
+                .remainTotalCredit(remainCredit.getTotalCredit())
+                .remainAverageScore(remainCredit.getAverageScore())
                 .build();
+
         return res;
     }
 

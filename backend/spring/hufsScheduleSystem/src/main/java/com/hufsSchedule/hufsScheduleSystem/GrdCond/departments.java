@@ -1,7 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
 public enum departments {
-    ENGLISH1("ELTT/영어학과", "ELTT"),
+    ENGLISH1("영어학", "ELTT"),
     ENGLISH2("영미문학.문화학과", "EnglishLitAndCult"),
     ENGLISH3("영어통번역학과", "English"), //////
     ENGLISH4("EICC학과", "EICC"),
@@ -48,7 +48,7 @@ public enum departments {
     LD1("LD전공", "LD"),
     LD2("사회과학전공", "something"), //
     LT1("LT학부", "LT"),
-    CONVERGENCE1("융복합소프트웨어전공", "SoftwareConvergence"),
+    CONVERGENCE1("융복합소프트웨어", "SoftwareConvergence"),
     CONVERGENCE2("EU전공", "EU"),
     CONVERGENCE3("브릭스전공", "BRICs"),
     CONVERGENCE4("국가리더전공", "NationalLeader"),
