@@ -1,7 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond;
 
+// CreditCond2015 covers 2015 >> 2020
 public class CreditCond2015 implements IfcCreditCond {
-
     public CreditCondObj makeCreditCond(Boolean bIntensiveMajor, Boolean bSecondMajor, Boolean bMinor) {
         CreditCondObj creditCondObj = new CreditCondObj();
 

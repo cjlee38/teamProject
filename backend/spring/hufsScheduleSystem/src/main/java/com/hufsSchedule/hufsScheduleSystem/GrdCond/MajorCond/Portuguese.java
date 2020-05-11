@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Italian implements IfcMajors{
+public class Portuguese implements IfcMajors{
     @Override
     public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
-        Arrays.asList(CourseEnums.ItalianEnum.values()).forEach(e -> baseCourseList.add(e));
+        Arrays.asList(CourseEnums.PortugueseEnum.values()).forEach(e -> baseCourseList.add(e));
 
         List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, studentYear, bSecondMajor);
         return retCourseList;
@@ -19,16 +19,26 @@ public class Italian implements IfcMajors{
 
     @Override
     public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, Integer studentYear, Boolean bSecondMajor) {
-        List<String> removeList = new ArrayList<String>();
-        if (studentYear >= 2019) {
-            removeList.addAll(Arrays.asList("A06102", "A06212"));
-        } else {
-            removeList.addAll(Arrays.asList("A06215", "A06105"));
+        List<String> removeList = new ArrayList<>();
+
+        if (studentYear <= 2016) {
+            removeList.addAll(Arrays.asList("A07136","A07146", "A07465", "A07138"));
+        }
+        if (studentYear <= 2015) {
+            removeList.addAll(Arrays.asList("A07467", "A07466", "A07116"));
+            if (bSecondMajor == true) {
+                removeList.add("N07327");
+            }
+        }
+        if (studentYear <= 2014) {
+            removeList.addAll(Arrays.asList("A07317", "N07327"));
+            if (bSecondMajor == true) {
+                removeList.add("A07208");
+            }
         }
 
         return GrdCondEct.removeCourseListByNumber(courseList, removeList);
     }
-
 
 
     @Override
