@@ -2,6 +2,7 @@ package com.hufsSchedule.hufsScheduleSystem.Dto;
 
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class ConditionDto {
         private int totalCredit;
         private float averageScore;
         private List<Instruction> instructions;
+//        private List<String> grdCourses;
 
         @Builder
         public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<Instruction> instructions){
@@ -40,6 +42,7 @@ public class ConditionDto {
             this.totalCredit = totalCredit;
             this.averageScore = averageScore;
             this.instructions = instructions;
+//            this.grdCourses = grdCourses;
         }
     }
 

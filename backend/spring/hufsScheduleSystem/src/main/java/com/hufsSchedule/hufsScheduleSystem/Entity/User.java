@@ -27,6 +27,7 @@ public class User {
     private Integer year;
     private Boolean foreigner;
     private Boolean teaching;
+    private Boolean intensiveMajor;
 
     @Builder
     public User(String studentNumber, String password) {
