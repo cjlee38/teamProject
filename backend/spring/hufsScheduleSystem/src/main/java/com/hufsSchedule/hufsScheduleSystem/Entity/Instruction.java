@@ -50,7 +50,7 @@ public class Instruction {
     @Column(name="note")
     private String note;
 
-    @OneToMany(mappedBy = "instruction", targetEntity = Timetable.class)
+    /*@OneToMany(mappedBy = "instruction", targetEntity = Timetable.class, fetch = FetchType.LAZY)
     private List<Timetable> timetables = new ArrayList<Timetable>();
 
     public void addTimetables(Timetable timetable) {
@@ -60,7 +60,7 @@ public class Instruction {
         }
     }
 
-    @OneToMany(mappedBy = "instruction", targetEntity = Course.class)
+    @OneToMany(mappedBy = "instruction", targetEntity = Course.class, fetch = FetchType.LAZY)
     private List<Course> courses = new ArrayList<Course>();
 
     public void addCourse(Course course) {
@@ -68,6 +68,6 @@ public class Instruction {
         if (course.getInstruction() != this) {
             course.setInstruction(this);
         }
-    }
+    }*/
 
 }

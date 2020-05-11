@@ -25,10 +25,10 @@ public class ConditionDto {
         private int optional;
         private int totalCredit;
         private float averageScore;
-        private List<Instruction> instructions;
+        private List<String> coursesTaken;
 
         @Builder
-        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<Instruction> instructions){
+        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<String> instructions){
             this.firstMajor = firstMajor;
             this.secondMajor = secondMajor;
             this.subMajor = subMajor;
@@ -39,7 +39,7 @@ public class ConditionDto {
             this.optional = optional;
             this.totalCredit = totalCredit;
             this.averageScore = averageScore;
-            this.instructions = instructions;
+            this.coursesTaken = instructions;
         }
     }
 
