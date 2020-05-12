@@ -204,6 +204,190 @@ public interface CourseEnums {
         }
     }
 
+    enum PortugueseEnum implements CourseEnums {
+        A07137("기초포르투갈어쓰기1", "Elementry Portuguese Composition 1"),
+        A07134("포르투갈어문법1", "Portuguese Grammar 1"),
+        A07115("초급포르투갈어회화(1)", "Elementry Portuguese Conversation (1)"),
+        A07207("중급포르투갈어회화(1)", "Intermediate Portuguese Conversation (1)"),
+        A07208("중급포르투갈어회화(2)", "Intermediate Portuguese Conversation (2)"), // 14
+
+        A07317("고급포르투갈어회화작문(1)", "Advanced Portuguese Conversation & Composition (1)"),
+        N07327("고급포르투갈어회화작문(2)", "Advanced Portuguese Conversation & Composition (2)"), // 15
+
+        A07467("기초포르투갈어쓰기2", "Elementry Portuguese Composition 2"),
+        A07466("포르투갈어문법2", "Portuguese Grammar 2"),
+        A07116("초급포르투갈어회화(2)", "Elementry Portuguese Conversation (2)"), //16
+
+        A07136("기초시청각포르투갈어1", "Elementry Portuguese (A/V) 1"),
+        A07146("기초시청각포르투갈어2", "Elementry Portuguese (A/V) 2"),
+        A07465("포.브라질지역입문","Introduction to Luso-Brazilian Area Studies"),
+        A07138("루소폰아프리카지역입문", "Introduction to Lusophone African Area Studies"); // 17 ~
+
+        final private String korName, engName;
+
+        PortugueseEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+
+    }
+
+    enum DutchEnum implements CourseEnums {
+        A08129("네덜란드어회화작문 1 (1)", "Dutch Conversation & Composition 1 (1)"),
+        A08130("네덜란드어회화작문 1 (2)", "Dutch Conversation & Composition 1 (2)"),
+        A08131("네덜란드어회화작문 2 (1)", "Dutch Conversation & Composition 2 (1)"),
+        A08132("네덜란드어회화작문 2 (2)", "Dutch Conversation & Composition 2 (2)"),
+        A08382("멀티미디어네덜란드어 1 (1)", "Multimedia Dutch (1)"),
+        A08383("멀티미디어네덜란드어 1 (2)", "Multimedia Dutch 1 (2)"),
+        A08384("멀티미디어네덜란드어 2 (1)", "Multimedia Dutch 2 (1)"),
+        A08485("멀티미디어네덜란드어 2 (2)", "Multimedia Dutch 2 (2)"),
+        A08125("초급네덜란드어강독문법 (1)", "Elementry Dutch Readings & Grammer (1)"),
+        A08126("초급네덜란드어강독문법 (2)", "Elementry Dutch Readings & Grammer (2)"),
+        A08219("중급네덜란드어강독문법 (1)", "Intermediate Dutch Readings & Grammar (1)"),
+        A08220("중급네덜란드어강독문법 (2)", "Intermediate Dutch Readings & Grammar (2)"),
+        A08393("FLEX네덜란드어", "FLEX Dutch");
+
+
+        final private String korName, engName;
+
+        DutchEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+    }
+
+    enum ScandinavianEnum implements CourseEnums {
+        A09108("초급스웨덴어실습 (2)", "Elementry Swedish Language Lab. (2)"),
+        A09107("초급스웨덴어실습 (1)", "Elementry Swedish Language Lab. (1)"),
+        A09323("중급스웨덴어회화 (1)", "Intermediate Swedish Conversation (1)"),
+        A09326("중급스웨덴어회화 (2)", "Intermediate Swedish Conversation (2)");
+
+        final private String korName, engName;
+
+        ScandinavianEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+
+    }
+
+    enum MalayIndonesianEnum implements CourseEnums {
+        B03110("초급마.인어회화작문 (1)", "Elementary Malay-Indonesian Conversation & Composition (1)"),
+        O03115("초급마.인어회화작문 (2)", "Elementary Malay-Indonesian Conversation & Composition (2)"),
+        B03206("중급마.인어회화작문 (1)", "Intermediate Malay-Indonesian Conversation & Composition (1)"),
+        O03202("중급마.인어회화작문 (2)", "Intermediate Malay-Indonesian Conversation & Composition (2)"), // 14까지
+        
+        B03493("인도네시아세계역사.문화:인도네시아,동티모르,필리핀",
+                "History and Culture of Indonesia World: Indonesia, East Timor, and Philippines"),
+        B03469("말레이세계역사와문화:말레이시아,싱가포르,브루나이" ,
+                "History and Culture of Malay World: Malaysia, Singapore, and Brunei"),
+        B03109("초급마.인어 (1)", "Elementry Malay-Indonesian (1)"),
+        B03229("초급마.인어 (2)", "Elementry Malay-Indonesian (2)"),
+        B03111("영상마.인어 (1)", "Audio-Visaul Malay-Indonesian Language (1)"),
+        B03126("영상마.인어 (2)", "Audio-Visaul Malay-Indonesian Language (2)"); // 15부터
+
+        final private String korName, engName;
+
+        MalayIndonesianEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+
+    }
+
+    enum ArabicEnum implements CourseEnums {
+        B04206("초급아랍어회화 (1)", "Elementry Arabic Conversation (1)"),
+        B04225("초급아랍어회화 (2)", "Elementry Arabic Conversation (2)"),
+        B04223("중급아랍어회화 (1)", "Intermediate Arabic Conversation (1)"),
+        B04224("중급아랍어회화 (2)", "Intermediate Arabic Conversation (2)");
+
+        final private String korName, engName;
+
+        ArabicEnum(String korName, String engName) {
+            this.korName = korName;
+            this.engName = engName;
+        }
+
+        @Override
+        public String getKorName() {
+            return korName;
+        }
+
+        @Override
+        public String getEngName() {
+            return engName;
+        }
+
+        @Override
+        public String getCourseNumber() {
+            return name() ;
+        }
+
+
+    }
+
+    // --------------------------- Liberal Arts Courses ---------------------------------- //
+
     enum LibArts2015Enum implements CourseEnums {
         Y12101("미네르바인문(1)읽기와쓰기", "Minerva Humanities Reading and Writing"),
         Y12102("미네르바인문(2)읽기와토의.토론", "Minerva Humanities Reading and Discussion & Debate"),

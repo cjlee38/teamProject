@@ -19,13 +19,14 @@ public class GrdCondEct {
         try {
             return Integer.parseInt(str);
         } catch (Exception e) {
+            System.out.println(str);
             System.out.println("Error occured while parsing String into Integer");
             return getInteger(str);
         }
     }
 
     public static Boolean getStudentBool(String str) {
-        if (str == null) { // or length == 0?
+        if (str == null || str.equals("0")) { // or length == 0?
             return false;
         } else {
             return true;
@@ -70,12 +71,13 @@ public class GrdCondEct {
 
         return userUniqueAreas;
 
-//        for (String s : userUniqueAreas) {
-//            if (libArtsArea.contains(s)) {
-//                userFieldCredit++;
-//            }
-//        }
-//
-//        return userFieldCredit;
+    }
+
+    public static List<String> extractStringFromEnums(List<CourseEnums> courses) {
+        ArrayList<String> strings = new ArrayList<>();
+
+        courses.stream().forEach(x -> strings.add(x.getKorName() + " " + x.getEngName()));
+
+        return strings;
     }
 }

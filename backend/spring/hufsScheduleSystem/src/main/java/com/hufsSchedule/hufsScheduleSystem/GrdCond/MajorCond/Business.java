@@ -14,31 +14,15 @@ public class Business implements IfcMajors {
         List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.BusinessEnum.values()).forEach(e -> baseCourseList.add(e));
 
-        List<CourseEnums> retCourseList = modifyCourseListByStudentYear(
-                modifyCourseListBybSecondMajor(baseCourseList, bSecondMajor), studentYear
-        );
+        List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList,studentYear, bSecondMajor);
         return retCourseList;
     }
 
     @Override
-    public List<CourseEnums> modifyCourseListByStudentYear(List<CourseEnums> courseList, Integer studentYear) {
-        //temp
-        List<String> removeList = new ArrayList<>();
-        if (studentYear != 2015) {
-            removeList.addAll(Arrays.asList("D01314"));
-
-        }
-
-
-        return GrdCondEct.removeCourseListByNumber(courseList, removeList);
-
-
-    }
-
-    @Override
-    public List<CourseEnums> modifyCourseListBybSecondMajor(List<CourseEnums> courseList, Boolean bSecondMajor) {
+    public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, Integer studentYear, Boolean bSecondMajor) {
         return courseList;
     }
+
 
     @Override
     public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {

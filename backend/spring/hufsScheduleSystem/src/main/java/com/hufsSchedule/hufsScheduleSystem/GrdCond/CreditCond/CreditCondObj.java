@@ -14,8 +14,8 @@ public class CreditCondObj {
     private Integer liberalArts;
     private Integer teaching;
     private Integer optional;
-    private Integer totalGet;
     private Integer totalCredit;
+    private Float averageScore;
 
 
     //    private User user;

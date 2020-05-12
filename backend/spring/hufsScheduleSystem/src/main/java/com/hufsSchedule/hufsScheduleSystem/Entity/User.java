@@ -28,8 +28,7 @@ public class User {
     private Boolean foreigner;
     private Boolean teaching;
     @Column(name="intensive_major")
-    private String intensiveMajor;
-
+    private Boolean intensiveMajor;
 
     @Builder
     public User(String studentNumber, String password, String name) {

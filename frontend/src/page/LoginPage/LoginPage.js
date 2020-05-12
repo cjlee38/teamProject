@@ -12,28 +12,28 @@ import Recommend from '../Homepage/Recommend';
 import Singuppage from '../Signuppage/Signuppage';
 import Axios from 'axios';
 
-function LoginPage () {
-  return (
-    <Router>
-    <Switch>
+// function LoginPage () {
+//   return (
+//     <Router>
+//     <Switch>
 
-        <Route path="/" exact={true} component={Main} />
-        <Route path="/Main" component={Main} />
+//         <Route path="/" exact={true} component={Main} />
+//         <Route path="/Main" component={Main} />
 
-        <Route path="/Main/:id/:password" component={Main} />
-        <Route path="/Login" component={LoginP} />
-        <Route path="/Signup" component={Signuppage} />
+//         <Route path="/Main/:id/:password" component={Main} />
+//         <Route path="/Login" component={LoginP} />
+//         <Route path="/Signup" component={Signuppage} />
 
-        <Route path="/Check" component={Check} />
-        <Route path="/Recommend" component={Recommend} />
-    </Switch>
+//         <Route path="/Check" component={Check} />
+//         <Route path="/Recommend" component={Recommend} />
+//     </Switch>
 
 
 
-</Router>
+// </Router>
 
-  )
-} 
+//   )
+// } 
 
 
 
@@ -115,4 +115,4 @@ const LoginP = () => {
 
 
 
-export default LoginPage
+export default LoginP

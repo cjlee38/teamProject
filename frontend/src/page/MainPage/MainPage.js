@@ -9,28 +9,28 @@ import Check from '../Homepage/Check';
 import LoginPage from '../LoginPage/LoginPage';
 
 
-function MainPage(match) {
-    console.log(match)
-    return (
-        <Router>
-            <Switch>
+// function MainPage(match) {
+//     console.log(match)
+//     return (
+//         <Router>
+//             <Switch>
 
-                <Route path="/" exact={true} component={Main} />
-                <Route path="/Main" component={Main} />
+//                 <Route path="/" exact={true} component={Main} />
+//                 <Route path="/Main" component={Main} />
 
-                <Route path="/Main/:id/:password" component={Main} />
-                <Route path="/Login" component={LoginPage} />
+//                 <Route path="/Main/:id/:password" component={Main} />
+//                 <Route path="/Login" component={LoginPage} />
 
-                <Route path="/Check" component={Check} />
-                <Route path="/Recommend" component={Recommend} />
-            </Switch>
+//                 <Route path="/Check" component={Check} />
+//                 <Route path="/Recommend" component={Recommend} />
+//             </Switch>
 
 
 
-        </Router>
+//         </Router>
 
-    )
-}
+//     )
+// }
 
 
 const Main = ({ match }) => {
@@ -57,4 +57,4 @@ const Main = ({ match }) => {
 
 
 
-export default MainPage
+export default Main
