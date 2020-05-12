@@ -43,13 +43,6 @@ public class ConditionCheckService {
         List<String> remainCourses = GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse());
         CreditCondObj remainCredit = remainObj.getGrdCredit();
 
-        System.out.println("# ---------------- #");
-        for(String s : remainCourses) {
-            System.out.println(s);
-        }
-
-        System.out.println(remainCredit.getTotalCredit());
-
 
         ConditionDto.ResultOfCondition res = ConditionDto.ResultOfCondition.builder()
                 .firstMajor(credit.getFirstMajor())
