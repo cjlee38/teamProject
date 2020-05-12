@@ -46,12 +46,12 @@ public class GrdCompareService {
 
         // 1전공 특수케이스 과목 삭제
         IfcMajors firstMajorObj = GrdCourseService.makeMajorObjsByInfo(GrdCondEct.getEngFromKorMajor(userInfo.getMajor()));
-        remainCourses = firstMajorObj.modifySpecialCourseList(removedCourses);
+        remainCourses = firstMajorObj.modifySpecialCourseList(removedCourses, userCourseList);
 
         // 2전공 특수케이스 과목 삭제
         if (userInfo.getSecondMajor() != null) {
             IfcMajors secondMajorObj = GrdCourseService.makeMajorObjsByInfo(GrdCondEct.getEngFromKorMajor(userInfo.getSecondMajor()));
-            remainCourses = secondMajorObj.modifySpecialCourseList(remainCourses);
+            remainCourses = secondMajorObj.modifySpecialCourseList(remainCourses, userCourseList);
         }
         
         return remainCourses;

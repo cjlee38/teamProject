@@ -17,8 +17,8 @@ public class GrdCourseService {
 
         } catch(Exception e) {
             courseInstance = null;
-//            System.out.println(e);
-//            System.out.println("error in making major courses occured");
+            System.out.println(e);
+            System.out.println("error in making major courses occured");
         }
 
 
@@ -52,14 +52,26 @@ public class GrdCourseService {
     }
 
     public static List<CourseEnums> makeAllGrdCourseList(Integer studentYear, String firstMajorName, String secondMajorName) {
-        List<CourseEnums> courseList = new ArrayList<CourseEnums>();
+        List<CourseEnums> courseList = new ArrayList<>();
 
         courseList.addAll(makeMajorCoursesByInfo(studentYear, firstMajorName, false));
+        for (CourseEnums c : courseList) {
+            System.out.println(c.getKorName());
+        }
+
         if (secondMajorName != null) {
+            System.out.println(secondMajorName);
             courseList.addAll(makeMajorCoursesByInfo(studentYear, secondMajorName, true));
+            for (CourseEnums c : courseList) {
+                System.out.println(c.getKorName());
+            }
+
         }
         courseList.addAll(makeLibArtsCourseByInfo(studentYear, firstMajorName, secondMajorName));
 
+        for (CourseEnums c : courseList) {
+            System.out.println(c.getKorName());
+        }
         return courseList;
     }
 

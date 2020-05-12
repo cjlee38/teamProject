@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LibArts2016 implements IfcLibArts{
-    // copy of 2015
+public class LibArts2014 implements IfcLibArts{
     @Override
     public List<CourseEnums> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
         List<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
@@ -30,5 +29,4 @@ public class LibArts2016 implements IfcLibArts{
     public List<CourseEnums> modifyCourseListBySecondMajor(List<CourseEnums> courseList, String secondMajorName) {
         return courseList;
     }
-
 }

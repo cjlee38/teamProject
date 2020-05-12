@@ -29,7 +29,7 @@ public class MalayIndonesian implements IfcMajors{
 
 
     @Override
-    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
         return remainCourseList;
     }
 }
