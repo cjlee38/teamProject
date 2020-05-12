@@ -92,17 +92,22 @@ def user_Table(id_input, pw_input, user_id, db):
     driver.get_fra('top')
 
     # 위쪽 frame
-
-    tables = driver.find_all_by_tag('table')    # 영역별 취득 학점, 이수중 전공 테이블 2개 담김
-
+    print(1)
+    tables = driver.find_all_by_tag('tbody')    # 영역별 취득 학점, 이수중 전공 테이블 2개 담김
+    print(tables)
+    print(2)
     # 영역별 취득 학점
     domain_dict = {}
 
     domain_grade = tables[0]
-    th = driver.find_all_by_tag_with_obj(domain_grade, 'th')    # 영역 이름
-    td = driver.find_all_by_tag_with_obj(domain_grade, 'td')    # 이수 학점
-
+    time.sleep(1)
+    th = domain_grade.find_elements_by_tag_name('th')    # 영역 이름
+    print(3)
+    td = domain_grade.find_elements_by_tag_name('td')    # 이수 학점
+    print(4)
     for i in range(1, len(th)):
+        print(th[i].text)
+        print(td[i].text)
         domain_dict[th[i].text] = td[i].text
     
     # 이수 전공
@@ -202,10 +207,10 @@ def user_Table(id_input, pw_input, user_id, db):
 
     # 프레임 이동
     driver.get_fra('body')
-
-    td = driver.find_all_by_tag('td')  # 교직 이수 현황 행 찾기
-
-    if td[0].text == '1':   # 순번이 있다면
+    time.sleep(1)
+    td1 = driver.find_all_by_tag('td')  # 교직 이수 현황 행 찾기
+    print("교직", td1[0].text)
+    if td1[0].text == '1':   # 순번이 있다면
         major_dict['교직'] = True
     else:
         major_dict['교직'] = False
@@ -279,7 +284,7 @@ def user_Table(id_input, pw_input, user_id, db):
 
     db_class.execute(sql_user_insert)
 
-    # print(major_dict)   # user 테이블용
+    print(major_dict)   # user 테이블용
 
 
     # course table insert
