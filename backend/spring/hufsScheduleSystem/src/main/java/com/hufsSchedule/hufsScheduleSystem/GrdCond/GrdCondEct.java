@@ -26,7 +26,7 @@ public class GrdCondEct {
     }
 
     public static Boolean getStudentBool(String str) {
-        if (str == null || str.equals("0")) { // or length == 0?
+        if (str == null || str.equals("0") || str.length() == 0) { // or length == 0?
             return false;
         } else {
             return true;

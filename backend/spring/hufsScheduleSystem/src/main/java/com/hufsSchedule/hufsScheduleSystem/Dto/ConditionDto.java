@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConditionDto {
@@ -16,83 +17,41 @@ public class ConditionDto {
     @Getter
     @NoArgsConstructor(access= AccessLevel.PROTECTED)
     public static class ResultOfCondition {
-        private int firstMajor;
-        private int secondMajor;
-        private int subMajor;
-        private int minor;
-        private int outDoor;
-        private int liberalArts;
-        private int teaching;
-        private int optional;
-        private int totalCredit;
-        private float averageScore;
+
+        private List<String> userInfo;
+
         private List<String> takenCourses;
+        private List<Integer> takenCredit;
+        private float averageScore;
 
         private List<String> grdCourses;
-        private int grdFirstMajor;
-        private int grdSecondMajor;
-        private int grdSubMajor;
-        private int grdMinor;
-        private int grdOutDoor;
-        private int grdLiberalArts;
-        private int grdTeaching;
-        private int grdOptional;
-        private int grdTotalCredit;
+        private List<Integer> grdCredit;
         private float grdAverageScore;
 
         private List<String> remainCourses;
-        private int remainFirstMajor;
-        private int remainSecondMajor;
-        private int remainSubMajor;
-        private int remainMinor;
-        private int remainOutdoor;
-        private int remainLiberalArts;
-        private int remainTeaching;
-        private int remainOptional;
-        private int remainTotalCredit;
+        private List<Integer> remainCredit;
         private float remainAverageScore;
 
 
         @Builder
-        public ResultOfCondition(int firstMajor, int secondMajor, int subMajor, int minor, int outDoor, int liberalArts, int teaching, int optional, int totalCredit, float averageScore, List<String> instructions,
-                                 List<String> remainCourses, int remainFirstMajor, int remainSecondMajor, int remainSubMajor, int remainMinor, int remainOutdoor, int remainLiberalArts, int remainTeaching, int remainOptional, int remainTotalCredit, float remainAverageScore,
-                                 List<String> grdCourses, int grdFirstMajor, int grdSecondMajor, int grdSubMajor, int grdMinor, int grdOutDoor, int grdLiberalArts, int grdTeaching, int grdOptional, int grdTotalCredit, float grdAverageScore){
+        public ResultOfCondition(List<String> userInfo, float averageScore, List<String> instructions,
+                                 List<Integer> takenCredit, List<Integer> grdCredit, List<Integer> remainCredit,
+                                 List<String> remainCourses, float remainAverageScore,
+                                 List<String> grdCourses, float grdAverageScore){
+            this.userInfo = userInfo;
 
-            this.firstMajor = firstMajor;
-            this.secondMajor = secondMajor;
-            this.subMajor = subMajor;
-            this.minor = minor;
-            this.outDoor = outDoor;
-            this.liberalArts = liberalArts;
-            this.teaching = teaching;
-            this.optional = optional;
-            this.totalCredit = totalCredit;
             this.averageScore = averageScore;
             this.takenCourses = instructions;
 
             this.grdCourses = grdCourses;
-            this.grdFirstMajor = grdFirstMajor;
-            this.grdSecondMajor = grdSecondMajor;
-            this.grdSubMajor = grdSubMajor;
-            this.grdMinor = grdMinor;
-            this.grdOutDoor = grdOutDoor;
-            this.grdLiberalArts = grdLiberalArts;
-            this.grdTeaching = grdTeaching;
-            this.grdOptional = grdOptional;
-            this.grdTotalCredit = grdTotalCredit;
             this.grdAverageScore = grdAverageScore;
 
             this.remainCourses = remainCourses;
-            this.remainFirstMajor = remainFirstMajor;
-            this.remainSecondMajor = remainSecondMajor;
-            this.remainSubMajor = remainSubMajor;
-            this.remainMinor = remainMinor;
-            this.remainOutdoor = remainOutdoor;
-            this.remainLiberalArts = remainLiberalArts;
-            this.remainTeaching = remainTeaching;
-            this.remainOptional = remainOptional;
-            this.remainTotalCredit = remainTotalCredit;
             this.remainAverageScore = remainAverageScore;
+
+            this.takenCredit = takenCredit;
+            this.grdCredit = grdCredit;
+            this.remainCredit= remainCredit;
         }
     }
 

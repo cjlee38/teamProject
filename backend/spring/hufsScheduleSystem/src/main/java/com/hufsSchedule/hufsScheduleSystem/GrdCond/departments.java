@@ -19,7 +19,7 @@ public enum departments {
     ASIA1("마인어과", "MalayIndonesian"),
     ASIA2("아랍어과", "Arabic"),
     ASIA3("태국어과", "Thai"),
-    ASIA4("베트남어과", "Vietnamese"),
+    ASIA4("베트남어", "Vietnamese"),
     ASIA5("인도어과", "Hindi"),
     ASIA6("터키,아제르바이잔어과","TurkishAzerbaijani"),
     ASIA7("이란어과","Persian"),

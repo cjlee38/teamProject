@@ -19,7 +19,7 @@ public class SoftwareConvergence implements IfcMajors {
 
     @Override
     public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, Integer studentYear, Boolean bSecondMajor) {
-        return null;
+        return courseList;
     }
 
     @Override
