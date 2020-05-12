@@ -44,4 +44,18 @@ public class CourseRepositorySupport extends QuerydslRepositorySupport {
                                 .where(course.user.userId.eq(userId))))
                 .fetch();
     }
+    public List<Instruction> findInstructionByUserCourseArea(Long userId, String courseAreaName){
+        QCourse course = new QCourse("course");
+        QInstruction instruction = new QInstruction("instruction");
+        return queryFactory
+                .select(instruction)
+                .from(instruction)
+                .where(instruction.instructionId.in(
+                        JPAExpressions
+                                .select(course.instruction.instructionId)
+                                .from(course)
+                                .where(course.user.userId.eq(userId),
+                                        course.courseArea.eq(courseAreaName))))
+                .fetch();
+    }
 }

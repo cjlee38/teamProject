@@ -34,6 +34,12 @@ public class ConditionCheckService {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
+        List<String> takenFirstMajor = courseRepositorySupport.findInstructionByUserCourseArea(userId, "1전공").stream().map(Instruction::getSubject).collect(Collectors.toList());
+        List<String> takenSecondMajor = courseRepositorySupport.findInstructionByUserCourseArea(userId, "이중").stream().map(Instruction::getSubject).collect(Collectors.toList());;
+        List<String> takenLiberalArts = courseRepositorySupport.findInstructionByUserCourseArea(userId, "교양").stream().map(Instruction::getSubject).collect(Collectors.toList());;
+        List<String> takenTeaching = courseRepositorySupport.findInstructionByUserCourseArea(userId, "교직").stream().map(Instruction::getSubject).collect(Collectors.toList());;
+        List<String> takenFree = courseRepositorySupport.findInstructionByUserCourseArea(userId, "자선").stream().map(Instruction::getSubject).collect(Collectors.toList());;
+
 
         List<String> instructionName = courses.stream().map(Instruction::getSubject).collect(Collectors.toList());
         List<String> userInfo = new ArrayList<>();
@@ -55,10 +61,10 @@ public class ConditionCheckService {
         userTakenCredit.add(credit.getOptional());
 
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(user);
-        List<String> gCourses = new ArrayList<>();
-        gCourses.addAll(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("firstMajor")));
-        gCourses.addAll(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("secondMajor")));
-        gCourses.addAll(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("liberalArts")));
+//        List<String> gCourses = new ArrayList<>();
+
+        GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("secondMajor"));
+        GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("liberalArts"));
 //        List<String> gCourses = GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse());
         CreditCondObj gCredit = GrdObj.getGrdCredit();
 
@@ -73,24 +79,11 @@ public class ConditionCheckService {
         userGrdCredit.add(gCredit.getTotalCredit());
 
         GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(user, courses, credit, GrdObj);
-        List<String> remainCourses = new ArrayList<>();
-
-        List<String> temp = GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("firstMajor"));
-        for(String s : temp) {
-            System.out.println(s);
-        }
-        List<String> temp2 = GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("secondMajor"));
-        for(String s : temp2) {
-            System.out.println(s);
-        }
-        List<String> temp3 = GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("liberalArts"));
-        for(String s : temp3) {
-            System.out.println(s);
-        }
-
-        remainCourses.addAll(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("firstMajor")));
-        remainCourses.addAll(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("secondMajor")));
-        remainCourses.addAll(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("liberalArts")));
+//        List<String> remainCourses = new ArrayList<>();
+//
+//
+//        remainCourses.addAll(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("secondMajor")));
+//        remainCourses.addAll(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("liberalArts")));
 //
         CreditCondObj remainCredit = remainObj.getGrdCredit();
 
@@ -109,11 +102,20 @@ public class ConditionCheckService {
                 .takenCredit(userTakenCredit)
                 .remainCredit(userRemainCredit)
                 .grdCredit(userGrdCredit)
-                .instructions(instructionName)
+//                .instructions(instructionName)
+                .takenFirstMajorCourses(takenFirstMajor)
+                .takenSecondMajorCourses(takenSecondMajor)
+                .takenLiberArtsCourses(takenLiberalArts)
+                .takenTeachingCourses(takenTeaching)
+                .takenFreeCourses(takenFree)
                 .averageScore(credit.getAverageScore())
-                .grdCourses(gCourses)
+                .grdFirstMajorCourses(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("firstMajor")))
+                .grdSecondMajorCourses(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("secondMajor")))
+                .grdLiberalArtsCourses(GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("liberalArts")))
                 .grdAverageScore(gCredit.getAverageScore())
-                .remainCourses(remainCourses)
+                .remainFirstMajorCourses(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("firstMajor")))
+                .remainSecondMajorCourses(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("secondMajor")))
+                .remainLiberalArtsCourses(GrdCondEct.extractStringFromEnums(remainObj.getGrdCourse().get("liberalArts")))
                 .remainAverageScore(remainCredit.getAverageScore())
                 .build();
 
