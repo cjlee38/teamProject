@@ -21,7 +21,6 @@ import Tab from 'react-bootstrap/Tab';
 import './Check.scss'
 import TabContent from './components/TabContent';
 import Table4 from './components/Table4'
-import Axios from 'axios';
 
 class Check extends React.Component {
 
@@ -30,6 +29,7 @@ class Check extends React.Component {
     this.state = {
       std: '',
       password: '',
+      result : {}
     }
     this.data = [
       { trow: '졸업학점' },
@@ -38,18 +38,6 @@ class Check extends React.Component {
 
     ];
 
-  }
-
-  componentDidMount() {
-    Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
-      params: { userId: 1}
-    })
-    .then((response) => {
-      console.log(response.data.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
 
   handlingChange = (event) => {
