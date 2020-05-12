@@ -6,10 +6,13 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.IfcLibArts;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.IfcMajors;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -18,7 +21,7 @@ import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractCour
 
 public class GrdCompareService {
     public static GrdCondObj compareGrdAndUser(User userInfo, List<Instruction> userCourses, Credit credit, GrdCondObj grdCond) {
-        List<CourseEnums> remainCourseList = compareCourseList(userInfo, extractCourseNumber(userCourses), grdCond.getGrdCourse());
+        Map<String, List<CourseEnums>> remainCourseList = compareCourseList(userInfo, extractCourseNumber(userCourses), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(credit, grdCond.getGrdCredit());
         List<String> remainLibArtsFieldCredit = compareLibArtsFieldCredit(GrdCondEct.extractUserFieldCredit(userCourses), grdCond.getGrdCreditField());
 
@@ -37,24 +40,30 @@ public class GrdCompareService {
         return resultField;
     }
 
-    public static List<CourseEnums> compareCourseList(User userInfo, List<String> userCourseList, List<CourseEnums> grdCourseList) {
-        List<CourseEnums> remainCourses;
+    public static Map<String, List<CourseEnums>> compareCourseList(User userInfo, List<String> userCourseList, Map<String, List<CourseEnums>> grdCourseList) {
+        Map<String, List<CourseEnums>> remainMap = new HashMap<>();
 
-        // 전공필수이수과목 삭제
-        // String studentYear = GrdCondEct.getStudentYear(userInfo.getStudentNumber());
-        List<CourseEnums> removedCourses = GrdCondEct.removeCourseListByNumber(grdCourseList, userCourseList);
+
+        // 전공, 이중전공, 교양 기본과목삭제
+        remainMap.put("firstMajor", GrdCondEct.removeCourseListByNumber(grdCourseList.get("firstMajor"), userCourseList));
+        remainMap.put("secondMajor", GrdCondEct.removeCourseListByNumber(grdCourseList.get("secondMajor"), userCourseList));
+        remainMap.put("liberalArts", GrdCondEct.removeCourseListByNumber(grdCourseList.get("liberalArts"), userCourseList));
 
         // 1전공 특수케이스 과목 삭제
         IfcMajors firstMajorObj = GrdCourseService.makeMajorObjsByInfo(GrdCondEct.getEngFromKorMajor(userInfo.getMajor()));
-        remainCourses = firstMajorObj.modifySpecialCourseList(removedCourses, userCourseList);
+        remainMap.put("firstMajor", firstMajorObj.modifySpecialCourseList(remainMap.get("firstMajor"), userCourseList));
 
         // 2전공 특수케이스 과목 삭제
         if (userInfo.getSecondMajor() != null) {
             IfcMajors secondMajorObj = GrdCourseService.makeMajorObjsByInfo(GrdCondEct.getEngFromKorMajor(userInfo.getSecondMajor()));
-            remainCourses = secondMajorObj.modifySpecialCourseList(remainCourses, userCourseList);
+            remainMap.put("secondMajor", firstMajorObj.modifySpecialCourseList(remainMap.get("secondMajor"), userCourseList));
         }
-        
-        return remainCourses;
+
+        // 교양 특수케이스 과목 삭제
+        IfcLibArts libArts = GrdCourseService.makeLibArtsObjsByInfo(GrdCondEct.getInteger( GrdCondEct.getStudentYear(userInfo.getStudentNumber())));
+        remainMap.put("liberalArts", libArts.modifySpecialCourseList(remainMap.get("liberalArts"), userCourseList));
+
+        return remainMap;
     }
 
 

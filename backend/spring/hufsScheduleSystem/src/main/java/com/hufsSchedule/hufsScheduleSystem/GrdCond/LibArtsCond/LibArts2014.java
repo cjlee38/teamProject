@@ -12,21 +12,27 @@ public class LibArts2014 implements IfcLibArts{
         List<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
         Arrays.asList(CourseEnums.LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e));
 
-        List<CourseEnums> retCourseList =
-                modifyCourseListBySecondMajor(
-                        modifyCourseListByFirstMajor(baseCourseList, firstMajorName),
-                        secondMajorName);
+        List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, firstMajorName, secondMajorName);
+
         return retCourseList;
     }
 
-    // need to fixed
     @Override
-    public List<CourseEnums> modifyCourseListByFirstMajor(List<CourseEnums> courseList, String firstMajorName) {
+    public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, String firstMajorName, String secondMajorName) {
         return courseList;
     }
 
     @Override
-    public List<CourseEnums> modifyCourseListBySecondMajor(List<CourseEnums> courseList, String secondMajorName) {
-        return courseList;
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
+        List<String> minervaList = new ArrayList<>(Arrays.asList("Y12101", "Y12102"));
+
+        Long minerva = userCourseList.stream().filter(x -> minervaList.contains(x)).count();
+
+        if (minerva >= 1) {
+            remainCourseList.removeIf(x -> x.getCourseNumber().equals("Y12101"));
+            remainCourseList.removeIf(x -> x.getCourseNumber().equals("Y12102"));
+        }
+        return remainCourseList;
     }
+
 }
