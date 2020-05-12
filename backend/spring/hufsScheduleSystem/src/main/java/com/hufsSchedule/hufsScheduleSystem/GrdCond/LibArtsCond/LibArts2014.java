@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LibArts2014 implements IfcLibArts{
+public class LibArts2014 implements IfcLibArts {
     @Override
     public List<CourseEnums> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
-        List<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+        //copy of 2015
+        List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e));
 
         List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, firstMajorName, secondMajorName);
@@ -22,7 +23,6 @@ public class LibArts2014 implements IfcLibArts{
         return courseList;
     }
 
-    @Override
     public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
         List<String> minervaList = new ArrayList<>(Arrays.asList("Y12101", "Y12102"));
 

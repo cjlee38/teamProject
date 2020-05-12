@@ -3,6 +3,7 @@ import TabList from './TabList';
 import Table from './Table';
 import Table2 from './Table2';
 import Table3 from './Table3';
+import Axios from 'axios';
 
 export default class TabContent extends Component {
     constructor(props){
@@ -10,6 +11,7 @@ export default class TabContent extends Component {
         this.state = {
             std : '',
             password : '',
+            result : {}
         }
         this.data = [
           {trow:'졸업학점'},
@@ -29,6 +31,20 @@ export default class TabContent extends Component {
             {trow: '외국어인증(졸업인증) 완료 여부'}
           ];  
     
+    }
+
+    componentDidMount() {
+        Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
+            params: { userId: 1}
+        })
+        .then((response) => {
+            this.setState({result : response.data.data},()=> {
+                console.log("this.state는",this.state.result);
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     render() {
