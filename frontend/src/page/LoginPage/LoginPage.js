@@ -76,6 +76,9 @@ const LoginP = () => {
       });
       reset();
     }
+
+    const trySignUp = () => {
+    }
     
     return (
     <div className="LoginPage">
@@ -103,7 +106,7 @@ const LoginP = () => {
             <Button onClick={tryLogin} name={"로그인"} value={"login"}/>
           </Link>
           <Link to="/Signup">
-            <Button name={"회원가입"} value={"signUp"}/>
+            <Button onClick={trySignUp} name={"회원가입"} value={"signUp"}/>
           </Link>  
         </div>
       </div>

@@ -7,10 +7,12 @@ import { BootstrapTable, TableHeaderColumn } from
 
 class Table extends Component {
   render() {
+    console.log("table:", this.props);
     return (
       <div className="whole-table">
         <BootstrapTable data={this.props.data}>
-          <TableHeaderColumn isKey
+          <TableHeaderColumn 
+            isKey
             dataField='trow'
             dataAlign='center'
             headerAlign="left"
@@ -23,19 +25,20 @@ class Table extends Component {
             }>
 
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='first_major'
+          <TableHeaderColumn 
+            dataField='first_major'
             dataAlign='center'
             headerAlign="center"
-            width="18%"
+            width="80%"
             thStyle={
               {
                 fontWeight: 'heavy',
                 backgroundColor: '#CCCCCC'
               }}>
 
-            1전공
+            과목 리스트
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='second_major'
+          {/* <TableHeaderColumn dataField='second_major'
             dataAlign='center'
             width="18%"
             thStyle={
@@ -85,7 +88,7 @@ class Table extends Component {
             자선
           
           
-          </TableHeaderColumn>
+          </TableHeaderColumn> */}
 
         </BootstrapTable>
       </div>

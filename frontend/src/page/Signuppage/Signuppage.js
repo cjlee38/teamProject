@@ -69,6 +69,7 @@ const Signuppage = () => {
                         onChange={onChange}
                         name={"password"}
                         value={password}
+                        type="password"
                         text={"비밀번호"}
                     />
                 </div>
