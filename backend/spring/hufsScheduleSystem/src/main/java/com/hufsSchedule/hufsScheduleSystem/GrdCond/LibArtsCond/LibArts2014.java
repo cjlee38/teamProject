@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
 public class LibArts2014 implements IfcLibArts {
     @Override
     public List<CourseEnums> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
@@ -23,11 +24,41 @@ public class LibArts2014 implements IfcLibArts {
     // need to fixed
     @Override
     public List<CourseEnums> modifyCourseListByFirstMajor(List<CourseEnums> courseList, String firstMajorName) {
+=======
+public class LibArts2014 implements IfcLibArts{
+    @Override
+    public List<CourseEnums> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
+        List<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
+        Arrays.asList(CourseEnums.LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e));
+
+        List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, firstMajorName, secondMajorName);
+
+        return retCourseList;
+    }
+
+    @Override
+    public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, String firstMajorName, String secondMajorName) {
+>>>>>>> ea5e81d2ef255e5815f1f3c9213fa2637ffbd510
         return courseList;
     }
 
     @Override
+<<<<<<< HEAD
     public List<CourseEnums> modifyCourseListBySecondMajor(List<CourseEnums> courseList, String secondMajorName) {
         return courseList;
     }
+=======
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
+        List<String> minervaList = new ArrayList<>(Arrays.asList("Y12101", "Y12102"));
+
+        Long minerva = userCourseList.stream().filter(x -> minervaList.contains(x)).count();
+
+        if (minerva >= 1) {
+            remainCourseList.removeIf(x -> x.getCourseNumber().equals("Y12101"));
+            remainCourseList.removeIf(x -> x.getCourseNumber().equals("Y12102"));
+        }
+        return remainCourseList;
+    }
+
+>>>>>>> ea5e81d2ef255e5815f1f3c9213fa2637ffbd510
 }

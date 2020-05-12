@@ -7,28 +7,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LibArts2016 implements IfcLibArts{
-    //2016 Enum needs
+    // copy of 2015
     @Override
     public List<CourseEnums> makeLibArtsCourseList(String firstMajorName, String secondMajorName) {
         List<CourseEnums> baseCourseList = new ArrayList<CourseEnums>();
         Arrays.asList(CourseEnums.LibArts2015Enum.values()).forEach(e -> baseCourseList.add(e));
 
-        List<CourseEnums> retCourseList =
-                modifyCourseListBySecondMajor(
-                        modifyCourseListByFirstMajor(baseCourseList, firstMajorName),
-                        secondMajorName);
+        List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, firstMajorName, secondMajorName);
+
         return retCourseList;
     }
 
-    // need to fixed
     @Override
-    public List<CourseEnums> modifyCourseListByFirstMajor(List<CourseEnums> courseList, String firstMajorName) {
+    public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, String firstMajorName, String secondMajorName) {
         return courseList;
     }
 
     @Override
-    public List<CourseEnums> modifyCourseListBySecondMajor(List<CourseEnums> courseList, String secondMajorName) {
-        return courseList;
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
+        return remainCourseList;
     }
+
+    // need to fixed
+
 
 }

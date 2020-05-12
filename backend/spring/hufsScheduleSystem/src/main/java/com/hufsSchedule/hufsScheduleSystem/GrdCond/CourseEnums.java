@@ -416,6 +416,32 @@ public interface CourseEnums {
 
     }
 
+//    enum LibArts2014Enum implements CourseEnums {
+//
+//
+//        final private String korName, engName;
+//
+//        LibArts2014Enum(String korName, String engName) {
+//            this.korName = korName;
+//            this.engName = engName;
+//        }
+//
+//        @Override
+//        public String getKorName() {
+//            return korName;
+//        }
+//        @Override
+//        public String getEngName() {
+//            return engName;
+//        }
+//        @Override
+//        public String getCourseNumber() {
+//            return name();
+//        }
+//
+//
+//    }
+
 
 
 }

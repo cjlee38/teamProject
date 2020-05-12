@@ -23,7 +23,7 @@ public class Arabic implements IfcMajors {
 
     // dont know it works well. need test
     @Override
-    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
         List<CourseEnums> finalCourseList = new ArrayList<>();
         if (remainCourseList.size() <= 2) {
             remainCourseList = finalCourseList;

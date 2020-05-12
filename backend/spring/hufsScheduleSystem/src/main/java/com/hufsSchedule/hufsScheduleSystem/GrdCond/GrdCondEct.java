@@ -15,6 +15,10 @@ public class GrdCondEct {
         return studentNumber.substring(0, 4);
     }
 
+    public static String getCourseUniqueNumber(String courseNumber) {
+        return courseNumber.substring(0,6);
+    }
+
     public static Integer getInteger(String str) {
         try {
             return Integer.parseInt(str);
@@ -58,6 +62,13 @@ public class GrdCondEct {
     public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
         userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber().substring(0,6)));
+
+        String seminar;
+        seminar = courseNumbers.stream().filter(x -> x.startsWith("U7618")).findFirst().orElse(null);
+        if (seminar != null) {
+            courseNumbers.remove(seminar);
+            courseNumbers.add("U7618");
+        }
 
         return courseNumbers;
     }

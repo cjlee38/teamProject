@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.getCourseUniqueNumber;
+
 public class Vietnamese implements IfcMajors {
     @Override
     public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
@@ -32,11 +34,12 @@ public class Vietnamese implements IfcMajors {
 
 
     @Override
-    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
-        List<String> historyOfVietnamese = new ArrayList<String>(Arrays.asList("B06137", "B06135", "B06136", "B06138"));
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
+        List<String> historyOfVietnamese = new ArrayList<>(Arrays.asList("B06137", "B06135", "B06136", "B06138"));
         List<String> UnderstandingVietnameseLiterature = new ArrayList<String>(Arrays.asList("B06466", "B06467")); // 베트남문학이해2(B06467) 없음.
-        Long history = remainCourseList.stream().filter(s -> historyOfVietnamese.contains(s.getCourseNumber())).count();
-        Long Literature = remainCourseList.stream().filter(s -> UnderstandingVietnameseLiterature.contains(s.getCourseNumber())).count();
+
+        Long history = userCourseList.stream().filter(s -> historyOfVietnamese.contains(s)).count();
+        Long Literature = userCourseList.stream().filter(s -> UnderstandingVietnameseLiterature.contains(s)).count();
 
         if (history >= 1) {
             remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99999"));

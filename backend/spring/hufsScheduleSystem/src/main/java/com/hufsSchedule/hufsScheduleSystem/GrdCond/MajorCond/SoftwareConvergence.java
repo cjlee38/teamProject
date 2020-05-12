@@ -12,8 +12,8 @@ public class SoftwareConvergence implements IfcMajors {
     public List<CourseEnums> makeMajorCourseList(Integer studentYear, Boolean bSecondMajor) {
         List<CourseEnums> baseCourseList = new ArrayList<>();
         Arrays.asList(CourseEnums.SoftwareConvergenceEnum.values()).forEach(e -> baseCourseList.add(e));
-
         List<CourseEnums> retCourseList = modifyCourseListByInfo(baseCourseList, studentYear, bSecondMajor);
+
         return retCourseList;
     }
 
@@ -23,7 +23,7 @@ public class SoftwareConvergence implements IfcMajors {
     }
 
     @Override
-    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList) {
+    public List<CourseEnums> modifySpecialCourseList(List<CourseEnums> remainCourseList, List<String> userCourseList) {
         return remainCourseList;
     }
 
