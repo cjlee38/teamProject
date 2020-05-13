@@ -93,6 +93,8 @@ def user_Table(id_input, pw_input, user_id, db):
 
     # 위쪽 frame
     print(1)
+    time.sleep(1)
+
     tables = driver.find_all_by_tag('tbody')    # 영역별 취득 학점, 이수중 전공 테이블 2개 담김
     print(tables)
     print(2)
@@ -100,7 +102,6 @@ def user_Table(id_input, pw_input, user_id, db):
     domain_dict = {}
 
     domain_grade = tables[0]
-    time.sleep(1)
     th = domain_grade.find_elements_by_tag_name('th')    # 영역 이름
     print(3)
     td = domain_grade.find_elements_by_tag_name('td')    # 이수 학점
