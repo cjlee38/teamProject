@@ -293,7 +293,7 @@ def user_Table(id_input, pw_input, user_id, db):
     for i in courses_list:
         inst_num = i[0]
         course_area = i[2]
-        sql_inst_search = """SELECT instruction_id FROM instruction WHERE  instruction_number LIKE \"{inst_num}%\";""".format(inst_num=inst_num)
+        sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0])
         inst_id = db_class.execute_all(sql_inst_search)
         inst_id = inst_id[0]['instruction_id']
         
