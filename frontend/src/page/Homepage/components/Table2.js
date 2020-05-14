@@ -29,18 +29,21 @@ class Table extends Component {
             dataField='first_major'
             dataAlign='center'
             headerAlign="center"
-            width="80%"
+            width="15%"
+            maxHeight="20%"
             thStyle={
               {
                 fontWeight: 'heavy',
                 backgroundColor: '#CCCCCC'
               }}>
 
-            과목 리스트
+            1전공
           </TableHeaderColumn>
-          {/* <TableHeaderColumn dataField='second_major'
+          <TableHeaderColumn dataField='second_major'
+                      maxHeight="20%"
+
             dataAlign='center'
-            width="18%"
+            width="15%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -49,10 +52,25 @@ class Table extends Component {
             headerAlign="center">
             이중전공
           </TableHeaderColumn>
+          <TableHeaderColumn dataField='minor'
+                      maxHeight="20%"
+
+            dataAlign='center'
+            width="15%"
+            thStyle={
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}
+            headerAlign="center">
+            부전공
+          </TableHeaderColumn>
      
           <TableHeaderColumn dataField='liberal_arts'
+                      maxHeight="20%"
+
             dataAlign='center'
-            width="18%"
+            width="15%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -63,9 +81,11 @@ class Table extends Component {
           
           
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='liberal_arts'
+          <TableHeaderColumn dataField='teaching'
+                      maxHeight="20%"
+
             dataAlign='center'
-            width="18%"
+            width="15%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -76,9 +96,11 @@ class Table extends Component {
           
           
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='liberal_arts'
+          <TableHeaderColumn dataField='optional'
+                      maxHeight="20%"
+
             dataAlign='center'
-            width="18%"
+            width="15%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -88,7 +110,7 @@ class Table extends Component {
             자선
           
           
-          </TableHeaderColumn> */}
+          </TableHeaderColumn>
 
         </BootstrapTable>
       </div>
