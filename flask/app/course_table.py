@@ -68,9 +68,9 @@ def crawl_Table(rq_year, rq_semester, db):
             year = int(tds[2].get_text().strip())
             course_num = tds[3].get_text().strip()
 
-            subject_name = tds[4].get_text().strip().splitlines()
-            subject_name = " ".join(subject_name)    # 영어도 함께
-
+            subject_name = tds[4].get_text().strip().splitlines()[0].split(' (')
+            subject_name = subject_name[0]    
+            print(subject_name)
             try:
                 syllabus = tds[5].find('a')['href'].split('\'')
                 ag_1 = syllabus[1]
@@ -196,8 +196,8 @@ def crawl_Table(rq_year, rq_semester, db):
                 year = "NULL"
             course_num = tds[3].get_text().strip()
 
-            subject_name = tds[4].get_text().strip().splitlines()
-            subject_name = " ".join(subject_name)    # 영어도 함께
+            subject_name = tds[4].get_text().strip().splitlines()[0].split(' (')
+            subject_name = subject_name[0] 
 
             try:
                 syllabus = tds[5].find('a')['href'].split('\'')

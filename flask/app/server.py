@@ -74,13 +74,34 @@ class ReigstInst(Resource):
     def post(self):
         db_class = database.Database()
         parser = reqparse.RequestParser()
-        parser.add_argument('rq_year', type=str)
-        parser.add_argument('rq_sem', type=str)
-        args = parser.parse_args()
+        # parser.add_argument('rq_year', type=str)
+        # parser.add_argument('rq_sem', type=str)
+        # args = parser.parse_args()
 
-        rq_year = args['rq_year']
-        rq_sem = args['rq_sem']
-        crawl_Table(rq_year, rq_sem, db_class)
+        # rq_year = args['rq_year']
+        # rq_sem = args['rq_sem']
+        # crawl_Table('14', '1', db_class)
+        # crawl_Table('14', '2', db_class)
+
+        # crawl_Table('15', '1', db_class)
+        # crawl_Table('15', '2', db_class)
+
+        crawl_Table('16', '1', db_class)
+        crawl_Table('16', '2', db_class)
+
+        crawl_Table('17', '1', db_class)
+        crawl_Table('17', '2', db_class)
+
+        crawl_Table('18', '1', db_class)
+        crawl_Table('18', '2', db_class)
+
+        crawl_Table('19', '1', db_class)
+        crawl_Table('19', '2', db_class)
+
+        crawl_Table('20', '1', db_class)
+
+
+
 
         return {'status': 'success'}
 
