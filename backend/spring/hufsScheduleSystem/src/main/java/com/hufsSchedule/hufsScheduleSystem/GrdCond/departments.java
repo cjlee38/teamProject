@@ -42,7 +42,7 @@ public enum departments {
     BUSINESSADMINISTRATION1("국제통상학과","InternationalEconomicsAndLaw"),
     BUSINESSADMINISTRATION2("경제학부", "Economics"),
 
-    BUSINESS("경영학부", "Business"),
+    BUSINESS("경영학", "Business"),	
     EDUCATION1("영어교육과", "EnglishEducation"),
     EDUCATION2("프랑스어교육과", "FrenchEducation"),
     EDUCATION3("독일어교육과", "GermanEducation"),

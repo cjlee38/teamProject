@@ -13,6 +13,7 @@ export default class TabContent extends Component {
             std : '',
             password : '',
             result : {},
+            data_in : false,
         }
 
         this.data = [
@@ -41,7 +42,7 @@ export default class TabContent extends Component {
 
     componentDidMount() {
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
-            params: { userId: 24}
+            params: { userId: 25}
         })
         .then((response) => {
             this.setState({result : response.data.data},()=> {
@@ -73,14 +74,17 @@ export default class TabContent extends Component {
                 this.data[0].average_score = this.state.result.grdAverageScore;
                 this.data4={trow:this.state.result.userInfo[0] + this.state.result.userInfo[1]} ;
                 console.log("check:", this.data4);
+                
+                
             });
+            // this.setState({data_in:true});
         })
         .catch(function (error) {
             console.log(error);
         });
-        this.setState({
-            data : this.data
-        });
+        // this.setState({
+        //     data : this.data
+        // });
         console.log("asd",this.state.data);
     }
 

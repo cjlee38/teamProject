@@ -20,33 +20,58 @@ public class ConditionDto {
 
         private List<String> userInfo;
 
-        private List<String> takenCourses;
+//        private List<String> takenCourses;
+        private List<String> takenFirstMajorCourses;
+        private List<String> takenSecondMajorCourses;
+        private List<String> takenLiberArtsCourses;
+        private List<String> takenTeachingCourses;
+        private List<String> takenFreeCourses;
         private List<Integer> takenCredit;
         private float averageScore;
 
-        private List<String> grdCourses;
+//        private List<String> grdCourses;
+        private List<String> grdFirstMajorCourses;
+        private List<String> grdSecondMajorCourses;
+        private List<String> grdLiberalArtsCourses;
         private List<Integer> grdCredit;
         private float grdAverageScore;
 
-        private List<String> remainCourses;
+//        private List<String> remainCourses;
+        private List<String> remainFirstMajorCourses;
+        private List<String> remainSecondMajorCourses;
+        private List<String> remainLiberalArtsCourses;
+
         private List<Integer> remainCredit;
         private float remainAverageScore;
 
 
         @Builder
-        public ResultOfCondition(List<String> userInfo, float averageScore, List<String> instructions,
+        public ResultOfCondition(List<String> userInfo, float averageScore,// List<String> instructions,
+                                 List<String> takenFirstMajorCourses, List<String> takenSecondMajorCourses, List<String> takenLiberArtsCourses, List<String> takenTeachingCourses, List<String> takenFreeCourses,
                                  List<Integer> takenCredit, List<Integer> grdCredit, List<Integer> remainCredit,
-                                 List<String> remainCourses, float remainAverageScore,
-                                 List<String> grdCourses, float grdAverageScore){
+                                 float remainAverageScore,
+                                 List<String> grdFirstMajorCourses,List<String> grdSecondMajorCourses, List<String> grdLiberalArtsCourses,
+                                 List<String> remainFirstMajorCourses, List<String> remainSecondMajorCourses, List<String> remainLiberalArtsCourses,
+                                 float grdAverageScore){
             this.userInfo = userInfo;
 
             this.averageScore = averageScore;
-            this.takenCourses = instructions;
+//            this.takenCourses = instructions;
+            this.takenFirstMajorCourses = takenFirstMajorCourses;
+            this.takenSecondMajorCourses = takenSecondMajorCourses;
+            this.takenLiberArtsCourses = takenLiberArtsCourses;
+            this.takenTeachingCourses = takenTeachingCourses;
+            this.takenFreeCourses = takenFreeCourses;
 
-            this.grdCourses = grdCourses;
+
+            this.grdFirstMajorCourses = grdFirstMajorCourses;
+            this.grdSecondMajorCourses = grdSecondMajorCourses;
+            this.grdLiberalArtsCourses = grdLiberalArtsCourses;
             this.grdAverageScore = grdAverageScore;
 
-            this.remainCourses = remainCourses;
+            this.remainFirstMajorCourses = remainFirstMajorCourses;
+            this.remainSecondMajorCourses = remainSecondMajorCourses;
+            this.remainLiberalArtsCourses = remainLiberalArtsCourses;
             this.remainAverageScore = remainAverageScore;
 
             this.takenCredit = takenCredit;
