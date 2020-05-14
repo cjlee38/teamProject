@@ -45,35 +45,6 @@ class Check extends React.Component {
   }
 
 
-  // handlingSubmit = (event) => {
-  //   console.log("크롤링 시작")
-
-  //   this.setState({ loading: true }, () => {
-  //     api.crawlUser({ std_num: this.state.std, password: this.state.password })
-  //       .then(result => this.setState({
-  //         loading: false,
-  //         data: [...result.data],
-  //       }))
-  //       .catch(function (error) {alert(error)});
-  //   });
-  //   // event.preventDefault()
-
-  //   // let result = await 
-  //   console.log(this.data)
-  //   this.setState({ std: "", password: "" })
-  // }
-
-  // handlingSubmit = async (event) => {
-  //   // event.preventDefault()
-  //   this.setState({loading:true});
-  //   console.log("크롤링 시작")
-  //   let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
-  //   this.setState({loading:false});
-  //   alert(result.data)
-  //   this.setState({ std: "", password: "" })
-  // }
-
-
   render() {
     console.log("ch")
     return (
@@ -83,28 +54,6 @@ class Check extends React.Component {
         <div className="CheckPage">
           <div className="body">
             <div className="head">내 졸업 요건 확인</div>
-            {/* <div className="Crwaler">
-              <form onSubmit={this.handlingSubmit}>
-
-
-                <TextField
-                  className="text" margin="normal"
-                  id="standard-textarea"
-                  label="학번"
-                  name="std" variant="outlined"
-                  placeholder="학번" value={this.state.std} onChange={this.handlingChange}
-                />
-                <TextField
-                  className="text" margin="normal"
-                  id="standard-textarea"
-                  label="종합정보시스템 비밀번호"
-                  name="password" variant="outlined"
-                  placeholder="종정시 비밀번호" value={this.state.password} type="password" onChange={this.handlingChange}
-                />
-                <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={this.handlingSubmit} className="crawlingbtn">
-                  업데이트      </Button>
-              </form>
-            </div> */}
       <div className="Crwaler">
       
             <Crawler />
