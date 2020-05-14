@@ -48,3 +48,15 @@ th {
 .nav-pills .active{
     background-color: #4385bf !important;
 }
+
+.course_t td{
+    font-size: 10pt !important;
+}
+#root > div > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody td:nth-child(1){
+    font-size: 13pt !important;
+}
+
+#root > div > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr:nth-child(3) > td:nth-child(n+2){
+    color: red;
+    font-weight: 600;
+}

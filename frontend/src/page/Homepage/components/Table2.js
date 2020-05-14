@@ -9,7 +9,7 @@ class Table extends Component {
   render() {
     console.log("table:", this.props);
     return (
-      <div className="whole-table">
+      <div className="course_t">
         <BootstrapTable data={this.props.data}>
           <TableHeaderColumn 
             isKey

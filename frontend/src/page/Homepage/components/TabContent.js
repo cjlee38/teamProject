@@ -30,19 +30,20 @@ total_credit:response.data.data.grdCredit[8], average_score:2.0},
 sub_major:response.data.data.takenCredit[2], minor:response.data.data.takenCredit[3], out_door:response.data.data.takenCredit[4],
 liberal_arts:response.data.data.takenCredit[5], teaching:response.data.data.takenCredit[6], optional:response.data.data.takenCredit[7],
 total_credit:total, average_score:response.data.data.averageScore},
-{ trow: '졸업학점', first_major: response.data.data.remainCredit[0], second_major:response.data.data.remainCredit[1], 
+{ trow: '남은학점', first_major: response.data.data.remainCredit[0], second_major:response.data.data.remainCredit[1], 
 sub_major:response.data.data.remainCredit[2], minor:response.data.data.remainCredit[3], out_door:response.data.data.remainCredit[4],
 liberal_arts:response.data.data.remainCredit[5], teaching:response.data.data.remainCredit[6], optional:response.data.data.remainCredit[7],
 total_credit:response.data.data.remainCredit[8], average_score:"-"}])
             setData2([{trow: "필수 과목", first_major:response.data.data.grdFirstMajorCourses.join('\n'), second_major:response.data.data.grdSecondMajorCourses.join('\n')
             , minor:"-", liberal_arts:response.data.data.grdLiberalArtsCourses.join('\n'), teaching:response.data.data.grdTeachingCourses
             , optional:"-"},
+           
+            {trow: "이수 과목", first_major:response.data.data.takenFirstMajorCourses.join('\n'), second_major:response.data.data.takenSecondMajorCourses.join('\n')
+            , minor:"-", liberal_arts:response.data.data.takenLiberArtsCourses.join('\n'), teaching:response.data.data.takenTeachingCourses.join('\n')
+            , optional:response.data.data.takenFreeCourses.join('\n')},
             {trow: "미이수 과목", first_major:response.data.data.remainFirstMajorCourses.join('\n'), second_major:response.data.data.remainSecondMajorCourses.join('\n')
             , minor:"-", liberal_arts:response.data.data.remainLiberalArtsCourses.join('\n'), teaching:response.data.data.remainTeachingCourses
             , optional:"-"},
-            {trow: "이수 과목", first_major:response.data.data.takenFirstMajorCourses.join('\n'), second_major:response.data.data.takenSecondMajorCourses.join('\n')
-            , minor:"-", liberal_arts:response.data.data.takenLiberArtsCourses.join('\n'), teaching:response.data.data.takenTeachingCourses.join('\n')
-            , optional:response.data.data.takenFreeCourses.join('\n')}
         ])
         console.log(response.data.data.remainLiberalArtsCourses)
         setData3([{trow:response.data.data.userInfo}])
