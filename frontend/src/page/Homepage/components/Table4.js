@@ -22,7 +22,7 @@ class Table extends Component {
               { fontWeight: 'heavy' },
               { backgroundColor: '#CCCCCC' }
             }>
-            전공 정보
+            전공 정보 (1전공 / 이중전공 / 부전공)
 
           </TableHeaderColumn>
           {/* <TableHeaderColumn dataField='first_major'

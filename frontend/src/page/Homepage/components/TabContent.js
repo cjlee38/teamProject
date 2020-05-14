@@ -46,7 +46,7 @@ total_credit:response.data.data.remainCredit[8], average_score:"-"}])
             , optional:"-"},
         ])
         console.log(response.data.data.remainLiberalArtsCourses)
-        setData3([{trow:response.data.data.userInfo}])
+        setData3([{trow:response.data.data.userInfo.join(' / ')}])
 
 
 
