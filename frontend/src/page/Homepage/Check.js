@@ -30,12 +30,6 @@ class Check extends React.Component {
       password: '',
       result : {}
     }
-    this.data = [
-      { trow: '졸업학점' },
-      { trow: '현재학점' },
-      { trow: '남은 학점' }
-
-    ];
 
   }
 
