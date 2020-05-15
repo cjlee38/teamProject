@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from
   'react-bootstrap-table';
-//import '../css/Table.css'
-//import '../dist/react-bootstrap-table-all.min.css'
 
 
 class Table extends Component {

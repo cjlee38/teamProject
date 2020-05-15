@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import Tab from './Tab';
 
 export default class TabList extends Component {
@@ -21,32 +20,32 @@ export default class TabList extends Component {
   }
 
   render() {
-    const { onClickTabItem, props: {children},state: {activeTab} } = this;
+    const { onClickTabItem, props: { children }, state: { activeTab } } = this;
 
     return (
-        <div>
-            <nav>
-            <div className="nav nav-pills">
-                {children.map((child) => {
-                const { label } = child.props;
-    
-                return (
-                    <Tab
-                    activeTab={activeTab}
-                    key={label}
-                    label={label}
-                    onClick={onClickTabItem}
-                    />
-                );
-                })}
-            </div>
-            </nav>
-            <div className="tab-content">
+      <div>
+        <nav>
+          <div className="nav nav-pills">
             {children.map((child) => {
-                if (child.props.label !== activeTab) return undefined;
-                return child.props.children;
+              const { label } = child.props;
+
+              return (
+                <Tab
+                  activeTab={activeTab}
+                  key={label}
+                  label={label}
+                  onClick={onClickTabItem}
+                />
+              );
             })}
-            </div>
+          </div>
+        </nav>
+        <div className="tab-content">
+          {children.map((child) => {
+            if (child.props.label !== activeTab) return undefined;
+            return child.props.children;
+          })}
+        </div>
       </div>
     );
   }

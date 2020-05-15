@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from
   'react-bootstrap-table';
-//import '../css/Table.css'
-//import '../dist/react-bootstrap-table-all.min.css'
 
 
 class Table extends Component {
@@ -46,7 +44,7 @@ class Table extends Component {
             headerAlign="center">
             충족여부
           </TableHeaderColumn>
-     
+
           <TableHeaderColumn dataField='liberal_arts'
             dataAlign='center'
             width="30%"
@@ -56,7 +54,7 @@ class Table extends Component {
                 backgroundColor: '#CCCCCC'
               }}
             headerAlign="center">
-            비고        
+            비고
           </TableHeaderColumn>
 
         </BootstrapTable>

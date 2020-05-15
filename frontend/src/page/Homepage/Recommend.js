@@ -6,9 +6,6 @@ import Button from '../LoginPage/components/Button';
 import Counter from '../Homepage/components/CreditRange'
 
 
-
-
-
 function Recommend_1(){//선제조건 1: 듣고싶은강의 선택
     console.log("reco")
     return(
