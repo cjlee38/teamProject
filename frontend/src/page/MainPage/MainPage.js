@@ -7,6 +7,8 @@ import './MainPage.scss';
 import Recommend from "../Homepage/Recommend";
 import Check from '../Homepage/Check';
 import LoginPage from '../LoginPage/LoginPage';
+import Header from '../LoginPage/Layout/Header';
+import LoginState from '../LoginPage/LoginState';
 
 
 function MainPage(match) {
@@ -39,14 +41,16 @@ const Main = ({ match }) => {
 
             <div className="body">
                 <Title />
+                <Header/>
                 <Link to="/Check">
                     <Button name={"졸업요건 확인하기"} value={"check"} />
                 </Link>
                 <Link to="/Recommend">
                     <Button name={"시간표 추천받기"} value={"check"} />
                 </Link>
+                
                 <Link to="/Login">
-                    <Button name={"로그인"} value={"check"} />
+                    <Button name={"로그인"} onClick={LoginState.onLogin} value={"check"} />
                 </Link>
 
 

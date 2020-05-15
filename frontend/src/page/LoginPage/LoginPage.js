@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, withRouter, Route, Switch, Link} from 'react-router-dom';
 import Input from './components/Input';
 import Button from './components/Button';
 import Title from './components/Title';
@@ -10,7 +10,7 @@ import Main from '../MainPage/MainPage';
 import Check from '../Homepage/Check';
 import Recommend from '../Homepage/Recommend';
 import Singuppage from '../Signuppage/Signuppage';
-
+import LoginState from '../LoginPage/LoginState';
 
 function LoginPage () {
   return (
@@ -65,12 +65,22 @@ const LoginP = () => {
     const tryLogin = async() => {
       console.log('sdffd')
       console.log(id, password);
+     // LoginState.logged=true;
+      //console.log(LoginState.logged);
       try {
-        let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
-        let json = await response.json();
-        console.log(json.success);
+       
+        //  let response = await fetch(`http://localhost:1415/web/v1/user/Login?studentNumber=${id}&password=${password}`);
+        //  let json = await response.json();
+         
+        //console.log(json.success);
+       // this.props.onLogin();
+        //LoginState.onLogin();
+        LoginState.logged=true;
+        console.log(LoginState.logged);
+        this.props.history.push('/');
       } catch (error) {
         console.log(error);
+       
       };
       reset();
     }
@@ -117,4 +127,4 @@ const LoginP = () => {
 
 
 
-export default LoginPage
+export default withRouter(LoginPage);
