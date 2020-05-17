@@ -14,7 +14,6 @@ function route() {
             <Router>
 
                 <div>
-                    <hr />
                     <Switch>
 
                         <Route path="/" exact={true} component={Main} />

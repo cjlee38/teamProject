@@ -8,9 +8,9 @@ import Table4 from '../components/Table4'
 
 
 export default function TabContent1() {
-    const [data, setData] = useState([{ data: "" }])
-    const [data2, setData2] = useState([{ data: "" }])
-    const [data3, setData3] = useState([{ data: "" }])
+    const [data, setData] = useState([{ trow: '졸업 학점'}, { trow: '현재 학점'}, { trow: '남은 학점'} ])
+    const [data2, setData2] = useState([{trow: "필수 과목"}, {trow: "이수 과목"}, {trow: "미이수 과목"} ])
+    const [data3, setData3] = useState()
 
     useEffect(() => {
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
@@ -34,7 +34,7 @@ export default function TabContent1() {
                 total_credit: total, average_score: response.data.data.averageScore
             },
             {
-                trow: '남은학점', first_major: response.data.data.remainCredit[0], second_major: response.data.data.remainCredit[1],
+                trow: '남은 학점', first_major: response.data.data.remainCredit[0], second_major: response.data.data.remainCredit[1],
                 sub_major: response.data.data.remainCredit[2], minor: response.data.data.remainCredit[3], out_door: response.data.data.remainCredit[4],
                 liberal_arts: response.data.data.remainCredit[5], teaching: response.data.data.remainCredit[6], optional: response.data.data.remainCredit[7],
                 total_credit: response.data.data.remainCredit[8], average_score: "-"

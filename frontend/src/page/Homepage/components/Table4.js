@@ -15,7 +15,7 @@ class Table extends Component {
             headerAlign="center"
             width="5%"
             tdStyle={
-              { backgroundColor: '' }}
+              { backgroundColor: '' ,textAlign:'center !important'}}
             thStyle={
               { fontWeight: 'heavy' },
               { backgroundColor: '#CCCCCC' }
