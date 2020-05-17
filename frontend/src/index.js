@@ -11,8 +11,8 @@ import Com from './Route'
  import Rout from './Route'
 export {default as Login} from './page/LoginPage/components/LoginContainer'
 
-ReactDOM.render(<Com />, document.getElementById('root'));
-ReactDOM.render(<Navigation />, document.getElementById('nav'));
+ReactDOM.render(<Login />, document.getElementById('root'));
+// ReactDOM.render(<Navigation />, document.getElementById('nav'));
 // ReactDOM.render(<Rout />, document.getElementById('route'));
 
 

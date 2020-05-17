@@ -11,28 +11,28 @@ import Header from '../LoginPage/Layout/Header';
 import LoginState from '../LoginPage/LoginState';
 
 
-function MainPage(match) {
-    console.log(match)
-    return (
-        <Router>
-            <Switch>
+// function MainPage(match) {
+//     console.log(match)
+//     return (
+//         <Router>
+//             <Switch>
 
-                <Route path="/" exact={true} component={Main} />
-                <Route path="/Main" component={Main} />
+//                 <Route path="/" exact={true} component={Main} />
+//                 <Route path="/Main" component={Main} />
 
-                <Route path="/Main/:id/:password" component={Main} />
-                <Route path="/Login" component={LoginPage} />
+//                 <Route path="/Main/:id/:password" component={Main} />
+//                 <Route path="/Login" component={LoginPage} />
 
-                <Route path="/Check" component={Check} />
-                <Route path="/Recommend" component={Recommend} />
-            </Switch>
+//                 <Route path="/Check" component={Check} />
+//                 <Route path="/Recommend" component={Recommend} />
+//             </Switch>
 
 
 
-        </Router>
+//         </Router>
 
-    )
-}
+//     )
+// }
 
 
 const Main = ({ match }) => {
@@ -50,7 +50,7 @@ const Main = ({ match }) => {
                 </Link>
                 
                 <Link to="/Login">
-                    <Button name={"로그인"} onClick={LoginState.onLogin} value={"check"} />
+                    <Button name={"로그인"} value={"check"} />
                 </Link>
 
 
@@ -60,4 +60,4 @@ const Main = ({ match }) => {
 
 
 
-export default MainPage
+export default Main
