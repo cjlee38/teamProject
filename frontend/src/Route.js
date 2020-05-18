@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Recommend from "./page/Homepage/Recommend";
 import Check from './page/Homepage/Check';
 import LoginPage from './page/LoginPage/LoginPage';
@@ -14,7 +14,6 @@ function route() {
             <Router>
 
                 <div>
-                    <hr />
                     <Switch>
 
                         <Route path="/" exact={true} component={Main} />

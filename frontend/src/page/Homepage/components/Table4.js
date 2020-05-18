@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from
   'react-bootstrap-table';
-//import '../css/Table.css'
-//import '../dist/react-bootstrap-table-all.min.css'
 
 
 class Table extends Component {
@@ -17,26 +15,14 @@ class Table extends Component {
             headerAlign="center"
             width="5%"
             tdStyle={
-              { backgroundColor: '' }}
+              { backgroundColor: '' ,textAlign:'center !important'}}
             thStyle={
               { fontWeight: 'heavy' },
               { backgroundColor: '#CCCCCC' }
             }>
-            전공 정보
+            전공 정보 (1전공 / 이중전공 / 부전공)
 
           </TableHeaderColumn>
-          {/* <TableHeaderColumn dataField='first_major'
-            dataAlign='center'
-            headerAlign="center"
-            width="9%"
-            thStyle={
-              {
-                fontWeight: 'heavy',
-                backgroundColor: '#CCCCCC'
-              }}>
-
-          </TableHeaderColumn> */}
-
 
         </BootstrapTable>
       </div>

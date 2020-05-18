@@ -89,31 +89,28 @@ def user_Table(id_input, pw_input, user_id, db):
     driver.click(grade_tap)
 
     driver.get_fra('body')
-    driver.get_fra('top')
+    driver.get_top()
 
     # 위쪽 frame
-    print(1)
+
     time.sleep(1)
 
-    tables = driver.find_all_by_tag('tbody')    # 영역별 취득 학점, 이수중 전공 테이블 2개 담김
-    print(tables)
-    print(2)
+    tables = driver.find_all_by_tag('tr')    # 영역별, 취득 학점, 이수중 전공 테이블 3개 담김
+
     # 영역별 취득 학점
     domain_dict = {}
 
-    domain_grade = tables[0]
-    th = domain_grade.find_elements_by_tag_name('th')    # 영역 이름
-    print(3)
-    td = domain_grade.find_elements_by_tag_name('td')    # 이수 학점
-    print(4)
+    domain_grade = tables[:2]
+    th = driver.find_all_by_tag_with_obj(domain_grade[0], 'th')    # 영역 이름
+    td = driver.find_all_by_tag_with_obj(domain_grade[1], 'td')    # 이수 학점
+
     for i in range(1, len(th)):
-        print(th[i].text)
-        print(td[i].text)
+
         domain_dict[th[i].text] = td[i].text
     
     # 이수 전공
 
-    domain_grade = tables[1]
+    domain_grade = tables[2]
     td = driver.find_by_tag_with_obj(domain_grade, 'td')    # 이수 전공
     major_list = td.text.split('\n')    # 1전공, 이중/부전공 분리
 
@@ -221,7 +218,6 @@ def user_Table(id_input, pw_input, user_id, db):
 
     # credit table insert
     val = list(domain_dict.values())
-    print(val)
     _first_major = int(val[0])
     _second_major = int(val[1])
     _sub_major = int(val[2])
@@ -289,11 +285,11 @@ def user_Table(id_input, pw_input, user_id, db):
 
 
     # course table insert
-
+    # print(courses_list)
     for i in courses_list:
-        inst_num = i[0]
+        inst_num = i[0].strip()
         course_area = i[2]
-        sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0])
+        sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
         inst_id = db_class.execute_all(sql_inst_search)
         inst_id = inst_id[0]['instruction_id']
         
