@@ -5,7 +5,7 @@ import Check from './page/Homepage/Check';
 import LoginPage from './page/LoginPage/LoginPage';
 import Main from './page/MainPage/MainPage';
 import Signuppage from './page/Signuppage/Signuppage';
-
+import T2 from './page/RecoPage/Reco1';
 
 function route() {
     return (
@@ -16,7 +16,7 @@ function route() {
                 <div>
                     <Switch>
 
-                        <Route path="/" exact={true} component={Main} />
+                        <Route path="/" exact={true} component={T2} />
                         <Route path="/Main" exact={true} component={Main} />
                         <Route path="/Login" component={LoginPage} />
                         <Route path="/Check" component={Check} />
