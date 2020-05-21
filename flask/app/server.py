@@ -86,24 +86,37 @@ class ReigstInst(Resource):
         # crawl_Table('15', '1', db_class)
         # crawl_Table('15', '2', db_class)
 
-        crawl_Table('16', '1', db_class)
-        crawl_Table('16', '2', db_class)
+        # crawl_Table('16', '1', db_class)
+        # crawl_Table('16', '2', db_class)
 
-        crawl_Table('17', '1', db_class)
-        crawl_Table('17', '2', db_class)
+        # crawl_Table('17', '1', db_class)
+        # crawl_Table('17', '2', db_class)
 
-        crawl_Table('18', '1', db_class)
-        crawl_Table('18', '2', db_class)
+        # crawl_Table('18', '1', db_class)
+        # crawl_Table('18', '2', db_class)
 
-        crawl_Table('19', '1', db_class)
-        crawl_Table('19', '2', db_class)
+        # crawl_Table('19', '1', db_class)
+        # crawl_Table('19', '2', db_class)
 
         crawl_Table('20', '1', db_class)
 
-
-
-
         return {'status': 'success'}
+
+    def get(self):
+        db_class = database.Database()
+
+        sql_inst_search = """SELECT dept, area, year, subject, url, required, professor, time,
+        credit, class_time, number_of_people, note FROM instruction WHERE rq_year={rq_year} and rq_semester={rq_semester};"""
+        sql_inst_search = sql_inst_search.format(rq_year=20, rq_semester=1)
+        row = db_class.execute_all(sql_inst_search)
+        sql_lib_area = """SELECT distinct area FROM instruction where rq_year={rq_year} and rq_semester={rq_semester} and not (area like \"%전공\" or area like \"%이중%\" or area like \"교직\");
+""".format(rq_year=20, rq_semester=1)
+        area =  db_class.execute_all(sql_lib_area)
+        if len(row):
+            # print(row)
+            return {'data' : row, 'lib' : area}
+        else:
+            return {'error' : '강의가 없습니다.'}
 
 
 

@@ -65,6 +65,8 @@ def crawl_Table(rq_year, rq_semester, db):
 
             tds = i.findAll('td')
             area = tds[1].get_text().strip()
+            if area == "전공":
+                area = "1" + area
             year = int(tds[2].get_text().strip())
             course_num = tds[3].get_text().strip()
 
