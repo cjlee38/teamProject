@@ -11,7 +11,6 @@ const qualityType = {
 };
 
 
-
 const areaType = {
 
   "1전공": "1전공",
@@ -25,6 +24,21 @@ const areaType = {
 
 export default class AllFilters extends React.Component {
 
+  constructor(props){
+    super(props)
+    this.lib = ()=>{
+      
+      let dd = this.props.data.lib
+      console.log(this.props.data.lib)
+      dd.map(function(obj){ 
+        
+        areaType[obj.area] = obj.area + "(교양)"
+        console.log(obj.area)
+      })
+    };
+
+
+  }
   handlerClickCleanFiltered() {
     this.refs.name1.cleanFiltered();
     this.refs.name2.cleanFiltered();
@@ -35,10 +49,11 @@ export default class AllFilters extends React.Component {
   }
 
   render() {
+    console.log(this.lib())
     return (
       <div className= "coursetbl" style={{fontSize:"5pt !important"}}>
         <a onClick={this.handlerClickCleanFiltered.bind(this)} style={{ cursor: 'pointer', color: "orange" }}>clear filters</a>
-      <BootstrapTable ref='table' data={this.props.data} pagination>
+      <BootstrapTable ref='table' data={this.props.data.data} pagination>
         
         <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' filter={{ type: 'TextFilter', placeholder: 'ELLT학과 or 교양' }}>학과/교양
 

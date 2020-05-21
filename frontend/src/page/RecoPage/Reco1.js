@@ -18,7 +18,7 @@ export default function Reco1() {
           if (obj.required) {obj.required="O"}
           else{obj.required=""}
       })
-        setData3({data:response.data.data, isdata:true})
+        setData3({data:response.data, isdata:true, lib:response})
 
 
 
