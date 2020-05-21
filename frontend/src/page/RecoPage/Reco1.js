@@ -14,6 +14,10 @@ export default function Reco1() {
         response.data.data.sort(function(a, b) { // 오름차순
           return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
       });
+      response.data.data.map(function(obj){
+          if (obj.required) {obj.required="O"}
+          else{obj.required=""}
+      })
         setData3({data:response.data.data, isdata:true})
 
 

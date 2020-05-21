@@ -4,9 +4,11 @@ td{
 }
 
 th{
-    padding: 0 auto;
+    padding-bottom: 20px !important;
+    font-size: 12px !important;
+    word-break: keep-all;
 }
-a {
+.coursetbl > a {
     font-size: x-large;
     padding: 10px;
 }
@@ -22,4 +24,20 @@ a {
     left:44%;
     top:40%;
     font-size: x-large;
+}
+
+.react-bootstrap-table-page-btns-ul{
+float:right !important;
+margin-right: 1%;
+
+margin-top: 0;
+font-size: medium !important;
+}
+
+.page-link{
+    font-size: medium !important;
+}
+span.dropdown
+{
+    margin: 5%;
 }
