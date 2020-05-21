@@ -1,0 +1,87 @@
+#lecture-list {
+  padding: 0 30px 0 30px;
+  margin-top: 90px;
+}
+
+ul {
+  padding: 0;
+  list-style-position: inside;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.lecture-textfield {
+  width: 20%;
+  max-width: 200px;
+}
+
+#timetable {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.MuiFormGroup-root-150.option-radio-form {
+  width: 900px;
+  flex-direction: row;
+}
+
+#timetable-radios {
+  margin-bottom: 30px;
+}
+
+table {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+td, th {
+  padding: 10px;
+}
+
+th {
+  border: 1px #3F51B5 solid;
+  color: #3F51B5;
+}
+
+td {
+  border: 1px #606060 solid;
+  color: #303030;
+}
+
+.block-time {
+  border: 1px #3F51B5 solid;
+  color: #3F51B5;
+  min-width: 110px;
+  text-align: center;
+}
+
+.unit {
+  width: 100px;
+  height: 100px;
+  color: white;
+  font-size: 14px;
+}
+
+.lecture-unrequired {
+  background-color: #3F51B5;
+}
+
+.lecture-required {
+  background-color: #F50057;
+}
+
+.lecture-info {
+  display: block;
+  font-size: 10px;
+}
+
+.MuiFormControl-root-64.credit-textfield {
+  margin-bottom: 20px;
+}
+
+.MuiFormControlLabel-root-91.lecture-checkbox {
+  margin-left: 10px;
+}
