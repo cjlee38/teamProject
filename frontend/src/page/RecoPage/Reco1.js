@@ -4,6 +4,7 @@ import Table4 from './components/Table';
 import cralwer from '../Homepage/crawl'
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 export default function Reco1() {
 
@@ -15,8 +16,10 @@ export default function Reco1() {
           return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
       });
       response.data.data.map(function(obj){
+
           if (obj.required) {obj.required="O"}
           else{obj.required=""}
+          
       })
         setData3({data:response.data, isdata:true, lib:response})
 
