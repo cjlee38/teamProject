@@ -1,14 +1,18 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, session, redirect, url_for
 from flask_restful import Resource, Api
 from flask_restful import reqparse
 import database
 from course_table import *
 from user_table import *
 from flask_cors import CORS
+from module import redis_session
+import json
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
+app.secret_key = "super secret key"
+rd = redis_session()
 
 class RegistUser(Resource):
     def get(self):
@@ -103,20 +107,38 @@ class ReigstInst(Resource):
         return {'status': 'success'}
 
     def get(self):
-        db_class = database.Database()
-
-        sql_inst_search = """SELECT dept, area, year, subject, url, required, professor, time,
-        credit, class_time, number_of_people, note FROM instruction WHERE rq_year={rq_year} and rq_semester={rq_semester};"""
-        sql_inst_search = sql_inst_search.format(rq_year=20, rq_semester=1)
-        row = db_class.execute_all(sql_inst_search)
-        sql_lib_area = """SELECT distinct area FROM instruction where rq_year={rq_year} and rq_semester={rq_semester} and not (area like \"%전공\" or area like \"%이중%\" or area like \"교직\");
-""".format(rq_year=20, rq_semester=1)
-        area =  db_class.execute_all(sql_lib_area)
-        if len(row):
-            # print(row)
-            return {'data' : row, 'lib' : area}
+        print(session)
+        if session.get('session_key'):
+            key = session['session_key']
+            rd.get_session(key)
+            json_inst_dict = rd.db.get('inst_dict').decode('utf-8')
+            inst_dict2 = dict(json.loads(json_inst_dict))
+            print(inst_dict2)
+            return inst_dict2
+        
         else:
-            return {'error' : '강의가 없습니다.'}
+            key = rd.save_session(1)
+            session['session_key'] = key
+            
+            print(session)
+
+            db_class = database.Database()
+
+            sql_inst_search = """SELECT instruction_id, dept, area, year, subject, url, required, professor, time,
+            credit, class_time, number_of_people, note FROM instruction WHERE rq_year={rq_year} and rq_semester={rq_semester};"""
+            sql_inst_search = sql_inst_search.format(rq_year=20, rq_semester=1)
+            row = db_class.execute_all(sql_inst_search)
+            sql_lib_area = """SELECT distinct area FROM instruction where rq_year={rq_year} and rq_semester={rq_semester} and not (area like \"%전공\" or area like \"%이중%\" or area like \"교직\");
+    """.format(rq_year=20, rq_semester=1)
+            area =  db_class.execute_all(sql_lib_area)
+            if len(row):
+                # print(row)
+                inst_dict = {'data' : row, 'lib' : area}
+                json_inst_dict = json.dumps(inst_dict, ensure_ascii=False).encode('utf-8')
+                rd.db.set("inst_dict", json_inst_dict)
+                return {'data' : row, 'lib' : area}
+            else:
+                return {'error' : '강의가 없습니다.'}
 
 
 
