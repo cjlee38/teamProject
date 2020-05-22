@@ -154,9 +154,9 @@ class Timetable extends React.Component {
               className="option-radio-form"
             >
               <FormControlLabel value="normal" control={<Radio />} label="일반" />
-              <FormControlLabel value="kitakubu" control={<Radio />} label="칼퇴" />
-              <FormControlLabel value="jammanbo" control={<Radio />} label="잠만보" />
-              <FormControlLabel value="lucky" control={<Radio />} label="I'm feeling lucky" />
+              <FormControlLabel value="kitakubu" control={<Radio />} label="아침형" />
+              <FormControlLabel value="jammanbo" control={<Radio />} label="오후형" />
+             
             </RadioGroup>
           </FormControl>
         </div>
