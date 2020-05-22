@@ -1,18 +1,40 @@
 
 td{
+    padding: 2px 0 !important;
+    height: 5% !important;
     font-size: 12px !important;
 }
 
 th{
-    padding-bottom: 20px !important;
+    // padding-bottom: 20px !important;
     font-size: 12px !important;
     word-break: keep-all;
+    height: 5% !important;
+
+}
+.atag{
+    margin-left: 2.5%;
+    font-size: x-large;
+
+}
+.coursetbl{
+    padding: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 .coursetbl > a {
     font-size: x-large;
     padding: 10px;
 }
 
+
+.coursetbl .react-bs-table-container{
+    width: 95%;
+}
 .spinner-grow {
     position: absolute;
     left:50%;

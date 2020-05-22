@@ -4,12 +4,20 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 function activeFormatter(cell, row, extraData) {
 
   console.log(extraData)
-  
+
   return (
-    <button  onClick={() => extraData(row)}>추가</button>
+    <button onClick={() => extraData(row)}>추가</button>
   );
 }
 
+function deactiveFormatter(cell, row, extraData) {
+
+  console.log(extraData)
+
+  return (
+    <button onClick={() => extraData(row)}>삭제</button>
+  );
+}
 
 const qualityType = {
   1: 1,
@@ -34,8 +42,9 @@ export default class AllFilters extends React.Component {
   constructor(props) {
     super(props)
     this.handlerButton = this.handlerButton.bind(this)
+    this.RemoveButton = this.RemoveButton.bind(this)
     this.state = {
-      full_data : this.props.data.data,
+      full_data: this.props.data.data,
       myCourse: []
     }
     this.lib = () => {
@@ -56,13 +65,34 @@ export default class AllFilters extends React.Component {
     // console.log(myCourse, this.state.myCourse)
     await this.setState({
       myCourse: this.state.myCourse.concat(row)
-  })
-  const { full_data } = this.state.full_data
-  await this.setState({
-    full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
-  })
-  console.log(this.state)
-}
+    })
+    const { full_data } = this.state.full_data
+    await this.setState({
+      full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
+    })
+    console.log(this.state)
+  }
+
+
+
+
+  async RemoveButton(row) {
+    const { full_data } = this.state.full_data
+    // console.log(myCourse, this.state.myCourse)
+    const { myCourse } = this.state.myCourse
+    await this.setState({
+      full_data: this.state.full_data.concat(row)
+    })
+    await this.setState({
+      myCourse: this.state.myCourse.filter(inst => inst.instruction_id !== row.instruction_id)
+    })
+   
+    
+    
+    console.log(this.state)
+  }
+
+
 
   handlerClickCleanFiltered() {
     this.refs.name1.cleanFiltered();
@@ -78,26 +108,48 @@ export default class AllFilters extends React.Component {
   render() {
 
     return (
-      <div className="coursetbl" style={{ fontSize: "5pt !important" }}>
-        <a onClick={this.handlerClickCleanFiltered.bind(this)} style={{ cursor: 'pointer', color: "orange" }}>clear filters</a>
-        <BootstrapTable ref='table' data={this.state.full_data} pagination>
+      <>
+        <h3 style={{ textAlign: "center" }}>내가 듣고 싶은 강의</h3>
+        <div className="coursetbl">
+          <BootstrapTable ref='table' data={this.state.myCourse}>
 
-          <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' filter={{ type: 'TextFilter', placeholder: 'ELLT학과 or 교양' }}>학과/교양
+            <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' >학과/교양</TableHeaderColumn>
+            <TableHeaderColumn width="9%" dataAlign='center' ref='name2' dataField='area' >구분</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' >학년</TableHeaderColumn>
+            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataField='subject' >과목명</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
+            <TableHeaderColumn width="14%" dataAlign='center' ref='inStockDate' dataField='professor' >담당 교수</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='time'>시간</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='class_time'>강의 시간</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='number_of_people'>제한 인원</TableHeaderColumn>
+            <TableHeaderColumn width="15%" dataAlign='center' ref='inStockDate' dataField='note'>비고</TableHeaderColumn>
+            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={deactiveFormatter} formatExtraData={this.RemoveButton} dataField='select'>선택</TableHeaderColumn>
+          </BootstrapTable>
+        </div>
+
+        <a onClick={this.handlerClickCleanFiltered.bind(this)} style={{ cursor: 'pointer', color: "orange" }} className="atag">clear filters</a>
+
+        <div className="coursetbl" style={{ fontSize: "5pt !important" }}>
+          <BootstrapTable ref='table' data={this.state.full_data} pagination>
+
+            <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' filter={{ type: 'TextFilter', placeholder: 'ELLT학과 or 교양' }}>학과/교양
 
         </TableHeaderColumn>
-          <TableHeaderColumn width="9%" dataSort={true} dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: areaType }}>구분</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
-          <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
-          <TableHeaderColumn width="14%" dataAlign='center' ref='inStockDate' dataField='professor' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>담당 교수</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='time'>시간</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='class_time'>강의 시간</TableHeaderColumn>
-          <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='number_of_people'>제한 인원</TableHeaderColumn>
-          <TableHeaderColumn width="15%" dataAlign='center' ref='inStockDate' dataField='note'>비고</TableHeaderColumn>
-          <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={activeFormatter} formatExtraData={this.handlerButton} dataField='select'>선택</TableHeaderColumn>
-        </BootstrapTable>
-      </div>
+            <TableHeaderColumn width="9%"  dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: areaType }}>구분</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
+            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
+            <TableHeaderColumn width="14%" dataAlign='center' ref='inStockDate' dataField='professor' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>담당 교수</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='time'>시간</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='class_time'>강의 시간</TableHeaderColumn>
+            <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='number_of_people'>제한 인원</TableHeaderColumn>
+            <TableHeaderColumn width="15%" dataAlign='center' ref='inStockDate' dataField='note'>비고</TableHeaderColumn>
+            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={activeFormatter} formatExtraData={this.handlerButton} dataField='select'>선택</TableHeaderColumn>
+          </BootstrapTable>
+        </div>
+      </>
     );
   }
 }
