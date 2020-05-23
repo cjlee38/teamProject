@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 function activeFormatter(cell, row, extraData) {
-
-  console.log(extraData)
-
   return (
     <button onClick={() => extraData(row)}>추가</button>
   );
 }
 
 function deactiveFormatter(cell, row, extraData) {
-
-  console.log(extraData)
-
   return (
     <button onClick={() => extraData(row)}>삭제</button>
   );
 }
+
+function urlFormatter(cell, row) {
+  console.log(row)
+  return (
+    <a href={row.url} target="_blank">{row.subject}</a>
+  );
+}
+
+
 
 const qualityType = {
   1: 1,
@@ -45,6 +48,7 @@ export default class AllFilters extends React.Component {
     this.RemoveButton = this.RemoveButton.bind(this)
     this.state = {
       full_data: this.props.data.data,
+      originData : this.props.data.data,
       myCourse: []
     }
     this.lib = () => {
@@ -62,31 +66,33 @@ export default class AllFilters extends React.Component {
   }
   async handlerButton(row) {
     const { myCourse } = this.state.myCourse
+    const { full_data } = this.state.full_data
+
     // console.log(myCourse, this.state.myCourse)
     await this.setState({
-      myCourse: this.state.myCourse.concat(row)
-    })
-    const { full_data } = this.state.full_data
-    await this.setState({
+      myCourse: this.state.myCourse.concat(row),
       full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
+
     })
     console.log(this.state)
   }
 
 
-
-
   async RemoveButton(row) {
     const { full_data } = this.state.full_data
     // console.log(myCourse, this.state.myCourse)
-    const { myCourse } = this.state.myCourse
-    await this.setState({
-      full_data: this.state.full_data.concat(row)
-    })
+    // const { myCourse } = this.state.myCourse
+    
     await this.setState({
       myCourse: this.state.myCourse.filter(inst => inst.instruction_id !== row.instruction_id)
     })
-   
+    const { myCourse } = this.state.myCourse
+    console.log(this.state.myCourse)
+    await this.setState({
+      full_data: this.state.originData.filter(inst => !this.state.myCourse.includes(inst.instruction_id)).sort(function(a, b) { // 오름차순
+        return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
+    })
+  })
     
     
     console.log(this.state)
@@ -116,7 +122,7 @@ export default class AllFilters extends React.Component {
             <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' >학과/교양</TableHeaderColumn>
             <TableHeaderColumn width="9%" dataAlign='center' ref='name2' dataField='area' >구분</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' >학년</TableHeaderColumn>
-            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataField='subject' >과목명</TableHeaderColumn>
+            <TableHeaderColumn width="21%" dataAlign='center' dataFormat={urlFormatter} ref='price' dataField='subject' >과목명</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
             <TableHeaderColumn width="14%" dataAlign='center' ref='inStockDate' dataField='professor' >담당 교수</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
@@ -138,7 +144,7 @@ export default class AllFilters extends React.Component {
         </TableHeaderColumn>
             <TableHeaderColumn width="9%"  dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: areaType }}>구분</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
-            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
+            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataFormat={urlFormatter} dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
             <TableHeaderColumn width="14%" dataAlign='center' ref='inStockDate' dataField='professor' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>담당 교수</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
