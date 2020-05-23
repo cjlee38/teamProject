@@ -65,6 +65,13 @@ export default class AllFilters extends React.Component {
 
   }
   async handlerButton(row) {
+    let flag = false
+    this.state.myCourse.forEach(function(element){
+      if (element.subject == row.subject){
+        flag = true
+        return alert("동일 교과목 존재!")}
+    })
+    if (flag){return}
     const { myCourse } = this.state.myCourse
     const { full_data } = this.state.full_data
 
