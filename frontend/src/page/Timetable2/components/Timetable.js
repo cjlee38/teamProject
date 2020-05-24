@@ -38,13 +38,13 @@ class Timetable extends React.Component {
   }
 
 
-//  handleClick = (w, t) => {
-//   console.log(w)
-//   console.log(t)
-//     w=this.getWeekdayIndex(w)
-//     t=this.getTimeIndex(t)
-//     console.log(w)
-//     console.log(t)
+ handleClick = (w, t) => {
+  console.log(w)
+  console.log(t)
+    w=this.getWeekdayIndex(w)
+    t=this.getTimeIndex(t)
+    console.log(w)
+    console.log(t)
 
 //     const { weekday } = this.state;
 //     const {timeUnitAlphabet} =this.state;
@@ -72,11 +72,9 @@ class Timetable extends React.Component {
     // this.setState({
     //   todos: nextTodos
     // });
-  //}
+}
 
-  handleClick=()=>{
-    console.log(this.id)
-  }
+
 
   setOption = (e) => {
     this.setState({
@@ -184,7 +182,7 @@ class Timetable extends React.Component {
               })}
             </tr>
           </thead>
-          <tbody onClick={()=>this.handleClick(this.props)}>
+          <tbody onClick={()=>this.handleClick(weekday[4], timeUnitAlphabet[3])}>
             {timeUnitString.map((time, t) => {
               
               return (
