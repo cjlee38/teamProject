@@ -9,14 +9,15 @@ import Normal from '../options/Normal';
 import Kitakubu from '../options/Kitakubu';
 import jammanbo from '../options/jammanbo'
 
-
+var A;
+var B;
 class Timetable extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       option: 'normal',
-      weekday: ['월', '화', '수', '목', '금', '토', '일'],
+      weekday: ['월', '화', '수', '목', '금', '토'],
       timeUnitAlphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'],
       timeUnitString: [
         'A 9:00 ~ 9:50',
@@ -46,32 +47,6 @@ class Timetable extends React.Component {
     console.log(w)
     console.log(t)
 
-//     const { weekday } = this.state;
-//     const {timeUnitAlphabet} =this.state;
-
-    // 파라미터로 받은 id 를 가지고 몇번째 아이템인지 찾습니다.
-    //const i = weekday.findIndex(weekday=>weekday[w]===weekday);
-    //const j=  timeUnitAlphabet.findIndex();
-    //const index = todos.findIndex(todo => todo.id === id);
-    //const selected = todos[index]; // 선택한 객체
-
-    // const nextTodos = [...todos]; // 배열을 복사
-
-    // // 기존의 값들을 복사하고, checked 값을 덮어쓰기
-    // nextTodos[index] = { 
-    //   ...selected, 
-    //   checked: !selected.checked,
-      
-    //  // text: todos.checked? "공강": "공강x"
-    //  text:"  "
-    //   //text: todos.text==="공강"? " - " :"공강"  
-    //   , background: 'gray'
-    // };
-    
-    
-    // this.setState({
-    //   todos: nextTodos
-    // });
 }
 
 
@@ -140,7 +115,9 @@ class Timetable extends React.Component {
       displayLectures
     } = this.state;
 
+
     return (
+      
       <div id="timetable">
         <div id="timetable-radios">
           <FormControl component="fieldset" required className="option-radio-form">
@@ -163,11 +140,7 @@ class Timetable extends React.Component {
           {'적용하기!'}
         </Button>
 
-
-
-
-
-        <table onClick={()=>this.handleClick(weekday[5], timeUnitAlphabet[3])} >
+        <table onClick={()=>this.handleClick(A, B)} >
           <thead>
             <tr>
               <th>
@@ -182,26 +155,28 @@ class Timetable extends React.Component {
               })}
             </tr>
           </thead>
-          <tbody onClick={()=>this.handleClick(weekday[4], timeUnitAlphabet[3])}>
+          <tbody >
             {timeUnitString.map((time, t) => {
               
               return (
                 <tr key={time} id={time.split('')[0]} className="block">
-                  <td className="block-time">
+                  <td className="block-time" >
                     {time}
                   </td>
-                  
-                  {Array.from(Array(7).keys()).map((w) => {
+                    {Array.from(Array(6).keys()).map((w) => {
+                    A=weekday[w];
+                    B=timeUnitAlphabet[t];
+                   
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
-                      console.log(w)
-                      console.log(t)
-                      
-                    return (
-                      <TimeBlock
+                    
+                    return (        
+                      <TimeBlock 
                         key={w} 
                         displayLecture={displayLectures[displayLectureKey]
+                        
                          }
-                      />);
+                      />
+                      );
                   })}
                 </tr>
               );
