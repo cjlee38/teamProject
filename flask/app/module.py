@@ -52,13 +52,3 @@ class redis_session:
         return session_key
 
    
-
-if __name__ == "__main__" :
-
-    r = redis_session()
-
-    #session_key = r.save_session()
-
-    if rd.open_session('b0b6b52b-1d72-43fe-bdf3-69248a73383d') :
-        pass
-
