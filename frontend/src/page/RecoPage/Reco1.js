@@ -9,11 +9,21 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 export default function Reco1() {
 
   const [data3, setData3] = useState({isdata:false})
+
+  
+const areaType = {
+
+    "1전공": "1전공",
+    "이중": "이중",
+    "부전공": "부전공",
+    "교직": "교직",
+  
+  };
   useEffect(() => {
     crawl.get_inst().then(response => {
-        console.log("res", response.data)
+        console.log("res", response)
         response.data.data.sort(function(a, b) { // 오름차순
-          return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
+          return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area? 1 : a.area < b.area? 0 : -2;
       });
       response.data.data.map(function(obj){
 
@@ -21,48 +31,22 @@ export default function Reco1() {
           else{obj.required=""}
           
       })
-        setData3({data:response.data, isdata:true, lib:response})
+
+      response.data.lib.map(function(obj){
+        areaType[obj.area] = obj.area + "(교양)"
+        
+    })
+        setData3({data:response.data, isdata:true, lib:areaType})
 
 
 
     })
 }, []
 )
-    console.log(data3)
     return (
-        <div style={{ marginTop: "10%"}}>
-            {data3.isdata ? <Table4 data={data3.data} />:<><Spinner animation="grow"  variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
+        <div>
+            {data3.isdata ? <Table4 data={data3.data} lib={data3.lib} />:<><Spinner animation="grow"  variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             
         </div>
     )
 }
-
-// export default class a extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = async() => { await cralwer.get_inst()}
-    
-//       }
-//     componentDidMount() {
-//        cralwer.get_inst().then((response) => {
-//         console.log("userId : ", response.data.data);
-//         this.setState({data:response.data.data})
-        
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//         }
-
-// render() {
-//     console.log("data",this.state)
-//     const { data } = this.state.data;
-//     console.log("data",data)
-//                 return(
-//         <div style = {{ marginTop: "20%" }} >
-//             <Table4 data={data} />
-//         </div >
-//     )
-
-//     }
-// }

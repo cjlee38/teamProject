@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Input from './components/Input';
 import Button from './components/Button';
@@ -6,15 +6,14 @@ import Title from './components/Title';
 import './LoginPage.scss';
 import Axios from 'axios';
 
-
-const LoginP = () => {
+const LoginP = (props) => {
   const [inputs, setInputs] = useState({
     id: "",
     password: ""
   });
 
   const { id, password } = inputs;
-
+  const [user, setUser] = useState();
   const onChange = e => {
     const { value, name } = e;
     console.log(value, name);
@@ -32,7 +31,7 @@ const LoginP = () => {
     })
   }
 
-  const tryLogin = () => {
+  const tryLogin = async() => {
     console.log('sdffd')
     console.log(id, password);
     Axios.get('http://localhost:1415/web/v1/user/Login', {
@@ -40,15 +39,30 @@ const LoginP = () => {
     })
       .then((response) => {
         console.log("userId : ", response.data.userId);
-      })
-      .catch(function (error) {
-        console.log(error);
+        setUser({user_id:response.data.userId})
+        props.history.push({
+          pathname: '/Check',
+          state: { user_id: response.data.userId }
+        })
+       
+    })
+      .catch(async function (error) {
+        await props.history.push({
+          pathname: '/Check',
+          state: { user_id: 2 }
+        })
+     console.log(error);
+        alert(error)
+
+        
       });
+      
     reset();
   }
 
   const trySignUp = () => {
   }
+  console.log(user)
 
   return (
     <div className="LoginPage">
@@ -72,9 +86,16 @@ const LoginP = () => {
           />
         </div>
         <div className="Button">
-          <Link to='/Check'>
+{/* 
+          <Link to={{
+            pathname : `/Check/${user}`,
+            state : {
+              userid : user
+            }
+          }}> <Button onClick={tryLogin} name={"로그인"} value={"login"} /></Link> */}
+          {/* <Link to='/Check'> */}
             <Button onClick={tryLogin} name={"로그인"} value={"login"} />
-          </Link>
+          {/* </Link> */}
           <Link to="/Signup">
             <Button onClick={trySignUp} name={"회원가입"} value={"signUp"} />
           </Link>

@@ -3,6 +3,7 @@ import TabContent from './components/TabContent';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Crawler from './components/Crawler';
 import './Check.scss'
+import { Redirect } from 'react-router-dom';
 
 class Check extends React.Component {
 
@@ -11,7 +12,8 @@ class Check extends React.Component {
     this.state = {
       std: '',
       password: '',
-      result: {}
+      result: {},
+      userID:this.props.location.state ? this.props.location.state : ""
     }
 
   }
@@ -21,12 +23,14 @@ class Check extends React.Component {
     console.log(event.target.name, "촘  ")
   }
 
+  componentDidMount(){
+  }
 
   render() {
-    console.log("ch")
     return (
-      <>
 
+      <>
+      {(this.state.userID === "") && <Redirect to="/Login"/>}
 
         <div className="CheckPage">
           <div className="body">
@@ -36,7 +40,7 @@ class Check extends React.Component {
               <Crawler />
             </div>
 
-            <TabContent />
+            <TabContent userID={this.state.userID} />
 
 
           </div>

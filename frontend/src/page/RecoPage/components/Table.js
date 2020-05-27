@@ -14,7 +14,6 @@ function deactiveFormatter(cell, row, extraData) {
 }
 
 function urlFormatter(cell, row) {
-  console.log(row)
   return (
     <a href={row.url} target="_blank">{row.subject}</a>
   );
@@ -29,14 +28,6 @@ const qualityType = {
   4: 4
 };
 
-const areaType = {
-
-  "1전공": "1전공",
-  "이중": "이중",
-  "부전공": "부전공",
-  "교직": "교직",
-
-};
 
 
 
@@ -44,26 +35,18 @@ export default class AllFilters extends React.Component {
 
   constructor(props) {
     super(props)
+    
     this.handlerButton = this.handlerButton.bind(this)
     this.RemoveButton = this.RemoveButton.bind(this)
     this.state = {
       full_data: this.props.data.data,
       originData : this.props.data.data,
-      myCourse: []
+      myCourse: [],
     }
-    this.lib = () => {
-
-      let dd = this.props.data.lib
-      console.log(this.props.data.lib)
-      dd.map(function (obj) {
-
-        areaType[obj.area] = obj.area + "(교양)"
-        // console.log(obj.area)
-      })
-    };
 
 
   }
+
   async handlerButton(row) {
     let flag = false
     this.state.myCourse.forEach(function(element){
@@ -119,12 +102,11 @@ export default class AllFilters extends React.Component {
 
 
   render() {
-
     return (
       <>
         <h3 style={{ textAlign: "center" }}>내가 듣고 싶은 강의</h3>
         <div className="coursetbl">
-          <BootstrapTable ref='table' data={this.state.myCourse}>
+          <BootstrapTable ref='table' data={this.props.myCourse}>
 
             <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' >학과/교양</TableHeaderColumn>
             <TableHeaderColumn width="9%" dataAlign='center' ref='name2' dataField='area' >구분</TableHeaderColumn>
@@ -137,7 +119,7 @@ export default class AllFilters extends React.Component {
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='class_time'>강의 시간</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='number_of_people'>제한 인원</TableHeaderColumn>
             <TableHeaderColumn width="15%" dataAlign='center' ref='inStockDate' dataField='note'>비고</TableHeaderColumn>
-            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={deactiveFormatter} formatExtraData={this.RemoveButton} dataField='select'>선택</TableHeaderColumn>
+            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={deactiveFormatter} formatExtraData={this.props.RemoveButton} dataField='select'>선택</TableHeaderColumn>
           </BootstrapTable>
         </div>
 
@@ -149,7 +131,7 @@ export default class AllFilters extends React.Component {
             <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' filter={{ type: 'TextFilter', placeholder: 'ELLT학과 or 교양' }}>학과/교양
 
         </TableHeaderColumn>
-            <TableHeaderColumn width="9%"  dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: areaType }}>구분</TableHeaderColumn>
+            <TableHeaderColumn width="9%"  dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: this.props.lib }}>구분</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
             <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataFormat={urlFormatter} dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
@@ -159,7 +141,7 @@ export default class AllFilters extends React.Component {
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='class_time'>강의 시간</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='number_of_people'>제한 인원</TableHeaderColumn>
             <TableHeaderColumn width="15%" dataAlign='center' ref='inStockDate' dataField='note'>비고</TableHeaderColumn>
-            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={activeFormatter} formatExtraData={this.handlerButton} dataField='select'>선택</TableHeaderColumn>
+            <TableHeaderColumn dataAlign='center' ref='inStockDate' dataFormat={activeFormatter} formatExtraData={this.props.handlerButton} dataField='select'>선택</TableHeaderColumn>
           </BootstrapTable>
         </div>
       </>

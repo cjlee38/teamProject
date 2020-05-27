@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Recommend from "./page/Homepage/Recommend";
 import Check from './page/Homepage/Check';
 import LoginPage from './page/LoginPage/LoginPage';
 import Main from './page/MainPage/MainPage';
 import Signuppage from './page/Signuppage/Signuppage';
-import T2 from './page/RecoPage/Reco1';
+import T2 from './page/RecoPage/RecoAll';
 
-function route() {
+const route = () => {
+    // const [isLogin, SetIsLogin] = useState()
+    // console.log(isLogin)
     return (
         <div className="Route">
 
