@@ -90,8 +90,8 @@ function RecoAll() {
     // const { myCourse } = myCourse
     // console.log(this.state.myCourse)
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
-        return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
-      })
+      return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
+    })
     )
 
   }
@@ -107,10 +107,10 @@ function RecoAll() {
         <div className="container up">
           <TabList>
             <div label="강의 선택" className="tab-content">
-            {data3.isdata ? <Table4 data={data3.data} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
+              {data3.isdata ? <Table4 data={data3.data} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-              <Table />
+              {/* <Table /> */}
             </div>
 
           </TabList>
