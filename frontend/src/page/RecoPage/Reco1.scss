@@ -1,0 +1,77 @@
+
+td{
+    padding: 2px 0 !important;
+    height: 5% !important;
+    font-size: 12px !important;
+}
+
+th{
+    // padding-bottom: 20px !important;
+    font-size: 12px !important;
+    word-break: keep-all;
+    height: 5% !important;
+
+}
+.atag{
+    margin-left: 2.5%;
+    font-size: x-large;
+
+}
+.coursetbl{
+    padding: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.coursetbl > a {
+    font-size: x-large;
+    padding: 10px;
+}
+
+
+.coursetbl .react-bs-table-container{
+    width: 95%;
+}
+.spinner-grow {
+    position: absolute;
+    left:50%;
+    top:50%;
+    font-size: xx-large;
+}
+.spinner {
+    position: absolute;
+    left:44%;
+    top:40%;
+    font-size: x-large;
+}
+
+.react-bootstrap-table-page-btns-ul{
+float:right !important;
+margin-right: 1%;
+
+margin-top: 0;
+font-size: medium !important;
+}
+
+.page-link{
+    font-size: medium !important;
+}
+span.dropdown
+{
+    margin: 5%;
+}
+
+.nav-pills .active{
+    background-color: #4385bf !important;
+}
+
+div.up nav {
+    margin-top: 10%;
+}
+
+div.up{
+    width: 90%;
+}
