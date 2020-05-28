@@ -6,6 +6,7 @@ import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
+import com.hufsSchedule.hufsScheduleSystem.Redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
+    private final RedisService redisService;
     private GrdCondService grdCondService;
     private GrdCompareService grdCompareService;
     private TimetableDto.Res res;
 
     public void checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
+        redisService.InstallInstructions();
 //        GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
 //
 //        GrdCondObj remains = grdCompareService.compareGrdAndUser(req, condition, GrdCond);
