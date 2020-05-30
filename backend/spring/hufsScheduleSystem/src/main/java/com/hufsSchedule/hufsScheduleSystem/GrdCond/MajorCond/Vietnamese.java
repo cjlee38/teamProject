@@ -41,14 +41,15 @@ public class Vietnamese implements IfcMajors {
         Long history = userCourseList.stream().filter(s -> historyOfVietnamese.contains(s)).count();
         Long Literature = userCourseList.stream().filter(s -> UnderstandingVietnameseLiterature.contains(s)).count();
 
+        List<String> removeList = new ArrayList<>();
         if (history >= 1) {
-            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99999"));
+            removeList.addAll(historyOfVietnamese);
         }
 
         if (Literature >= 1) {
-            remainCourseList.removeIf(s -> s.getCourseNumber().equals("Z99998"));
+            removeList.addAll(UnderstandingVietnameseLiterature);
         }
 
-        return remainCourseList;
+        return GrdCondEct.removeCourseListByNumber(remainCourseList, removeList);
     }
 }
