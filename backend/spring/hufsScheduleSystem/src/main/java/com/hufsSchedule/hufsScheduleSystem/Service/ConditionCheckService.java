@@ -2,7 +2,6 @@ package com.hufsSchedule.hufsScheduleSystem.Service;
 
 import com.hufsSchedule.hufsScheduleSystem.Advice.Exception.UserNotFoundException;
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
-import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;

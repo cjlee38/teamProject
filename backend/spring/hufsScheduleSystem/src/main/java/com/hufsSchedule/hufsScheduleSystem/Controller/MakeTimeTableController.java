@@ -18,11 +18,11 @@ public class MakeTimeTableController {
     private final MakeTimeTableService makeTimeTableService;
     private final RedisService redisService;
 
-    @GetMapping("/selectInstruction")
+    /*@GetMapping("/selectInstruction")
     public void makeTimeTable()throws Exception {
         redisService.InstallInstructions();
         return ;
-    }
+    }*/
 
     @PostMapping("/try")
     public void makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
