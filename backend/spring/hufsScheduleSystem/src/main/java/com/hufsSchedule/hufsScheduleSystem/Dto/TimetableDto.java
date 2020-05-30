@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 
 public class TimetableDto {
 
@@ -15,30 +16,12 @@ public class TimetableDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class Req{
         private Long userId;
-        private String password;
-        private String studentNumber;
-        private String name;
-        private String major;
-        private String secondMajor;
-        private String minor;
-        private Integer year;
-        private Boolean foreigner;
-        private Boolean teaching;
-        private Boolean intensiveMajor;
+        private ArrayList<String> myFreetime;// 공강시간
 
-        @Builder
-        public Req(Long userId, String password, String studentNumber, String name, String major, String secondMajor, String minor, int year, boolean foreigner, boolean teaching, boolean intensiveMajor){
+       @Builder
+        public Req(Long userId, ArrayList<String> mytime){
             this.userId = userId;
-            this.password = password;
-            this.studentNumber = studentNumber;
-            this.name = name;
-            this.major = major;
-            this.secondMajor = secondMajor;
-            this.minor = minor;
-            this.year = year;
-            this.foreigner = foreigner;
-            this.teaching = teaching;
-            this.intensiveMajor = intensiveMajor;
+            this.myFreetime = mytime;
         }
     }
 
@@ -52,4 +35,60 @@ public class TimetableDto {
 
     }
 
+    @Getter
+    public static class Result {
+        private ArrayList<Day> timeTable;
+
+        public Result(ArrayList<Day> timeTable) {
+            this.timeTable = timeTable;
+        }
+    }
+
+    public static class Data {
+        private String instruction;
+        private String instructor;
+        private Boolean required;
+
+        public Data(String instruction, String instructor, Boolean required){
+            this.instruction = instruction;
+            this.instructor = instructor;
+            this.required = required;
+        }
+    }
+
+    public static class Day {
+        private ArrayList<Data> data;
+        private Boolean is;
+
+        public Day(Boolean is){
+            this.is = is;
+        }
+
+        public Day(ArrayList<Data> data){
+            this.data = data;
+        }
+    }
+    /*
+    예.
+        [
+            [[“자료구조“, “최정주“, “true”], [“자료구조“, “최정주“, “true”], [“자료구조“, “최정주“, “true”], false, false, false, false, false, false, false, false, false],	# 월
+            [false, false, false, false, false, false,false, false, false, false, false, false],	# 화
+            [false, false, false, false, false, false,false, false, false, false, false, false],	# 수
+            [false, false, false, false, false, false,false, false, false, false, false, false],	# 목
+            [false, false, false, false, false, false,false, false, false, false, false, false],	# 금
+        ]
+    결과 테이블이 월 123 최정주의 자료구조이고 필수조건이 true이면 위와 같이 보냅니다.
+    테이블 형성 과정은 이렇습니다.
+    1. TimetableDto.Data data1 = new TimetableDto.Data("자료구조", "최정주", true);
+    2. TimetableDto.Day monday = new TimeTableDto.Day();
+    3. for(int i = 0; i < 12; i++) {
+           monday.add(false);
+       }
+    4. monday.set(0, data1);
+       monday.set(1, data1);
+       monday.set(2, data1);
+
+      요런식으로 화수목금 채워서.... ㅎ
+      프론트에서 요구하는게 위와 같은 데이터 형식이라.....
+    * */
 }
