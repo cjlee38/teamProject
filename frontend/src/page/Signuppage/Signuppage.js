@@ -33,7 +33,7 @@ const Signuppage = () => {
             "name": username
         })
             .then((response) => {
-                console.log(response.data);
+                alert("가입 완료!")                
             })
             .catch(function (error) {
                 console.log(error);

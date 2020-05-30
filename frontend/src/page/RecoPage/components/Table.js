@@ -126,7 +126,7 @@ export default class AllFilters extends React.Component {
         <a onClick={this.handlerClickCleanFiltered.bind(this)} style={{ cursor: 'pointer', color: "orange" }} className="atag">clear filters</a>
 
         <div className="coursetbl" style={{ fontSize: "5pt !important" }}>
-          <BootstrapTable ref='table' data={this.state.full_data} pagination>
+          <BootstrapTable ref='table' data={this.props.full_data} pagination>
 
             <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' filter={{ type: 'TextFilter', placeholder: 'ELLT학과 or 교양' }}>학과/교양
 
