@@ -40,12 +40,12 @@ class Timetable extends React.Component {
 
 
  handleClick = (w, t) => {
-  console.log(w)
-  console.log(t)
-    w=this.getWeekdayIndex(w)
-    t=this.getTimeIndex(t)
-    console.log(w)
-    console.log(t)
+  console.log(this.state.weekday[w])
+  console.log(this.state.timeUnitAlphabet[t])
+    // w=this.getWeekdayIndex(w)
+    // t=this.getTimeIndex(t)
+    // console.log(w)
+    // console.log(t)
 
 }
 
@@ -140,7 +140,7 @@ class Timetable extends React.Component {
           {'적용하기!'}
         </Button>
 
-        <table onClick={()=>this.handleClick(A, B)} >
+        <table  >
           <thead>
             <tr>
               <th>
@@ -175,6 +175,7 @@ class Timetable extends React.Component {
                         displayLecture={displayLectures[displayLectureKey]
                         
                          }
+                         onClick={()=>this.handleClick(w, t)}
                       />
                       );
                   })}

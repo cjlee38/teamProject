@@ -42,7 +42,7 @@ class TimeBlock extends React.Component {
     }
 
     return (
-      <td className="unit" />
+      <td className="unit" onClick={this.props.onClick}/>
     );
   }
 }
