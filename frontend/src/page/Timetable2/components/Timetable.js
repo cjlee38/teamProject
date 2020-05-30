@@ -8,14 +8,19 @@ import TimeBlock from './TimeBlock';
 import Normal from '../options/Normal';
 import Kitakubu from '../options/Kitakubu';
 import jammanbo from '../options/jammanbo'
+import Tablelocation from '../options/tablelocation'
+import { useState } from "react";
+import styled from "styled-components";
 
-var A;
-var B;
+
+
 class Timetable extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
+      backgroundColor: '',
+
       option: 'normal',
       weekday: ['월', '화', '수', '목', '금', '토'],
       timeUnitAlphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'],
@@ -39,16 +44,21 @@ class Timetable extends React.Component {
   }
 
 
- handleClick = (w, t) => {
-  console.log(this.state.weekday[w])
-  console.log(this.state.timeUnitAlphabet[t])
-    // w=this.getWeekdayIndex(w)
-    // t=this.getTimeIndex(t)
-    // console.log(w)
-    // console.log(t)
 
-}
+  onClick = (w, t) => {
+    this.setState({ backgroundColor: 'gray' })
 
+
+
+  }
+
+
+
+  handleClick(w, t) {
+    console.log(this.state.weekday[w])
+    console.log(this.state.timeUnitAlphabet[t])
+    // this.setState({ backgroundColor: 'gray' })
+  }
 
 
   setOption = (e) => {
@@ -117,7 +127,7 @@ class Timetable extends React.Component {
 
 
     return (
-      
+
       <div id="timetable">
         <div id="timetable-radios">
           <FormControl component="fieldset" required className="option-radio-form">
@@ -131,7 +141,7 @@ class Timetable extends React.Component {
               <FormControlLabel value="normal" control={<Radio />} label="일반" />
               <FormControlLabel value="kitakubu" control={<Radio />} label="아침형" />
               <FormControlLabel value="jammanbo" control={<Radio />} label="오후형" />
-             
+
             </RadioGroup>
           </FormControl>
         </div>
@@ -140,7 +150,7 @@ class Timetable extends React.Component {
           {'적용하기!'}
         </Button>
 
-        <table  >
+        <table>
           <thead>
             <tr>
               <th>
@@ -157,27 +167,26 @@ class Timetable extends React.Component {
           </thead>
           <tbody >
             {timeUnitString.map((time, t) => {
-              
+
               return (
-                <tr key={time} id={time.split('')[0]} className="block">
+                <tr key={time} id={time.split('')[0]} className="block" >
                   <td className="block-time" >
                     {time}
                   </td>
-                    {Array.from(Array(6).keys()).map((w) => {
-                    A=weekday[w];
-                    B=timeUnitAlphabet[t];
-                   
+                  {Array.from(Array(6).keys()).map((w) => {
+
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
-                    
-                    return (        
-                      <TimeBlock 
-                        key={w} 
-                        displayLecture={displayLectures[displayLectureKey]
-                        
-                         }
-                         onClick={()=>this.handleClick(w, t)}
+
+                    return (
+
+                      <TimeBlock style={this.state.backgroundColor} onClick={() => this.onClick(w, t)}
+
+
+                        key={w}
+                        displayLecture={displayLectures[displayLectureKey]}
+                        onClick={() => this.handleClick(w, t)}
                       />
-                      );
+                    );
                   })}
                 </tr>
               );

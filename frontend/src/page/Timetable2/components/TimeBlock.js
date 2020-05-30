@@ -4,8 +4,21 @@ import TimeTable from './Timetable';
 
 
 class TimeBlock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state ={
+      color: ""
+    }
+  }
+  onClick1 () {
+    this.props.onClick();
+    if (this.state.color === ""){
+      this.setState({color:"gray"})}
+    else{this.setState({color:""})}
+  }
   render() {
-    const { displayLecture, onClick } = this.props;
+    const { displayLecture } = this.props;
+
     // const LectureList=this.state.map(
     //   ({option, weekday, timeUnitAlphabet, timeUnitString})=>(
     //     <div 
@@ -42,7 +55,7 @@ class TimeBlock extends React.Component {
     }
 
     return (
-      <td className="unit" onClick={this.props.onClick}/>
+      <td style={{ backgroundColor: this.state.color}}className="unit" onClick={()=>this.onClick1()}/>
     );
   }
 }
