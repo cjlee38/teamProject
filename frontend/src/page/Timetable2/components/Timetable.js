@@ -23,22 +23,24 @@ class Timetable extends React.Component {
 
       option: 'normal',
       weekday: ['월', '화', '수', '목', '금', '토'],
-      timeUnitAlphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'],
+      timeUnitAlphabet: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
       timeUnitString: [
-        'A 9:00 ~ 9:50',
-        'B 10:00 ~ 10:50',
-        'C 11:00 ~ 11:50',
-        'D 12:00 ~ 12:50',
-        'E 13:00 ~ 13:50',
-        'F 14:00 ~ 14:50',
-        'G 15:00 ~ 15:50',
-        'H 16:00 ~ 16:50',
-        'I 17:00 ~ 17:50',
-        'J 18:00 ~ 18:50',
-        'K 19:00 ~ 19:50',
-        'L 20:00 ~ 20:50',
-        'M 21:00 ~ 21:50'
+        '1 9:00 ~ 9:50',
+        '2 10:00 ~ 10:50',
+        '3 11:00 ~ 11:50',
+        '4 12:00 ~ 12:50',
+        '5 13:00 ~ 13:50',
+        '6 14:00 ~ 14:50',
+        '7 15:00 ~ 15:50',
+        '8 16:00 ~ 16:50',
+        '9 17:00 ~ 17:50',
+        '10 18:00 ~ 18:50',
+        '11 19:00 ~ 19:50',
+        '12 20:00 ~ 20:50',
+        '13 21:00 ~ 21:50'
       ],
+      mytime : [],
+    
       displayLectures: {}
     };
   }
@@ -55,9 +57,18 @@ class Timetable extends React.Component {
 
 
   handleClick(w, t) {
-    console.log(this.state.weekday[w])
+    const mytime12 = this.state.mytime
+    console.log(mytime12)
+    let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
+    console.log(mytime12.includes(text))
     console.log(this.state.timeUnitAlphabet[t])
-    // this.setState({ backgroundColor: 'gray' })
+    if (this.state.mytime.includes(text)){
+      this.setState({mytime:this.state.mytime.filter(val => val !== text)})
+    }
+    else{
+      this.setState({mytime: this.state.mytime.concat(text)})
+
+    }
   }
 
 
