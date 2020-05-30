@@ -12,6 +12,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     show-sql: true
+  cache: redis
   redis:
     host: hufsschedulesystemredis.kbfcki.ng.0001.apn2.cache.amazonaws.com
-    post: 6379
+    port: 6379

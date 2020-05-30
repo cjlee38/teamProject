@@ -23,7 +23,7 @@ public class MakeTimeTableService {
 
     public void checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
-        redisService.InstallInstructions();
+
 //        GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
 //
 //        GrdCondObj remains = grdCompareService.compareGrdAndUser(req, condition, GrdCond);
