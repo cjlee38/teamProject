@@ -70,10 +70,10 @@ public interface CourseEnums {
         A10203("언어공학개론", "Introduction to Linguistics & Language Technology"),
         A01127("고급영어문법(1)", "Advanced English Grammar(1)"),
         A01128("고급영어문법(2)", "Advanced English Grammar(2)"),
-        A01740("", "Critical Writing(General 1)"),
-        A01741("", "Critical Writing(Honors 1)"),
-        A10104("", "Critical Writing(General 2)"),
-        A10105("", "Critical Writing(Honors 2)");
+        A01740("Critical Writing(General 1)", "Critical Writing(General 1)"),
+        A01741("Critical Writing(Honors 1)", "Critical Writing(Honors 1)"),
+        A10104("Critical Writing(General 2)", "Critical Writing(General 2)"),
+        A10105("Critical Writing(Honors 2)", "Critical Writing(Honors 2)");
         // 1617 영어학개론 1,2 고급영어문법 1,2
         // 18 영어학개론1, 언어공학개론, 고급영어문법1,2, critical writing 1,2
 
@@ -122,8 +122,15 @@ public interface CourseEnums {
         B06223("중급베트남어회화(2)", "Intermediate Vietnamese Conversation(2)"),
         B06311("고급베트남어회화(1)", "Intermediate Vietnamese Conversation(1)"),
         B06312("고급베트남어회화(2)", "Intermediate Vietnamese Conversation(2)"),
-        Z99999("베트남역사_최소과목", "History of Vietnamese"),
-        Z99998("베트남문학이해_최소과목", "Understanding of Vietnamese Literature");
+
+        B06135("베트남역사1(1)", "History of Vietnamese 1(1)"),
+        B06136("베트남역사1(2)", "History of Vietnamese 1(2)"),
+        B06137("베트남역사2(1)", "History of Vietnamese 2(2)"),
+        B06138("베트남역사2(2)", "History of Vietnamese 2(2)"), // 베트남역사 set
+
+        B06466("베트남문학이해1", "Understanding Vietnamese Literature 1"),
+        B06467("베트남문학이해2", "Understanding Vietnamese Literature 2"); // 베트남 문학이해 set. 문학이해2는 임시(20-2에 개설되는듯)
+
 
         final private String korName, engName;
 

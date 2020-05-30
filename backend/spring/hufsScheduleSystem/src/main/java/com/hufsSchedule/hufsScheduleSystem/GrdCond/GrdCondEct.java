@@ -87,7 +87,7 @@ public class GrdCondEct {
     public static List<String> extractStringFromEnums(List<CourseEnums> courses) {
         ArrayList<String> strings = new ArrayList<>();
 
-        courses.stream().forEach(x -> strings.add(x.getKorName() + " " + x.getEngName()));
+        courses.stream().forEach(x -> strings.add(x.getKorName()));
 
         return strings;
     }
