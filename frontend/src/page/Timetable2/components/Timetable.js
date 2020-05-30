@@ -56,19 +56,20 @@ class Timetable extends React.Component {
 
 
 
-  handleClick(w, t) {
+  async handleClick(w, t) {
     const mytime12 = this.state.mytime
     console.log(mytime12)
     let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
     console.log(mytime12.includes(text))
     console.log(this.state.timeUnitAlphabet[t])
     if (this.state.mytime.includes(text)){
-      this.setState({mytime:this.state.mytime.filter(val => val !== text)})
+      await this.setState({mytime:this.state.mytime.filter(val => val !== text)})
     }
     else{
-      this.setState({mytime: this.state.mytime.concat(text)})
+      await this.setState({mytime: this.state.mytime.concat(text)})
 
     }
+    console.log(this.state.mytime)
   }
 
 
