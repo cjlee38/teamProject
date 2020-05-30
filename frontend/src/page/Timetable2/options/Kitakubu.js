@@ -17,7 +17,8 @@ class Kitakubu {
         times.forEach((time) => {
           const weekday = time.replace(/\s/g, '').split('')[0];
           const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
-
+          console.log(111111+weekday)
+          console.log(2222222+hours)
           if (weekday && hours) {
             const key = `${weekday}${hours}`;
 

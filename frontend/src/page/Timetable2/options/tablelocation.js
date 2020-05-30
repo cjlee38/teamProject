@@ -1,36 +1,29 @@
-class Tablelocation {
-    constructor(lectureForms, lectures, credit) {
-      this.lectureForms = lectureForms;
-      this.lectures = lectures;
-      this.credit = credit;
-      this.displayLectures = {};
-    }
+// import Timetable from '../components/Timetable'
+
+
+
+// class Tablelocation {
+//     constructor(w,t) {
+//       this.w=w;
+//       this.t=t;
+//       this.displayLectures = {};
+//     }
   
-    // TODO: 강의 배치 로직 구현
-    execute() {
-      this.lectureForms.forEach((lectureForm) => {
-        const lecture = this.lectures[lectureForm];
+//     // TODO: 강의 배치 로직 구현
+//     execute() {
+//     //   this.lectureForms.forEach((lectureForm) => {
+//     //     const lecture = this.lectures[lectureForm];
   
-        if (lecture.time) {
-          const times = lecture.time.split(',');
-  
-          times.forEach((time) => {
-            const weekday = time.replace(/\s/g, '').split('')[0];
-            const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
-    
-            if (weekday && hours) {
-              const key = `${weekday}${hours}`;
-              console.log(key)
+        
+//               const key = `${weekday[w]}${TimeUnitAlphabet[t]}`;
+//               console.log(key)
   
         
           
-            }
-          });
-        }
-      });
+            
+     
+//       return this.displayLectures;
+//     }
+//   }
   
-      return this.displayLectures;
-    }
-  }
-  
-  export default Tablelocation;
+//   export default Tablelocation;
