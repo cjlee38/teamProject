@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navigation from './Nav'
 import Com from './Route'
 // import Rout from './Route'
 

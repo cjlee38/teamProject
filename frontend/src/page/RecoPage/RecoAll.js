@@ -4,18 +4,17 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
 import Table from './Reco1';
 import Table4 from './components/Table';
-import cralwer from '../Homepage/crawl'
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
 import LectureList from '../Timetable2/components/LectureList'
 
-function RecoAll() {
+function RecoAll(props) {
 
   var [full_data, setFullData] = useState()
   var [originData, setoriginData] = useState()
   var [myCourse, setmyCourse] = useState([])
   var [lectures, setLectures] = useState()
-
+  var [userId, setUser] = useState(props.userId)
 
   var [data3, setData3] = useState({ isdata: false })
 
@@ -35,7 +34,7 @@ function RecoAll() {
         return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area ? 1 : a.area < b.area ? 0 : -2;
       });
       response.data.data.map(function (obj) {
-
+        obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
         else { obj.required = "" }
 
@@ -76,14 +75,15 @@ function RecoAll() {
     // console.log(myCourse, this.state.myCourse)
     await setmyCourse(myCourse.concat(row))
 
-    await lectureSet()
     await setFullData(temp.filter(inst => inst.instruction_id !== row.instruction_id))
+    await lectureSet(myCourse)
 
     // await this.setState({
     //   myCourse: this.state.myCourse.concat(row),
     //   full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
 
     // })
+    console.log(lectures)
 
   }
 
@@ -96,21 +96,20 @@ function RecoAll() {
     await setmyCourse(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
     // const { myCourse } = myCourse
     // console.log(this.state.myCourse)
-    await lectureSet()
+    await lectureSet(myCourse)
   
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
       return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
     })
     )
-    console.log(lectures)
 
   }
 
 
-  const lectureSet= async()=> {
+  const lectureSet= async(arr)=> {
     var temp = {}
     let num = 0
-    var result = await myCourse.forEach(function(obj){
+    arr.forEach(function(obj){
       var test = {}
       test["name"] = obj.subject
       test['time'] = obj.class_time

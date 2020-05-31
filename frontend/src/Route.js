@@ -1,22 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Recommend from "./page/Homepage/Recommend";
-import Check from './page/Homepage/Check';
-import LoginPage from './page/LoginPage/LoginPage';
+import Check from './page/Homepage/Container';
+import LoginPage from './page/LoginPage/Container';
 import Main from './page/MainPage/MainPage';
 import Signuppage from './page/Signuppage/Signuppage';
-import T2 from './page/RecoPage/RecoAll';
+import T2 from './page/RecoPage/Container';
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Nav.scss'
 import Logo from './image/logo.png';
+import Store from './Store/Store'
+import { Redirect } from 'react-router-dom';
 
-export default function Route1() {
-    const [isLogin, SetIsLogin] = useState(false)
-    console.log(isLogin)
+
+export default class Route1 extends Component{
+    constructor(props){
+      super(props)
+      this.state = {
+        logged: false,
+        onLogin : this.onLogin,
+        onLogout : this.onLogout,
+        userId: null
+      }
+    
+    }
+
+    onLogin = (id) => {
+      this.setState({
+        logged:true,
+        userId: id
+      })
+      console.log(this.state)
+    }
+    onLogout = async() => {
+      await this.setState({
+        logged:false,
+        userId: null
+      })
+      window.sessionStorage.clear();
+            console.log(this.state)
+
+    }
+    componentWillMount() {
+      const id = parseInt(window.sessionStorage.getItem('id'));
+      if(id){
+        this.onLogin(id);}
+      else {
+        this.onLogout();
+      
+      }
+    }
+
+    render() {
+      console.log(this.state)
+      const {logged, onLogout} = this.state;
     return (
         <>
 
+<Store.Provider value={this.state}>
 <div className="Navigation">
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top"><img src={Logo} classname="logo" alt="logo" width='5%' />
         <Navbar.Brand href="/" className="title">졸업 플래너</Navbar.Brand>
@@ -27,7 +68,8 @@ export default function Route1() {
             <Nav.Link href="/Recommend">시간표</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/Login">Login</Nav.Link>
+            {logged? <Nav.Link href="/Login" onClick={onLogout}>Logout</Nav.Link> :<Nav.Link href="/Login">Login</Nav.Link>}
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -35,6 +77,7 @@ export default function Route1() {
         <div className="Route">
 
             <Router>
+            {(this.state.logged === false) && <Redirect to="/Login"/>}
 
                 <div>
                     <Switch>
@@ -53,7 +96,8 @@ export default function Route1() {
             </Router>
 
         </div>
+        </Store.Provider>
         </>
     )
-}
+}}
 
