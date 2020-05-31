@@ -11,7 +11,7 @@ export default function TabContent1(props) {
     const [data, setData] = useState([{ trow: '졸업 학점'}, { trow: '현재 학점'}, { trow: '남은 학점'} ])
     const [data2, setData2] = useState([{trow: "필수 과목"}, {trow: "이수 과목"}, {trow: "미이수 과목"} ])
     const [data3, setData3] = useState()
-
+    
     useEffect(() => {
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
             params: { userId: props.userID }
@@ -39,19 +39,19 @@ export default function TabContent1(props) {
                 total_credit: response.data.data.remainCredit[8], average_score: "-"
             }])
             setData2([{
-                trow: "필수 과목", first_major: response.data.data.grdFirstMajorCourses.join('\n'), second_major: response.data.data.grdSecondMajorCourses.join('\n')
-                , minor: "-", liberal_arts: response.data.data.grdLiberalArtsCourses.join('\n'), teaching: response.data.data.grdTeachingCourses
+                trow: "필수 과목", first_major: response.data.data.grdFirstMajorCourses, second_major: response.data.data.grdSecondMajorCourses
+                , minor: "-", liberal_arts: response.data.data.grdLiberalArtsCourses, teaching: response.data.data.grdTeachingCourses
                 , optional: "-"
             },
 
             {
-                trow: "이수 과목", first_major: response.data.data.takenFirstMajorCourses.join('\n'), second_major: response.data.data.takenSecondMajorCourses.join('\n')
-                , minor: "-", liberal_arts: response.data.data.takenLiberArtsCourses.join('\n'), teaching: response.data.data.takenTeachingCourses.join('\n')
-                , optional: response.data.data.takenFreeCourses.join('\n')
+                trow: "이수 과목", first_major: response.data.data.takenFirstMajorCourses, second_major: response.data.data.takenSecondMajorCourses
+                , minor: "-", liberal_arts: response.data.data.takenLiberArtsCourses, teaching: response.data.data.takenTeachingCourses
+                , optional: response.data.data.takenFreeCourses
             },
             {
-                trow: "미이수 과목", first_major: response.data.data.remainFirstMajorCourses.join('\n'), second_major: response.data.data.remainSecondMajorCourses.join('\n')
-                , minor: "-", liberal_arts: response.data.data.remainLiberalArtsCourses.join('\n'), teaching: response.data.data.remainTeachingCourses
+                trow: "미이수 과목", first_major: response.data.data.remainFirstMajorCourses, second_major: response.data.data.remainSecondMajorCourses
+                , minor: "-", liberal_arts: response.data.data.remainLiberalArtsCourses, teaching: response.data.data.remainTeachingCourses
                 , optional: "-"
             },
             ])

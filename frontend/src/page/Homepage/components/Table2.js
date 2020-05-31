@@ -4,6 +4,15 @@ import { BootstrapTable, TableHeaderColumn } from
 
 
 class Table extends Component {
+
+  Formatter(cell, row) {
+    
+    return (
+      <div>{row.join('\n')}</div>
+    );
+  }
+
+
   render() {
     console.log("table:", this.props);
     return (
@@ -24,6 +33,7 @@ class Table extends Component {
 
           </TableHeaderColumn>
           <TableHeaderColumn 
+           dataFormat={this.Formatter}
             dataField='first_major'
             dataAlign='center'
             headerAlign="center"
@@ -39,6 +49,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='second_major'
                       maxHeight="20%"
+                      dataFormat={this.Formatter}
 
             dataAlign='center'
             width="15%"
@@ -52,6 +63,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='minor'
                       maxHeight="20%"
+                      dataFormat={this.Formatter}
 
             dataAlign='center'
             width="15%"
@@ -66,6 +78,7 @@ class Table extends Component {
      
           <TableHeaderColumn dataField='liberal_arts'
                       maxHeight="20%"
+                      dataFormat={this.Formatter}
 
             dataAlign='center'
             width="15%"
@@ -81,6 +94,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='teaching'
                       maxHeight="20%"
+                      dataFormat={this.Formatter}
 
             dataAlign='center'
             width="15%"
@@ -96,6 +110,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='optional'
                       maxHeight="20%"
+                      dataFormat={this.Formatter}
 
             dataAlign='center'
             width="15%"
