@@ -39,6 +39,8 @@ export default class Route1 extends Component{
       window.sessionStorage.clear();
 
     }
+    componentDidMount() {
+    }
     componentWillMount() {
       const id = parseInt(window.sessionStorage.getItem('id'));
       if(id){
@@ -50,6 +52,7 @@ export default class Route1 extends Component{
     }
 
     render() {
+      console.log("Route"+this.state.userId);
       const {logged, onLogout} = this.state;
     return (
         <>

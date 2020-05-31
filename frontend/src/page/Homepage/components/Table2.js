@@ -6,7 +6,7 @@ import { BootstrapTable, TableHeaderColumn } from
 class Table extends Component {
 
   Formatter(cell, row) {
-    
+    console.log("yes"+typeof(row));
     return (
       <div>{row.join('\n')}</div>
     );

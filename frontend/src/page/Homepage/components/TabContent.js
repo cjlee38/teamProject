@@ -13,8 +13,9 @@ export default function TabContent1(props) {
     const [data3, setData3] = useState()
     
     useEffect(() => {
+        console.log("tabContent: "+props.userId);
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
-            params: { userId: props.userID }
+            params: { userId: 24 }
         }).then(response => {
             let total = response.data.data.takenCredit.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,

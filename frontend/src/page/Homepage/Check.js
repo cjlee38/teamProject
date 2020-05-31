@@ -27,7 +27,7 @@ class Check extends React.Component {
               <Crawler />
             </div>
 
-            <TabContent userID={this.state.userID} />
+            <TabContent userID={this.props.userId} />
 
 
           </div>

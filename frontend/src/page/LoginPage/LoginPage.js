@@ -38,7 +38,7 @@ const LoginP = (props) => {
       params: { studentNumber: id, password: password }
     })
       .then((response) => {
-        doSignin(response.data.userId)       
+        doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
         alert("아이디/비밀번호를 확인해주세요!")
