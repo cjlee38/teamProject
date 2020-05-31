@@ -47,11 +47,8 @@ class Timetable extends React.Component {
 
 
 
-  onClick = (w, t) => {
+onClick = (w, t) => {
     this.setState({ backgroundColor: 'gray' })
-
-
-
   }
 
 
@@ -128,7 +125,7 @@ class Timetable extends React.Component {
   }
 
   render() {
-    console.log("sts", this.state)
+  
     const {
       option,
       weekday,
@@ -150,7 +147,7 @@ class Timetable extends React.Component {
               onChange={this.setOption}
               className="option-radio-form"
             >
-              <FormControlLabel value="normal" control={<Radio />} label="일반" />
+              <FormControlLabel value="normal" control={<Radio />} label="일반"/>
               <FormControlLabel value="kitakubu" control={<Radio />} label="아침형" />
               <FormControlLabel value="jammanbo" control={<Radio />} label="오후형" />
 
@@ -181,7 +178,8 @@ class Timetable extends React.Component {
             {timeUnitString.map((time, t) => {
 
               return (
-                <tr key={time} id={time.split('')[0]} className="block" >
+                <tr key={time} id={time.split('')[0]+time.split('')[1]} className="block" >
+                  
                   <td className="block-time" >
                     {time}
                   </td>
