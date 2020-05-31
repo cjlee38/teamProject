@@ -11,11 +11,10 @@ export default function TabContent1(props) {
     const [data, setData] = useState([{ trow: '졸업 학점'}, { trow: '현재 학점'}, { trow: '남은 학점'} ])
     const [data2, setData2] = useState([{trow: "필수 과목"}, {trow: "이수 과목"}, {trow: "미이수 과목"} ])
     const [data3, setData3] = useState()
-    
     useEffect(() => {
-        console.log("tabContent: "+props.userId);
+        console.log("tabContent: "+props.userID);
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
-            params: { userId: 24 }
+            params: { userId: props.userID }
         }).then(response => {
             let total = response.data.data.takenCredit.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,

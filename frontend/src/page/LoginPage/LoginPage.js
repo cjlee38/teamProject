@@ -40,19 +40,19 @@ const LoginP = (props) => {
       .then((response) => {
         doSignin(response.data.data.userId);       
     })
-      .catch(async function (error) {
+      .catch(async function (error) {    
+
         alert("아이디/비밀번호를 확인해주세요!")
       });
       
     reset();
   }
 
-  const doSignin = (id_input) => {
-    window.sessionStorage.setItem('id', id_input);
-    props.onLogin(id_input);
+  const doSignin = async (id_input) => {
+    await window.sessionStorage.setItem('id', id_input);
+    await props.onLogin(id_input);
     props.history.push('/Check')
   }
-  console.log(user)
 
   return (
     <>

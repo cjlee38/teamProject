@@ -5,10 +5,49 @@ import { BootstrapTable, TableHeaderColumn } from
 
 class Table extends Component {
 
-  Formatter(cell, row) {
-    console.log("yes"+typeof(row));
+  Formatter1(cell, row) {
+    let a = row.first_major
+
     return (
-      <div>{row.join('\n')}</div>
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+    );
+  }
+
+  Formatter2(cell, row) {
+    let a = row.second_major
+
+    return (
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+    );
+  }
+  Formatter3(cell, row) {
+    let a = row.minor
+
+    return (
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+    );
+  }
+  Formatter4(cell, row) {
+    let a = row.liberal_arts
+
+    return (
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+    );
+  }
+  Formatter5(cell, row) {
+    let a = row.trow.teaching
+
+    return (
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+    );
+  }
+
+  Formatter6(cell, row) {
+    let a = row.optional
+    console.log(a)
+
+    return (
+      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
     );
   }
 
@@ -33,7 +72,7 @@ class Table extends Component {
 
           </TableHeaderColumn>
           <TableHeaderColumn 
-           dataFormat={this.Formatter}
+           dataFormat={this.Formatter1}
             dataField='first_major'
             dataAlign='center'
             headerAlign="center"
@@ -49,7 +88,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='second_major'
                       maxHeight="20%"
-                      dataFormat={this.Formatter}
+                      dataFormat={this.Formatter2}
 
             dataAlign='center'
             width="15%"
@@ -63,7 +102,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='minor'
                       maxHeight="20%"
-                      dataFormat={this.Formatter}
+                      dataFormat={this.Formatter3}
 
             dataAlign='center'
             width="15%"
@@ -78,7 +117,7 @@ class Table extends Component {
      
           <TableHeaderColumn dataField='liberal_arts'
                       maxHeight="20%"
-                      dataFormat={this.Formatter}
+                      dataFormat={this.Formatter4}
 
             dataAlign='center'
             width="15%"
@@ -94,7 +133,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='teaching'
                       maxHeight="20%"
-                      dataFormat={this.Formatter}
+                      dataFormat={this.Formatter5}
 
             dataAlign='center'
             width="15%"
@@ -110,7 +149,7 @@ class Table extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn dataField='optional'
                       maxHeight="20%"
-                      dataFormat={this.Formatter}
+                      dataFormat={this.Formatter6}
 
             dataAlign='center'
             width="15%"
