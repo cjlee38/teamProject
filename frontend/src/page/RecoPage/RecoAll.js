@@ -1,3 +1,4 @@
+import '../Timetable2/components/css/index.css'
 import React, { Component, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
@@ -6,12 +7,14 @@ import Table4 from './components/Table';
 import cralwer from '../Homepage/crawl'
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
+import LectureList from '../Timetable2/components/LectureList'
 
 function RecoAll() {
 
   var [full_data, setFullData] = useState()
   var [originData, setoriginData] = useState()
   var [myCourse, setmyCourse] = useState([])
+  var [lectures, setLectures] = useState()
 
 
   var [data3, setData3] = useState({ isdata: false })
@@ -59,6 +62,7 @@ function RecoAll() {
 
   const handlerButton = async (row) => {
     let flag = false
+    let temp = full_data
     myCourse.forEach(function (element) {
       if (element.subject == row.subject) {
         flag = true
@@ -71,13 +75,16 @@ function RecoAll() {
 
     // console.log(myCourse, this.state.myCourse)
     await setmyCourse(myCourse.concat(row))
-    await setFullData(full_data.filter(inst => inst.instruction_id !== row.instruction_id))
+
+    await lectureSet()
+    await setFullData(temp.filter(inst => inst.instruction_id !== row.instruction_id))
 
     // await this.setState({
     //   myCourse: this.state.myCourse.concat(row),
     //   full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
 
     // })
+
   }
 
 
@@ -89,14 +96,45 @@ function RecoAll() {
     await setmyCourse(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
     // const { myCourse } = myCourse
     // console.log(this.state.myCourse)
+    await lectureSet()
+  
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
       return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
     })
     )
+    console.log(lectures)
 
   }
 
-  console.log(myCourse)
+
+  const lectureSet= async()=> {
+    var temp = {}
+    let num = 0
+    var result = await myCourse.forEach(function(obj){
+      var test = {}
+      test["name"] = obj.subject
+      test['time'] = obj.class_time
+      test['professor'] = obj.professor
+      test['isRequired'] = obj.required
+      temp[num] = test
+      num += 1
+    })
+    await setLectures({lectures :temp})
+  }
+
+  function makearr(a){
+    if (a.length){
+      
+    let arr = Array(a.length - 1);
+    for (let i = 0; i <a.length - 1;i++){
+      arr[i] = i;
+    }
+    return arr
+
+    }
+    return 0
+  }
+  console.log(myCourse, lectures)
 
   return (
     <>
@@ -107,10 +145,10 @@ function RecoAll() {
         <div className="container up">
           <TabList>
             <div label="강의 선택" className="tab-content">
-              {data3.isdata ? <Table4 data={data3.data} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
+              {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-              {/* <Table /> */}
+              <LectureList lectures={lectures} length1 = {makearr(myCourse)} />
             </div>
 
           </TabList>

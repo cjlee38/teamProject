@@ -6,11 +6,32 @@ import LoginPage from './page/LoginPage/LoginPage';
 import Main from './page/MainPage/MainPage';
 import Signuppage from './page/Signuppage/Signuppage';
 import T2 from './page/RecoPage/RecoAll';
+import { Navbar, Nav } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Nav.scss'
+import Logo from './image/logo.png';
 
-const route = () => {
-    // const [isLogin, SetIsLogin] = useState()
-    // console.log(isLogin)
+export default function Route1() {
+    const [isLogin, SetIsLogin] = useState(false)
+    console.log(isLogin)
     return (
+        <>
+
+<div className="Navigation">
+      <Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top"><img src={Logo} classname="logo" alt="logo" width='5%' />
+        <Navbar.Brand href="/" className="title">졸업 플래너</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/Check">졸업요건</Nav.Link>
+            <Nav.Link href="/Recommend">시간표</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link href="/Login">Login</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
         <div className="Route">
 
             <Router>
@@ -32,7 +53,7 @@ const route = () => {
             </Router>
 
         </div>
+        </>
     )
 }
 
-export default route
