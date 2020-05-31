@@ -34,42 +34,20 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    console.log(props)
-    console.log('sdffd')
-    console.log(id, password);
     Axios.get('http://localhost:1415/web/v1/user/Login', {
       params: { studentNumber: id, password: password }
     })
       .then((response) => {
-        console.log("userId : ", response.data.userId);
-        props.onLogin(response.data.userId);
-        props.history.push({
-          pathname: '/Check',
-          state: { user_id: response.data.userId }
-        })
-        doSignin(id)
-       
+        doSignin(response.data.userId)       
     })
       .catch(async function (error) {
-        // props.onLogin(3);
-        await doSignin(3)
-        props.history.push({
-          pathname: '/Check',
-        })
-
-
-        
-     console.log(error);
-        // alert("아이디/비밀번호를 확인해주세요!")
-
-        
+        alert("아이디/비밀번호를 확인해주세요!")
       });
       
     reset();
   }
 
   const doSignin = (id_input) => {
-    console.log(id_input)
     window.sessionStorage.setItem('id', id_input);
     props.onLogin(id_input);
     props.history.push('/Check')
@@ -98,16 +76,7 @@ const LoginP = (props) => {
           />
         </div>
         <div className="Button">
-{/* 
-          <Link to={{
-            pathname : `/Check/${user}`,
-            state : {
-              userid : user
-            }
-          }}> <Button onClick={tryLogin} name={"로그인"} value={"login"} /></Link> */}
-          {/* <Link to='/Check'> */}
             <Button onClick={tryLogin} name={"로그인"} value={"login"} />
-          {/* </Link> */}
           <Link to="/Signup">
             <Button name={"회원가입"} value={"signUp"} />
           </Link>

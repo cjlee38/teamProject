@@ -30,7 +30,6 @@ export default class Route1 extends Component{
         logged:true,
         userId: id
       })
-      console.log(this.state)
     }
     onLogout = async() => {
       await this.setState({
@@ -38,7 +37,6 @@ export default class Route1 extends Component{
         userId: null
       })
       window.sessionStorage.clear();
-            console.log(this.state)
 
     }
     componentWillMount() {
@@ -52,7 +50,6 @@ export default class Route1 extends Component{
     }
 
     render() {
-      console.log(this.state)
       const {logged, onLogout} = this.state;
     return (
         <>

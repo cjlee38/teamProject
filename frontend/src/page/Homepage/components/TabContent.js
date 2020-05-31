@@ -16,7 +16,6 @@ export default function TabContent1(props) {
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
             params: { userId: props.userID }
         }).then(response => {
-            console.log("res", response.data)
             let total = response.data.data.takenCredit.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
                 0
@@ -56,7 +55,6 @@ export default function TabContent1(props) {
                 , optional: "-"
             },
             ])
-            console.log(response.data.data.remainLiberalArtsCourses)
             setData3([{ trow: response.data.data.userInfo.join(' / ') }])
 
 
@@ -64,7 +62,6 @@ export default function TabContent1(props) {
         })
     }, []
     )
-    console.log(data)
 
     return (
         <>

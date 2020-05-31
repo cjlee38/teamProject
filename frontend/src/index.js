@@ -5,8 +5,6 @@ import Com from './Route'
 
 
 ReactDOM.render(<Com />, document.getElementById('root'));
-// ReactDOM.render(<Navigation />, document.getElementById('nav'));
-// ReactDOM.render(<Rout />, document.getElementById('route'));
 
 
 
