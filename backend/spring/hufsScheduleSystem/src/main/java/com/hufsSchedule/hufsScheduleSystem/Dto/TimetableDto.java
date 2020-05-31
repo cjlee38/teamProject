@@ -47,9 +47,9 @@ public class TimetableDto {
     public static class Data {
         private String instruction;
         private String instructor;
-        private Boolean required;
+        private Integer required;
 
-        public Data(String instruction, String instructor, Boolean required){
+        public Data(String instruction, String instructor, Integer required){
             this.instruction = instruction;
             this.instructor = instructor;
             this.required = required;
@@ -71,7 +71,7 @@ public class TimetableDto {
     /*
     예.
         [
-            [[“자료구조“, “최정주“, “true”], [“자료구조“, “최정주“, “true”], [“자료구조“, “최정주“, “true”], false, false, false, false, false, false, false, false, false],	# 월
+            [[“자료구조“, “최정주“, 1], [“자료구조“, “최정주“, 1], [“자료구조“, “최정주“, 1], false, false, false, false, false, false, false, false, false],	# 월
             [false, false, false, false, false, false,false, false, false, false, false, false],	# 화
             [false, false, false, false, false, false,false, false, false, false, false, false],	# 수
             [false, false, false, false, false, false,false, false, false, false, false, false],	# 목
@@ -79,7 +79,7 @@ public class TimetableDto {
         ]
     결과 테이블이 월 123 최정주의 자료구조이고 필수조건이 true이면 위와 같이 보냅니다.
     테이블 형성 과정은 이렇습니다.
-    1. TimetableDto.Data data1 = new TimetableDto.Data("자료구조", "최정주", true);
+    1. TimetableDto.Data data1 = new TimetableDto.Data("자료구조", "최정주", 1);
     2. TimetableDto.Day monday = new TimeTableDto.Day();
     3. for(int i = 0; i < 12; i++) {
            monday.add(false);
