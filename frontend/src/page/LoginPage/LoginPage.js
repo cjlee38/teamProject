@@ -5,6 +5,8 @@ import Button from './components/Button';
 import Title from './components/Title';
 import './LoginPage.scss';
 import Axios from 'axios';
+import {withRouter} from 'react-router-dom';
+
 
 const LoginP = (props) => {
   const [inputs, setInputs] = useState({
@@ -32,40 +34,28 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    console.log('sdffd')
-    console.log(id, password);
     Axios.get('http://localhost:1415/web/v1/user/Login', {
       params: { studentNumber: id, password: password }
     })
       .then((response) => {
-        console.log("userId : ", response.data.userId);
-        setUser({user_id:response.data.userId})
-        props.history.push({
-          pathname: '/Check',
-          state: { user_id: response.data.userId }
-        })
-       
+        doSignin(response.data.userId)       
     })
       .catch(async function (error) {
-        await props.history.push({
-          pathname: '/Check',
-          state: { user_id: 2 }
-        })
-     console.log(error);
         alert("아이디/비밀번호를 확인해주세요!")
-
-        
       });
       
     reset();
   }
 
-  const trySignUp = () => {
+  const doSignin = (id_input) => {
+    window.sessionStorage.setItem('id', id_input);
+    props.onLogin(id_input);
+    props.history.push('/Check')
   }
   console.log(user)
 
   return (
-    <div className="LoginPage">
+    <>
       <div className="body">
         <Title />
         <div className="idPassword">
@@ -86,26 +76,17 @@ const LoginP = (props) => {
           />
         </div>
         <div className="Button">
-{/* 
-          <Link to={{
-            pathname : `/Check/${user}`,
-            state : {
-              userid : user
-            }
-          }}> <Button onClick={tryLogin} name={"로그인"} value={"login"} /></Link> */}
-          {/* <Link to='/Check'> */}
             <Button onClick={tryLogin} name={"로그인"} value={"login"} />
-          {/* </Link> */}
           <Link to="/Signup">
-            <Button onClick={trySignUp} name={"회원가입"} value={"signUp"} />
+            <Button name={"회원가입"} value={"signUp"} />
           </Link>
         </div>
-      </div>
     </div>
+    </>
   )
 }
 
 
 
 
-export default LoginP
+export default withRouter(LoginP)

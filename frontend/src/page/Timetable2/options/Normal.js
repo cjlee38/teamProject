@@ -14,8 +14,10 @@ class Normal {
         const times = lecture.time.split(',');
 
         times.forEach((time) => {
-          const weekday = time.replace(/\s/g, '').split('')[0];
-          const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
+          const regx = '[^0-9]'
+          const weekday = regx.exec(time);
+          console.log(weekday)
+          const hours = time.replace(/\s/g, '').split('')[1];
 
           if (weekday && hours) {
             const key = `${weekday}${hours}`;

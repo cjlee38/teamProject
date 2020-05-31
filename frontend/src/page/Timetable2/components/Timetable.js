@@ -22,22 +22,22 @@ class Timetable extends React.Component {
       backgroundColor: '',
 
       option: 'normal',
-      weekday: ['월', '화', '수', '목', '금', '토'],
+      weekday: ['월', '화', '수', '목', '금'],
       timeUnitAlphabet: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
       timeUnitString: [
-        '1 9:00 ~ 9:50',
-        '2 10:00 ~ 10:50',
-        '3 11:00 ~ 11:50',
-        '4 12:00 ~ 12:50',
-        '5 13:00 ~ 13:50',
-        '6 14:00 ~ 14:50',
-        '7 15:00 ~ 15:50',
-        '8 16:00 ~ 16:50',
-        '9 17:00 ~ 17:50',
-        '10 18:00 ~ 18:50',
-        '11 19:00 ~ 19:50',
-        '12 20:00 ~ 20:50',
-        '13 21:00 ~ 21:50'
+        '1교시 9:00',
+        '2교시 10:00',
+        '3교시 11:00',
+        '4교시 12:00',
+        '5교시 13:00',
+        '6교시 14:00',
+        '7교시 15:00',
+        '8교시 16:00',
+        '9교시 17:00',
+        '10교시 18:00',
+        '11교시 19:00',
+        '12교시 20:00',
+        '13교시 21:00'
       ],
       mytime : [],
     
@@ -186,7 +186,7 @@ class Timetable extends React.Component {
                   <td className="block-time" >
                     {time}
                   </td>
-                  {Array.from(Array(6).keys()).map((w) => {
+                  {Array.from(Array(5).keys()).map((w) => {
 
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
                     console.log(displayLectures[displayLectureKey])
