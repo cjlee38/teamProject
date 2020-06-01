@@ -16,7 +16,7 @@ public class SuggSysService {
     SuggCourseService suggCourseService;
     SuggRatioService suggRatioService;
 
-    public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj) {
+    /*public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj) {
         Integer maxCredit = suggCreditService.initTimeTableCredit(userSelectsObj.userSelectCredit, userSelectsObj.userSelectCourses);
         Table<String, String, Instruction> timeTable = suggTableService.initTimeTable();
         List<Instruction> validCourseList = suggCourseService.initValidCourses();
@@ -24,5 +24,5 @@ public class SuggSysService {
 
         return new SuggSysObj(maxCredit, timeTable, validCourseList, creditRatio);
 
-    }
+    }*/
 }
