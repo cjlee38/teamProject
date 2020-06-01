@@ -22,10 +22,13 @@ class Table extends Component {
   }
   Formatter3(cell, row) {
     let a = row.minor
-
-    return (
+    if(a !=='-' ) {return (
       <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    );}else{
+      return (
+        <></>
+      );
+    }
   }
   Formatter4(cell, row) {
     let a = row.liberal_arts
