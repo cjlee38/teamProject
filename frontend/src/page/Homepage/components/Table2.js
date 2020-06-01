@@ -7,48 +7,66 @@ class Table extends Component {
 
   Formatter1(cell, row) {
     let a = row.first_major
-
+    if (a !== "-") {
     return (
       <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    );}
+    else{
+    return (<>{a}</>)}
   }
 
   Formatter2(cell, row) {
     let a = row.second_major
-
-    return (
-      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    if (a !== "-") {
+      return (
+        <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+      );}
+      else{
+      return (<>{a}</>)}
   }
+
   Formatter3(cell, row) {
     let a = row.minor
 
-    return (
-      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    if (a !== "-") {
+      return (
+        <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+      );}
+      else{
+      return (<>{a}</>)}
   }
+
   Formatter4(cell, row) {
     let a = row.liberal_arts
 
-    return (
-      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    if (a !== "-") {
+      return (
+        <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+      );}
+      else{
+      return (<>{a}</>)}
   }
+
   Formatter5(cell, row) {
     let a = row.trow.teaching
 
-    return (
-      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    if (a !== "-") {
+      return (
+        <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+      );}
+      else{
+      return (<>{a}</>)}
   }
 
   Formatter6(cell, row) {
     let a = row.optional
-    console.log(a)
 
-    return (
-      <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
-    );
+    if (a !== "-") {
+      return (
+        <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
+      );}
+      else{
+      return (<>{a}</>)}
   }
 
 
