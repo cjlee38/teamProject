@@ -52,7 +52,7 @@ export default class Route1 extends Component{
     }
 
     render() {
-      console.log("Route"+this.state.userId);
+      console.log("Routeid : "+this.state.userId);
       const {logged, onLogout} = this.state;
     return (
         <>
@@ -82,7 +82,7 @@ export default class Route1 extends Component{
                 <div>
                     <Switch>
 
-                        <Route path="/" exact={true} component={LoginPage} />
+                        <Route path="/" exact={true} component={Check} />
                         <Route path="/Main" exact={true} component={Main} />
                         <Route path="/Login" component={LoginPage} />
                         <Route path="/Check" component={Check} />
