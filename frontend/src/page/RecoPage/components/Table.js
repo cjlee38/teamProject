@@ -36,8 +36,9 @@ export default class AllFilters extends React.Component {
   constructor(props) {
     super(props)
     
-    this.handlerButton = this.handlerButton.bind(this)
-    this.RemoveButton = this.RemoveButton.bind(this)
+    this.handlerButton = this.props.handlerButton.bind(this)
+    this.RemoveButton = this.props.RemoveButton.bind(this)
+    this.lectureSet = this.props.lectureSet.bind(this)
     this.state = {
       full_data: this.props.data.data,
       originData : this.props.data.data,
@@ -47,46 +48,46 @@ export default class AllFilters extends React.Component {
 
   }
 
-  async handlerButton(row) {
-    let flag = false
-    this.state.myCourse.forEach(function(element){
-      if (element.subject == row.subject){
-        flag = true
-        return alert("동일 교과목 존재!")}
-    })
-    if (flag){return}
-    const { myCourse } = this.state.myCourse
-    const { full_data } = this.state.full_data
+  // async handlerButton(row) {
+  //   let flag = false
+  //   this.state.myCourse.forEach(function(element){
+  //     if (element.subject == row.subject){
+  //       flag = true
+  //       return alert("동일 교과목 존재!")}
+  //   })
+  //   if (flag){return}
+  //   const { myCourse } = this.state.myCourse
+  //   const { full_data } = this.state.full_data
 
-    // console.log(myCourse, this.state.myCourse)
-    await this.setState({
-      myCourse: this.state.myCourse.concat(row),
-      full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
+  //   // console.log(myCourse, this.state.myCourse)
+  //   await this.setState({
+  //     myCourse: this.state.myCourse.concat(row),
+  //     full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
 
-    })
-    console.log(this.state)
-  }
+  //   })
+  //   console.log(this.state)
+  // }
 
 
-  async RemoveButton(row) {
-    const { full_data } = this.state.full_data
-    // console.log(myCourse, this.state.myCourse)
-    // const { myCourse } = this.state.myCourse
+  // async RemoveButton(row) {
+  //   const { full_data } = this.state.full_data
+  //   // console.log(myCourse, this.state.myCourse)
+  //   // const { myCourse } = this.state.myCourse
     
-    await this.setState({
-      myCourse: this.state.myCourse.filter(inst => inst.instruction_id !== row.instruction_id)
-    })
-    const { myCourse } = this.state.myCourse
-    console.log(this.state.myCourse)
-    await this.setState({
-      full_data: this.state.originData.filter(inst => !this.state.myCourse.includes(inst.instruction_id)).sort(function(a, b) { // 오름차순
-        return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
-    })
-  })
+  //   await this.setState({
+  //     myCourse: this.state.myCourse.filter(inst => inst.instruction_id !== row.instruction_id)
+  //   })
+  //   const { myCourse } = this.state.myCourse
+  //   console.log(this.state.myCourse)
+  //   await this.setState({
+  //     full_data: this.state.originData.filter(inst => !this.state.myCourse.includes(inst.instruction_id)).sort(function(a, b) { // 오름차순
+  //       return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
+  //   })
+  // })
     
     
-    console.log(this.state)
-  }
+  //   console.log(this.state)
+  // }
 
 
 

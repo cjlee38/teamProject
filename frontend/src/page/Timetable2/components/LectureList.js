@@ -12,7 +12,7 @@ class LectureList extends React.Component {
     this.state = {
       credit: 0,
       lectureForms: this.props.length1,
-      lectures: this.props.lectures
+      lectures: this.props.lectures.lectures
     };
   }
 

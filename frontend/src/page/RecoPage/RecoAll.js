@@ -74,16 +74,14 @@ function RecoAll(props) {
 
     // console.log(myCourse, this.state.myCourse)
     await setmyCourse(myCourse.concat(row))
-
     await setFullData(temp.filter(inst => inst.instruction_id !== row.instruction_id))
-    await lectureSet(myCourse)
+    // await lectureSet(myCourse)
 
     // await this.setState({
     //   myCourse: this.state.myCourse.concat(row),
     //   full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
 
     // })
-    console.log(lectures)
 
   }
 
@@ -106,10 +104,12 @@ function RecoAll(props) {
   }
 
 
-  const lectureSet= async(arr)=> {
+  const lectureSet= async(row)=> {
+    await handlerButton(row)
+    console.log(myCourse)
     var temp = {}
     let num = 0
-    arr.forEach(function(obj){
+    await myCourse.forEach(function(obj){
       var test = {}
       test["name"] = obj.subject
       test['time'] = obj.class_time
@@ -118,14 +118,16 @@ function RecoAll(props) {
       temp[num] = test
       num += 1
     })
+    console.log(temp)
     await setLectures({lectures :temp})
+
   }
 
   function makearr(a){
     if (a.length){
       
-    let arr = Array(a.length - 1);
-    for (let i = 0; i <a.length - 1;i++){
+    let arr = Array(a.length);
+    for (let i = 0; i <a.length;i++){
       arr[i] = i;
     }
     return arr
@@ -133,6 +135,7 @@ function RecoAll(props) {
     }
     return 0
   }
+  
   console.log(myCourse, lectures)
 
   return (
@@ -144,7 +147,7 @@ function RecoAll(props) {
         <div className="container up">
           <TabList>
             <div label="강의 선택" className="tab-content">
-              {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
+              {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={lectureSet} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
               <LectureList lectures={lectures} length1 = {makearr(myCourse)} />
