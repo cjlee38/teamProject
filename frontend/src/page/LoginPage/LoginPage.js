@@ -37,7 +37,7 @@ function LoginPage () {
 
 
 
-const LoginP = () => {
+const LoginP = (props) => {
     const [inputs, setInputs] = useState({
       id: "",
       password: ""
@@ -62,7 +62,7 @@ const LoginP = () => {
       })
     }
 
-    const tryLogin = async() => {
+    const tryLogin = async(props) => {
       console.log('sdffd')
       console.log(id, password);
      // LoginState.logged=true;
@@ -73,10 +73,8 @@ const LoginP = () => {
         //  let json = await response.json();
          
         //console.log(json.success);
-       // this.props.onLogin();
+       this.props.onLogin();
         //LoginState.onLogin();
-        LoginState.logged=true;
-        console.log(LoginState.logged);
         this.props.history.push('/');
       } catch (error) {
         console.log(error);
@@ -127,4 +125,4 @@ const LoginP = () => {
 
 
 
-export default withRouter(LoginPage);
+export default withRouter(LoginP);

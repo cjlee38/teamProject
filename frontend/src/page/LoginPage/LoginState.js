@@ -3,7 +3,8 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Header from './Layout/Header';
 import Store from './Store/store';
 import LoginP from './components/LoginContainer';
-import Rout from '../../Route'
+import Rout from '../../Route';
+import Navigation from '../../Nav';
 
 class LoginState extends Component{
 
@@ -36,10 +37,11 @@ onLogout=()=>{
       console.log(logged);
       return(
         <Store.Provider value={this.state}>
-        
-              <Header logged={logged} onLogout={onLogout}/>                  
-             
-                <LoginP/>
+                <Navigation logged={logged} onLogout={onLogout} />
+              {/* <Header logged={logged} onLogout={onLogout}/>                   */}
+             <Rout>
+                {/* <LoginP/> */}
+                </Rout>
         </Store.Provider> 
       );
     }
