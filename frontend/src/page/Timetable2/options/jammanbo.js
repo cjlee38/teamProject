@@ -19,9 +19,9 @@ class snorlax {
       
             //const key = `${weekday}${hours}`;
             times.forEach((time) => {
-             
+             // 만약에 한글이면 배열에 넣어, 숫자가 나오면 그 배열 1개랑 그 숫자랑 합쳐 월1 -> 결과 배열에 넣어, 한글 -> 배열 1개 pop 한글을 push '수'
               for(let i=0; i<4; i++){
-               var hours = time.replace(/\s/g, '').split('')[i];
+               var hours = time.split(' ')[i]; // 월  1  월  2  수10
               if ( hours) {
                 for(let j=0; j<5; j++){
                   

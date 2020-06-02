@@ -5,7 +5,7 @@ import { BootstrapTable, TableHeaderColumn } from
 //import '../dist/react-bootstrap-table-all.min.css'
 
 
-class Table extends Component {
+class ResultTable extends Component {
   render() {
     return (
       <div className="whole-table">
@@ -14,52 +14,79 @@ class Table extends Component {
             dataField='trow'
             dataAlign='center'
             headerAlign="left"
-            width="40"
+            width="30"
             tdStyle={
               { backgroundColor: '' }}
             thStyle={
               { fontWeight: 'heavy' },
               { backgroundColor: '#CCCCCC' }
             }>
-
+                (시간)
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='first_major'
+          <TableHeaderColumn dataField='MON'
             dataAlign='center'
             headerAlign="center"
-            width="30%"
+            width="18"
             thStyle={
               {
                 fontWeight: 'heavy',
                 backgroundColor: '#CCCCCC'
               }}>
 
-            1전공
+              월
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='second_major'
+          <TableHeaderColumn dataField='TUE'
             dataAlign='center'
-            width="30%"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
                 backgroundColor: '#CCCCCC'
               }}
             headerAlign="center">
-            이중전공
+            화
           </TableHeaderColumn>
      
-          <TableHeaderColumn dataField='liberal_arts'
+          <TableHeaderColumn dataField='WED'
             dataAlign='center'
-            width="30%"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
                 backgroundColor: '#CCCCCC'
               }}
             headerAlign="center">
-            교양
+              수
           
           
           </TableHeaderColumn>
+          <TableHeaderColumn dataField='THU'
+            dataAlign='center'
+            width="18%"
+            thStyle={
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}
+            headerAlign="center">
+              목
+          
+          
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='FRI'
+            dataAlign='center'
+            width="18%"
+            thStyle={
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}
+            headerAlign="center">
+              금
+          
+          
+          </TableHeaderColumn>
+
 
         </BootstrapTable>
       </div>
@@ -68,4 +95,4 @@ class Table extends Component {
 }
 
 
-export default Table;
+export default ResultTable;
