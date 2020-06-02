@@ -2,10 +2,8 @@ package com.hufsSchedule.hufsScheduleSystem.Service;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
-import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
 import com.hufsSchedule.hufsScheduleSystem.Redis.RedisService;
 import com.hufsSchedule.hufsScheduleSystem.Repository.InstructionRepository;
@@ -13,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +26,7 @@ public class MakeTimeTableService {
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
 
+        // Taken GrdCondObj, remain GrdCondObj, UserInfo
         //GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
         //GrdCondObj remains = grdCompareService.compareGrdAndUser(req, condition, GrdCond);
         //res = new TimetableDto.Res(remains);
