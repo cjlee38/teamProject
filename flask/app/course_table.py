@@ -115,8 +115,7 @@ def crawl_Table(rq_year, rq_semester, db):
             credit = int(tds[12].get_text().strip())
             time2 = int(tds[13].get_text().strip())
 
-            class_time = tds[14].get_text().split('(')[0].split()
-            class_time = "".join(class_time)
+            class_time = tds[14].get_text().split('(')[0].strip()
             restrict_num = tds[15].get_text().split('/')[1].strip()
             note = tds[16].get_text().strip().replace("\"", "\'")
             try:
@@ -200,6 +199,7 @@ def crawl_Table(rq_year, rq_semester, db):
 
             subject_name = tds[4].get_text().strip().splitlines()[0].split(' (')
             subject_name = subject_name[0] 
+            print(subject_name)
 
             try:
                 syllabus = tds[5].find('a')['href'].split('\'')
@@ -224,8 +224,7 @@ def crawl_Table(rq_year, rq_semester, db):
             credit = int(tds[12].get_text().strip())
             time2 = int(tds[13].get_text().strip())
 
-            class_time = tds[14].get_text().split('(')[0].split()
-            class_time = "".join(class_time)
+            class_time = tds[14].get_text().split('(')[0].strip()
             restrict_num = tds[15].get_text().split('/')[1].strip()
             note = tds[16].get_text().strip()
             try:
