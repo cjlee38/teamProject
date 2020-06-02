@@ -47,10 +47,10 @@ class Timetable extends React.Component {
 
 
 
-onClick = (w, t) => {
-    this.setState({ backgroundColor: 'gray' })
+  set1(text){
+    const mytime = this.state.mytime
+    this.setState(mytime.concat(text))
   }
-
 
 
   async handleClick(w, t) {
@@ -112,20 +112,20 @@ onClick = (w, t) => {
     if (option === 'normal') {
       computedLectures = new Normal(lectureForms, lectures).execute();
     } else if (option === 'kitakubu') {
-      computedLectures = new Kitakubu(lectureForms, lectures, credit).execute();
+      computedLectures = new Kitakubu(lectureForms, lectures, credit, this.set1).execute();
     }
     else if (option === 'jammanbo') {
-      computedLectures = new jammanbo(lectureForms, lectures, credit).execute();
+      computedLectures = new jammanbo(lectureForms, lectures, credit, this.handleClick).execute();
     }
-
-
+   
+    this.setState({mytime:this.state.mytime.concat(Object.keys(computedLectures))})
     this.setState({
       displayLectures: computedLectures
     });
   }
 
   render() {
-  
+    console.log(this.state.mytime)
     const {
       option,
       weekday,
@@ -186,12 +186,10 @@ onClick = (w, t) => {
                   {Array.from(Array(6).keys()).map((w) => {
 
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
-
                     return (
 
-                      <TimeBlock style={this.state.backgroundColor} onClick={() => this.onClick(w, t)}
-
-
+                      <TimeBlock style={this.state.backgroundColor}
+                        
                         key={w}
                         displayLecture={displayLectures[displayLectureKey]}
                         onClick={() => this.handleClick(w, t)}

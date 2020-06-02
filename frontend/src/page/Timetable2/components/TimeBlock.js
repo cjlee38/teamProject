@@ -6,30 +6,20 @@ import TimeTable from './Timetable';
 class TimeBlock extends React.Component {
   constructor(props) {
     super(props);
+    this.handle =  this.props.onClick;
     this.state ={
       color: ""
     }
   }
   onClick1 () {
-    this.props.onClick();
+    console.log("onclick1 ok")
     if (this.state.color === ""){
       this.setState({color:"gray"})}
     else{this.setState({color:""})}
+    this.handle()
   }
   render() {
     const { displayLecture } = this.props;
-
-    // const LectureList=this.state.map(
-    //   ({option, weekday, timeUnitAlphabet, timeUnitString})=>(
-    //     <div 
-    //     option={option}
-    //     weekday={weekday}
-    //     timeUnitAlphabet={timeUnitAlphabet}
-    //     timeUnitString={timeUnitString}
-    //     onClick={onClick}
-    //     />
-    //   )
-    // );
     if (displayLecture) {
       const {
         name,
@@ -39,7 +29,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
 
       return (
-        <td className={isRequired ? 'unit lecture-required' : 'unit lecture-unrequired'}>
+        <td className={isRequired ? 'unit lecture-required' : 'unit lecture-unrequired'} onClick={()=>{this.onClick1(); this.handle();}}>
           <span className="lecture-name">
             {name}
           </span>

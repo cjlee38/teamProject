@@ -1,30 +1,29 @@
 class Kitakubu {
-  constructor(lectureForms, lectures, credit) {
+  constructor(lectureForms, lectures, credit, click) {
     this.lectureForms = lectureForms;
     this.lectures = lectures;
     this.credit = credit;
     this.displayLectures = {};
+    this.handleClick = click
+
   }
 
   // TODO: 강의 배치 로직 구현
   execute() {
+    const result = []
+
     this.lectureForms.forEach((lectureForm) => {
       const lecture = this.lectures[lectureForm];
-      // const time='789';
-      // const times = time.split(',');
+
       const hours=['7', '8','9', '10', '11', '12', '13']
-      const weekdays=['월', '화', '수', '목', '금', '토']
-      
+      const weekdays=['월', '화', '수', '목', '금']
             //const key = `${weekday}${hours}`;
            
-              for(let i=0; i<7; i++){
-               //var hours = time.replace(/\s/g, '').split('')[i];
-            
-    
+            for(let i=0; i<7; i++){
               if ( hours) {
-                for(let j=0; j<=7; j++){
+                for(let j=0; j<5; j++){
                 const key = `${weekdays[j]}${hours[i]}`;
-    
+                result.push(key)
                 this.displayLectures = {
                   ...this.displayLectures,
                   [key]: {
@@ -39,7 +38,7 @@ class Kitakubu {
               }}
             };
             
-        });
+        }); 
     
         return this.displayLectures;
   
