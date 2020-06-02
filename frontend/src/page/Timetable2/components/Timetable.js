@@ -39,18 +39,14 @@ class Timetable extends React.Component {
         '12 20:00 ~ 20:50',
         '13 21:00 ~ 21:50'
       ],
-      mytime : [],
-    
+      mytime: [],
+
       displayLectures: {}
     };
   }
 
 
 
-  set1(text){
-    const mytime = this.state.mytime
-    this.setState(mytime.concat(text))
-  }
 
 
   async handleClick(w, t) {
@@ -59,13 +55,17 @@ class Timetable extends React.Component {
     let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
     console.log(mytime12.includes(text))
     console.log(this.state.timeUnitAlphabet[t])
-    if (this.state.mytime.includes(text)){
-      await this.setState({mytime:this.state.mytime.filter(val => val !== text)})
+    if (this.state.mytime.includes(text)) {
+      await this.setState({ mytime: this.state.mytime.filter(val => val !== text) })
     }
-    else{
-      await this.setState({mytime: this.state.mytime.concat(text)})
+    else {
+      await this.setState({ mytime: this.state.mytime.concat(text) })
 
     }
+    if (this.state.color === "") {
+      this.setState({ backgroundColor : "gray"});
+    }
+    else { this.setState({ backgroundColor : ""}); }
     console.log(this.state.mytime)
   }
 
@@ -117,8 +117,8 @@ class Timetable extends React.Component {
     else if (option === 'jammanbo') {
       computedLectures = new jammanbo(lectureForms, lectures, credit, this.handleClick).execute();
     }
-   
-    this.setState({mytime:this.state.mytime.concat(Object.keys(computedLectures))})
+
+    this.setState({ mytime: this.state.mytime.concat(Object.keys(computedLectures)) })
     this.setState({
       displayLectures: computedLectures
     });
@@ -147,7 +147,7 @@ class Timetable extends React.Component {
               onChange={this.setOption}
               className="option-radio-form"
             >
-              <FormControlLabel value="normal" control={<Radio />} label="일반"/>
+              <FormControlLabel value="normal" control={<Radio />} label="일반" />
               <FormControlLabel value="kitakubu" control={<Radio />} label="아침형" />
               <FormControlLabel value="jammanbo" control={<Radio />} label="오후형" />
 
@@ -178,8 +178,8 @@ class Timetable extends React.Component {
             {timeUnitString.map((time, t) => {
 
               return (
-                <tr key={time} id={time.split('')[0]+time.split('')[1]} className="block" >
-                  
+                <tr key={time} id={time.split('')[0] + time.split('')[1]} className="block" >
+
                   <td className="block-time" >
                     {time}
                   </td>
@@ -188,8 +188,8 @@ class Timetable extends React.Component {
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
                     return (
 
-                      <TimeBlock style={this.state.backgroundColor}
-                        
+                      <TimeBlock ground={this.state.backgroundColor}
+
                         key={w}
                         displayLecture={displayLectures[displayLectureKey]}
                         onClick={() => this.handleClick(w, t)}

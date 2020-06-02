@@ -8,7 +8,8 @@ class TimeBlock extends React.Component {
     super(props);
     this.handle =  this.props.onClick;
     this.state ={
-      color: ""
+      color: this.props.ground,
+      color2: "gray"
     }
   }
   onClick1 () {
@@ -16,6 +17,13 @@ class TimeBlock extends React.Component {
     if (this.state.color === ""){
       this.setState({color:"gray"})}
     else{this.setState({color:""})}
+    this.handle()
+  }
+  onClick2 () {
+    console.log("onclick1 ok")
+    if (this.state.color2 === ""){
+      this.setState({color2:"gray"})}
+    else{this.setState({color2:""})}
     this.handle()
   }
   render() {
@@ -29,7 +37,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
 
       return (
-        <td className={isRequired ? 'unit lecture-required' : 'unit lecture-unrequired'} onClick={()=>{this.onClick1(); this.handle();}}>
+        <td style={isRequired ? { backgroundColor: 'red' } : name!=="" ? { backgroundColor: 'aqua'} : { backgroundColor: this.state.color2}}  onClick={()=>{this.onClick2();}}>
           <span className="lecture-name">
             {name}
           </span>
