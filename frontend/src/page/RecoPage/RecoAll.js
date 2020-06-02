@@ -13,7 +13,7 @@ function RecoAll(props) {
   var [full_data, setFullData] = useState()
   var [originData, setoriginData] = useState()
   var [myCourse, setmyCourse] = useState([])
-  var [lectures, setLectures] = useState()
+  var [lectures, setLectures] = useState({lectures :null})
   var [userId, setUser] = useState(props.userId)
 
   var [data3, setData3] = useState({ isdata: false })
