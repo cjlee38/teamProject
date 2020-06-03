@@ -6,16 +6,27 @@ import TimeTable from './Timetable';
 class TimeBlock extends React.Component {
   constructor(props) {
     super(props);
+    this.handle =  this.props.onClick;
     this.state ={
-      color: "",
-      opacity:""
+      color: this.props.ground,
+      opacity:"",
+      opacity2:"0.5",
+      color2: "#F50057"
     }
   }
   onClick1 () {
-    this.props.onClick();
+    console.log("onclick1 ok")
     if (this.state.color === ""){
       this.setState({color:"#F50057", opacity:"0.5"})}
     else{this.setState({color:"", opacity:""})}
+    this.handle()
+  }
+  onClick2 () {
+    console.log("onclick1 ok")
+    if (this.state.color2 === ""){
+      this.setState({color2:"#F50057", opacity2:"0.5"})}
+    else{this.setState({color2:"", opacity2:""})}
+    this.handle()
   }
   render() {
     const { displayLecture } = this.props;
@@ -40,7 +51,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
 
       return (
-        <td className={isRequired ? 'unit lecture-required' : 'unit lecture-unrequired'}>
+        <td style={isRequired ? { backgroundColor: 'red' } : name!=="" ? { backgroundColor: 'aqua'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2();}}>
           <span className="lecture-name">
             {name}
           </span>

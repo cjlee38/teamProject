@@ -47,15 +47,6 @@ class Timetable extends React.Component {
 
 
 
-  onClick = (w, t) => {
-    this.setState({ backgroundColor: 'gray' })
-
-
-
-  }
-
-
-
   async handleClick(w, t) {
     const mytime12 = this.state.mytime
     console.log(mytime12)
@@ -69,7 +60,12 @@ class Timetable extends React.Component {
       await this.setState({mytime: this.state.mytime.concat(text)})
 
     }
+    if (this.state.color === "") {
+      this.setState({ backgroundColor : "gray"});
+    }
+    else { this.setState({ backgroundColor : ""}); }
     console.log(this.state.mytime)
+  
   }
 
 
@@ -122,6 +118,7 @@ class Timetable extends React.Component {
       computedLectures = new jammanbo(lectureForms, lectures.lectures, credit).execute();
     }
 
+    this.setState({ mytime: this.state.mytime.concat(Object.keys(computedLectures)) })
 
     this.setState({
       displayLectures: computedLectures
@@ -192,7 +189,7 @@ class Timetable extends React.Component {
                     console.log(displayLectures[displayLectureKey])
                     return (
 
-                      <TimeBlock style={this.state.backgroundColor} onClick={() => this.onClick(w, t)}
+                      <TimeBlock style={this.state.backgroundColor}
 
 
                         key={w}

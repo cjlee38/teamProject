@@ -15,7 +15,6 @@ function RecoAll(props) {
   var [myCourse, setmyCourse] = useState([])
   var [lectures, setLectures] = useState({lectures :null})
   var [userId, setUser] = useState(props.userId)
-
   var [data3, setData3] = useState({ isdata: false })
 
 
@@ -75,7 +74,7 @@ function RecoAll(props) {
     // console.log(myCourse, this.state.myCourse)
     await setmyCourse(myCourse.concat(row))
     await setFullData(temp.filter(inst => inst.instruction_id !== row.instruction_id))
-    // await lectureSet(myCourse)
+    await lectureSet(myCourse.concat(row))
 
     // await this.setState({
     //   myCourse: this.state.myCourse.concat(row),
@@ -94,22 +93,21 @@ function RecoAll(props) {
     await setmyCourse(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
     // const { myCourse } = myCourse
     // console.log(this.state.myCourse)
-    await lectureSet(myCourse)
+    // await lectureSet(myCourse)
   
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
       return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
     })
     )
+    await lectureSet(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
 
   }
 
 
-  const lectureSet= async(row)=> {
-    await handlerButton(row)
-    console.log(myCourse)
+  const lectureSet= async(course)=> {
     var temp = {}
     let num = 0
-    await myCourse.forEach(function(obj){
+    await course.forEach(function(obj){
       var test = {}
       test["name"] = obj.subject
       test['time'] = obj.class_time
@@ -118,8 +116,8 @@ function RecoAll(props) {
       temp[num] = test
       num += 1
     })
-    console.log(temp)
     await setLectures({lectures :temp})
+
 
   }
 
@@ -141,16 +139,15 @@ function RecoAll(props) {
   return (
     <>
 
-
       <div className="CheckPage">
 
         <div className="container up">
           <TabList>
             <div label="강의 선택" className="tab-content">
-              {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={lectureSet} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
+              {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-              <LectureList lectures={lectures} length1 = {makearr(myCourse)} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} />
             </div>
 
           </TabList>

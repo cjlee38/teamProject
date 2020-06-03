@@ -7,17 +7,14 @@ class Normal {
 
   execute() {
     this.lectureForms.forEach((lectureForm) => {
-      console.log(lectureForm, this.lectures[0])
       const lecture = this.lectures[lectureForm];
 
       if (lecture.time) {
         const times = lecture.time.split(',');
 
         times.forEach((time) => {
-          const regx = '[^0-9]'
-          const weekday = regx.exec(time);
-          console.log(weekday)
-          const hours = time.replace(/\s/g, '').split('')[1];
+          const weekday = time.replace(/\s/g, '').split('')[0];
+          const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
 
           if (weekday && hours) {
             const key = `${weekday}${hours}`;
