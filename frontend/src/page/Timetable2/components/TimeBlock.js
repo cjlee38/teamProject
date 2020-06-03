@@ -26,7 +26,6 @@ class TimeBlock extends React.Component {
     if (this.state.color2 === ""){
       await this.setState({color2:"#F50057", opacity2:"0.5"})}
     else{this.setState({color2:"", opacity2:""})}
-    await this.handle()
   }
   render() {
     const { displayLecture } = this.props;

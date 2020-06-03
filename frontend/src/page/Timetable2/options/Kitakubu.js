@@ -10,6 +10,8 @@ class Kitakubu {
 
   // TODO: 강의 배치 로직 구현
   execute() {
+
+    if (this.lectureForms){
     const result = []
 
     this.lectureForms.forEach((lectureForm) => {
@@ -39,7 +41,7 @@ class Kitakubu {
             };
             
         }); 
-    
+      }
         return this.displayLectures;
   
  }

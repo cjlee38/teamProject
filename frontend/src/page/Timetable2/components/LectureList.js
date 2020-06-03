@@ -68,7 +68,8 @@ class LectureList extends React.Component {
   }
 
 
-  async handleClick(w, t) {
+  async handleClick(w, t, test) {
+
     const mytime12 = this.state.mytime
     console.log(mytime12)
     let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
@@ -81,10 +82,6 @@ class LectureList extends React.Component {
       await this.setState({mytime: this.state.mytime.concat(text)})
 
     }
-    if (this.state.color === "") {
-      this.setState({ backgroundColor : "gray"});
-    }
-    else { this.setState({ backgroundColor : ""}); }
     console.log(this.state.mytime)
   
   }
@@ -133,10 +130,10 @@ class LectureList extends React.Component {
     if (option === 'normal') {
       computedLectures = new Normal(lectureForms, lectures.lectures).execute();
     } else if (option === 'kitakubu') {
-      computedLectures = new Kitakubu(lectureForms, lectures.lectures, credit).execute();
+      computedLectures = new Kitakubu(lectureForms, lectures.lectures).execute();
     }
     else if (option === 'jammanbo') {
-      computedLectures = new jammanbo(lectureForms, lectures.lectures, credit).execute();
+      computedLectures = new jammanbo(lectureForms, lectures.lectures).execute();
     }
 
     this.setState({ mytime: this.state.mytime.concat(Object.keys(computedLectures)) })
@@ -146,6 +143,10 @@ class LectureList extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.setTable()
+
+  }
   render() {
     console.log(this.state)
     const { credit, lectureForms, lectures } = this.state;
@@ -209,7 +210,6 @@ class LectureList extends React.Component {
                   {Array.from(Array(5).keys()).map((w) => {
 
                     const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
-                    console.log(displayLectures[displayLectureKey])
                     return (
 
                       <TimeBlock style={this.state.backgroundColor}
