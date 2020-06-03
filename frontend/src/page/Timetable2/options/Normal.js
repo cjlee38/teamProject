@@ -6,36 +6,49 @@ class Normal {
   }
 
   execute() {
-    this.lectureForms.forEach((lectureForm) => {
-      const lecture = this.lectures[lectureForm];
 
-      if (lecture.time) {
-        const times = lecture.time.split(',');
+    if (this.lectureForms){
+      this.lectureForms.forEach((lectureForm) => {
+        const lecture = this.lectures[lectureForm];
+  
+        if (lecture.time) {
+          var times = lecture.time.split(' ');
+          let temp = null;
+          var result = []
+          times.forEach((text) => {
+            if (!isNaN(text)){result.push(temp + String(text))}
+            else {
+              temp = text
+            }
+          })
+          console.log(result)
+          result.forEach((time) => {
+            const weekday = time.split('')[0];
+            const hours = time.replace(/\s/g, '').split('')[1]
+  
+            if (weekday && hours) {
+              const key = `${weekday}${hours}`;
+  
+              this.displayLectures = {
+                ...this.displayLectures,
+                [key]: {
+                  name: lecture.name,
+                  professor: lecture.professor,
+                  location: lecture.location,
+                  isRequired: lecture.isRequired,
+                  weekday,
+                  hours
+                }
+              };
+            }
+          });
+        }
+      });
 
-        times.forEach((time) => {
-          const weekday = time.replace(/\s/g, '').split('')[0];
-          const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
-
-          if (weekday && hours) {
-            const key = `${weekday}${hours}`;
-
-            this.displayLectures = {
-              ...this.displayLectures,
-              [key]: {
-                name: lecture.name,
-                professor: lecture.professor,
-                location: lecture.location,
-                isRequired: lecture.isRequired,
-                weekday,
-                hours
-              }
-            };
-          }
-        });
-      }
-    });
-
+    }
+    
     return this.displayLectures;
+
   }
 }
 

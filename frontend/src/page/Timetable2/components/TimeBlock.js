@@ -8,40 +8,29 @@ class TimeBlock extends React.Component {
     super(props);
     this.handle =  this.props.onClick;
     this.state ={
-      color: this.props.ground,
+      color: "",
       opacity:"",
       opacity2:"0.5",
       color2: "#F50057"
     }
   }
-  onClick1 () {
+  async onClick1  () {
     console.log("onclick1 ok")
     if (this.state.color === ""){
-      this.setState({color:"#F50057", opacity:"0.5"})}
+      await this.setState({color:"#F50057", opacity:"0.5"})}
     else{this.setState({color:"", opacity:""})}
-    this.handle()
+    await this.handle()
   }
-  onClick2 () {
+  async onClick2 () {
     console.log("onclick1 ok")
     if (this.state.color2 === ""){
-      this.setState({color2:"#F50057", opacity2:"0.5"})}
+      await this.setState({color2:"#F50057", opacity2:"0.5"})}
     else{this.setState({color2:"", opacity2:""})}
-    this.handle()
+    await this.handle()
   }
   render() {
     const { displayLecture } = this.props;
 
-    // const LectureList=this.state.map(
-    //   ({option, weekday, timeUnitAlphabet, timeUnitString})=>(
-    //     <div 
-    //     option={option}
-    //     weekday={weekday}
-    //     timeUnitAlphabet={timeUnitAlphabet}
-    //     timeUnitString={timeUnitString}
-    //     onClick={onClick}
-    //     />
-    //   )
-    // );
     if (displayLecture) {
       const {
         name,

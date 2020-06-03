@@ -13,9 +13,11 @@ function RecoAll(props) {
   var [full_data, setFullData] = useState()
   var [originData, setoriginData] = useState()
   var [myCourse, setmyCourse] = useState([])
-  var [lectures, setLectures] = useState({lectures :null})
+  var [lectures, setLectures] = useState({lectures : [] })
   var [userId, setUser] = useState(props.userId)
   var [data3, setData3] = useState({ isdata: false })
+  var [mytime, setmyTime] = useState([])
+  var [mycredit, setmyCredit] = useState()
 
 
   var areaType = {
@@ -33,7 +35,7 @@ function RecoAll(props) {
         return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area ? 1 : a.area < b.area ? 0 : -2;
       });
       response.data.data.map(function (obj) {
-        obj.class_time = obj.class_time.split(" ").join("")
+        // obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
         else { obj.required = "" }
 
