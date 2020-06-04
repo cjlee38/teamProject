@@ -21,7 +21,6 @@ class Normal {
               temp = text
             }
           })
-          console.log(result)
           result.forEach((time) => {
             const weekday = time.split('')[0];
             const hours = time.split('')[1]

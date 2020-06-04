@@ -15,9 +15,11 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 class LectureList extends React.Component {
   constructor(props) {
     super(props);
-
+    this.setTime = this.props.setTime.bind(this)
+    this.setmyCredit = this.props.setmyCredit.bind(this)
+    this.postUserset = this.props.post
+    this.mytime = this.props.mytime
     this.state = {
-      credit: 0,
       lectureForms: this.props.length1,
       lectures: this.props.lectures,
       option: 'normal',
@@ -46,7 +48,7 @@ class LectureList extends React.Component {
 
   setCredit = (e) => {
     const input = e.target.value;
-    this.setState({ credit: parseInt(input) });
+    this.setmyCredit( parseInt(input));
   }
 
   setLectureInfo = (e, key, type) => {
@@ -70,19 +72,16 @@ class LectureList extends React.Component {
 
   async handleClick(w, t) {
 
-    const mytime12 = this.state.mytime
-    console.log(mytime12)
     let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
-    console.log(mytime12.includes(text))
-    console.log(this.state.timeUnitAlphabet[t])
-    if (this.state.mytime.includes(text)){
+    if (this.props.mytime.includes(text)){
+      await this.setTime(this.props.mytime.filter(val => val !== text))
       await this.setState({mytime:this.state.mytime.filter(val => val !== text)})
     }
     else{
-      await this.setState({mytime: this.state.mytime.concat(text)})
+      await this.setTime(this.props.mytime.concat(text))
+      await this.setState({mytime:this.state.mytime.concat(text)})
 
     }
-    console.log(this.state.mytime)
   
   }
 
@@ -120,7 +119,6 @@ class LectureList extends React.Component {
 
   setTable = () => {
     const { credit, lectureForms, lectures } = this.state;
-    console.log(lectures)
     const { option } = this.state;
 
     let computedLectures = null;
@@ -136,8 +134,7 @@ class LectureList extends React.Component {
     else if (option === 'jammanbo') {
       computedLectures = new jammanbo(lectureForms, lectures.lectures).execute();
     }
-
-    this.setState({ mytime: [...new Set(Object.keys(computedLectures))] })
+    this.setTime([...new Set(Object.keys(computedLectures).concat(this.state.mytime))])
 
     this.setState({
       displayLectures: computedLectures
@@ -149,8 +146,6 @@ class LectureList extends React.Component {
 
   }
   render() {
-    console.log(this.state.displayLectures)
-    console.log(this.state.mytime)
 
     const { credit, lectureForms, lectures } = this.state;
     const {
@@ -163,7 +158,7 @@ class LectureList extends React.Component {
 
     return (
       <div id="lecture-list">
-        <TextField id="credit" className="credit-textfield" label="신청학점" onChange={(e) => { this.setCredit(e); }} />
+        <TextField id="credit" className="credit-textfield" label="최대학점" onChange={(e) => { this.setCredit(e); }} />
        
         <div id="timetable">
         <div id="timetable-radios">
@@ -183,9 +178,9 @@ class LectureList extends React.Component {
           </FormControl>
         </div>
 
-        {/* <Button variant="contained" color="primary" onClick={this.setTable}>
-          {'적용하기!'}
-        </Button> */}
+        <Button variant="contained" color="primary" onClick={this.postUserset}>
+          {'시간표 생성!'}
+        </Button>
 
         <table>
           <thead>
@@ -230,7 +225,6 @@ class LectureList extends React.Component {
           </tbody>
         </table>
       </div>
-        {/* <Timetable credit={credit} lectureForms={lectureForms} lectures={lectures} /> */}
       </div>
     );
   }

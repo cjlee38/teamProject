@@ -12,13 +12,12 @@ function RecoAll(props) {
 
   var [full_data, setFullData] = useState()
   var [originData, setoriginData] = useState()
-  var [myCourse, setmyCourse] = useState([])
+  const [myCourse, setmyCourse] = useState([])
   var [lectures, setLectures] = useState({lectures : [] })
   var [userId, setUser] = useState(props.userId)
   var [data3, setData3] = useState({ isdata: false })
-  var [mytime, setmyTime] = useState([])
-  var [mycredit, setmyCredit] = useState()
-  var [mytime, setmyTime] = useState([])
+  const [mycredit, setmyCredit] = useState(0)
+  const [mytime, setmyTime] = useState([])
 
   var areaType = {
 
@@ -55,10 +54,6 @@ function RecoAll(props) {
   }, []
   )
 
-  // this.handlerButton = this.handlerButton.bind(this)
-  // this.RemoveButton = this.RemoveButton.bind(this)
-
-
 
   const handlerButton = async (row) => {
     let flag = false
@@ -70,33 +65,17 @@ function RecoAll(props) {
       }
     })
     if (flag) { return }
-    // const { myCourse } = myCourse
-    // const { full_data } = full_data
-
-    // console.log(myCourse, this.state.myCourse)
     await setmyCourse(myCourse.concat(row))
     await setFullData(temp.filter(inst => inst.instruction_id !== row.instruction_id))
     await lectureSet(myCourse.concat(row))
 
-    // await this.setState({
-    //   myCourse: this.state.myCourse.concat(row),
-    //   full_data: this.state.full_data.filter(inst => inst.instruction_id !== row.instruction_id)
-
-    // })
 
   }
 
 
   const RemoveButton = async (row) => {
-    // const { full_data } = full_data
-    // console.log(myCourse, this.state.myCourse)
-    // const { myCourse } = this.state.myCourse
 
     await setmyCourse(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
-    // const { myCourse } = myCourse
-    // console.log(this.state.myCourse)
-    // await lectureSet(myCourse)
-  
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
       return a.dept < b.dept ? -1 : a.dept > b.dept ? 1 : 0;
     })
@@ -135,9 +114,13 @@ function RecoAll(props) {
     }
     return 0
   }
-  
-  console.log(myCourse, lectures)
 
+  function postUserset(){
+    let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    console.log(data)
+  }
+
+  console.log(mycredit, mytime)
   return (
     <>
 
@@ -149,7 +132,7 @@ function RecoAll(props) {
               {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={postUserset} />
             </div>
 
           </TabList>
