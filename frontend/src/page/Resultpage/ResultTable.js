@@ -10,20 +10,21 @@ class ResultTable extends Component {
     return (
       <div className="whole-table">
         <BootstrapTable data={this.props.data}>
-          <TableHeaderColumn isKey
-            dataField='trow'
+   
+
+        <TableHeaderColumn dataField='0' isKey
             dataAlign='center'
-            headerAlign="left"
-            width="30"
-            tdStyle={
-              { backgroundColor: '' }}
+            headerAlign="center"
+            width="18"
             thStyle={
-              { fontWeight: 'heavy' },
-              { backgroundColor: '#CCCCCC' }
-            }>
-                (시간)
+              {
+                fontWeight: 'heavy',
+                backgroundColor: '#CCCCCC'
+              }}>
+
+              시간
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='MON'
+          <TableHeaderColumn dataField='1'
             dataAlign='center'
             headerAlign="center"
             width="18"
@@ -35,7 +36,7 @@ class ResultTable extends Component {
 
               월
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='TUE'
+          <TableHeaderColumn dataField='2'
             dataAlign='center'
             width="18%"
             thStyle={
@@ -47,7 +48,7 @@ class ResultTable extends Component {
             화
           </TableHeaderColumn>
      
-          <TableHeaderColumn dataField='WED'
+          <TableHeaderColumn dataField='3'
             dataAlign='center'
             width="18%"
             thStyle={
@@ -60,7 +61,7 @@ class ResultTable extends Component {
           
           
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='THU'
+          <TableHeaderColumn dataField='4'
             dataAlign='center'
             width="18%"
             thStyle={
@@ -73,7 +74,7 @@ class ResultTable extends Component {
           
           
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='FRI'
+          <TableHeaderColumn dataField='5'
             dataAlign='center'
             width="18%"
             thStyle={
@@ -86,6 +87,8 @@ class ResultTable extends Component {
           
           
           </TableHeaderColumn>
+  
+
 
 
         </BootstrapTable>
