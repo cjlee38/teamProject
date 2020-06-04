@@ -46,7 +46,7 @@ class LectureList extends React.Component {
 
   setCredit = (e) => {
     const input = e.target.value;
-    this.setState({ credit: input });
+    this.setState({ credit: parseInt(input) });
   }
 
   setLectureInfo = (e, key, type) => {
@@ -68,7 +68,7 @@ class LectureList extends React.Component {
   }
 
 
-  async handleClick(w, t, test) {
+  async handleClick(w, t) {
 
     const mytime12 = this.state.mytime
     console.log(mytime12)
@@ -87,10 +87,11 @@ class LectureList extends React.Component {
   }
 
 
-  setOption = (e) => {
-    this.setState({
+  setOption = async (e) => {
+    await this.setState({
       option: e.target.value
     });
+    this.setTable();
   }
 
   getWeekdayIndex(target) {
@@ -136,7 +137,7 @@ class LectureList extends React.Component {
       computedLectures = new jammanbo(lectureForms, lectures.lectures).execute();
     }
 
-    this.setState({ mytime: this.state.mytime.concat(Object.keys(computedLectures)) })
+    this.setState({ mytime: [...new Set(Object.keys(computedLectures))] })
 
     this.setState({
       displayLectures: computedLectures
@@ -148,7 +149,9 @@ class LectureList extends React.Component {
 
   }
   render() {
-    console.log(this.state)
+    console.log(this.state.displayLectures)
+    console.log(this.state.mytime)
+
     const { credit, lectureForms, lectures } = this.state;
     const {
       option,
@@ -180,9 +183,9 @@ class LectureList extends React.Component {
           </FormControl>
         </div>
 
-        <Button variant="contained" color="primary" onClick={this.setTable}>
+        {/* <Button variant="contained" color="primary" onClick={this.setTable}>
           {'적용하기!'}
-        </Button>
+        </Button> */}
 
         <table>
           <thead>

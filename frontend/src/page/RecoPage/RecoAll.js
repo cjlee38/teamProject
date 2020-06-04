@@ -18,7 +18,7 @@ function RecoAll(props) {
   var [data3, setData3] = useState({ isdata: false })
   var [mytime, setmyTime] = useState([])
   var [mycredit, setmyCredit] = useState()
-
+  var [mytime, setmyTime] = useState([])
 
   var areaType = {
 
@@ -149,7 +149,7 @@ function RecoAll(props) {
               {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-             <LectureList lectures={lectures} length1 = {makearr(myCourse)} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} />
             </div>
 
           </TabList>

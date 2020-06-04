@@ -21,11 +21,20 @@ class TimeBlock extends React.Component {
     else{this.setState({color:"", opacity:""})}
     await this.handle()
   }
-  async onClick2 () {
-    console.log("onclick1 ok")
-    if (this.state.color2 === ""){
-      await this.setState({color2:"#F50057", opacity2:"0.5"})}
-    else{this.setState({color2:"", opacity2:""})}
+  async onClick2 (name) {
+    if (!name){
+      console.log("onclick1 ok")
+      if (this.state.color2 === ""){
+        await this.setState({color2:"#F50057", opacity2:"0.5"})}
+      else{this.setState({color2:"", opacity2:""})}
+      await this.handle()
+     }
+     else {
+      console.log("onclick1 ok")
+      if (this.state.color2 === ""){
+        await this.setState({color2:"#F50057", opacity2:"0.5"})}
+      else{this.setState({color2:"", opacity2:""})}
+     }
   }
   render() {
     const { displayLecture } = this.props;
@@ -39,7 +48,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
 
       return (
-        <td style={isRequired ? { backgroundColor: 'red' } : name!=="" ? { backgroundColor: 'aqua'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2();}}>
+        <td style={isRequired ? { backgroundColor: 'red' } : name ? { backgroundColor: 'aqua'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(name);}}>
           <span className="lecture-name">
             {name}
           </span>
