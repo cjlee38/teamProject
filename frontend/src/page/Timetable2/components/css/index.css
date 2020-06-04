@@ -49,9 +49,11 @@ td, th {
   padding: 10px;
 }
 
-th {
+#timetable th {
   border: 1.5px black solid;
   color: black;
+  font-size: 18px !important;
+
 }
 
 td {
@@ -96,6 +98,11 @@ td {
 .MuiButtonBase-root{
   float: right;
 }
+
+#timetable-radios > fieldset > div > label > span.MuiTypography-root{
+  font-size: 18px !important;
+}
+
 .MuiFormControl-root{
 width: 30%;
 text-align: center;
