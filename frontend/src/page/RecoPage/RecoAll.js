@@ -18,6 +18,7 @@ function RecoAll(props) {
   var [data3, setData3] = useState({ isdata: false })
   const [mycredit, setmyCredit] = useState(0)
   const [mytime, setmyTime] = useState([])
+  const [timeList, setTimeList] = useState([])
 
   var areaType = {
 
@@ -58,6 +59,26 @@ function RecoAll(props) {
   const handlerButton = async (row) => {
     let flag = false
     let temp = full_data
+    let times = row.class_time.split(' ')
+    let temp2 = null;
+    let result = []
+    times.forEach(async (text) => {
+      if (!isNaN(text)){
+      if (timeList.includes(temp2 + String(text))){
+        flag = true
+        return alert("동일 시간 존재!")
+      }
+      else{
+        result.push(temp2 + String(text))
+      }
+      }
+      else {
+        temp2 = text
+      }
+    })
+    console.log(timeList)
+    if (flag) { return }
+    setTimeList(timeList.concat(result))
     myCourse.forEach(function (element) {
       if (element.subject == row.subject) {
         flag = true
@@ -74,6 +95,21 @@ function RecoAll(props) {
 
 
   const RemoveButton = async (row) => {
+    let times = row.class_time.split(' ')
+    let temp2 = null;
+    let result = []
+    times.forEach((text) => {
+      if (!isNaN(text)){
+
+        result.push(temp2 + String(text))
+     
+      }
+      else {
+        temp2 = text
+      }
+    })
+
+    setTimeList(timeList.filter(time => !result.includes(time)))
 
     await setmyCourse(myCourse.filter(inst => inst.instruction_id !== row.instruction_id))
     await setFullData(originData.filter(inst => !myCourse.includes(inst.instruction_id)).sort(function (a, b) { // 오름차순
@@ -119,8 +155,7 @@ function RecoAll(props) {
     let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
     console.log(data)
   }
-
-  console.log(mycredit, mytime)
+console.log(timeList)
   return (
     <>
 
