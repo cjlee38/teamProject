@@ -19,6 +19,7 @@ class LectureList extends React.Component {
     this.setmyCredit = this.props.setmyCredit.bind(this)
     this.postUserset = this.props.post
     this.mytime = this.props.mytime
+    this.timeList = this.props.timeList
     this.state = {
       lectureForms: this.props.length1,
       lectures: this.props.lectures,
@@ -134,7 +135,7 @@ class LectureList extends React.Component {
     else if (option === 'jammanbo') {
       computedLectures = new jammanbo(lectureForms, lectures.lectures).execute();
     }
-    this.setTime([...new Set(Object.keys(computedLectures).concat(this.state.mytime))])
+    this.setTime([...new Set(Object.keys(computedLectures).filter(time => !this.timeList.includes(time)).concat(this.state.mytime))])
 
     this.setState({
       displayLectures: computedLectures

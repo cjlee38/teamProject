@@ -151,11 +151,12 @@ function RecoAll(props) {
     return 0
   }
 
-  function postUserset(){
-    let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+  function postUserset(course, credit, time){
+    let data = {myCourse : course, myCredit : credit, mytime : time}
     console.log(data)
   }
-console.log(timeList)
+
+console.log("myCourse", myCourse, "mycredit", mycredit, "mytime", mytime)
   return (
     <>
 
@@ -167,7 +168,7 @@ console.log(timeList)
               {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={postUserset} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={()=>postUserset(myCourse, mycredit, mytime)} timeList={timeList} />
             </div>
 
           </TabList>
