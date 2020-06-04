@@ -31,6 +31,9 @@ li {
 
 #timetable-radios {
   margin-bottom: 30px;
+  display: flex;
+  float: left;
+  width: 50%;
 }
 
 #timetable table {
@@ -89,4 +92,25 @@ td {
 
 .MuiFormControlLabel-root-91.lecture-checkbox {
   margin-left: 10px;
+}
+.MuiButtonBase-root{
+  float: right;
+}
+.MuiFormControl-root{
+width: 30%;
+text-align: center;
+font-size: medium;
+
+}
+#credit{
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.MuiButton-containedPrimary{
+  background-color: #F50057 !important;
+  width: 30% !important;
+  height: 50% !important;
+  font-size: large !important;
 }
