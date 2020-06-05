@@ -1,6 +1,5 @@
 import React from 'react';
 import LectureList from './LectureList';
-import TimeTable from './Timetable';
 
 
 class TimeBlock extends React.Component {

@@ -1,8 +1,8 @@
 import '../Timetable2/components/css/index.css'
+import './Reco1.scss';
 import React, { Component, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
-import Table from './Reco1';
 import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
@@ -19,7 +19,6 @@ function RecoAll(props) {
   const [mycredit, setmyCredit] = useState(0)
   const [mytime, setmyTime] = useState([])
   const [timeList, setTimeList] = useState([])
-  const [postSet, setPost] = useState({myCourse : myCourse, myCredit:mycredit, myTime : mytime})
 
   var areaType = {
 
