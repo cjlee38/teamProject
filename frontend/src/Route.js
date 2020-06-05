@@ -52,7 +52,6 @@ export default class Route1 extends Component{
     }
 
     render() {
-      console.log("Routeid : "+this.state.userId);
       const {logged, onLogout} = this.state;
     return (
         <>

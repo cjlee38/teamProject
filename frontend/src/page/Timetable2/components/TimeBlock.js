@@ -14,7 +14,6 @@ class TimeBlock extends React.Component {
     }
   }
   async onClick1  () {
-    console.log("onclick1 ok")
     if (this.state.color === ""){
       await this.setState({color:"#F50057", opacity:"0.5"})}
     else{this.setState({color:"", opacity:""})}
@@ -22,14 +21,12 @@ class TimeBlock extends React.Component {
   }
   async onClick2 (name) {
     if (!name){
-      console.log("onclick1 ok")
       if (this.state.color2 === ""){
         await this.setState({color2:"#F50057", opacity2:"0.5"})}
       else{this.setState({color2:"", opacity2:""})}
       await this.handle()
      }
      else {
-      console.log("onclick1 ok")
       if (this.state.color2 === ""){
         await this.setState({color2:"#F50057", opacity2:"0.5"})}
       else{this.setState({color2:"", opacity2:""})}

@@ -30,7 +30,6 @@ function RecoAll(props) {
   };
   useEffect(() => {
     crawl.get_inst().then(response => {
-      console.log("res", response)
       response.data.data.sort(function (a, b) { // 오름차순
         return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area ? 1 : a.area < b.area ? 0 : -2;
       });

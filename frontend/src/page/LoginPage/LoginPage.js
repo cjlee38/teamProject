@@ -18,7 +18,6 @@ const LoginP = (props) => {
   const [user, setUser] = useState();
   const onChange = e => {
     const { value, name } = e;
-    console.log(value, name);
 
     setInputs({
       ...inputs,
