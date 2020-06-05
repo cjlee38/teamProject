@@ -17,7 +17,7 @@ class LectureList extends React.Component {
     super(props);
     this.setTime = this.props.setTime.bind(this)
     this.setmyCredit = this.props.setmyCredit.bind(this)
-    this.postUserset = this.props.post
+    this.postData = this.props.post()
     this.mytime = this.props.mytime
     this.timeList = this.props.timeList
     this.state = {
@@ -42,14 +42,13 @@ class LectureList extends React.Component {
         '13교시 21:00'
       ],
       mytime : [],
-    
       displayLectures: {}
     };
   }
 
-  setCredit = (e) => {
+  setCredit = async (e) => {
     const input = e.target.value;
-    this.setmyCredit( parseInt(input));
+    await this.setmyCredit( parseInt(input));
   }
 
   setLectureInfo = (e, key, type) => {
@@ -147,7 +146,6 @@ class LectureList extends React.Component {
 
   }
   render() {
-
     const { credit, lectureForms, lectures } = this.state;
     const {
       option,
@@ -179,7 +177,7 @@ class LectureList extends React.Component {
           </FormControl>
         </div>
 
-        <Button variant="contained" color="primary" onClick={this.postUserset}>
+        <Button variant="contained" color="primary" onClick={() => this.props.post()}>
           {'시간표 생성!'}
         </Button>
 

@@ -19,6 +19,7 @@ function RecoAll(props) {
   const [mycredit, setmyCredit] = useState(0)
   const [mytime, setmyTime] = useState([])
   const [timeList, setTimeList] = useState([])
+  const [postSet, setPost] = useState({myCourse : myCourse, myCredit:mycredit, myTime : mytime})
 
   var areaType = {
 
@@ -151,12 +152,11 @@ function RecoAll(props) {
     return 0
   }
 
-  function postUserset(course, credit, time){
-    let data = {myCourse : course, myCredit : credit, mytime : time}
+  async function postUserset(){
+    let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
     console.log(data)
   }
 
-console.log("myCourse", myCourse, "mycredit", mycredit, "mytime", mytime)
   return (
     <>
 
@@ -168,7 +168,7 @@ console.log("myCourse", myCourse, "mycredit", mycredit, "mytime", mytime)
               {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={()=>postUserset(myCourse, mycredit, mytime)} timeList={timeList} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={postUserset} timeList={timeList} />
             </div>
 
           </TabList>
