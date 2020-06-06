@@ -12,19 +12,23 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableServi
 import java.util.List;
 import java.util.Map;
 
-public class SuggSysService {
+/*public class SuggSysService {
     SuggCreditService suggCreditService;
     SuggTableService suggTableService;
     SuggInstructionService suggInstructionService;
     SuggRatioService suggRatioService;
     /*
 
+<<<<<<< HEAD
+    /*public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj) {
+=======
     maxCredit -> 선택한 학점에서 과목 학점만큼 제거
     Table -> 선택한 과목 + 공강시간 process
     validCourseList -> 20-1 모든 과목에서 내가 수강한 과목  & 선택한 과목 제거. ( + 본인 전공 과목만 남길것인지? )
     creditRatio -> 지금까지 수강한 과목 학점 비율.
      */
-    public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, Map<String, List<Instruction>> userTakenCourses, List<Instruction> entireCourses) {
+    /*public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, Map<String, List<Instruction>> userTakenCourses, List<Instruction> entireCourses) {
+>>>>>>> a61eb11093cf9e87d6aa43e96a8ff9342073b12b
         Integer maxCredit = suggCreditService.initTimeTableCredit(userSelectsObj.userSelectCredit, userSelectsObj.userSelectCourses);
         Table<String, String, Instruction> timeTable = suggTableService.initTimeTable(userSelectsObj.userSelectCourses, userSelectsObj.userSelectFreeTime);
         List<Instruction> validInstructions = suggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userInfo);
@@ -39,10 +43,15 @@ public class SuggSysService {
         // do something +
 
 
+<<<<<<< HEAD
+    }*/
+    /*
+=======
 
 
         return initObj.getTimeTable();
     }
 
 
-}
+>>>>>>> a61eb11093cf9e87d6aa43e96a8ff9342073b12b
+}*/
