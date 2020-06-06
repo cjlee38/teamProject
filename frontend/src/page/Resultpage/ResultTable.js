@@ -15,7 +15,7 @@ class ResultTable extends Component {
         <TableHeaderColumn dataField='0' isKey
             dataAlign='center'
             headerAlign="center"
-            width="18"
+            width="8%"
             thStyle={
               {
                 fontWeight: 'heavy',
@@ -27,7 +27,7 @@ class ResultTable extends Component {
           <TableHeaderColumn dataField='1'
             dataAlign='center'
             headerAlign="center"
-            width="18"
+            width="18%"
             thStyle={
               {
                 fontWeight: 'heavy',
