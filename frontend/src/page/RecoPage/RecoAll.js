@@ -76,7 +76,6 @@ function RecoAll(props) {
         temp2 = text
       }
     })
-    console.log(timeList)
     if (flag) { return }
     setTimeList(timeList.concat(result))
     myCourse.forEach(function (element) {
@@ -130,6 +129,7 @@ function RecoAll(props) {
       test['time'] = obj.class_time
       test['professor'] = obj.professor
       test['isRequired'] = obj.required
+      test['url'] = obj.url
       temp[num] = test
       num += 1
     })

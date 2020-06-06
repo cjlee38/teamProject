@@ -43,10 +43,13 @@ li {
   margin-top: 15px;
   margin-bottom: 15px;
   height: 1000px;
+  
 }
 
 td, th {
   padding: 10px;
+
+  /* font-family: 'UhBeemysen', sans-serif !important; */
 }
 
 #timetable th {
@@ -73,6 +76,7 @@ td {
   height: 100px;
   color: white;
   font-size: 14px;
+
 }
 
 .lecture-unrequired {
@@ -125,4 +129,6 @@ font-size: medium;
 td span {
   color: white;
   font-weight: 600;
+  /* font-size: 20px !important; */
+
 }

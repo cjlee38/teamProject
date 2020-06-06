@@ -56,6 +56,7 @@ class snorlax {
                   professor: lecture.professor,
                   location: lecture.location,
                   isRequired: lecture.isRequired,
+                  url : lecture.url,
                   weekday,
                   hours
                 }
