@@ -40,12 +40,12 @@ class TimeBlock extends React.Component {
         name,
         professor,
         location,
-        isRequired
+        isRequired,
+        url
       } = displayLecture;
-
       return (
         <td style={isRequired ? { backgroundColor: '#FF5675' } : name ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(name);}}>
-          <span className="lecture-name">
+          <a href={url} target="_blank"><span className="lecture-name">
             {name}
           </span>
           <span className="lecture-info">
@@ -54,7 +54,7 @@ class TimeBlock extends React.Component {
             {location}
             {LectureList}
             
-          </span>
+          </span></a>
         </td>
       );
     }

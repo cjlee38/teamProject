@@ -4,7 +4,11 @@ import { BootstrapTable, TableHeaderColumn } from
 //import '../css/Table.css'
 //import '../dist/react-bootstrap-table-all.min.css'
 
-
+function urlFormatter(cell, row) {
+  return (
+    <a href={row.url} target="_blank">{row.subject}</a>
+  );
+}
 class ResultTable extends Component {
   render() {
     return (
