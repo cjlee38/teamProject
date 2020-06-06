@@ -1,36 +1,40 @@
 import React from 'react';
 import LectureList from './LectureList';
-import TimeTable from './Timetable';
 
 
 class TimeBlock extends React.Component {
   constructor(props) {
     super(props);
+    this.handle =  this.props.onClick;
     this.state ={
       color: "",
-      opacity:""
+      opacity:"",
+      opacity2:"0.5",
+      color2: "#FFB0CF"
     }
   }
-  onClick1 () {
-    this.props.onClick();
+  async onClick1  () {
     if (this.state.color === ""){
-      this.setState({color:"#F50057", opacity:"0.5"})}
+      await this.setState({color:"#FFB0CF", opacity:"0.5"})}
     else{this.setState({color:"", opacity:""})}
+    await this.handle()
+  }
+  async onClick2 (name) {
+    if (!name){
+      if (this.state.color2 === ""){
+        await this.setState({color2:"#FFB0CF", opacity2:"0.5"})}
+      else{this.setState({color2:"", opacity2:""})}
+      await this.handle()
+     }
+     else {
+      if (this.state.color2 === ""){
+        await this.setState({color2:"#FFB0CF", opacity2:"0.5"})}
+      else{this.setState({color2:"", opacity2:""})}
+     }
   }
   render() {
     const { displayLecture } = this.props;
 
-    // const LectureList=this.state.map(
-    //   ({option, weekday, timeUnitAlphabet, timeUnitString})=>(
-    //     <div 
-    //     option={option}
-    //     weekday={weekday}
-    //     timeUnitAlphabet={timeUnitAlphabet}
-    //     timeUnitString={timeUnitString}
-    //     onClick={onClick}
-    //     />
-    //   )
-    // );
     if (displayLecture) {
       const {
         name,
@@ -40,7 +44,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
 
       return (
-        <td className={isRequired ? 'unit lecture-required' : 'unit lecture-unrequired'}>
+        <td style={isRequired ? { backgroundColor: '#FF5675' } : name ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(name);}}>
           <span className="lecture-name">
             {name}
           </span>

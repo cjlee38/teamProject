@@ -31,6 +31,9 @@ li {
 
 #timetable-radios {
   margin-bottom: 30px;
+  display: flex;
+  float: left;
+  width: 50%;
 }
 
 #timetable table {
@@ -46,9 +49,11 @@ td, th {
   padding: 10px;
 }
 
-th {
+#timetable th {
   border: 1.5px black solid;
   color: black;
+  font-size: 18px !important;
+
 }
 
 td {
@@ -89,4 +94,35 @@ td {
 
 .MuiFormControlLabel-root-91.lecture-checkbox {
   margin-left: 10px;
+}
+.MuiButtonBase-root{
+  float: right;
+}
+
+#timetable-radios > fieldset > div > label > span.MuiTypography-root{
+  font-size: 18px !important;
+}
+
+.MuiFormControl-root{
+width: 30%;
+text-align: center;
+font-size: medium;
+
+}
+#credit{
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.MuiButton-containedPrimary{
+  background-color: #4CAF50 !important;
+  width: 30% !important;
+  height: 50% !important;
+  font-size: large !important;
+  /* color: #303030 !important; */
+}
+td span {
+  color: white;
+  font-weight: 600;
 }

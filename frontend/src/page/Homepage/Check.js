@@ -15,7 +15,6 @@ class Check extends React.Component {
   }
 
   render() {
-    console.log("table : ", this.props.userId)
     return (
 
       <>

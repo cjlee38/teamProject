@@ -12,7 +12,6 @@ export default function TabContent1(props) {
     const [data2, setData2] = useState([{trow: "필수 과목"}, {trow: "이수 과목"}, {trow: "미이수 과목"} ])
     const [data3, setData3] = useState()
     useEffect(() => {
-        console.log("tabContent: "+props.userID);
         Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
             params: { userId: props.userID }
         }).then(response => {
