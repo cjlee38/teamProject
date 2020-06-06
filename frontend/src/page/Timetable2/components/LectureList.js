@@ -15,7 +15,7 @@ class LectureList extends React.Component {
     super(props);
     this.setTime = this.props.setTime.bind(this)
     this.setmyCredit = this.props.setmyCredit.bind(this)
-    this.postData = this.props.post()
+    this.postData = this.props.post
     this.mytime = this.props.mytime
     this.timeList = this.props.timeList
     this.state = {

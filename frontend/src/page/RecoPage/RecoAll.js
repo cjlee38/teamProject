@@ -7,6 +7,7 @@ import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
 import LectureList from '../Timetable2/components/LectureList'
+import {withRouter} from 'react-router-dom';
 
 function RecoAll(props) {
 
@@ -153,6 +154,8 @@ function RecoAll(props) {
   async function postUserset(){
     let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
     console.log(data)
+    props.history.push('/Result')
+
   }
 
   return (
@@ -178,7 +181,7 @@ function RecoAll(props) {
 }
 
 
-export default RecoAll;
+export default withRouter(RecoAll);
 
 
 
