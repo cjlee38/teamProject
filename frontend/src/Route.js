@@ -11,7 +11,7 @@ import './Nav.scss'
 import Logo from './image/logo.png';
 import Store from './Store/Store'
 import { Redirect } from 'react-router-dom';
-
+import Result from './page/ResultPage/Container'
 
 export default class Route1 extends Component{
     constructor(props){
@@ -52,7 +52,6 @@ export default class Route1 extends Component{
     }
 
     render() {
-      console.log("Routeid : "+this.state.userId);
       const {logged, onLogout} = this.state;
     return (
         <>
@@ -88,6 +87,8 @@ export default class Route1 extends Component{
                         <Route path="/Check" component={Check} />
                         <Route path="/Recommend" component={T2} />
                         <Route path="/Signup" component={Signuppage} />
+                        <Route path="/Result" component={Result} />
+
 
                     </Switch>
 

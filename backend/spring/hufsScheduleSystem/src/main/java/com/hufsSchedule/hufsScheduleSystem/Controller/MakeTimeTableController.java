@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("web/v1/makeTimeTable")
+@CrossOrigin(origins = "*")
 public class MakeTimeTableController {
     private final ResponseService responseService;
     private final MakeTimeTableService makeTimeTableService;

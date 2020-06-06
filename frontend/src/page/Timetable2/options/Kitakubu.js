@@ -1,24 +1,51 @@
 class Kitakubu {
-  constructor(lectureForms, lectures, credit) {
+  constructor(lectureForms, lectures, credit, click) {
     this.lectureForms = lectureForms;
     this.lectures = lectures;
     this.credit = credit;
     this.displayLectures = {};
+    this.handleClick = click
+
   }
 
   // TODO: 강의 배치 로직 구현
   execute() {
+    const hours=['9', '10', '11', '12', '13']
+    const weekdays=['월', '화', '수', '목', '금']
+          // const key = `${weekday}${hours}`;
+         
+          for(let i=0; i<hours.length; i++){
+            if ( hours) {
+              for(let j=0; j<5; j++){
+              const key = `${weekdays[j]}${hours[i]}`;
+              // result.push(key)
+              this.displayLectures = {
+                ...this.displayLectures,
+                [key]: {
+                  hours
+                }
+              };
+            }}
+          };
+    if (this.lectureForms){
+    const result = []
+
     this.lectureForms.forEach((lectureForm) => {
       const lecture = this.lectures[lectureForm];
-
       if (lecture.time) {
-        const times = lecture.time.split(',');
+        var times = lecture.time.split(' ');
+        let temp = null;
+        var result = []
+        times.forEach((text) => {
+          if (!isNaN(text)){result.push(temp + String(text))}
+          else {
+            temp = text
+          }
+        })
+        result.forEach((time) => {
+          const weekday = time.split('')[0];
+          const hours = time.split('')[1]
 
-        times.forEach((time) => {
-          const weekday = time.replace(/\s/g, '').split('')[0];
-          const hours = time.replace(/\s/g, '').split('')[1].toUpperCase();
-          console.log(111111+weekday)
-          console.log(2222222+hours)
           if (weekday && hours) {
             const key = `${weekday}${hours}`;
 
@@ -29,6 +56,8 @@ class Kitakubu {
                 professor: lecture.professor,
                 location: lecture.location,
                 isRequired: lecture.isRequired,
+                url : lecture.url,
+
                 weekday,
                 hours
               }
@@ -36,10 +65,12 @@ class Kitakubu {
           }
         });
       }
-    });
 
-    return this.displayLectures;
-  }
-}
-
+            
+        }); 
+      }
+        return this.displayLectures;
+  
+ }
+  };
 export default Kitakubu;
