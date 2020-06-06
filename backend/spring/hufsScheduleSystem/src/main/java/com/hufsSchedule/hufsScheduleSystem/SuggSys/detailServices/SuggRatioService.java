@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.SuggSys.InitSugg;
+package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
 import java.util.ArrayList;
 import java.util.List;

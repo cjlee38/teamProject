@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.SuggSys.InitSugg;
+package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Lists;

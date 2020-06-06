@@ -7,7 +7,7 @@ class Table extends Component {
 
   Formatter1(cell, row) {
     let a = row.first_major
-    if (a !== "-") {
+    if (a !== "-" && a) {
     return (
       <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
     );}
@@ -17,7 +17,7 @@ class Table extends Component {
 
   Formatter2(cell, row) {
     let a = row.second_major
-    if (a !== "-") {
+    if (a !== "-" && a) {
       return (
         <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
       );}
@@ -28,7 +28,7 @@ class Table extends Component {
   Formatter3(cell, row) {
     let a = row.minor
 
-    if (a !== "-") {
+    if (a !== "-" && a) {
       return (
         <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
       );}
@@ -39,7 +39,7 @@ class Table extends Component {
   Formatter4(cell, row) {
     let a = row.liberal_arts
 
-    if (a !== "-") {
+    if (a !== "-" && a) {
       return (
         <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
       );}
@@ -50,7 +50,7 @@ class Table extends Component {
   Formatter5(cell, row) {
     let a = row.teaching
 
-    if (a !== "-") {
+    if (a !== "-" && a) {
       return (
         <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
       );}
@@ -61,7 +61,7 @@ class Table extends Component {
   Formatter6(cell, row) {
     let a = row.optional
 
-    if (a !== "-") {
+    if (a !== "-" && a) {
       return (
         <>{a.map(function(obj) {return <span>{obj}<br/></span>})} </>
       );}
