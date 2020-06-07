@@ -17,7 +17,9 @@ import com.hufsSchedule.hufsScheduleSystem.Repository.UserRepository;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.SuggSysObj;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.UserSelectsObj;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
+import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysService;
+import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.UserSelectsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,7 +41,7 @@ public class MakeTimeTableService {
     private TimetableDto.Res res;
     private SuggSysService suggSysService;
     private UserSelectsService userSelectsService;
-    public void checkCondition(TimetableDto.Req req){
+    public List<TimetableDto.Result> checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
 
@@ -55,6 +57,13 @@ public class MakeTimeTableService {
         GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
 
         List<Table<String, String, WeightInstruction>> tables = suggSysService.addInstructionsToTable(suggSysObj, remainObj.getGrdCourse());
+
+        List<TimetableDto.Result> results = new ArrayList<>();
+        for (Table<String, String, WeightInstruction> table : tables) {
+            results.add(suggSysService.cvtTableToResult(table));
+        }
+
+        return results;
         // Taken GrdCondObj, remain GrdCondObj, UserInfo
         //GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
         //GrdCondObj remains = grdCompareService.compareGrdAndUser(req, condition, GrdCond);

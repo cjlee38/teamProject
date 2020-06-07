@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -26,9 +28,9 @@ public class MakeTimeTableController {
     }*/
 
     @PostMapping("/try")
-    public void makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
-        makeTimeTableService.checkCondition(req);
-        return ;
+    public List<TimetableDto.Result> makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
+        List<TimetableDto.Result> results = makeTimeTableService.checkCondition(req);
+        return results;
     }
 
     @PostMapping("/save")
