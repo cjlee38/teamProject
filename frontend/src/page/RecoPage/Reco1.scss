@@ -26,9 +26,16 @@ th{
     align-items: center;
     width: 100%;
 }
-.coursetbl > a {
+#root > div.Route > div > div > div > div > div > a {
     font-size: x-large;
     padding: 10px;
+}
+#root > div.Route > div > div > div > div > div > div:nth-child(4) > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody{
+    font-size: 12px !important;
+}
+#root > div.Route > div > div > div > div > div > div:nth-child(2) > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody{
+    font-size: 12px !important;
+
 }
 
 

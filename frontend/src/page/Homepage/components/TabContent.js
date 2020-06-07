@@ -65,7 +65,7 @@ export default function TabContent1(props) {
     return (
         <>
             <Table4 data={data3} />
-            <div className="container up">
+            <div className="GG">
                 <TabList>
                     <div label="학점" className="tab-content1">
                         <Table data={data} />
