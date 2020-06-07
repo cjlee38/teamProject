@@ -167,7 +167,7 @@ function RecoAll(props) {
 
   async function postUserset(){
     Axios.get('http://localhost:1415/', {
-        params: {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+        params: {myCourse : myCourse, myCredit : mycredit, mytime : mytime, userId:userId}
     })
     // let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
     // console.log(data)
