@@ -53,7 +53,7 @@ function RecoAll(props) {
 
 
     })
-  }, []
+  }, [areaType]
   )
 
 
@@ -153,9 +153,17 @@ function RecoAll(props) {
   }
 
   async function postUserset(){
-    Axios.get('http://localhost:1415/', {
-        params: {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    Axios.post('http://localhost:1415/web/v1/makeTimeTable/try', {
+        "myCourse" : myCourse, 
+        "myCredit" : mycredit, 
+        "mytime" : mytime
     })
+    .then((response) => {
+      console.log(response);        
+  })
+  .catch(function (error) {
+      console.log(error);
+  });
     // let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
     // console.log(data)
     props.history.push('/Result')

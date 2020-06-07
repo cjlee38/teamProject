@@ -32,12 +32,12 @@ const Signuppage = () => {
             "password": password,
             "name": username
         })
-            .then((response) => {
-                alert("가입 완료!")                
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .then((response) => {
+            alert("가입 완료!")                
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
