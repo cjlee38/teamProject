@@ -66,7 +66,7 @@ function RecoAll(props) {
 
 
     })
-  }, [areaType]
+  }, []
   )
 
 
