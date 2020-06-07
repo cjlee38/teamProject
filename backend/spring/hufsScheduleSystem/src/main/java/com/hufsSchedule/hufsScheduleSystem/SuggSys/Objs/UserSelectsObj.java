@@ -9,9 +9,9 @@ import java.util.List;
 public class UserSelectsObj {
     List<Instruction> userSelectCourses;
     CreditRange userSelectCredit;
-    Object userSelectFreeTime;
+    List<String> userSelectFreeTime;
 
-    public UserSelectsObj(List<Instruction> userSelectCourses, CreditRange userSelectCredit, Object userSelectFreeTime) {
+    public UserSelectsObj(List<Instruction> userSelectCourses, CreditRange userSelectCredit, List<String> userSelectFreeTime) {
         this.userSelectCourses = userSelectCourses;
         this.userSelectCredit = userSelectCredit;
         this.userSelectFreeTime = userSelectFreeTime;
