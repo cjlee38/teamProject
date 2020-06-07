@@ -67,10 +67,10 @@ export default function TabContent1(props) {
             <Table4 data={data3} />
             <div className="container up">
                 <TabList>
-                    <div label="학점" className="tab-content">
+                    <div label="학점" className="tab-content1">
                         <Table data={data} />
                     </div>
-                    <div label="이수 과목" className="tab-content">
+                    <div label="이수 과목" className="tab-content2">
                         <Table2 data={data2} />
                     </div>
                 </TabList>
