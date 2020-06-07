@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {  useState, useEffect } from 'react';
 import Table from './ResultTable';
 import TabList from './Tablist';
 import Spinner from 'react-bootstrap/Spinner';

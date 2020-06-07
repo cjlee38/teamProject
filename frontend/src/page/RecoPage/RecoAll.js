@@ -1,7 +1,7 @@
 import '../Timetable2/components/css/index.css'
 import './Reco1.scss';
-import React, { Component, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+// import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
 import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
