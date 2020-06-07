@@ -32,8 +32,21 @@ function RecoAll(props) {
   useEffect(() => {
     crawl.get_inst().then(response => {
       response.data.data.sort(function (a, b) { // 오름차순
-        return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area ? 1 : a.area < b.area ? 0 : -2;
+        if(a.dept>b.dept) return 1;
+        else if(a.dept<b.dept) return -1;
+        else if(a.area>b.area) return 1;
+        else if (a.area<b.area) return -1;
+        else if(a.year>b.year) return 1;
+        else if(a.year<b.year) return -1;
+        return 0;
       });
+
+
+      
+
+
+
+
       response.data.data.map(function (obj) {
         // obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
