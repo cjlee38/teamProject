@@ -116,7 +116,7 @@ class LectureList extends React.Component {
   }
 
   setTable = () => {
-    const { credit, lectureForms, lectures } = this.state;
+    const { lectureForms, lectures } = this.state;
     const { option } = this.state;
 
     let computedLectures = null;
@@ -144,7 +144,6 @@ class LectureList extends React.Component {
 
   }
   render() {
-    const { credit, lectureForms, lectures } = this.state;
     const {
       option,
       weekday,

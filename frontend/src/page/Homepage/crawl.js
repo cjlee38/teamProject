@@ -6,13 +6,6 @@ axios.defaults.baseURL = "http://127.0.0.1:5000"
 
 export default {
     crawlInst(data) {
-        let options = {
-            method: 'POST',
-            url: "http://127.0.0.1:5000/inst_update",
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            },
-        };
         return axios.post("/inst_update", data)
     },
 
@@ -29,13 +22,6 @@ export default {
     },
 
     async get_inst() {
-        let options = {
-            method: 'GET',
-            url: "http://127.0.0.1:5000/inst_update",
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            },
-        };
         return axios.get("/inst_update")
         }
 }

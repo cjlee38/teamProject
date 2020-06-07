@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, } from 'react';
+import { BrowserRouter as Link } from 'react-router-dom';
 import Input from './components/Input';
 import Button from './components/Button';
 import Title from './components/Title';
