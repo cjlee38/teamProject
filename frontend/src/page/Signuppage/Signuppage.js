@@ -26,7 +26,6 @@ const Signuppage = () => {
     }
 
     const trySignUp = async () => {
-        console.log(username, usernum, password);
         Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/SignUp', {
             "studentNumber": usernum,
             "password": password,
