@@ -33,16 +33,20 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
+    let config = {
+      headers: {
+          "Access-Control-Allow-Origin": "*"
+      },
+    };
     Axios.get('http://localhost:1415/web/v1/user/Login', {
       params: { studentNumber: id, password: password }
-    })
+    }, config)
       .then((response) => {
         doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
-        doSignin(3);       
-
-        alert("아이디/비밀번호를 확인해주세요!")
+        console.log(error);
+        alert("아이디/비밀번호를 확인해주세요!");
       });
       
     reset();
