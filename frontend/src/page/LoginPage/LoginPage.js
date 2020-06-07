@@ -33,15 +33,11 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    let config = {
-      headers: {
-          "Access-Control-Allow-Origin": "*"
-      },
-    };
-    Axios.get('http://localhost:1415/web/v1/user/Login', {
+    Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
       params: { studentNumber: id, password: password }
-    }, config)
+    })
       .then((response) => {
+        console.log(response);
         doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {

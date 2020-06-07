@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TimetableDto {
 
@@ -37,9 +39,9 @@ public class TimetableDto {
 
     @Getter
     public static class Result {
-        private ArrayList<Day> timeTable;
+        private List<Day> timeTable;
 
-        public Result(ArrayList<Day> timeTable) {
+        public Result(List<Day> timeTable) {
             this.timeTable = timeTable;
         }
     }
@@ -55,16 +57,23 @@ public class TimetableDto {
             this.required = required;
         }
     }
-
     public static class Day {
-        private ArrayList<Data> data;
+        private List<Cell> cell;
+        public Day(List<Cell> cell) {
+            this.cell = cell;
+        }
+    }
+
+    public static class Cell {
+
+        private Data data;
         private Boolean is;
 
-        public Day(Boolean is){
+        public Cell(Boolean is){
             this.is = is;
         }
 
-        public Day(ArrayList<Data> data){
+        public Cell(Data data){
             this.data = data;
         }
     }
@@ -80,7 +89,7 @@ public class TimetableDto {
     결과 테이블이 월 123 최정주의 자료구조이고 필수조건이 true이면 위와 같이 보냅니다.
     테이블 형성 과정은 이렇습니다.
     1. TimetableDto.Data data1 = new TimetableDto.Data("자료구조", "최정주", 1);
-    2. TimetableDto.Day monday = new TimeTableDto.Day();
+    2. TimetableDto.Day monday = new TimeTableDto.Day(data1, );
     3. for(int i = 0; i < 12; i++) {
            monday.add(false);
        }
