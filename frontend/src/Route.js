@@ -12,6 +12,7 @@ import Logo from './image/logo.png';
 import Store from './Store/Store'
 import { Redirect } from 'react-router-dom';
 import Result from './page/ResultPage/Container'
+import mytable from './page/ResultPage/mytable';
 
 export default class Route1 extends Component{
     constructor(props){
@@ -65,6 +66,7 @@ export default class Route1 extends Component{
           <Nav className="mr-auto">
             <Nav.Link href="/Check">졸업요건</Nav.Link>
             <Nav.Link href="/Recommend">시간표</Nav.Link>
+            <Nav.Link href="/mytable">내 시간표</Nav.Link>
           </Nav>
           <Nav>
             {logged? <Nav.Link href="/Login" onClick={onLogout}>Logout</Nav.Link> :<Nav.Link href="/Login">Login</Nav.Link>}
@@ -88,6 +90,7 @@ export default class Route1 extends Component{
                         <Route path="/Recommend" component={T2} />
                         <Route path="/Signup" component={Signuppage} />
                         <Route path="/Result" component={Result} />
+                        <Route path="/mytable" component={mytable} />
 
 
                     </Switch>
