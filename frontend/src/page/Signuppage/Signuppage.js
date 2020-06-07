@@ -22,7 +22,6 @@ const Signuppage = () => {
             [name]: value
         });
 
-        console.log(username, usernum, password);
     }
 
     const trySignUp = async () => {
