@@ -41,7 +41,7 @@ public class MakeTimeTableService {
     private TimetableDto.Res res;
     private SuggSysService suggSysService;
     private UserSelectsService userSelectsService;
-    public void checkCondition(TimetableDto.Req req){
+    public List<TimetableDto.Result> checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
 
