@@ -47,7 +47,7 @@ public class MakeTimeTableService {
         User userInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         List<Instruction> userTakenCourses = condition.getInstructions();
         Credit userCredit = condition.getCredit();
-//        UserSelectsObj userSelectsObj = userSelectsService.initUserSelects(####)
+        UserSelectsObj userSelectsObj = userSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
         SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
 
 

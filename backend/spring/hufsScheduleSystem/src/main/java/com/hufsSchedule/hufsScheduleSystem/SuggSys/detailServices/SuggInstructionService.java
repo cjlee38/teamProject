@@ -17,8 +17,9 @@ public class SuggInstructionService {
     /*
     본인 전공에 해당하지 않는 과목 삭제할것인지..?
      */
-    public List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, Map<String, List<Instruction>> takenInstructions, List<Instruction> selectedInstructions, User userInfo) {
-        List <Instruction> removeInstructions = SuggSysFunc.sumInstructions(takenInstructions);
+    public List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions, List<Instruction> selectedInstructions, User userInfo) {
+        List <Instruction> removeInstructions = new ArrayList<>();
+        removeInstructions.addAll(takenInstructions);
         removeInstructions.addAll(selectedInstructions);
 
         List<String> names = new ArrayList<>(Arrays.asList(userInfo.getMajor(), userInfo.getSecondMajor(), userInfo.getMinor(), "교양"));
