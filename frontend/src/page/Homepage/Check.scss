@@ -70,3 +70,9 @@ th {
     text-align: center;
     font-size: x-large !important;
 }
+#root > div.Route > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody tr{
+    font-size: large !important;
+}
+#root > div.Route > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr:nth-child(3) span{
+    color:red !important;
+}
