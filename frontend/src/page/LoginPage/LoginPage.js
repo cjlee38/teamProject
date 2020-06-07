@@ -54,7 +54,9 @@ const LoginP = (props) => {
     await props.onLogin(id_input);
     props.history.push('/Check')
   }
-
+  const toSignup = () => {
+    props.history.push('/Signup')
+  }
   return (
     <>
       <div className="body">
@@ -78,9 +80,7 @@ const LoginP = (props) => {
         </div>
         <div className="Button">
             <Button onClick={tryLogin} name={"로그인"} value={"login"} />
-          <Link to="/Signup">
-            <Button name={"회원가입"} value={"signUp"} />
-          </Link>
+            <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
     </div>
     </>
