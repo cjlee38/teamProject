@@ -30,7 +30,7 @@ public class SuggSysService {
     validCourseList -> 20-1 모든 과목에서 내가 수강한 과목  & 선택한 과목 제거. ( + 본인 전공 과목만 남길것인지? )
     creditRatio -> 지금까지 수강한 과목 학점 비율. & 1전공-전공명 / 이중전공 - 전공명 map
      */
-    public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, Map<String, List<Instruction>> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
+    public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
         CreditRange creditRange = suggCreditService.initTimeTableCredit(userSelectsObj.getUserSelectCredit(), userSelectsObj.getUserSelectCourses());
         Table<String, String, WeightInstruction> timeTable = suggTableService.initTimeTable(userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserSelectFreeTime());
         List<WeightInstruction> validInstructions = suggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userInfo);
