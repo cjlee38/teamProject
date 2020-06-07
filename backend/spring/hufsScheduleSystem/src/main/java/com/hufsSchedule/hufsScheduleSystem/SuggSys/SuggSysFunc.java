@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class SuggSysFunc {
 
     public static boolean isInstructionEmpty(WeightInstruction instruction) {
-        if (instruction.getInstruction().getInstructionNumber() == null) {
+        if (instruction.getInstruction() == null) {
             return true;
         } else {
             return false;
@@ -24,7 +24,7 @@ public class SuggSysFunc {
     }
 
     public static WeightInstruction getEmptyInstruction() {
-        return new WeightInstruction(new Float(0), new Instruction());
+        return new WeightInstruction(new Float(-1));
     }
 
 
@@ -82,7 +82,7 @@ public class SuggSysFunc {
     public static Integer sumTableCredit(Table<String, String, WeightInstruction> table) {
         Integer summed = 0;
         for (Table.Cell cell : table.cellSet()) {
-            if (cell.getValue() != null) {
+            if (cell.getValue() != null && ((WeightInstruction)cell.getValue()).getInstruction() != null) {
                 summed += ((WeightInstruction)cell.getValue()).getInstruction().getCredit();
             }
         }

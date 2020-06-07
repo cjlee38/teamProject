@@ -66,11 +66,13 @@ export default class Route1 extends Component{
           <Nav className="mr-auto">
             <Nav.Link href="/Check">졸업요건</Nav.Link>
             <Nav.Link href="/Recommend">시간표</Nav.Link>
-            <Nav.Link href="/mytable">내 시간표</Nav.Link>
+            
+            {logged? <Nav.Link href="/mytable">내 시간표</Nav.Link>:<> </>}
           </Nav>
           <Nav>
-            {logged? <Nav.Link href="/Login" onClick={onLogout}>Logout</Nav.Link> :<Nav.Link href="/Login">Login</Nav.Link>}
             
+            {logged? <Nav.Link href="/Login" onClick={onLogout}>Logout</Nav.Link> :<Nav.Link href="/Login">Login</Nav.Link>}
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>

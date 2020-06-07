@@ -13,6 +13,9 @@ public class WeightInstruction implements Comparable<WeightInstruction>{
         this.weight = weight;
         this.instruction = instruction;
     }
+    public WeightInstruction(Float weight) {
+        this.weight = weight;
+    }
 
 
     @Override

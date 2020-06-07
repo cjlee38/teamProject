@@ -49,7 +49,7 @@ public class SuggInstructionService {
         for (String key : remainCourses.keySet()) {
             flattenCourses.addAll(remainCourses.get(key));
         }
-
+        // 에러날거같은데
         Float one = new Float(1);
         for ( CourseEnums course : flattenCourses ){
             validInstructions.stream()

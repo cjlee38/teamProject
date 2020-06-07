@@ -17,12 +17,17 @@ import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.splitClass
 
 public class SuggTableService {
 
-    public Table<String, String, WeightInstruction> initTimeTable(List<Instruction> userSelectInstructions, Object userSelectFreetime) {
+    public Table<String, String, WeightInstruction> initTimeTable(List<Instruction> userSelectInstructions, List<String> userSelectFreetime) {
         Table<String, String, WeightInstruction> timeTable = getEmptyTimeTable();
         List<WeightInstruction> weigted = SuggInstructionService.addWeightToInstructions(userSelectInstructions, new Float(1));
-        // do something with user select free time
 
-        for (WeightInstruction instruction : weigted) {
+        for (String freetime : userSelectFreetime) { // 공강시간 --> empty instruction
+            String day = cvtKorDayToEng(freetime.substring(0,1));
+            String time = freetime.substring(1);
+            timeTable.put(time, day, SuggSysFunc.getEmptyInstruction());
+        }
+
+        for (WeightInstruction instruction : weigted) { // 사용자가 설정한 강의 추가
             inputInstructionToTable(timeTable, instruction);
         }
 
@@ -57,7 +62,9 @@ public class SuggTableService {
         }
 
         for (Table.Cell cell : timeTable.cellSet()) {
-            if (cell.getValue() != null && cell.getValue().equals(instruction.getInstruction().getInstructionNumber().substring(0,6)))    {
+            if (cell.getValue() != null
+                    && ((WeightInstruction)cell.getValue()).getInstruction() != null
+                    && cell.getValue().equals(instruction.getInstruction().getInstructionNumber().substring(0,6)))    {
                 return; // 같은 학수번호가 존재한다면 return
             }
         }

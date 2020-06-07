@@ -39,13 +39,15 @@ public class SuggSysService {
         return new SuggSysObj(creditRange, timeTable, validInstructions, creditRatio);
     }
 
-    // 전필을 강의과목에 추가
+    // 강의과목을 테이블에 추가
     public List<Table<String, String, WeightInstruction>> addInstructionsToTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses) {
-        List<WeightInstruction> weightedInstructions = sortInstructionByWeight(suggInstructionService.addWeigthToNcssInstructions(remainCourses, suggSysObj.getValidInstructions())); // 남아있는 필수과목에 해당하는 Instruction만 남김
+        List<WeightInstruction> weightedInstructions = sortInstructionByWeight(
+                suggInstructionService.addWeigthToNcssInstructions(remainCourses, suggSysObj.getValidInstructions())
+        ); // 남아있는 필수과목에 해당하는 Instruction만 남김
 
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
         for (Integer idx = 0; idx <= weightedInstructions.size(); idx++) {
-            Table<String, String, WeightInstruction> table = suggTableService.getEmptyTimeTable();
+            Table<String, String, WeightInstruction> table = suggSysObj.getTimeTable();
 
             List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(weightedInstructions);
             Integer maxCredit = suggSysObj.getCreditRange().getMaxCredit();
