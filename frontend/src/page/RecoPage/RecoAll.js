@@ -165,21 +165,11 @@ function RecoAll(props) {
     return 0
   }
 
-  async function postUserset(){
-    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/try', {
-        "myCourse" : myCourse, 
-        "myCredit" : mycredit, 
-        "mytime" : mytime
-    })
-    .then((response) => {
-      console.log(response);        
-  })
-  .catch(function (error) {
-      console.log(error);
-  });
-    // let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+function postUserset(){
+    return {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    // let data = 
     // console.log(data)
-    props.history.push('/Result')
+    // props.history.push('/Result')
 
   }
 
@@ -194,7 +184,8 @@ function RecoAll(props) {
               {data3.isdata ? <Table4 data={data3.data} full_data = {full_data} lectureSet={lectureSet} myCourse={myCourse} lib={data3.lib} handlerButton={handlerButton} RemoveButton={RemoveButton} /> : <><Spinner animation="grow" variant="info" /><div className="spinner">강의 시간표 로딩중...</div></>}
             </div>
             <div label="공강 선택" className="tab-content">
-             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} mytime={mytime} setmyCredit={setmyCredit} post={postUserset} timeList={timeList} />
+             <LectureList lectures={lectures} length1 = {makearr(myCourse)} setTime={setmyTime} getData={postUserset}
+             mytime={mytime} myCourse={myCourse} mycredit={mycredit} setmyCredit={setmyCredit} timeList={timeList} />
             </div>
 
           </TabList>

@@ -9,14 +9,14 @@ import Kitakubu from '../options/Kitakubu';
 import jammanbo from '../options/jammanbo';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import { Link } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core';
 
 class LectureList extends React.Component {
   constructor(props) {
     super(props);
     this.setTime = this.props.setTime.bind(this)
     this.setmyCredit = this.props.setmyCredit.bind(this)
-    this.postData = this.props.post
-    this.mytime = this.props.mytime
     this.timeList = this.props.timeList
     this.state = {
       lectureForms: this.props.length1,
@@ -114,7 +114,6 @@ class LectureList extends React.Component {
 
     return -1;
   }
-
   setTable = () => {
     const { lectureForms, lectures } = this.state;
     const { option } = this.state;
@@ -144,13 +143,16 @@ class LectureList extends React.Component {
 
   }
   render() {
+    
     const {
       option,
       weekday,
       timeUnitAlphabet,
       timeUnitString,
-      displayLectures
+      displayLectures,
     } = this.state;
+
+    const {myCourse, mytime, myCredit} = this.props.getData();
 
     return (
       <div id="lecture-list">
@@ -173,11 +175,18 @@ class LectureList extends React.Component {
             </RadioGroup>
           </FormControl>
         </div>
-
-        <Button variant="contained" color="primary" onClick={() => this.props.post()}>
+      <Link to={{
+        pathname:"/Result",
+        state: {
+          myCourse:myCourse,
+          mytime : mytime,
+          myCredit : myCredit
+        }
+      }}>
+        <Button variant="contained" color="primary" >
           {'시간표 생성!'}
         </Button>
-
+        </Link>
         <table>
           <thead>
             <tr>
