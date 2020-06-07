@@ -1,13 +1,14 @@
 import '../Timetable2/components/css/index.css'
 import './Reco1.scss';
-import React, { Component, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+// import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
 import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
 import LectureList from '../Timetable2/components/LectureList'
 import {withRouter} from 'react-router-dom';
+import Axios from 'axios';
 
 function RecoAll(props) {
 
@@ -32,8 +33,21 @@ function RecoAll(props) {
   useEffect(() => {
     crawl.get_inst().then(response => {
       response.data.data.sort(function (a, b) { // 오름차순
-        return a.dept < b.dept ? -1 : a.dept > b.dept ? 2 : a.area > b.area ? 1 : a.area < b.area ? 0 : -2;
+        if(a.dept>b.dept) return 1;
+        else if(a.dept<b.dept) return -1;
+        else if(a.area>b.area) return 1;
+        else if (a.area<b.area) return -1;
+        else if(a.year>b.year) return 1;
+        else if(a.year<b.year) return -1;
+        return 0;
       });
+
+
+      
+
+
+
+
       response.data.data.map(function (obj) {
         // obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
@@ -152,8 +166,11 @@ function RecoAll(props) {
   }
 
   async function postUserset(){
-    let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
-    console.log(data)
+    Axios.get('http://localhost:1415/', {
+        params: {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    })
+    // let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    // console.log(data)
     props.history.push('/Result')
 
   }

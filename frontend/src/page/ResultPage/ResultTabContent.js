@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {  useState, useEffect } from 'react';
 import Table from './ResultTable';
 import TabList from './Tablist';
 import Spinner from 'react-bootstrap/Spinner';
@@ -60,19 +60,36 @@ export default function TabContent1() {
 
 
 
-    function mapping() {
+    function mapping(data) {
         let i = 0
         data.map(function (array) {
             i++;
-            return (<div label="시간표{i}" className="tab-content">
+            return (<div label={`시간표${i}`} className="tab-content">
                 <Table data={array} />
+                <button onClick={()=>onClick(i-1)}/>
+
             </div>)
         })
     }
 
 
-    var i = 0;
+    function onClick(i){
+        console.log(data[i]);
+        let idArray=[];
+        for(let j=0; j<data[i].length; j++){
+            if(!data[i][j]===''){
+                idArray.push(data[i][j].instruction_id);
+                console.log(data[i][j].instruction_id)
+            }
+        }
+        console.log(idArray)
+    }
 
+
+
+
+
+    var i = 0;
     return (
         <>
             {isData ?
@@ -82,8 +99,12 @@ export default function TabContent1() {
 
                         {data.map(function (array) {
                             i++;
+                            let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
                                 <Table data={array} />
+                                <button style={
+                                    {float: 'right'}
+                                }onClick={()=>onClick(w-1)}> 저장하기</button>
                             </div>)
                         })}
                     </TabList>

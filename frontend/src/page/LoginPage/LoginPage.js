@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, } from 'react';
+import { BrowserRouter as Link } from 'react-router-dom';
 import Input from './components/Input';
 import Button from './components/Button';
 import Title from './components/Title';
@@ -33,19 +33,16 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    let config = {
-      headers: {
-          "Access-Control-Allow-Origin": "*"
-      },
-    };
-    Axios.get('http://localhost:1415/web/v1/user/Login', {
+    Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
       params: { studentNumber: id, password: password }
-    }, config)
+    })
       .then((response) => {
+        console.log(response);
         doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
         console.log(error);
+        doSignin(1)
         alert("아이디/비밀번호를 확인해주세요!");
       });
       
@@ -57,7 +54,9 @@ const LoginP = (props) => {
     await props.onLogin(id_input);
     props.history.push('/Check')
   }
-
+  const toSignup = () => {
+    props.history.push('/Signup')
+  }
   return (
     <>
       <div className="body">
@@ -81,9 +80,7 @@ const LoginP = (props) => {
         </div>
         <div className="Button">
             <Button onClick={tryLogin} name={"로그인"} value={"login"} />
-          <Link to="/Signup">
-            <Button name={"회원가입"} value={"signUp"} />
-          </Link>
+            <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
     </div>
     </>

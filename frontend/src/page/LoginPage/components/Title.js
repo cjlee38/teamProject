@@ -13,7 +13,7 @@ export default function Title() {
             <b className="titleWord">Hankuk University of Foreign Studies</b>
           </div>
           <div>
-            <b className="titleWord">Schdule Maker</b>
+            <b className="titleWord">Schedule Maker</b>
           </div>
         </div>
     )

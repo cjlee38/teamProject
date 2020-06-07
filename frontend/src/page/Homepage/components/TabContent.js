@@ -12,7 +12,7 @@ export default function TabContent1(props) {
     const [data2, setData2] = useState([{trow: "필수 과목"}, {trow: "이수 과목"}, {trow: "미이수 과목"} ])
     const [data3, setData3] = useState()
     useEffect(() => {
-        Axios.get('http://localhost:1415/web/v1/checkCondition/try', {
+        Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/checkCondition/try', {
             params: { userId: props.userID }
         }).then(response => {
             let total = response.data.data.takenCredit.reduce(
