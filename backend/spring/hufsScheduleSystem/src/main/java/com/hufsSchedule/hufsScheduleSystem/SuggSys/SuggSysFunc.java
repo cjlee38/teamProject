@@ -8,6 +8,7 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
+import sun.plugin.services.WIExplorerBrowserService;
 
 
 import java.util.*;
@@ -87,6 +88,14 @@ public class SuggSysFunc {
             }
         }
         return summed;
+    }
+
+    public static List<WeightInstruction> sortInstructionByWeight(List<WeightInstruction> instructions) {
+        List<WeightInstruction> sorted = new ArrayList<>();
+        sorted.addAll(instructions);
+        Collections.sort(instructions);
+
+        return sorted;
     }
 
 }
