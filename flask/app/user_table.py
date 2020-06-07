@@ -285,7 +285,7 @@ def user_Table(id_input, pw_input, user_id, db):
 
 
     # course table insert
-    # print(courses_list)
+    print(courses_list)
     for i in courses_list:
         inst_num = i[0].strip()
         course_area = i[2]
