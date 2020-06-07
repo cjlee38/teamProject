@@ -166,7 +166,7 @@ function RecoAll(props) {
   }
 
   async function postUserset(){
-    Axios.post('http://localhost:1415/web/v1/makeTimeTable/try', {
+    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/try', {
         "myCourse" : myCourse, 
         "myCredit" : mycredit, 
         "mytime" : mytime

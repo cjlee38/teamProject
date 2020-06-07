@@ -1,6 +1,6 @@
 import axios from "axios"
 
-axios.defaults.baseURL = "http://127.0.0.1:5000"
+axios.defaults.baseURL = "http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:5000"
 // axios.defaults.header = {}
 
 

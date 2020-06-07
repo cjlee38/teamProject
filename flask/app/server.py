@@ -105,7 +105,7 @@ class ReigstInst(Resource):
         return {'status': 'success'}
 
     def get(self):
-        
+
 
         db_class = database.Database()
 
@@ -128,5 +128,5 @@ api.add_resource(ReigstInst, '/inst_update')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
 
