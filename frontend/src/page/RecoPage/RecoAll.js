@@ -8,6 +8,7 @@ import crawl from '../Homepage/crawl';
 import Spinner from 'react-bootstrap/Spinner';
 import LectureList from '../Timetable2/components/LectureList'
 import {withRouter} from 'react-router-dom';
+import Axios from 'axios';
 
 function RecoAll(props) {
 
@@ -165,8 +166,11 @@ function RecoAll(props) {
   }
 
   async function postUserset(){
-    let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
-    console.log(data)
+    Axios.get('http://localhost:1415/', {
+        params: {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    })
+    // let data = {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
+    // console.log(data)
     props.history.push('/Result')
 
   }
