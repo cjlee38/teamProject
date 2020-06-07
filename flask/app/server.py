@@ -5,14 +5,12 @@ import database
 from course_table import *
 from user_table import *
 from flask_cors import CORS
-from module import redis_session
 import json
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 app.secret_key = "super secret key"
-rd = redis_session()
 
 class RegistUser(Resource):
     def get(self):
@@ -66,7 +64,7 @@ class RegistUser(Resource):
                 #     raise e
 
             else:
-                raise Exception('아이디를 다시 입력해주세요!')
+                raise Exception('Check your ID')
            
         except Exception as e:
             print(e)
@@ -110,14 +108,9 @@ class ReigstInst(Resource):
         print(session)
         if session.get('session_key'):
             key = session['session_key']
-            rd.get_session(key)
-            json_inst_dict = rd.db.get('inst_dict').decode('utf-8')
-            inst_dict2 = dict(json.loads(json_inst_dict))
-            print(inst_dict2)
-            return inst_dict2
+            
         
         else:
-            key = rd.save_session(1)
             session['session_key'] = key
             
             print(session)
@@ -132,10 +125,6 @@ class ReigstInst(Resource):
     """.format(rq_year=20, rq_semester=1)
             area =  db_class.execute_all(sql_lib_area)
             if len(row):
-                # print(row)
-                inst_dict = {'data' : row, 'lib' : area}
-                json_inst_dict = json.dumps(inst_dict, ensure_ascii=False).encode('utf-8')
-                rd.db.set("inst_dict", json_inst_dict)
                 return {'data' : row, 'lib' : area}
             else:
                 return {'error' : '강의가 없습니다.'}
