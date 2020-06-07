@@ -30,4 +30,9 @@ public class MakeTimeTableController {
         makeTimeTableService.checkCondition(req);
         return ;
     }
+
+    @PostMapping("/save")
+    public void saveTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
+        return ;
+    }
 }

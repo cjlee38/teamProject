@@ -8,7 +8,6 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
-import sun.plugin.services.WIExplorerBrowserService;
 
 
 import java.util.*;

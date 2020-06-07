@@ -1,5 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
+import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import lombok.AccessLevel;
@@ -18,12 +19,27 @@ public class TimetableDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class Req{
         private Long userId;
+        private ArrayList<Instruction> myCourse;
+        private Long myCredit;
         private ArrayList<String> myFreetime;// 공강시간
 
        @Builder
-        public Req(Long userId, ArrayList<String> mytime){
+        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> mytime){
             this.userId = userId;
+            this.myCourse = myCourse;
+            this.myCredit = myCredit;
             this.myFreetime = mytime;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class save{
+        private ArrayList<Instruction> myPick;
+
+        @Builder
+        public save(ArrayList<Instruction> myPick){
+            this.myPick = myPick;
         }
     }
 
