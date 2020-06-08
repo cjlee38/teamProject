@@ -52,17 +52,31 @@ th {
 .course_t td{
     font-size: 10pt !important;
 }
-#root > div > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody td:nth-child(1){
+div.GG{
+    width: 80%;
+}
+
+#root > div > div > div > div.body > div.GG > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody td:nth-child(1){
     font-size: 13pt !important;
 }
 
-#root > div > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr:nth-child(3) > td:nth-child(n+2){
+#root > div > div > div > div.body > div.GG > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr:nth-child(3) > td:nth-child(n+2){
     color: red;
     font-weight: 600;
 }
 .react-bs-table-no-data{
     text-align: center;
 }
-#root > div.Route > div > div > div.body > div.container.up > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody span{
+#root > div.Route > div > div > div.body > div.GG > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody span{
     color: black !important;
+}
+#root > div.Route > div > div > div.body > div.table4 > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr > td{
+    text-align: center;
+    // font-size: x-large !important;
+}
+#root > div.Route > div > div > div.body > div.GG > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody tr{
+    // font-size: large !important;
+}
+#root > div.Route > div > div > div.body > div.GG > div > div > div > div > div.react-bs-table.react-bs-table-bordered > div.react-bs-container-body > table > tbody > tr:nth-child(3) span{
+    color:red !important;
 }
