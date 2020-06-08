@@ -1,41 +1,49 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from './ResultTable';
 import TabList from './Tablist';
 import Spinner from 'react-bootstrap/Spinner';
 import Axios from 'axios';
+import LectureTable from './test'
 
 
 export default function TabContent1(props) {
     console.log(props.data.state)
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
     const [isData, setIsData] = useState(false)
 
     useEffect(async () => {
         Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/try', {
-            "myCourse" : props.data.state.myCourse, 
-            "myCredit" : props.data.state.myCredit, 
-            "mytime" : props.data.state.mytime
+            "myCourse": props.data.state.myCourse,
+            "myCredit": props.data.state.myCredit,
+            "mytime": props.data.state.mytime,
+            "userId": props.userId
         })
-        .then((response) => {
-          console.log(response);
-          for (var x = 0; x < response.data.data.length; x++) {
-            for (var i = 0; i < 13; i++) {
-                for (var j = 1; j < 6; j++) {
-                    if (data[x][i][j] === 0) {
-                        data[x][i][j] = '';
-                    }
+            .then(async (response) => {
+                console.log(response);
+                for (var x = 0; x < response.data.data.length; x++) {
+                    for (var i = 0; i < 13; i++) {
+                        for (var j = 1; j < 6; j++) {
+                            if (data[x][i][j] === 0) {
+                                data[x][i][j] = '';
+                            }
+                        }
+                    };
                 }
-            };
-        }  
-          setData(response.data.data)      
-      })
-      .catch(async function (error) {
-          console.log(error);
-      });
-       
-        
+                await setData(response.data.data)
+                await setIsData(true)
+
+            })
+            .catch(async function (error) {
+                console.log(error);
+                await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
+                await setIsData(true)
+
+                alert(error)
+            });
+
+            // await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
+
         // await setData(data)
-        await setIsData(true)
     }, []
     )
 
@@ -47,18 +55,18 @@ export default function TabContent1(props) {
             i++;
             return (<div label={`시간표${i}`} className="tab-content">
                 <Table data={array} />
-                <button onClick={()=>onClick(i-1)}/>
+                <button onClick={() => onClick(i - 1)} />
 
             </div>)
         })
     }
 
 
-    function onClick(i){
+    function onClick(i) {
         console.log(data[i]);
-        let idArray=[];
-        for(let j=0; j<data[i].length; j++){
-            if(!data[i][j]===''){
+        let idArray = [];
+        for (let j = 0; j < data[i].length; j++) {
+            if (!data[i][j] === '') {
                 idArray.push(data[i][j].instruction_id);
                 console.log(data[i][j].instruction_id)
             }
@@ -67,10 +75,22 @@ export default function TabContent1(props) {
     }
 
 
+    function makearr(a) {
+        if (a.length) {
 
+            let arr = Array(a.length);
+            for (let i = 0; i < a.length; i++) {
+                arr[i] = i;
+            }
+            return arr
+
+        }
+        return 0
+    }
 
 
     var i = 0;
+    console.log(data)
     return (
         <>
             {isData ?
@@ -82,10 +102,10 @@ export default function TabContent1(props) {
                             i++;
                             let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
-                                <Table data={array} />
+                                <LectureTable data={array} lectureLength={makearr(array)} />
                                 <button style={
-                                    {float: 'right'}
-                                }onClick={()=>onClick(w-1)}> 저장하기</button>
+                                    { float: 'right' }
+                                } onClick={() => onClick(w - 1)}> 저장하기</button>
                             </div>)
                         })}
                     </TabList>
