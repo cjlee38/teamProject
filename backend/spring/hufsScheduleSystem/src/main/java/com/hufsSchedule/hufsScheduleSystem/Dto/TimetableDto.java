@@ -24,11 +24,11 @@ public class TimetableDto {
         private ArrayList<String> myFreetime;// 공강시간
 
        @Builder
-        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> mytime){
+        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime){
             this.userId = userId;
             this.myCourse = myCourse;
             this.myCredit = myCredit;
-            this.myFreetime = mytime;
+            this.myFreetime = myFreetime;
         }
     }
 
