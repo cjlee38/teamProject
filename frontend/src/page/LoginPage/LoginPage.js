@@ -33,9 +33,16 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
+    
+    let config = {
+      headers: {
+          "Access-Control-Allow-Origin": "*"
+      },
+  };
+  console.log(id, password)
     Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
      "studentNumber": id, "password": password 
-    })
+    }, config)
       .then((response) => {
         console.log(response);
         doSignin(response.data.data.userId);       
@@ -60,7 +67,7 @@ const LoginP = (props) => {
     <>
       <div className="body">
         <Title />
-        <form method="POST">
+        <form onSubmit={tryLogin} method="POST">
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -79,7 +86,10 @@ const LoginP = (props) => {
           />
         </div>
         <div className="idPassword">
-            <Button type={"submit"} onClick={tryLogin} onSubmit={tryLogin} name={"로그인"} value={"login"} />
+
+            <button className={"login"} name={"로그인"}
+            >로그인</button>
+
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
         </form>
