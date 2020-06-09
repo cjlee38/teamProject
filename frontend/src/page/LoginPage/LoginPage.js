@@ -43,9 +43,9 @@ const LoginP = (props) => {
     Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
      "studentNumber": id, "password": password 
     }, config)
-      .then((response) => {
+      .then(async (response) => {
         console.log(response);
-        doSignin(response.data.data.userId);       
+        await doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
         console.log(error);
@@ -58,7 +58,7 @@ const LoginP = (props) => {
   const doSignin = async (id_input) => {
     await window.sessionStorage.setItem('id', id_input);
     await props.onLogin(id_input);
-    props.history.push('/Check')
+    await props.history.push('/Check')
   }
   const toSignup = () => {
     props.history.push('/Signup')
@@ -67,7 +67,7 @@ const LoginP = (props) => {
     <>
       <div className="body">
         <Title />
-        <form onSubmit={tryLogin} method="POST">
+        {/* <form onSubmit={tryLogin} > */}
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -87,12 +87,11 @@ const LoginP = (props) => {
         </div>
         <div className="idPassword">
 
-            <button className={"login"} name={"로그인"}
-            >로그인</button>
+            <button type={"submit"}className={"login"} name={"로그인"} onClick={tryLogin} > 로그인 </button>
 
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
-        </form>
+        {/* </form> */}
     </div>
     </>
   )
