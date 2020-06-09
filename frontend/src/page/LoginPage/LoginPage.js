@@ -60,7 +60,7 @@ const LoginP = (props) => {
     <>
       <div className="body">
         <Title />
-        <form method="POST">
+        <form onSubmit={tryLogin} method="POST">
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -79,7 +79,10 @@ const LoginP = (props) => {
           />
         </div>
         <div className="idPassword">
-            <Button type={"submit"} onClick={tryLogin} onSubmit={tryLogin} name={"로그인"} value={"login"} />
+
+            <button className={"login"} name={"로그인"}
+            >로그인</button>
+
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
         </form>

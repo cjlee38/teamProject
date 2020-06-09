@@ -12,7 +12,7 @@ class Driver:
         options.add_argument(
             "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
 
-        self.driver = webdriver.Chrome('./chromedriver.exe', options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     def __call__(self):
         return self.driver
