@@ -255,6 +255,9 @@ def user_Table(id_input, pw_input, user_id, db):
     # user table insert
     user_year = (major_dict['이수 학기'] // 2) + 1
 
+    if user_year > 4:
+        user_year = 4
+
     intensive = False
     keys = list(major_dict.keys())
     if (user_year != 1 and len(keys) == 1) or '전공심화' in keys[1]:
