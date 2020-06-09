@@ -9,12 +9,17 @@ class Check extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userID:this.props.userId
+      userID:this.props.userId,
+      dataChange:false
     }
 
   }
+  Change = async () => {
+    await this.setState({dataChange:!this.state.dataChange})
+  }
 
   render() {
+
     return (
 
       <>
@@ -24,7 +29,7 @@ class Check extends React.Component {
             <div className="head">내 졸업 요건 확인</div>
             <div className="Crwaler">
 
-              <Crawler />
+              <Crawler Change={this.Change}/>
             </div>
 
             <TabContent userID={this.props.userId} />

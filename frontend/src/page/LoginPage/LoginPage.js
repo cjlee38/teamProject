@@ -33,8 +33,8 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
-      params: { studentNumber: id, password: password }
+    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
+     "studentNumber": id, "password": password 
     })
       .then((response) => {
         console.log(response);
@@ -60,6 +60,7 @@ const LoginP = (props) => {
     <>
       <div className="body">
         <Title />
+        <form method="POST">
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -77,10 +78,11 @@ const LoginP = (props) => {
             text={"비밀번호"}
           />
         </div>
-        <div className="Button">
-            <Button onClick={tryLogin} name={"로그인"} value={"login"} />
+        <div className="idPassword">
+            <Button type={"submit"} onClick={tryLogin} onSubmit={tryLogin} name={"로그인"} value={"login"} />
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
         </div>
+        </form>
     </div>
     </>
   )

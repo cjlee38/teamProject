@@ -71,7 +71,6 @@ class Table extends Component {
 
 
   render() {
-    console.log("table:", this.props);
     return (
       <div className="course_t" >
         <BootstrapTable data={this.props.data} style={{color:"black !important"}}>

@@ -7,7 +7,6 @@ import LectureTable from './test'
 
 
 export default function TabContent1(props) {
-    console.log(props.data.state)
     const [data, setData] = useState([])
     const [isData, setIsData] = useState(false)
 
@@ -15,28 +14,19 @@ export default function TabContent1(props) {
         Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/try', {
             "myCourse": props.data.state.myCourse,
             "myCredit": props.data.state.myCredit,
-            "mytime": props.data.state.mytime,
+            "myFreetime": props.data.state.mytime,
             "userId": props.userId
         })
             .then(async (response) => {
                 console.log(response);
-                for (var x = 0; x < response.data.data.length; x++) {
-                    for (var i = 0; i < 13; i++) {
-                        for (var j = 1; j < 6; j++) {
-                            if (data[x][i][j] === 0) {
-                                data[x][i][j] = '';
-                            }
-                        }
-                    };
-                }
                 await setData(response.data.data)
                 await setIsData(true)
 
             })
             .catch(async function (error) {
                 console.log(error);
-                await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
-                await setIsData(true)
+                // await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
+                // await setIsData(true)
 
                 alert(error)
             });

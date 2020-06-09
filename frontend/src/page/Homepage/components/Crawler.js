@@ -20,7 +20,6 @@ class crawler extends React.Component {
 
   handlingChange = (event) => {
     this.setState({ [event.target.name]: event.target.value, loading: false })
-    console.log(event.target.name, "change  ")
   }
 
 
@@ -34,18 +33,15 @@ class crawler extends React.Component {
       alert(result.data.error)
       
     }
-    console.log(result)
-    
     this.setState({ std: "", password: "" })
+    this.props.Change()
   }
 
   render() {
-    // const { loading } = async () => { this.state.loading}
-    console.log(this.state.loading)
 
     return (
 
-        <form onSubmit={this.handlingSubmit} method="POST">
+        <form onSubmit={this.handlingSubmit} method="POST" className="ccc">
 
           {this.state.loading ? <TextField
             className="input" margin="normal" disabled
