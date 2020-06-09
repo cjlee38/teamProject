@@ -10,6 +10,19 @@ public class UserDto {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class loginReq{
+        private String studentNumber;
+        private String password;
+
+        @Builder
+        public loginReq(String studentNumber, String password){
+            this.studentNumber = studentNumber;
+            this.password = password;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SignUpReq{
         private String studentNumber;
         private String password;
