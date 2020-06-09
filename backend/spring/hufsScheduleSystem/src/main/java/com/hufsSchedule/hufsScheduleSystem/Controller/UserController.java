@@ -20,8 +20,8 @@ public class UserController {
     private final ResponseService responseService;
 
     @PostMapping("/Login")
-    public CommonResult login(@RequestBody String studentNumber, String password)throws Exception {
-        return responseService.getSingleResult(userService.login(studentNumber,password));
+    public CommonResult login(@RequestBody UserDto.loginReq login)throws Exception {
+        return responseService.getSingleResult(userService.login(login));
     }
 
     @PostMapping("/SignUp")

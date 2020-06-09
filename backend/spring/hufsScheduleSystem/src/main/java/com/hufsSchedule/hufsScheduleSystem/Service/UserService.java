@@ -16,8 +16,8 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserDto.Res login(String studentNumber, String password) {
-        User user = userRepository.findByStudentNumberAndPassword(studentNumber,password).orElseThrow(UserNotFoundException::new);
+    public UserDto.Res login(UserDto.loginReq login) {
+        User user = userRepository.findByStudentNumberAndPassword(login.getStudentNumber(),login.getPassword()).orElseThrow(UserNotFoundException::new);
         UserDto.Res result = UserDto.Res.builder()
                 .userId(user.getUserId())
                 .build();
