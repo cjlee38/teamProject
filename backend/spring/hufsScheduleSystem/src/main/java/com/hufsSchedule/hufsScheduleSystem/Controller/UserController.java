@@ -19,11 +19,8 @@ public class UserController {
     private final UserService userService;
     private final ResponseService responseService;
 
-    @GetMapping("/Login")
-    public CommonResult login(
-            @RequestParam(value = "studentNumber", required =  true)String studentNumber,
-            @RequestParam(value = "password", required = true)String password
-    )throws Exception {
+    @PostMapping("/Login")
+    public CommonResult login(@RequestBody String studentNumber, String password)throws Exception {
         return responseService.getSingleResult(userService.login(studentNumber,password));
     }
 
