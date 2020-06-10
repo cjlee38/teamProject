@@ -33,7 +33,7 @@ const LoginP = (props) => {
   }
 
   const tryLogin = async() => {
-    await doSignin(28); 
+    
     let config = {
       headers: {
           "Access-Control-Allow-Origin": "*"
@@ -48,8 +48,6 @@ const LoginP = (props) => {
         await doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
-        await doSignin(28);       
-
         console.log(error);
         alert("아이디/비밀번호를 확인해주세요!");
       });
