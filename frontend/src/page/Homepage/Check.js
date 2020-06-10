@@ -15,10 +15,13 @@ class Check extends React.Component {
 
   }
   Change = async () => {
-    await this.setState({dataChange:!this.state.dataChange})
+    console.log(this.state.dataChange)
+    await this.setState((prevState) => ({dataChange: !prevState.dataChange}))
+    
   }
 
   render() {
+    console.log(this.state.dataChange)
 
     return (
 
@@ -32,7 +35,7 @@ class Check extends React.Component {
               <Crawler Change={this.Change}/>
             </div>
 
-            <TabContent userID={this.props.userId} />
+            <TabContent userID={this.props.userId} test={this.state.dataChange}/>
 
 
           </div>
