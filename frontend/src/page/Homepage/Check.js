@@ -35,7 +35,7 @@ class Check extends React.Component {
             <div className="head">내 졸업 요건 확인</div>
             <div className="Crwaler">
       
-              <Crawler Change={this.Change}/>
+              <Crawler Change={this.Change} userID={this.props.userId} />
             </div>
           {this.state.dataChange? <TabContent userID={this.props.userId} test={this.state.dataChange}/> :  <><Spinner style={{marginTop:"5%"}}animation="grow" variant="info" /><div className="spinner" style={{marginTop:"5%"}}>데이터 가져오는 중..(약 1분 소요)</div></> }
            

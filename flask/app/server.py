@@ -38,13 +38,13 @@ class RegistUser(Resource):
 
             _std_num = args['std_num']
             _Password = args['password']
-            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
+            _userID = args['userId']
+            sql_user_search = """SELECT user_id FROM user WHERE user_id=\"{user}\";""".format(user=_userID)
             row = db_class.execute_all(sql_user_search)
             row = "" if not row else row
             driver = None
             if len(row):
-                print(row)
-                user_id = row[0]['user_id']
+                user_id = _userID
                 sql_liberal_delete= """DELETE FROM liberal_art WHERE user={user_id};""".format(user_id=user_id)
                 db_class.execute(sql_liberal_delete)
 
