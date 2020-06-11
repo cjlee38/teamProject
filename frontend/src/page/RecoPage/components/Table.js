@@ -116,8 +116,8 @@ export default class AllFilters extends React.Component {
 
             <TableHeaderColumn isKey width="13%" dataAlign='center' ref='name1' dataField='dept' >학과/교양</TableHeaderColumn>
             <TableHeaderColumn width="9%" dataAlign='center' ref='name2' dataField='area' >구분</TableHeaderColumn>
-            <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' >학년</TableHeaderColumn>
-            <TableHeaderColumn width="21%" dataAlign='center' dataFormat={urlFormatter} ref='price' dataField='subject' >과목명</TableHeaderColumn>
+            <TableHeaderColumn width="6%" dataAlign='center' ref='quality' dataField='year' >학년</TableHeaderColumn>
+            <TableHeaderColumn width="19%" dataAlign='center' dataFormat={urlFormatter} ref='price' dataField='subject' >과목명</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
             <TableHeaderColumn width="10%" dataAlign='center' ref='inStockDate' dataField='professor' >담당 교수</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
@@ -138,8 +138,8 @@ export default class AllFilters extends React.Component {
 
         </TableHeaderColumn>
             <TableHeaderColumn width="9%"  dataAlign='center' ref='name2' dataField='area' filter={{ type: 'SelectFilter', options: this.props.lib }}>구분</TableHeaderColumn>
-            <TableHeaderColumn width="4%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
-            <TableHeaderColumn width="21%" dataAlign='center' ref='price' dataFormat={urlFormatter} dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
+            <TableHeaderColumn width="6%" dataAlign='center' ref='quality' dataField='year' filter={{ type: 'SelectFilter', options: qualityType, defaultValue: 0, }}>학년</TableHeaderColumn>
+            <TableHeaderColumn width="19%" dataAlign='center' ref='price' dataFormat={urlFormatter} dataField='subject' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>과목명</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='satisfaction' dataField='required'>전필</TableHeaderColumn>
             <TableHeaderColumn width="10%" dataAlign='center' ref='inStockDate' dataField='professor' filter={{ type: 'TextFilter', placeholder: 'Please enter a value' }}>담당 교수</TableHeaderColumn>
             <TableHeaderColumn width="4%" dataAlign='center' ref='inStockDate' dataField='credit'>학점</TableHeaderColumn>
