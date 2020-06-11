@@ -18,7 +18,7 @@ function RecoAll(props) {
   var [lectures, setLectures] = useState({lectures : [] })
   var [userId, setUser] = useState(props.userId)
   var [data3, setData3] = useState({ isdata: false })
-  const [mycredit, setmyCredit] = useState(0)
+  const [mycredit, setmyCredit] = useState(20)
   const [mytime, setmyTime] = useState([])
   const [timeList, setTimeList] = useState([])
 
@@ -172,7 +172,6 @@ function postUserset(){
     // props.history.push('/Result')
 
   }
-
   return (
     <>
 
