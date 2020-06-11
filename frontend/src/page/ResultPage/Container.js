@@ -2,10 +2,10 @@ import React from 'react';
 import Store from '../../Store/Store';
 import Result from './ResultTabContent';
 
-const RecoContainer = () =>(
+const RecoContainer = (props) =>(
     <Store.Consumer>
         {store => (
-            <Result userId={store.userId} />
+            <Result userId={store.userId} data={props.location} />
         )}
     </Store.Consumer>
 )

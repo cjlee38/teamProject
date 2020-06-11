@@ -255,6 +255,9 @@ def user_Table(id_input, pw_input, user_id, db):
     # user table insert
     user_year = (major_dict['이수 학기'] // 2) + 1
 
+    if user_year > 4:
+        user_year = 4
+
     intensive = False
     keys = list(major_dict.keys())
     if (user_year != 1 and len(keys) == 1) or '전공심화' in keys[1]:
@@ -288,13 +291,16 @@ def user_Table(id_input, pw_input, user_id, db):
     print(courses_list)
     for i in courses_list:
         inst_num = i[0].strip()
-        course_area = i[2]
-        sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
-        inst_id = db_class.execute_all(sql_inst_search)
-        inst_id = inst_id[0]['instruction_id']
+        if inst_num:
+            course_area = i[2]
+            sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
+            inst_id = db_class.execute_all(sql_inst_search)
+            inst_id = inst_id[0]['instruction_id']
+            sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area) VALUES ({course_inst_num}, {user_id}, \"{course_area}\");""".format(course_inst_num=inst_id, user_id=user_id, course_area = course_area)
+            db_class.execute(sql_course_insert)
+
         
-        sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area) VALUES ({course_inst_num}, {user_id}, \"{course_area}\");""".format(course_inst_num=inst_id, user_id=user_id, course_area = course_area)
-        db_class.execute(sql_course_insert)
+        
     
     print(courses_list)  # course 테이블용
 

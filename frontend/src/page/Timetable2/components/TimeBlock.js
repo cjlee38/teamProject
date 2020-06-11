@@ -1,5 +1,4 @@
 import React from 'react';
-import LectureList from './LectureList';
 
 
 class TimeBlock extends React.Component {
@@ -52,7 +51,6 @@ class TimeBlock extends React.Component {
             {professor}
             {professor && location ? ' · ' : ''}
             {location}
-            {LectureList}
             
           </span></a>
         </td>
