@@ -24,6 +24,7 @@ class crawler extends React.Component {
 
 
   handlingSubmit = async (event) => {
+    this.props.Change()
     event.preventDefault()
     this.setState({ loading: true });
     console.log("크롤링 시작")
