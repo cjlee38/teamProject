@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Table from './ResultTable';
 import TabList from './Tablist';
 import Spinner from 'react-bootstrap/Spinner';
 import Axios from 'axios';
-import LectureTable from './test'
+import LectureTable from './ResultT'
+import Button from '@material-ui/core/Button';
 
 
 export default function TabContent1(props) {
     const [data, setData] = useState([])
     const [isData, setIsData] = useState(false)
 
-    useEffect(async () => {
+    useEffect( () => {
         if (isNaN(props.data.state.myCredit)) {
             props.data.state.myCredit = 0;
         }
@@ -22,37 +22,20 @@ export default function TabContent1(props) {
         })
             .then(async (response) => {
                 console.log(response);
-                await setData(response.data.data)
-                await setIsData(true)
+               setData(response.data.data)
+               setIsData(true)
 
             })
             .catch(async function (error) {
                 console.log(error);
-                // await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
-                // await setIsData(true)
+               setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
+               setIsData(true)
 
                 alert(error)
             });
-
-            // await setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
-
-        // await setData(data)
     }, []
     )
 
-
-
-    function mapping(data) {
-        let i = 0
-        data.map(function (array) {
-            i++;
-            return (<div label={`시간표${i}`} className="tab-content">
-                <Table data={array} />
-                <button onClick={() => onClick(i - 1)} />
-
-            </div>)
-        })
-    }
 
 
     function onClick(i) {
@@ -95,10 +78,11 @@ export default function TabContent1(props) {
                             i++;
                             let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
+                                {/* <Button variant="contained" size="large" color="secondary" style={
+                                    { float: 'left' }
+                                } onClick={() => onClick(w - 1)}> 저장하기</Button> */}
                                 <LectureTable data={array} lectureLength={makearr(array)} />
-                                <button style={
-                                    { float: 'right' }
-                                } onClick={() => onClick(w - 1)}> 저장하기</button>
+                                
                             </div>)
                         })}
                     </TabList>
