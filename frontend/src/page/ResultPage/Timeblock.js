@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -24,7 +23,7 @@ class TimeBlock extends React.Component {
     else{this.setState({color:"", opacity:""})}
     await this.handle()
   }
-  async onClick2 (name) {
+  async onClick2 () {
     this.props.displayLecture.deleted = !this.props.displayLecture.deleted
     this.props.remove(this.props.displayLecture)
   } 

@@ -1,7 +1,6 @@
 import '../Timetable2/components/css/index.css'
 import './Reco1.scss';
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
 import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
@@ -49,7 +48,6 @@ function RecoAll(props) {
 
 
       response.data.data.map(function (obj) {
-        // obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
         else { obj.required = "" }
 
@@ -167,9 +165,6 @@ function RecoAll(props) {
 
 function postUserset(){
     return {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
-    // let data = 
-    // console.log(data)
-    // props.history.push('/Result')
 
   }
   return (
