@@ -21,7 +21,7 @@ function urlFormatter(cell, row) {
 
 function Formatter(cell, row) {
   return (
-    <span>{row.choosed}/{row.number_of_people} </span>
+   <> {row.choosed}/{row.number_of_people}</>
   );
 }
 

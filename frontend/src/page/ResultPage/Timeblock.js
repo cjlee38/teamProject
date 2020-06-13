@@ -1,11 +1,14 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import './Table.scss'
 
 class TimeBlock extends React.Component {
   constructor(props) {
     super(props);
     this.handle =  this.props.onhandle;
-
     this.state ={
       color: "",
       opacity:"",
@@ -39,7 +42,18 @@ class TimeBlock extends React.Component {
         deleted
       } = displayLecture;
       return (
-        <td style={deleted? {backgroundColor:"gray"}:isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
+        
+        <td className={"test"} style={deleted? {backgroundColor:"gray"}:isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
+          
+            {deleted?
+            <IconButton color="primary" aria-label="add to shopping cart" onClick={()=>{this.onClick2(subject);}}>
+            <AddShoppingCartIcon />
+          </IconButton>
+          :
+          <IconButton aria-label="delete" onClick={()=>{this.onClick2(subject);}}>
+          <DeleteIcon /></IconButton>}
+  
+
           <a href={url} target="_blank"><span className="lecture-name">
             {subject}
           </span>
@@ -48,7 +62,6 @@ class TimeBlock extends React.Component {
             {professor && location ? ' · ' : ''}
             
           </span></a>
-          <button onClick={()=>{this.onClick2(subject);}}>{deleted?'복구':'삭제'}</button>
         </td>
       );
     }
