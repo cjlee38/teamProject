@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TimeBlock from './Timeblock';
 import Normal from './Normal';
+import Axios from 'axios';
+
 
 class LectureList extends React.Component {
   constructor(props) {
@@ -99,6 +101,10 @@ class LectureList extends React.Component {
   // }
 
   componentDidMount() {
+    Axios.get('', {
+      params: { userId: this.props.userId }
+  }).then((response)=>{
+    // let lectrue = response.data
     let lecture = [{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]
 
     let arr = Array(lecture.length);
@@ -106,7 +112,14 @@ class LectureList extends React.Component {
           arr[i] = i;
       }
       let lectureForms = arr
+    this.setState({lecture : lecture, lectureForms:lectureForms})
     this.setTable(lecture, lectureForms)
+  }
+  ).catch((err)=>{
+    console.log(err)
+    alert(err)    
+  })
+   
 
   }
 

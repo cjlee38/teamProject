@@ -47,18 +47,19 @@ class TimeBlock extends React.Component {
         
         <td className={"test"} style={deleted? {backgroundColor:"gray"}:required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
           
-            {deleted?
+           
+  
+
+          <a href={url} target="_blank"><span className="lecture-name">
+            {subject}
+          </span></a>
+          {deleted?
             <IconButton color="primary" aria-label="add to shopping cart" onClick={()=>{this.onClick2(subject);}}>
             <AddShoppingCartIcon />
           </IconButton>
           :
           <IconButton aria-label="delete" onClick={()=>{this.onClick2(subject);}}>
           <DeleteIcon /></IconButton>}
-  
-
-          <a href={url} target="_blank"><span className="lecture-name">
-            {subject}
-          </span></a>
           <span className="lecture-info">
             {professor}
             {professor && location ? ' · ' : ''}
