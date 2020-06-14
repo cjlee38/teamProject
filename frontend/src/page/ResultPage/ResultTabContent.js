@@ -67,7 +67,7 @@ export default function TabContent1(props) {
                             i++;
                             let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
-                                <LectureTable change = {ChangeF} credit={props.data.state.myCredit} data={array} lectureLength={makearr(array)} />
+                                <LectureTable userId={props.userId} change = {ChangeF} credit={props.data.state.myCredit} data={array} lectureLength={makearr(array)} />
                                 
                             </div>)
                         })}
