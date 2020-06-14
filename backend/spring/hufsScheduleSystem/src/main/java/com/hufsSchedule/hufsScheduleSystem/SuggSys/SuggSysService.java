@@ -13,8 +13,12 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructio
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggCreditService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggRatioService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
+import de.mrapp.apriori.Apriori;
+import de.mrapp.apriori.Item;
+import de.mrapp.apriori.Transaction;
 
 import javax.xml.crypto.Data;
+import java.lang.reflect.Type;
 import java.util.*;
 
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
@@ -124,4 +128,14 @@ public class SuggSysService {
         TimetableDto.Result result = new TimetableDto.Result(days);
         return result;
     }
+
+//    public void apriori() {
+//        double minSupport = 0.5;
+//        Apriori<Type>
+//        Apriori apriori = new Apriori.Builder<>(minSupport).create();
+//        Iterable<Transaction>
+////        Apriori<NamedItem> apriori = new Apriori.Builder<NamedItem>(minSupport).create();
+////        RuleSet
+//    }
 }
+
