@@ -12,7 +12,7 @@ import Logo from './image/logo.png';
 import Store from './Store/Store'
 import { Redirect } from 'react-router-dom';
 import Result from './page/ResultPage/Container'
-import mytable from './page/ResultPage/mytable';
+import mytable from './page/Mytablepage/Container';
 
 export default class Route1 extends Component{
     constructor(props){
