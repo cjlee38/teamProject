@@ -2,10 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TimeBlock from './Timeblock';
 import Normal from './options/Normal';
+import { Link } from 'react-router-dom';
 
 class LectureList extends React.Component {
   constructor(props) {
     super(props);
+    this.Change = this.props.change.bind(this)
     this.state = {
       lectureForms: this.props.lectureLength,
       lectures: this.props.data,
@@ -103,14 +105,11 @@ class LectureList extends React.Component {
 
   }
 
-  rePost(){
-    
-  }
+  
 
   saveTimetable(){
 
   }
-
 
 
   render() {
@@ -123,7 +122,15 @@ class LectureList extends React.Component {
     return (
       <div id="lecture-list">
         <Button onClick={this.saveTimetable} variant="contained" size="large" color="primary" style={{ float: 'left',marginBottom:"1%",  backgroundColor:"gray !important"}}> 저장하기</Button>
-        <Button onClick={this.rePost} variant="contained" color="primary" style={{marginBottom:"1%"}}>현재 조건으로 재생성</Button>
+        <Link onClick={this.props.change} to={{
+        pathname:"/Result",
+        state: {
+          myCourse:this.state.lectures,
+          mytime : this.state.mytime,
+          myCredit : this.props.credit
+        }
+      }}>
+        <Button variant="contained" color="primary" style={{marginBottom:"1%"}}>현재 조건으로 재생성</Button></Link>
         <div id="timetable">
           <table>
             <thead>

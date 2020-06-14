@@ -44,7 +44,7 @@ class TimeBlock extends React.Component {
         number_of_people,
         url
       } = displayLecture;
-      console.log(displayLecture)
+      
       return (
         <td style={required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
           <a href={url} target="_blank"><span className="lecture-name">

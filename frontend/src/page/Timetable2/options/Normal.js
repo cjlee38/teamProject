@@ -27,7 +27,6 @@ class Normal {
   
             if (weekday && hours) {
               const key = `${weekday}${hours}`;
-  console.log(key, lecture)
               this.displayLectures = {
                 ...this.displayLectures,
                 [key]: lecture

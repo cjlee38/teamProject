@@ -32,12 +32,14 @@ export default function TabContent1(props) {
 
                 alert(error)
             });
-    }, []
+    }, [isData]
     )
 
 
 
-
+    const Change =() => {
+        setIsData(false)
+    }
     function makearr(a) {
         if (a.length) {
 
@@ -51,7 +53,6 @@ export default function TabContent1(props) {
         return 0
     }
 
-
     var i = 0;
     return (
         <>
@@ -64,7 +65,7 @@ export default function TabContent1(props) {
                             i++;
                             let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
-                                <LectureTable data={array} lectureLength={makearr(array)} />
+                                <LectureTable change = {Change} credit={props.data.state.myCredit} data={array} lectureLength={makearr(array)} />
                                 
                             </div>)
                         })}

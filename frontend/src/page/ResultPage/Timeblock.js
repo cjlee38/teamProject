@@ -42,7 +42,7 @@ class TimeBlock extends React.Component {
         number_of_people,
         deleted
       } = displayLecture;
-      console.log(displayLecture)
+      
       return (
         
         <td className={"test"} style={deleted? {backgroundColor:"gray"}:required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
