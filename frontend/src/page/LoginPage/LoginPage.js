@@ -68,6 +68,7 @@ const LoginP = (props) => {
       <div className="body">
         <Title />
         {/* <form onSubmit={tryLogin} > */}
+        <form action="">
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -90,7 +91,7 @@ const LoginP = (props) => {
             <button type={"submit"}className={"login"} name={"로그인"} onClick={tryLogin} > 로그인 </button>
 
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
-        </div>
+        </div></form>
         {/* </form> */}
     </div>
     </>

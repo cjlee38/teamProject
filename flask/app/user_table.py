@@ -299,7 +299,7 @@ def user_Table(id_input, pw_input, user_id, db):
                 sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
 
             course_area = i[2]
-            temp_dept = None
+            temp_dept = ""
             if course_area == "1전공":
                 tepm_dept = major_dict['1전공']
             elif course_area == "이중":
