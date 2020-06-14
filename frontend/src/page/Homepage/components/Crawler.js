@@ -24,10 +24,11 @@ class crawler extends React.Component {
 
 
   handlingSubmit = async (event) => {
+    this.props.Change()
     event.preventDefault()
     this.setState({ loading: true });
     console.log("크롤링 시작")
-    let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password })
+    let result = await api.crawlUser({ std_num: this.state.std, password: this.state.password, userId : this.props.userID })
     this.setState({ loading: false });
     if (result.data.error) {
       alert(result.data.error)

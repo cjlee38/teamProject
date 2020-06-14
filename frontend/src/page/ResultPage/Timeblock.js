@@ -1,15 +1,20 @@
 import React from 'react';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import './Table.scss'
 
 class TimeBlock extends React.Component {
   constructor(props) {
     super(props);
-    this.handle =  this.props.onClick;
+    this.handle =  this.props.onhandle;
     this.state ={
       color: "",
       opacity:"",
       opacity2:"0.5",
-      color2: "#FFB0CF"
+      color2: "#FFB0CF",
+      color3 : "#A4C3FF",
+      isdeleted: false,
     }
   }
   async onClick1  () {
@@ -18,39 +23,42 @@ class TimeBlock extends React.Component {
     else{this.setState({color:"", opacity:""})}
     await this.handle()
   }
-  async onClick2 (name) {
-    if (!name){
-      if (this.state.color2 === ""){
-        await this.setState({color2:"#FFB0CF", opacity2:"0.5"})}
-      else{this.setState({color2:"", opacity2:""})}
-      await this.handle()
-     }
-     else {
-      if (this.state.color2 === ""){
-        await this.setState({color2:"#FFB0CF", opacity2:"0.5"})}
-      else{this.setState({color2:"", opacity2:""})}
-     }
-  }
-  render() {
-    const { displayLecture } = this.props;
+  async onClick2 () {
+    this.props.displayLecture.deleted = !this.props.displayLecture.deleted
+    this.props.remove(this.props.displayLecture)
+  } 
 
+  render() {
+
+    const { displayLecture } = this.props;
     if (displayLecture) {
       const {
-        name,
+        subject,
         professor,
         location,
         isRequired,
-        url
+        url,
+        deleted
       } = displayLecture;
       return (
-        <td style={isRequired ? { backgroundColor: '#FF5675' } : name ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(name);}}>
+        
+        <td className={"test"} style={deleted? {backgroundColor:"gray"}:isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
+          
+            {deleted?
+            <IconButton color="primary" aria-label="add to shopping cart" onClick={()=>{this.onClick2(subject);}}>
+            <AddShoppingCartIcon />
+          </IconButton>
+          :
+          <IconButton aria-label="delete" onClick={()=>{this.onClick2(subject);}}>
+          <DeleteIcon /></IconButton>}
+  
+
           <a href={url} target="_blank"><span className="lecture-name">
-            {name}
+            {subject}
           </span>
           <span className="lecture-info">
             {professor}
             {professor && location ? ' · ' : ''}
-            {location}
             
           </span></a>
         </td>

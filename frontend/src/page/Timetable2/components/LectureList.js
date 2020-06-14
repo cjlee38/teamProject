@@ -153,10 +153,10 @@ class LectureList extends React.Component {
     } = this.state;
 
     const {myCourse, mytime, myCredit} = this.props.getData();
-
+    
     return (
       <div id="lecture-list">
-        <TextField id="credit" className="credit-textfield" label="최대학점" onChange={(e) => { this.setCredit(e); }} />
+        <TextField id="credit" className="credit-textfield" label="최대학점" defaultValue={20} onChange={(e) => { this.setCredit(e); }} />
        
         <div id="timetable">
         <div id="timetable-radios">

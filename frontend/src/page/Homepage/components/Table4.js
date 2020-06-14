@@ -5,7 +5,7 @@ import { BootstrapTable, TableHeaderColumn } from
 
 class Table extends Component {
   render() {
-    console.log("?", this.props);
+    // console.log("?", this.props);
     return (
       <div className="table4">
         <BootstrapTable data={this.props.data}>

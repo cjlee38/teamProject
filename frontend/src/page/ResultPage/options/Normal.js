@@ -11,6 +11,7 @@ class Normal {
         
             this.lectureForms.forEach((lectureForm) => {
               const lecture = this.lectures[lectureForm];
+              lecture['deleted'] = false
               if (lecture.class_time) {
                 var times = lecture.class_time.split(' ');
                 let temp = null;
@@ -30,16 +31,7 @@ class Normal {
         
                     this.displayLectures = {
                       ...this.displayLectures,
-                      [key]: {
-                        name: lecture.subject,
-                        professor: lecture.professor,
-                        location: lecture.location,
-                        isRequired: lecture.isRequired,
-                        url : lecture.url,
-        
-                        weekday,
-                        hours
-                      }
+                      [key]: lecture
                     };
                   }
                 });

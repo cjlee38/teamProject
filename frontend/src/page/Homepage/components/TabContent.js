@@ -34,7 +34,8 @@ export default function TabContent1(props) {
             {
                 trow: '남은 학점', first_major: response.data.data.remainCredit[0], second_major: response.data.data.remainCredit[1],
                 sub_major: response.data.data.remainCredit[2], minor: response.data.data.remainCredit[3], out_door: response.data.data.remainCredit[4],
-                liberal_arts: response.data.data.remainCredit[5], teaching: response.data.data.remainCredit[6], optional: response.data.data.remainCredit[7],
+                liberal_arts: response.data.data.remainCredit[5], teaching: response.data.data.remainCredit[6], 
+                optional: response.data.data.remainCredit[7],
                 total_credit: response.data.data.remainCredit[8], average_score: "-"
             }])
             setData2([{

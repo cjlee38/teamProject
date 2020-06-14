@@ -1,0 +1,15 @@
+tr#1  > td:nth-child(2) > button{
+    margin-left: -2%;
+}
+
+td.test  {
+    margin-right: -2%;
+}
+td.test button{
+    margin-left: -100% !important;
+    margin-right: 5%;
+
+}
+td.test button > span.MuiIconButton-label{
+    color:rgba($color: #581845, $alpha: 1.0);
+}

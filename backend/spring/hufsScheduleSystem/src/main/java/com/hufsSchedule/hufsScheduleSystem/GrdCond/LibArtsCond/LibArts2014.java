@@ -20,6 +20,7 @@ public class LibArts2014 implements IfcLibArts {
 
     @Override
     public List<CourseEnums> modifyCourseListByInfo(List<CourseEnums> courseList, String firstMajorName, String secondMajorName) {
+
         return courseList;
     }
 
