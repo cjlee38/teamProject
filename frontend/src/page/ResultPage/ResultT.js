@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class LectureList extends React.Component {
   constructor(props) {
     super(props);
-    this.Change = this.props.change.bind(this)
+   // this.Change = this.props.change.bind(this)
     this.state = {
       lectureForms: this.props.lectureLength,
       lectures: this.props.data,

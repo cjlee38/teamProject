@@ -8,8 +8,10 @@ import LectureTable from './ResultT'
 export default function TabContent1(props) {
     const [data, setData] = useState([])
     const [isData, setIsData] = useState(false)
+    const [Change, setChange] = useState(false)
 
     useEffect( () => {
+        setIsData(false)
         if (isNaN(props.data.state.myCredit)) {
             props.data.state.myCredit = 0;
         }
@@ -32,13 +34,13 @@ export default function TabContent1(props) {
 
                 alert(error)
             });
-    }, [isData]
+    }, [Change]
     )
 
 
 
-    const Change =() => {
-        setIsData(false)
+    const ChangeF =() => {
+        setChange(!Change)
     }
     function makearr(a) {
         if (a.length) {
@@ -65,7 +67,7 @@ export default function TabContent1(props) {
                             i++;
                             let w = i
                             return (<div label={`시간표${i}`} className="tab-content">
-                                <LectureTable change = {Change} credit={props.data.state.myCredit} data={array} lectureLength={makearr(array)} />
+                                <LectureTable change = {ChangeF} credit={props.data.state.myCredit} data={array} lectureLength={makearr(array)} />
                                 
                             </div>)
                         })}
