@@ -13,3 +13,19 @@ td.test button{
 td.test button > span.MuiIconButton-label{
     color:rgba($color: #581845, $alpha: 1.0);
 }
+
+#mylecture-list{
+    margin-top: 5% !important;
+    // width: 90% !important;
+    width: 100%;
+
+    padding: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;;
+}
+#mylecture-list #timetable{
+    width: 80%;
+}

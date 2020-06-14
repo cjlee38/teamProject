@@ -27,8 +27,8 @@ export default function TabContent1(props) {
             })
             .catch(async function (error) {
                 console.log(error);
-            //    setData([[{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]])
-            //    setIsData(true)
+               setData([props.data.state.myCourse])
+               setIsData(true)
 
                 alert(error)
             });
