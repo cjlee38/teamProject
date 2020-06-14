@@ -401,6 +401,24 @@ public interface CourseEnums {
         U7618("신입생세미나", "Seminar for Freshmen"),
         Y12104("HUFS Career Design 진로설정과취.창업경력개발", "HUFS Career Design (Defining Career Path & Development)");
 
+//        Y13101("교양외국어", "Communicative English 1"),
+//        Y13102("교양영어2", "Communicative English 2"),
+//        Y13103("교양프랑스어1", "Communicative French 1"),
+//        Y13104("교양프랑스어2", "Communicative French 2"),
+//        Y13105("교양독일어2", "Communicative German 1"),
+//        Y13106("교양독일어2", "Communicative German 2"),
+//        Y13107("교양노어2", "Communicative Russian 1"),
+//        Y13108("교양노어2", "Communicative Russian 2"),
+//        Y13109("교양스페인어1", "Communicative Spansish 1"),
+//        Y13110("교양스페인어2", "Communicative Spansish 2"),
+//        Y13111("교양이탈리아어1", "Communicative Spansish 1"),
+//        Y13112("교양이탈리아어1", "Communicative Spansish 1"),
+//        Y13113("교양포르투갈어1", "Communicative Spansish 1"),
+//        Y13114("교양포트루갈어1", "Communicative Spansish 1"),
+//        Y13115("교양중국어1", "Communicative Spansish 1"),
+//        Y13115("교양중국어1", "Communicative Spansish 1"),
+
+
         final private String korName, engName;
 
         LibArts2015Enum(String korName, String engName) {

@@ -96,6 +96,15 @@ public class ConditionCheckService {
         userRemainCredit.add(remainCredit.getOptional());
         userRemainCredit.add(remainCredit.getTotalCredit());
 
+        for ( Instruction ins : courses) {
+            System.out.println(ins.getSubject());
+            System.out.println(ins.getInstructionNumber());
+        }
+        System.out.println("-------------------------");
+        System.out.println(GrdObj.getGrdCourse());
+        System.out.println("-------------------------");
+        System.out.println(remainObj.getGrdCourse());
+
         ConditionDto.ResultOfCondition res = ConditionDto.ResultOfCondition.builder()
                 .userInfo(userInfo)
                 .takenCredit(userTakenCredit)

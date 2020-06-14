@@ -292,11 +292,26 @@ def user_Table(id_input, pw_input, user_id, db):
     for i in courses_list:
         inst_num = i[0].strip()
         if inst_num:
+            sql_inst_search = ""
+            if 'U7618' in inst_num:
+                sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{dept}%%\";""".format(inst_num=inst_num, dept=major_dict['1전공'])
+            else:
+                sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
+
             course_area = i[2]
-            sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
+            temp_dept = None
+            if course_area == "1전공":
+                tepm_dept = major_dict['1전공']
+            elif course_area == "이중":
+                temp_dept = major_dict['이중전공']
+            elif "부전" in course_area:
+                if intensive:
+                    temp_dept = major_dict['전공심화(부전공)']
+                else:
+                    temp_dept = major_dict['부전공']
             inst_id = db_class.execute_all(sql_inst_search)
             inst_id = inst_id[0]['instruction_id']
-            sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area) VALUES ({course_inst_num}, {user_id}, \"{course_area}\");""".format(course_inst_num=inst_id, user_id=user_id, course_area = course_area)
+            sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area, dept) VALUES ({course_inst_num}, {user_id}, \"{course_area}\", \"{dept}\");""".format(course_inst_num=inst_id, user_id=user_id, course_area = course_area, dept = temp_dept)
             db_class.execute(sql_course_insert)
 
         

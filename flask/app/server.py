@@ -38,13 +38,13 @@ class RegistUser(Resource):
 
             _std_num = args['std_num']
             _Password = args['password']
-            sql_user_search = """SELECT user_id FROM user WHERE student_number=\"{std_num}\";""".format(std_num=_std_num)
+            _userID = args['userId']
+            sql_user_search = """SELECT user_id FROM user WHERE user_id=\"{user}\";""".format(user=_userID)
             row = db_class.execute_all(sql_user_search)
             row = "" if not row else row
             driver = None
             if len(row):
-                print(row)
-                user_id = row[0]['user_id']
+                user_id = _userID
                 sql_liberal_delete= """DELETE FROM liberal_art WHERE user={user_id};""".format(user_id=user_id)
                 db_class.execute(sql_liberal_delete)
 
@@ -110,7 +110,7 @@ class ReigstInst(Resource):
         db_class = database.Database()
 
         sql_inst_search = """SELECT instruction_id, dept, area, year, subject, url, required, professor, time,
-        credit, class_time, number_of_people, note FROM instruction WHERE rq_year={rq_year} and rq_semester={rq_semester};"""
+        credit, class_time, number_of_people, note, choosed FROM instruction WHERE rq_year={rq_year} and rq_semester={rq_semester};"""
         sql_inst_search = sql_inst_search.format(rq_year=20, rq_semester=1)
         row = db_class.execute_all(sql_inst_search)
         sql_lib_area = """SELECT distinct area FROM instruction where rq_year={rq_year} and rq_semester={rq_semester} and not (area like \"%전공\" or area like \"인문학공통\" or area like \"%이중%\" or area like \"교직\");

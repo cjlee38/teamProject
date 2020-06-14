@@ -36,23 +36,27 @@ class TimeBlock extends React.Component {
 
     if (displayLecture) {
       const {
-        name,
+        subject,
         professor,
         location,
-        isRequired,
+        required,
+        choosed,
+        number_of_people,
         url
       } = displayLecture;
+      
       return (
-        <td style={isRequired ? { backgroundColor: '#FF5675' } : name ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(name);}}>
+        <td style={required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
           <a href={url} target="_blank"><span className="lecture-name">
-            {name}
-          </span>
+            {subject}
+          </span></a>
           <span className="lecture-info">
             {professor}
             {professor && location ? ' · ' : ''}
-            {location}
+            <br/>
+            {subject? `${choosed} / ${number_of_people}`:" "}
             
-          </span></a>
+          </span>
         </td>
       );
     }

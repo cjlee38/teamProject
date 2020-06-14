@@ -16,6 +16,8 @@
 #responsive-navbar-nav > div.mr-auto.navbar-nav{
     width: 50%;
 }
-// .navbar-nav{
-//     width: 20%;
-// }
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+html .Route, .Navigation{
+    font-family: 'Nanum Gothic Coding', serif !important;
+}

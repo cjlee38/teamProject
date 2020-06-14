@@ -41,8 +41,8 @@ public class CourseRepositorySupport extends QuerydslRepositorySupport {
                         JPAExpressions
                                 .select(course.instruction.instructionId)
                                 .from(course)
-                                .where(course.user.userId.eq(userId),
-                                        course.courseArea.eq("1전공"))))
+                                .where(course.user.userId.eq(userId)
+                                        /*course.courseArea.eq("1전공")*/)))
                 .fetch();
     }
     public List<Instruction> findInstructionByUserCourseArea(Long userId, String courseAreaName){

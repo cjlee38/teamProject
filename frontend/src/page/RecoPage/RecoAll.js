@@ -1,7 +1,6 @@
 import '../Timetable2/components/css/index.css'
 import './Reco1.scss';
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TabList from './components/TabList';
 import Table4 from './components/Table';
 import crawl from '../Homepage/crawl';
@@ -18,7 +17,7 @@ function RecoAll(props) {
   var [lectures, setLectures] = useState({lectures : [] })
   var [userId, setUser] = useState(props.userId)
   var [data3, setData3] = useState({ isdata: false })
-  const [mycredit, setmyCredit] = useState(0)
+  const [mycredit, setmyCredit] = useState(20)
   const [mytime, setmyTime] = useState([])
   const [timeList, setTimeList] = useState([])
 
@@ -49,7 +48,6 @@ function RecoAll(props) {
 
 
       response.data.data.map(function (obj) {
-        // obj.class_time = obj.class_time.split(" ").join("")
         if (obj.required) { obj.required = "O" }
         else { obj.required = "" }
 
@@ -135,19 +133,8 @@ function RecoAll(props) {
 
 
   const lectureSet= async(course)=> {
-    var temp = {}
-    let num = 0
-    await course.forEach(function(obj){
-      var test = {}
-      test["name"] = obj.subject
-      test['time'] = obj.class_time
-      test['professor'] = obj.professor
-      test['isRequired'] = obj.required
-      test['url'] = obj.url
-      temp[num] = test
-      num += 1
-    })
-    await setLectures({lectures :temp})
+    
+    await setLectures({lectures :course})
 
 
   }
@@ -167,12 +154,8 @@ function RecoAll(props) {
 
 function postUserset(){
     return {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
-    // let data = 
-    // console.log(data)
-    // props.history.push('/Result')
 
   }
-
   return (
     <>
 
