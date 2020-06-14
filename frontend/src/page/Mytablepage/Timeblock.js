@@ -38,7 +38,9 @@ class TimeBlock extends React.Component {
         location,
         isRequired,
         url,
-        deleted
+        deleted,
+        choosed,
+        number_of_people
       } = displayLecture;
       return (
         
@@ -55,12 +57,14 @@ class TimeBlock extends React.Component {
 
           <a href={url} target="_blank"><span className="lecture-name">
             {subject}
-          </span>
+          </span></a>
           <span className="lecture-info">
             {professor}
             {professor && location ? ' · ' : ''}
-            
-          </span></a>
+            <br/>
+            {subject? `${choosed} / ${number_of_people}`:" "}
+
+          </span>
         </td>
       );
     }

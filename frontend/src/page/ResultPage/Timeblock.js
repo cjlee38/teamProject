@@ -38,8 +38,11 @@ class TimeBlock extends React.Component {
         location,
         isRequired,
         url,
+        choosed,
+        number_of_people,
         deleted
       } = displayLecture;
+      console.log(displayLecture)
       return (
         
         <td className={"test"} style={deleted? {backgroundColor:"gray"}:isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
@@ -55,12 +58,13 @@ class TimeBlock extends React.Component {
 
           <a href={url} target="_blank"><span className="lecture-name">
             {subject}
-          </span>
+          </span></a>
           <span className="lecture-info">
             {professor}
             {professor && location ? ' · ' : ''}
-            
-          </span></a>
+            <br/>
+            {subject? `${choosed} / ${number_of_people}`:" "}
+          </span>
         </td>
       );
     }

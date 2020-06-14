@@ -72,8 +72,8 @@ class LectureList extends React.Component {
 
   //   return -1;
   // }
-  setTable = () => {
-    const { lectureForms, lectures } = this.state;
+  setTable = (lectures, lectureForms) => {
+    // const { lectureForms, lectures } = this.state;
     const { option } = this.state;
     let computedLectures = null;
 
@@ -99,7 +99,14 @@ class LectureList extends React.Component {
   // }
 
   componentDidMount() {
-    this.setTable()
+    let lecture = [{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]
+
+    let arr = Array(lecture.length);
+      for (let i = 0; i < lecture.length; i++) {
+          arr[i] = i;
+      }
+      let lectureForms = arr
+    this.setTable(lecture, lectureForms)
 
   }
 

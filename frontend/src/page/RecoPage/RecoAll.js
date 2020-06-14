@@ -133,19 +133,8 @@ function RecoAll(props) {
 
 
   const lectureSet= async(course)=> {
-    var temp = {}
-    let num = 0
-    await course.forEach(function(obj){
-      var test = {}
-      test["name"] = obj.subject
-      test['time'] = obj.class_time
-      test['professor'] = obj.professor
-      test['isRequired'] = obj.required
-      test['url'] = obj.url
-      temp[num] = test
-      num += 1
-    })
-    await setLectures({lectures :temp})
+    
+    await setLectures({lectures :course})
 
 
   }
