@@ -39,14 +39,14 @@ class TimeBlock extends React.Component {
         subject,
         professor,
         location,
-        isRequired,
+        required,
         choosed,
         number_of_people,
         url
       } = displayLecture;
       console.log(displayLecture)
       return (
-        <td style={isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
+        <td style={required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
           <a href={url} target="_blank"><span className="lecture-name">
             {subject}
           </span></a>

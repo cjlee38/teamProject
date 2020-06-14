@@ -36,7 +36,7 @@ class TimeBlock extends React.Component {
         subject,
         professor,
         location,
-        isRequired,
+        required,
         url,
         deleted,
         choosed,
@@ -44,7 +44,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
       return (
         
-        <td className={"test"} style={deleted? {backgroundColor:"gray"}:isRequired ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
+        <td className={"test"} style={deleted? {backgroundColor:"gray"}:required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: this.state.color3} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  >
           
             {/* {deleted?
             <IconButton color="primary" aria-label="add to shopping cart" onClick={()=>{this.onClick2(subject);}}>
