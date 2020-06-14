@@ -1,6 +1,9 @@
 package com.hufsSchedule.hufsScheduleSystem.Repository;
 
+import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.*;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -17,18 +20,15 @@ public class CourseRepositorySupport extends QuerydslRepositorySupport {
         this.queryFactory = queryFactory;
     }
 
-    public List<String> findInstructionNameByUser(Long userId){
+    public List<TimetableDto.findInstructionCode> findInstructionCodeByMajor(){
         QCourse course = new QCourse("course");
         QInstruction instruction = new QInstruction("instruction");
-        return queryFactory
-                .select(instruction.subject)
-                .from(instruction)
-                .where(instruction.instructionId.in(
-                        JPAExpressions
-                                .select(course.instruction.instructionId)
-                                .from(course)
-                                .where(course.user.userId.eq(userId))))
-                        .fetch();
+        List<TimetableDto.findInstructionCode> dto = queryFactory
+                .select(Projections.bean(TimetableDto.findInstructionCode.class, course.user.userId, course.instruction.instructionNumber))
+                .from(course)
+                .where(course.courseArea.eq("1전공"))
+                .fetch();
+        return dto;
     }
 
     public List<Instruction> findInstructionByUser(Long userId){

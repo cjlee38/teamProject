@@ -3,10 +3,8 @@ package com.hufsSchedule.hufsScheduleSystem.Dto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -30,6 +28,21 @@ public class TimetableDto {
             this.myCredit = myCredit;
             this.myFreetime = myFreetime;
         }
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class findInstructionCode{
+        private Long userId;
+        private String instructionNumber;
+
+        @QueryProjection
+        public findInstructionCode(Long userId, String instructionNumber){
+            this.userId = userId;
+            this.instructionNumber = instructionNumber;
+        }
+
     }
 
     @Getter
