@@ -166,7 +166,7 @@ class LectureList extends React.Component {
 
                 return (
                   <tr key={time} id={time.split('')[0]} className="block" >
-                    <td className="block-time" >
+                    <td  className="block-time" >
                       {time}
                     </td>
                     {Array.from(Array(5).keys()).map((w) => {
