@@ -32,23 +32,20 @@ const LoginP = (props) => {
     })
   }
 
-  const tryLogin = async() => {
-    
+  const tryLogin = async(event) => {
+    event.preventDefault()
     let config = {
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
-    };
-    console.log(id, password)
+  };
     Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
      "studentNumber": id, "password": password 
     }, config)
       .then(async (response) => {
-        console.log(response);
         await doSignin(response.data.data.userId);       
     })
       .catch(async function (error) {
-        console.log(error);
         alert("아이디/비밀번호를 확인해주세요!");
       });
       
@@ -67,7 +64,7 @@ const LoginP = (props) => {
     <>
       <div className="body">
         <Title />
-        {/* <form onSubmit={tryLogin} > */}
+        <form onSubmit={tryLogin}>
         <div className="idPassword">
           <Input
             placeholder={"ex)195002215"}
@@ -87,11 +84,10 @@ const LoginP = (props) => {
         </div>
         <div className="idPassword">
 
-            <button type={"submit"}className={"login"} name={"로그인"} onClick={tryLogin} > 로그인 </button>
+            <button type={"submit"}className={"login"} name={"로그인"} > 로그인 </button>
 
             <Button onClick={toSignup} name={"회원가입"} value={"signUp"} />
-        </div>
-        {/* </form> */}
+        </div></form>
     </div>
     </>
   )

@@ -2,11 +2,19 @@ tr#1  > td:nth-child(2) > button{
     margin-left: -2%;
 }
 
-td.test  {
+td.test, td.unit  {
     margin-right: -2%;
+    width: 16%;
+}
+td.test .lecture-name{
+    font-size: 15px !important;
+}
+td.test .lecture-info{
+    font-size: 12px !important;
 }
 td.test button{
-    margin-left: -100% !important;
+    position: relative;
+    margin-left: -5% !important;
     margin-right: 5%;
 
 }

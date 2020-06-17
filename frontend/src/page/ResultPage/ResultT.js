@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import TimeBlock from './Timeblock';
 import Normal from './options/Normal';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
+
 
 class LectureList extends React.Component {
   constructor(props) {
@@ -108,6 +110,18 @@ class LectureList extends React.Component {
   
 
   saveTimetable(){
+    Axios.post('', {
+     "userId" : this.props.userId,
+     "myCourse" : this.state.lectures
+      
+    })
+      .then(async (response) => {
+        console.log(response)
+    })
+      .catch(async function (error) {
+        alert(error);
+      });
+      
 
   }
 
@@ -121,7 +135,7 @@ class LectureList extends React.Component {
     } = this.state;
     return (
       <div id="lecture-list">
-        <Button onClick={this.saveTimetable} variant="contained" size="large" color="primary" style={{ float: 'left',marginBottom:"1%",  backgroundColor:"gray !important"}}> 저장하기</Button>
+        <Button onClick={this.saveTimetable} variant="contained" color="primary" style={{ float: 'left', backgroundColor:"gray !important"}}> 저장하기</Button>
         <Link onClick={this.props.change} to={{
         pathname:"/Result",
         state: {
@@ -130,7 +144,7 @@ class LectureList extends React.Component {
           myCredit : this.props.credit
         }
       }}>
-        <Button variant="contained" color="primary" style={{marginBottom:"1%"}}>현재 조건으로 재생성</Button></Link>
+        <Button variant="contained" color="primary" >현재 조건으로 재생성</Button></Link>
         <div id="timetable">
           <table>
             <thead>
@@ -152,7 +166,7 @@ class LectureList extends React.Component {
 
                 return (
                   <tr key={time} id={time.split('')[0]} className="block" >
-                    <td className="block-time" >
+                    <td  className="block-time" >
                       {time}
                     </td>
                     {Array.from(Array(5).keys()).map((w) => {

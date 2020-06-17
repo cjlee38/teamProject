@@ -49,18 +49,30 @@ public class MakeTimeTableService {
         User userInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         List<Instruction> userTakenCourses = condition.getInstructions();
         Credit userCredit = condition.getCredit();
-        UserSelectsObj userSelectsObj = userSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
-        SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
 
+//        ArrayList<Instruction> testCourses = req.getMyCourse();
+//        for (Instruction course : testCourses) {
+//            System.out.println(course.getSubject());
+//        }
+//        System.out.println(req.getMyCredit());
+//        System.out.println(req.getMyFreetime());
+//
+        UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
+
+        SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
+        System.out.println("point 1");
 
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
-        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
+        System.out.println("point 2");
 
-        List<Table<String, String, WeightInstruction>> tables = suggSysService.addInstructionsToTable(suggSysObj, remainObj.getGrdCourse());
+        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
+        System.out.println("point 3");
+
+        List<Table<String, String, WeightInstruction>> tables = SuggSysService.addInstructionsToTable(suggSysObj, remainObj.getGrdCourse());
 
         List<TimetableDto.Result> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
-            results.add(suggSysService.cvtTableToResult(table));
+            results.add(SuggSysService.cvtTableToResult(table));
         }
 
         return results;

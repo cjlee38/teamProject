@@ -24,7 +24,7 @@ class Normal {
                 })
                 result.forEach((time) => {
                   const weekday = time.split('')[0];
-                  const hours = time.split('')[1]
+                  const hours = time.split('').splice(1).join('')
         
                   if (weekday && hours) {
                     const key = `${weekday}${hours}`;

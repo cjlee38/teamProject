@@ -24,29 +24,25 @@ import java.util.*;
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
 
 public class SuggSysService {
-    SuggCreditService suggCreditService;
-    SuggTableService suggTableService;
-    SuggInstructionService suggInstructionService;
-    SuggRatioService suggRatioService;
     /*
     maxCredit -> 선택한 학점에서 과목 학점만큼 제거
     Table -> 선택한 과목 + 공강시간 process
     validCourseList -> 20-1 모든 과목에서 내가 수강한 과목  & 선택한 과목 제거. ( + 본인 전공 과목만 남길것인지? )
     creditRatio -> 지금까지 수강한 과목 학점 비율. & 1전공-전공명 / 이중전공 - 전공명 map
      */
-    public SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
-        CreditRange creditRange = suggCreditService.initTimeTableCredit(userSelectsObj.getUserSelectCredit(), userSelectsObj.getUserSelectCourses());
-        Table<String, String, WeightInstruction> timeTable = suggTableService.initTimeTable(userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserSelectFreeTime());
-        List<WeightInstruction> validInstructions = suggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userInfo);
-        CreditRatio creditRatio = suggRatioService.initCreditRatio(userCredit, userInfo, creditRange);
+    public static SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
+        CreditRange creditRange = SuggCreditService.initTimeTableCredit(userSelectsObj.getUserSelectCredit(), userSelectsObj.getUserSelectCourses());
+        Table<String, String, WeightInstruction> timeTable = SuggTableService.initTimeTable(userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserSelectFreeTime());
+        List<WeightInstruction> validInstructions = SuggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userInfo);
+        CreditRatio creditRatio = SuggRatioService.initCreditRatio(userCredit, userInfo, creditRange);
 
         return new SuggSysObj(creditRange, timeTable, validInstructions, creditRatio);
     }
 
     // 강의과목을 테이블에 추가
-    public List<Table<String, String, WeightInstruction>> addInstructionsToTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses) {
+    public static List<Table<String, String, WeightInstruction>> addInstructionsToTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses) {
         List<WeightInstruction> weightedInstructions = sortInstructionByWeight(
-                suggInstructionService.addWeigthToNcssInstructions(remainCourses, suggSysObj.getValidInstructions())
+                SuggInstructionService.addWeigthToNcssInstructions(remainCourses, suggSysObj.getValidInstructions())
         ); // 남아있는 필수과목에 해당하는 Instruction만 남김
 
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
@@ -64,7 +60,7 @@ public class SuggSysService {
             Integer summed = SuggSysFunc.sumTableCredit(table);
             if (summed <= suggSysObj.getCreditRange().getMaxCredit() - 2) {
                 for (WeightInstruction weightInstruction : weightedInstructions) {
-                    suggTableService.inputInstructionToTable(table, weightInstruction);
+                    SuggTableService.inputInstructionToTable(table, weightInstruction);
                 }
             }
         }
@@ -72,7 +68,7 @@ public class SuggSysService {
         return tableList;
     }
 
-    public boolean isPossible(Integer credit) {
+    public static boolean isPossible(Integer credit) {
         if (credit <= 0) {
             return false;
         } else {
@@ -80,7 +76,7 @@ public class SuggSysService {
         }
     }
 
-    public void backtracking(List<WeightInstruction> instructions, Table<String, String, WeightInstruction> table,
+    public static void backtracking(List<WeightInstruction> instructions, Table<String, String, WeightInstruction> table,
                              Integer credit, CreditRatio ratio, List<Table<String, String, WeightInstruction>> tableList, Integer idx) {
         if (!isPossible(credit)) {
             tableList.add(table);
@@ -91,8 +87,8 @@ public class SuggSysService {
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
         CreditRatio currentRatio = copyCreditRatio(ratio);
 
-        suggTableService.inputInstructionToTable(currentTable, currentInstruction, ratio);
-        suggRatioService.subtractRatio(currentRatio, currentInstruction);
+        SuggTableService.inputInstructionToTable(currentTable, currentInstruction, ratio);
+        SuggRatioService.subtractRatio(currentRatio, currentInstruction);
         idx++;
 
         for (Integer iter = 0; iter <= instructions.size(); iter++) {
@@ -101,7 +97,7 @@ public class SuggSysService {
         }
     }
 
-    public TimetableDto.Result cvtTableToResult(Table<String, String, WeightInstruction> table) {
+    public static TimetableDto.Result cvtTableToResult(Table<String, String, WeightInstruction> table) {
         List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
 

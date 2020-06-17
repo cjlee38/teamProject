@@ -14,7 +14,7 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 import java.util.*;
 
 public class SuggRatioService {
-    public CreditRatio initCreditRatio(Credit userCredit, User userInfo, CreditRange creditRange) {
+    public static CreditRatio initCreditRatio(Credit userCredit, User userInfo, CreditRange creditRange) {
         Map<String, String> mapper = connectFieldToMajor(userInfo);
 
         Map<String, Float> ratio = new HashMap<>();
@@ -43,7 +43,7 @@ public class SuggRatioService {
         return new CreditRatio(mapper, ratio);
     }
 
-    public Map<String, String> connectFieldToMajor(User userInfo) {
+    public static Map<String, String> connectFieldToMajor(User userInfo) {
         Map<String, String> mapper = new HashMap<>();
         mapper.put(userInfo.getMajor(), "firstMajor");
         mapper.put(userInfo.getSecondMajor(), "secondMajor");
@@ -51,7 +51,7 @@ public class SuggRatioService {
 
         return mapper;
     }
-    public void subtractRatio(CreditRatio creditRatio, WeightInstruction instruction) {
+    public static void subtractRatio(CreditRatio creditRatio, WeightInstruction instruction) {
         Integer value = instruction.getInstruction().getCredit();
         String field = creditRatio.getFieldToMajor().get(instruction.getInstruction().getDept());
 

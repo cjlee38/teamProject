@@ -17,7 +17,7 @@ public class SuggInstructionService {
     /*
     본인 전공에 해당하지 않는 과목 삭제할것인지..?
      */
-    public List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions, List<Instruction> selectedInstructions, User userInfo) {
+    public static List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions, List<Instruction> selectedInstructions, User userInfo) {
         List <Instruction> removeInstructions = new ArrayList<>();
         removeInstructions.addAll(takenInstructions);
         removeInstructions.addAll(selectedInstructions);
@@ -45,7 +45,7 @@ public class SuggInstructionService {
         }
         return weighted;
     }
-    public List<WeightInstruction> addWeigthToNcssInstructions(Map<String, List<CourseEnums>> remainCourses, List<WeightInstruction> validInstructions) {
+    public static List<WeightInstruction> addWeigthToNcssInstructions(Map<String, List<CourseEnums>> remainCourses, List<WeightInstruction> validInstructions) {
         List<CourseEnums> flattenCourses = new ArrayList<>();
         for (String key : remainCourses.keySet()) {
             flattenCourses.addAll(remainCourses.get(key));
@@ -63,7 +63,7 @@ public class SuggInstructionService {
     }
 
 
-    public List<Instruction> removeInstructionsByList(List<Instruction> entireInstructions, List<Instruction> removeInstructions) {
+    public static List<Instruction> removeInstructionsByList(List<Instruction> entireInstructions, List<Instruction> removeInstructions) {
         List<String> removeCourseNumber = new ArrayList<>();
         removeInstructions.stream().forEach(x -> removeCourseNumber.add(x.getInstructionNumber()));
         return entireInstructions.stream()

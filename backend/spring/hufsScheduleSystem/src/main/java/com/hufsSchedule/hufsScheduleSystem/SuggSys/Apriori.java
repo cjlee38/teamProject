@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem;
+package com.hufsSchedule.hufsScheduleSystem.SuggSys;
 
 import com.google.common.collect.Sets;
 

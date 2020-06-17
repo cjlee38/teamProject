@@ -39,7 +39,6 @@ public class ConditionCheckService {
         List<String> takenTeaching = courseRepositorySupport.findInstructionByUserCourseArea(userId, "교직").stream().map(Instruction::getSubject).collect(Collectors.toList());;
         List<String> takenFree = courseRepositorySupport.findInstructionByUserCourseArea(userId, "자선").stream().map(Instruction::getSubject).collect(Collectors.toList());;
 
-
         List<String> instructionName = courses.stream().map(Instruction::getSubject).collect(Collectors.toList());
         List<String> userInfo = new ArrayList<>();
         List<Integer> userGrdCredit = new ArrayList<>();
@@ -95,15 +94,6 @@ public class ConditionCheckService {
         userRemainCredit.add(remainCredit.getTeaching());
         userRemainCredit.add(remainCredit.getOptional());
         userRemainCredit.add(remainCredit.getTotalCredit());
-
-        for ( Instruction ins : courses) {
-            System.out.println(ins.getSubject());
-            System.out.println(ins.getInstructionNumber());
-        }
-        System.out.println("-------------------------");
-        System.out.println(GrdObj.getGrdCourse());
-        System.out.println("-------------------------");
-        System.out.println(remainObj.getGrdCourse());
 
         ConditionDto.ResultOfCondition res = ConditionDto.ResultOfCondition.builder()
                 .userInfo(userInfo)
