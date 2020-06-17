@@ -38,8 +38,8 @@ const LoginP = (props) => {
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
-  };
-  console.log(id, password)
+    };
+    console.log(id, password)
     Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/user/Login', {
      "studentNumber": id, "password": password 
     }, config)
