@@ -1,5 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -19,8 +20,10 @@ public class Instruction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="instruction_id", unique = true)
+    @JsonProperty("instruction_id")
     private Long instructionId;
     @Column(name="instruction_number", unique = true)
+    @JsonProperty("instruction_number")
     private String instructionNumber;
     @Column(name="rq_year")
     private Long rqYear;
@@ -43,10 +46,12 @@ public class Instruction implements Serializable {
     @Column(name="time")
     private int time;
     @Column(name="class_time")
+    @JsonProperty("class_time")
     private String classTime;
     @Column(name="required")
     private boolean required;
     @Column(name="number_of_people")
+    @JsonProperty("number_of_people")
     private String numberOfPeople;
     @Column(name="note")
     private String note;
