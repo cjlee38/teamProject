@@ -8,19 +8,26 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
+import de.mrapp.apriori.Apriori;
+import de.mrapp.apriori.Item;
+import org.jetbrains.annotations.NotNull;
 
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class SuggSysFunc {
 
+
+
+public class SuggSysFunc {
     public static boolean isInstructionEmpty(WeightInstruction instruction) {
         if (instruction.getInstruction() == null) {
             return true;
         } else {
             return false;
         }
+
     }
 
     public static WeightInstruction getEmptyInstruction() {
@@ -32,7 +39,7 @@ public class SuggSysFunc {
         String engDay;
 
         if (korDay.equals("월")) { engDay = "Monday"; }
-        else if (korDay.equals("화")) { engDay = "TuesDay"; }
+        else if (korDay.equals("화")) { engDay = "Tuesday"; }
         else if (korDay.equals("수")) { engDay = "Wednesday"; }
         else if (korDay.equals("목")) { engDay = "Thursday"; }
         else if (korDay.equals("금")) { engDay = "Friday"; }

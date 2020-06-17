@@ -17,7 +17,7 @@ import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.splitClass
 
 public class SuggTableService {
 
-    public Table<String, String, WeightInstruction> initTimeTable(List<Instruction> userSelectInstructions, List<String> userSelectFreetime) {
+    public static Table<String, String, WeightInstruction> initTimeTable(List<Instruction> userSelectInstructions, List<String> userSelectFreetime) {
         Table<String, String, WeightInstruction> timeTable = getEmptyTimeTable();
         List<WeightInstruction> weigted = SuggInstructionService.addWeightToInstructions(userSelectInstructions, new Float(1));
 
@@ -26,7 +26,6 @@ public class SuggTableService {
             String time = freetime.substring(1);
             timeTable.put(time, day, SuggSysFunc.getEmptyInstruction());
         }
-
         for (WeightInstruction instruction : weigted) { // 사용자가 설정한 강의 추가
             inputInstructionToTable(timeTable, instruction);
         }
@@ -42,7 +41,19 @@ public class SuggTableService {
         return timeTable;
     }
 
-    public void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction)  {
+    public static void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction)  {
+        System.out.println("-----------------------");
+        System.out.println("input instruction to table");
+        System.out.println(instruction.getInstruction().getInstructionNumber());
+        System.out.println(instruction.getInstruction().getArea());
+        System.out.println(instruction.getInstruction().getCredit());
+        System.out.println(instruction.getInstruction().getDept());
+        System.out.println(instruction.getInstruction().getProfessor());
+        System.out.println(instruction.getInstruction().getNumberOfPeople());
+
+        System.out.println(instruction.getInstruction().getSubject());
+        System.out.println(instruction.getInstruction().getClassTime());
+        System.out.println("-----------------------");
         String classTime = instruction.getInstruction().getClassTime();
         String day = cvtKorDayToEng(classTime.substring(0,1));
         List<String> times = splitClassTimes(classTime.substring(1));
@@ -53,7 +64,7 @@ public class SuggTableService {
 
     }
 
-    public void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction, CreditRatio ratio)  {
+    public static void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction, CreditRatio ratio)  {
         String field = ratio.getFieldToMajor().get(instruction.getInstruction().getDept());
         if (field != null) {
             if (ratio.getRatio().get(field) <=0) {
