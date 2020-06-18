@@ -21,12 +21,47 @@ public class TimetableDto {
         private Long myCredit;
         private ArrayList<String> myFreetime;// 공강시간
 
-       @Builder
+        @Builder
         public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime){
             this.userId = userId;
             this.myCourse = myCourse;
             this.myCredit = myCredit;
             this.myFreetime = myFreetime;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class SaveTimeTable{
+        private Long userId;
+        private ArrayList<Instruction> myCourse;
+
+        @Builder
+        public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse){
+            this.userId = userId;
+            this.myCourse = myCourse;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class ReqTimeTable{
+        private Long userId;
+
+        @Builder
+        public ReqTimeTable(Long userId){
+            this.userId = userId;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class MyTimeTable{
+        private List<Instruction> myCourse;
+
+        @Builder
+        public MyTimeTable(List<Instruction> myCourse){
+            this.myCourse = myCourse;
         }
     }
 

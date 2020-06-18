@@ -13,12 +13,6 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructio
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggCreditService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggRatioService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
-import de.mrapp.apriori.Apriori;
-import de.mrapp.apriori.Item;
-import de.mrapp.apriori.Transaction;
-
-import javax.xml.crypto.Data;
-import java.lang.reflect.Type;
 import java.util.*;
 
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
