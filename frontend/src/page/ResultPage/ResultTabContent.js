@@ -29,8 +29,8 @@ export default function TabContent1(props) {
             })
             .catch(async function (error) {
                 console.log(error);
-               setData([props.data.state.myCourse])
-               setIsData(true)
+            //    setData([props.data.state.myCourse])
+            //    setIsData(true)
 
                 alert(error)
             });
