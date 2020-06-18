@@ -46,8 +46,6 @@ public class SuggTableService {
         String day = cvtKorDayToEng(classTime.substring(0,1));
         List<String> times = splitClassTimes(classTime.substring(2));
 
-        System.out.println("times : " + times);
-
         for (String time : times) {
                 timeTable.put(time, day, instruction);
         }

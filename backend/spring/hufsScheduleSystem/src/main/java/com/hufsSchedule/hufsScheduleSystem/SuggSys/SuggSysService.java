@@ -8,6 +8,7 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Timetable;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
+import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.*;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructionService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggCreditService;
@@ -40,16 +41,16 @@ public class SuggSysService {
     }
 
     // 강의과목을 테이블에 추가
-    public static List<Table<String, String, WeightInstruction>> addInstructionsToTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses) {
-        List<WeightInstruction> weightedInstructions = sortInstructionByWeight(
-                SuggInstructionService.addWeigthToNcssInstructions(remainCourses, suggSysObj.getValidInstructions())
-        ); // 남아있는 필수과목에 해당하는 Instruction만 남김
+    public static List<Table<String, String, WeightInstruction>> generateTimeTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses, Long userId) {
+        System.out.println("valid instructions length : " + suggSysObj.getValidInstructions().size());
+        SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, userId); // void
+        List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
-        for (Integer idx = 0; idx <= weightedInstructions.size(); idx++) {
+        for (Integer idx = 0; idx <= sorted.size(); idx++) {
             Table<String, String, WeightInstruction> table = suggSysObj.getTimeTable();
 
-            List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(weightedInstructions);
+            List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(sorted);
             Integer maxCredit = suggSysObj.getCreditRange().getMaxCredit();
             CreditRatio ratio = SuggSysFunc.copyCreditRatio(suggSysObj.getCreditRatio());
 
@@ -59,7 +60,7 @@ public class SuggSysService {
         for (Table<String, String, WeightInstruction> table : tableList) {
             Integer summed = SuggSysFunc.sumTableCredit(table);
             if (summed <= suggSysObj.getCreditRange().getMaxCredit() - 2) {
-                for (WeightInstruction weightInstruction : weightedInstructions) {
+                for (WeightInstruction weightInstruction : sorted) {
                     SuggTableService.inputInstructionToTable(table, weightInstruction);
                 }
             }
@@ -106,7 +107,7 @@ public class SuggSysService {
             ArrayList<TimetableDto.Cell> cells = new ArrayList<>();
             for (String row : rows) {
                 WeightInstruction cell = table.get(row, column);
-                if (cell != null && isInstructionEmpty(cell)) {
+                if (cell != null && ! isInstructionEmpty(cell)) {
                     String instruction = cell.getInstruction().getInstructionNumber();
                     String instructor = cell.getInstruction().getProfessor();
                     Integer required = 0;
