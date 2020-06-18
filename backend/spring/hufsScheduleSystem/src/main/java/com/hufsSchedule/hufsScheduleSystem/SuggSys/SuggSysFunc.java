@@ -59,6 +59,7 @@ public class SuggSysFunc {
     }
 
     public static List<String> splitClassTimes(String times) {
+        if (times.startsWith(" ")) {times = times.substring(1);}
         return Arrays.stream(times.split(" ")).collect(Collectors.toList());
     }
 
