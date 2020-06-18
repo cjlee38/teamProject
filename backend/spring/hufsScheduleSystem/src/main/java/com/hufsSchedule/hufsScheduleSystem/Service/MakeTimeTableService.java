@@ -50,30 +50,45 @@ public class MakeTimeTableService {
         List<Instruction> userTakenCourses = condition.getInstructions();
         Credit userCredit = condition.getCredit();
 
-//        ArrayList<Instruction> testCourses = req.getMyCourse();
-//        for (Instruction course : testCourses) {
-//            System.out.println(course.getSubject());
-//        }
-//        System.out.println(req.getMyCredit());
-//        System.out.println(req.getMyFreetime());
+        ArrayList<Instruction> tester = req.getMyCourse();
+
+        for (Instruction instruction : tester) {
+            System.out.println(" -- maketimetable test --");
+            System.out.println(instruction.getInstructionId());
+            System.out.println(instruction.getInstructionNumber());
+            System.out.println(instruction.getProfessor());
+            System.out.println(instruction.getDept());
+            System.out.println(instruction.getArea());
+            System.out.println(instruction.getCredit());
+            System.out.println(instruction.getSubject());
+            System.out.println(instruction.getRqSemester());
+            System.out.println(instruction.getRqYear());
+            System.out.println(instruction.getTime());
+            System.out.println(instruction.getClassTime());
+            System.out.println(instruction.getNote());
+            System.out.println(instruction.getUrl());
+            System.out.println(" ------------------------");
+        }
+
 //
         UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
 
         SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
-        System.out.println("point 1");
-
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
-        System.out.println("point 2");
-
         GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
-        System.out.println("point 3");
 
         List<Table<String, String, WeightInstruction>> tables = SuggSysService.addInstructionsToTable(suggSysObj, remainObj.getGrdCourse());
+        System.out.println("-- table results --");
+        System.out.println(tables.size());
+        System.out.println(tables.indexOf(0));
+        System.out.println("-------------------");
 
         List<TimetableDto.Result> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
             results.add(SuggSysService.cvtTableToResult(table));
         }
+
+
 
         return results;
         // Taken GrdCondObj, remain GrdCondObj, UserInfo

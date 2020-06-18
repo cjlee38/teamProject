@@ -42,21 +42,11 @@ public class SuggTableService {
     }
 
     public static void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction)  {
-        System.out.println("-----------------------");
-        System.out.println("input instruction to table");
-        System.out.println(instruction.getInstruction().getInstructionNumber());
-        System.out.println(instruction.getInstruction().getArea());
-        System.out.println(instruction.getInstruction().getCredit());
-        System.out.println(instruction.getInstruction().getDept());
-        System.out.println(instruction.getInstruction().getProfessor());
-        System.out.println(instruction.getInstruction().getNumberOfPeople());
-
-        System.out.println(instruction.getInstruction().getSubject());
-        System.out.println(instruction.getInstruction().getClassTime());
-        System.out.println("-----------------------");
         String classTime = instruction.getInstruction().getClassTime();
         String day = cvtKorDayToEng(classTime.substring(0,1));
-        List<String> times = splitClassTimes(classTime.substring(1));
+        List<String> times = splitClassTimes(classTime.substring(2));
+
+        System.out.println("times : " + times);
 
         for (String time : times) {
                 timeTable.put(time, day, instruction);
@@ -82,7 +72,7 @@ public class SuggTableService {
 
         String classTime = instruction.getInstruction().getClassTime();
         String day = cvtKorDayToEng(classTime.substring(0,1));
-        List<String> times = splitClassTimes(classTime.substring(1));
+        List<String> times = splitClassTimes(classTime.substring(2));
         for (String time : times) {
             if ( timeTable.get(time,day) != null) { // 해당 시간에 null이 아닌 뭔가가 있으면 pass
                 return;
