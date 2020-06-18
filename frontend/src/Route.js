@@ -40,8 +40,7 @@ export default class Route1 extends Component{
       window.sessionStorage.clear();
 
     }
-    componentDidMount() {
-    }
+    
     componentWillMount() {
       const id = parseInt(window.sessionStorage.getItem('id'));
       if(id){
