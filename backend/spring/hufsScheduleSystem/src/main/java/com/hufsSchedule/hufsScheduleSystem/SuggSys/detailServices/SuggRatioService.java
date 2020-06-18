@@ -34,11 +34,9 @@ public class SuggRatioService {
         ratio.put("teaching", (float)(grdCredit.getTeaching() - userCredit.getTeaching()) / total);
         ratio.put("optional", (float)(grdCredit.getOptional() - userCredit.getOptional()) / total);
 
-        for (String key : ratio.keySet()) {
-            Float value = ratio.get(key);
-            if (value <= 0) { ratio.remove(key); }
-            else { ratio.put(key, value * creditRange.getMaxCredit()); }
-        }
+        ratio.entrySet().removeIf(x -> x.getValue() <= 0); // 0 이하는 다 삭제하고
+        ratio.replaceAll((k,v) -> v * creditRange.getMaxCredit()); // maxcredit 계산
+
 
         return new CreditRatio(mapper, ratio);
     }
