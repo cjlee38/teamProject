@@ -29,53 +29,12 @@ class LectureList extends React.Component {
         '12교시 20:00',
         '13교시 21:00'
       ],
-      // mytime: [],
-      // deletedLecture: [],
       displayLectures: {}
     };
   }
 
 
-
-  // async handleClick(w, t) {
-
-  //   let text = this.state.weekday[w] + String(this.state.timeUnitAlphabet[t]);
-  //   if (this.state.mytime.includes(text)) {
-  //     await this.setState({ mytime: this.state.mytime.filter(val => val !== text) })
-  //   }
-  //   else {
-  //     await this.setState({ mytime: this.state.mytime.concat(text) })
-
-  //   }
-
-  // }
-
-
-  // getWeekdayIndex(target) {
-  //   const { weekday } = this.state;
-
-  //   for (let i = 0; i < weekday.length; i += 1) {
-  //     if (target === weekday[i]) {
-  //       return i;
-  //     }
-  //   }
-
-  //   return -1;
-  // }
-
-  // getTimeIndex(target) {
-  //   const { timeUnitAlphabet } = this.state;
-
-  //   for (let i = 0; i < timeUnitAlphabet.length; i += 1) {
-  //     if (target === timeUnitAlphabet[i]) {
-  //       return i;
-  //     }
-  //   }
-
-  //   return -1;
-  // }
   setTable = (lectures, lectureForms) => {
-    // const { lectureForms, lectures } = this.state;
     const { option } = this.state;
     let computedLectures = null;
 
@@ -90,22 +49,12 @@ class LectureList extends React.Component {
     });
   }
 
-  // removeLecture = (row) => {
-  //   if (row.deleted) {
-  //     this.setState({ lectures: this.state.lectures.filter(inst => inst.instruction_id !== row.instruction_id), deletedLecture: this.state.deletedLecture.concat(row) })
-  //   }
-  //   else {
-  //     this.setState({ lectures: this.state.lectures.concat(row), deletedLecture: this.state.deletedLecture.filter(inst => inst.instruction_id !== row.instruction_id) })
-
-  //   }
-  // }
-
   componentDidMount() {
-    Axios.get('', {
+    Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/check', {
       params: { userId: this.props.userId }
   }).then((response)=>{
-    // let lectrue = response.data
-    let lecture = [{ instruction_id: 1234, subject: "자료구조", class_time: "월 1 2 3", professor: "신찬수" }]
+    console.log(response.data)
+    let lecture = response.data
 
     let arr = Array(lecture.length);
       for (let i = 0; i < lecture.length; i++) {
@@ -116,20 +65,11 @@ class LectureList extends React.Component {
     this.setTable(lecture, lectureForms)
   }
   ).catch((err)=>{
-    console.log(err)
     alert(err)    
   })
    
 
   }
-
-  // rePost(){
-    
-  // }
-
-  // saveTimetable(){
-
-  // }
 
 
 

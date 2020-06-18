@@ -74,7 +74,7 @@ class crawler extends React.Component {
               placeholder="종정시 비밀번호" value={this.state.password} type="password" onChange={this.handlingChange}
             />}
 
-          {this.state.loading ? <Spinner /> : <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={this.handlingSubmit} className="crawlingbtn">
+          {this.state.loading ? <Spinner /> : <Button startIcon={<CloudUploadIcon />} variant="outlined" size="large" color="primary" type="submit" onSubmit={()=>{if(window.confirm("종합정보시스템 개인정보이용에 동의하십니까?")){this.handlingSubmit()}}} className="crawlingbtn">
             업데이트      </Button>}
 
         </form>
