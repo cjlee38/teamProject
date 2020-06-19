@@ -22,8 +22,9 @@ export default function TabContent1(props) {
             "userId": props.userId
         })
             .then(async (response) => {
-                console.log(response);
-               setData(response.data.data)
+                
+                console.log(response.data);
+               setData(response.data.timeTable)
                setIsData(true)
 
             })
