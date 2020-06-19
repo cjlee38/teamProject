@@ -38,12 +38,13 @@ public class MakeTimeTableController {
 
     @PostMapping("/save")
     public boolean saveTimeTable(@RequestBody TimetableDto.SaveTimeTable req)throws Exception {
+        makeTimeTableService.saveTimeTable(req);
         return true;
     }
 
     @GetMapping("/check")
-    public TimetableDto.MyTimeTable checkTimeTable(@RequestBody TimetableDto.ReqTimeTable req)throws Exception {
-        TimetableDto.MyTimeTable result = makeTimeTableService.checkTimeTable(req);
+    public TimetableDto.MyTimeTable checkTimeTable(@RequestParam(value = "userId", required =  true)Long userId)throws Exception {
+        TimetableDto.MyTimeTable result = makeTimeTableService.checkTimeTable(userId);
         return result;
     }
 

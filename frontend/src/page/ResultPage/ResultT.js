@@ -110,15 +110,16 @@ class LectureList extends React.Component {
   
 
   saveTimetable(){
-    Axios.post('', {
+    Axios.post('http://127.0.0.1:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
      "myCourse" : this.state.lectures
       
     })
-      .then(async (response) => {
-        console.log(response)
+      .then((response) => {
+        alert("저장되었습니다.")
+        
     })
-      .catch(async function (error) {
+      .catch(function (error) {
         alert(error);
       });
       
@@ -135,7 +136,7 @@ class LectureList extends React.Component {
     } = this.state;
     return (
       <div id="lecture-list">
-        <Button onClick={this.saveTimetable} variant="contained" color="primary" style={{ float: 'left', backgroundColor:"gray !important"}}> 저장하기</Button>
+        <Button onClick={()=>{if(window.confirm("저장하시겠습니까? 기존에 저장된 시간표는 사라집니다!")){this.saveTimetable()}}} variant="contained" color="primary" style={{ float: 'left', backgroundColor:"gray !important"}}> 저장하기</Button>
         <Link onClick={this.props.change} to={{
         pathname:"/Result",
         state: {

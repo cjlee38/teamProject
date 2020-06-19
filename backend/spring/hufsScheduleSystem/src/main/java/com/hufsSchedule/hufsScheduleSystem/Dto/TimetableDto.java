@@ -45,17 +45,6 @@ public class TimetableDto {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class ReqTimeTable{
-        private Long userId;
-
-        @Builder
-        public ReqTimeTable(Long userId){
-            this.userId = userId;
-        }
-    }
-
-    @Getter
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class MyTimeTable{
         private List<Instruction> myCourse;
 

@@ -108,8 +108,8 @@ public class MakeTimeTableService {
         // 만든 결과물은 TimetableDto 내 res에 넣어야 함.
 
     }
-    public TimetableDto.MyTimeTable checkTimeTable(TimetableDto.ReqTimeTable req){
-        List<Instruction> instructionList = timeTableRepositorySupport.findInstructionByUser(req.getUserId());
+    public TimetableDto.MyTimeTable checkTimeTable(Long userId){
+        List<Instruction> instructionList = timeTableRepositorySupport.findInstructionByUser(userId);
         TimetableDto.MyTimeTable result = TimetableDto.MyTimeTable.builder().myCourse(instructionList).build();
         return result;
     }
