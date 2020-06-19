@@ -103,32 +103,52 @@ public class SuggSysService {
         return 0;
     }
 
-    public static TimetableDto.Result cvtTableToResult(Table<String, String, WeightInstruction> table) {
+//    public static TimetableDto.Result cvtTableToResult(Table<String, String, WeightInstruction> table) {
+//        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+//        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+//
+//        ArrayList<TimetableDto.Day> days = new ArrayList<>();
+//        for (String column : columns) {
+//            ArrayList<TimetableDto.Cell> cells = new ArrayList<>();
+//            for (String row : rows) {
+//                WeightInstruction cell = table.get(row, column);
+//                if (cell != null && ! isInstructionEmpty(cell)) {
+//                    String instruction = cell.getInstruction().getInstructionNumber();
+//                    String instructor = cell.getInstruction().getProfessor();
+//                    Integer required = 0;
+//                    if (cell.getInstruction().isRequired() == true) {
+//                        required = 1;
+//                    }
+//                    TimetableDto.Data data = new TimetableDto.Data(instruction, instructor, required);
+//                    cells.add(new TimetableDto.Cell(data));
+//                } else {
+//                    cells.add(new TimetableDto.Cell(false));
+//                }
+//            days.add(new TimetableDto.Day(cells));
+//            }
+//        }
+//        TimetableDto.Result result = new TimetableDto.Result(days);
+//        return result;
+//    }
+
+    public static ArrayList<Instruction> cvtTableToResult(Table<String, String, WeightInstruction> table) {
         List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
 
-        ArrayList<TimetableDto.Day> days = new ArrayList<>();
+        Set<Instruction> set = new HashSet<>();
         for (String column : columns) {
-            ArrayList<TimetableDto.Cell> cells = new ArrayList<>();
             for (String row : rows) {
                 WeightInstruction cell = table.get(row, column);
                 if (cell != null && ! isInstructionEmpty(cell)) {
-                    String instruction = cell.getInstruction().getInstructionNumber();
-                    String instructor = cell.getInstruction().getProfessor();
-                    Integer required = 0;
-                    if (cell.getInstruction().isRequired() == true) {
-                        required = 1;
-                    }
-                    TimetableDto.Data data = new TimetableDto.Data(instruction, instructor, required);
-                    cells.add(new TimetableDto.Cell(data));
-                } else {
-                    cells.add(new TimetableDto.Cell(false));
+                    set.add(cell.getInstruction());
                 }
-            days.add(new TimetableDto.Day(cells));
             }
         }
-        TimetableDto.Result result = new TimetableDto.Result(days);
-        return result;
+
+        ArrayList<Instruction> ret = new ArrayList<>();
+        ret.addAll(set);
+        return ret;
+
     }
 
 //    public void apriori() {

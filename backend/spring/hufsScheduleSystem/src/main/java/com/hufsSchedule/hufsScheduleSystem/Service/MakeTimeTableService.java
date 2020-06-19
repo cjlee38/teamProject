@@ -49,7 +49,7 @@ public class MakeTimeTableService {
     private SuggSysService suggSysService;
     private UserSelectsService userSelectsService;
 
-    public List<TimetableDto.Result> checkCondition(TimetableDto.Req req){
+    public TimetableDto.Result checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
 //        List<TimetableDto.findInstructionCode> list = courseRepositorySupport.findInstructionCodeByMajor();
@@ -96,13 +96,15 @@ public class MakeTimeTableService {
 
         System.out.println(tables.size());
 
-        ArrayList<TimetableDto.Result> results = new ArrayList<>();
+        ArrayList<ArrayList<Instruction>> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
             results.add(SuggSysService.cvtTableToResult(table));
         }
 
+        TimetableDto.Result realResult = new TimetableDto.Result(results);
 
-        return results;
+
+        return realResult;
         // Taken GrdCondObj, remain GrdCondObj, UserInfo
         //GrdCondObj GrdCond = grdCondService.makeGrdCondByUserInfo(req);
         //GrdCondObj remains = grdCompareService.compareGrdAndUser(req, condition, GrdCond);

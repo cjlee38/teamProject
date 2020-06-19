@@ -31,8 +31,8 @@ public class MakeTimeTableController {
     }*/
 
     @PostMapping("/try")
-    public List<TimetableDto.Result> makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
-        List<TimetableDto.Result> results = makeTimeTableService.checkCondition(req);
+    public TimetableDto.Result makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
+        TimetableDto.Result results = makeTimeTableService.checkCondition(req);
         return results;
     }
 
