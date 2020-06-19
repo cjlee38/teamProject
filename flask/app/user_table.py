@@ -167,6 +167,7 @@ def user_Table(id_input, pw_input, user_id, db):
     tables = driver.find_by_tag('table')    # 취득 현황 테이블
 
     trs = driver.find_all_by_tag_with_obj(tables, 'tr')     # 테이블 요소
+    ths = len(driver.find_all_by_tag_with_obj(trs[0], 'th')) - 2
     columns = trs[0].text.split()   # columns 구분
 
     area = columns.index('교양영역') - 2
@@ -178,14 +179,17 @@ def user_Table(id_input, pw_input, user_id, db):
     for i in range(1, len(trs) - 1):    # 각 교양 행 탐색
         if '계' in trs[i].text:   # (소계) 제외
             continue
-        tds = driver.find_all_by_tag_with_obj(trs[i], 'td') # 행 요소
         temp_list = []
-        
-        
-        area_name = tds[area].text.split('(')[0]
 
-        number_of_subject = int(tds[count].text)
-        acquisition_credits = int(tds[got_credits].text)
+        tds = driver.find_all_by_tag_with_obj(trs[i], 'td')[:len(tds) - 1] # 행 요소
+        checking = len(tds) - ths
+        if checking:
+            number_of_subject = int(tds[count - checking].text)
+            acquisition_credits = int(tds[got_credits  - checking].text)
+        else:
+            number_of_subject = int(tds[count].text)
+            acquisition_credits = int(tds[got_credits].text)
+        area_name = tds[area].text.split('(')[0]            
 
         temp_list.append(area_name)    # 행 요소 종합
         temp_list.append(number_of_subject)    # 행 요소 종합
@@ -301,7 +305,7 @@ def user_Table(id_input, pw_input, user_id, db):
             course_area = i[2]
             temp_dept = ""
             if course_area == "1전공":
-                tepm_dept = major_dict['1전공']
+                temp_dept = major_dict['1전공']
             elif course_area == "이중":
                 temp_dept = major_dict['이중전공']
             elif "부전" in course_area:

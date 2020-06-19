@@ -4,17 +4,11 @@ import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
-import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
-import de.mrapp.apriori.Apriori;
-import de.mrapp.apriori.Item;
-import org.jetbrains.annotations.NotNull;
 
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 
