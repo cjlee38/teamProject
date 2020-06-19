@@ -7,6 +7,8 @@ import TimeBlock from './TimeBlock';
 import Normal from '../options/Normal';
 import Kitakubu from '../options/Kitakubu';
 import jammanbo from '../options/jammanbo';
+import Monday from '../options/Monday';
+import Friday from '../options/Friday';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { Link } from 'react-router-dom';
@@ -131,6 +133,12 @@ class LectureList extends React.Component {
     else if (option === 'jammanbo') {
       computedLectures = new jammanbo(lectureForms, lectures.lectures).execute();
     }
+    else if (option === 'monday') {
+      computedLectures = new Monday(lectureForms, lectures.lectures).execute();
+    }
+    else if (option === 'friday') {
+      computedLectures = new Friday(lectureForms, lectures.lectures).execute();
+    }
     this.setTime([...new Set(Object.keys(computedLectures).filter(time => !this.timeList.includes(time)).concat(this.state.mytime))])
 
     this.setState({
@@ -171,6 +179,11 @@ class LectureList extends React.Component {
               <FormControlLabel value="normal" control={<Radio />} label="일반" />
               <FormControlLabel value="kitakubu" control={<Radio />} label="아침형" />
               <FormControlLabel value="jammanbo" control={<Radio />} label="오후형" />
+              
+              <FormControlLabel value="monday" control={<Radio />} label="월요병" />
+              
+              <FormControlLabel value="friday" control={<Radio />} label="불금" />
+
 
             </RadioGroup>
           </FormControl>

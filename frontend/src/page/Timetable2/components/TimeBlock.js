@@ -46,7 +46,7 @@ class TimeBlock extends React.Component {
       } = displayLecture;
       
       return (
-        <td style={required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
+        <td className="unit" style={required ? { backgroundColor: '#FF5675' } : subject ? { backgroundColor: '#A4C3FF'} : { backgroundColor: this.state.color2, opacity:this.state.opacity2}}  onClick={()=>{this.onClick2(subject);}}>
           <a href={url} target="_blank"><span className="lecture-name">
             {subject}
           </span></a>
@@ -62,7 +62,7 @@ class TimeBlock extends React.Component {
     }
 
     return (
-      <td style={{ backgroundColor: this.state.color, opacity: this.state.opacity}}className="unit" onClick={()=>this.onClick1()}/>
+      <td className="unit" style={{ backgroundColor: this.state.color, opacity: this.state.opacity}}className="unit" onClick={()=>this.onClick1()}/>
     );
   }
 }
