@@ -34,6 +34,7 @@ class RegistUser(Resource):
             parser = reqparse.RequestParser()
             parser.add_argument('std_num', type=str)
             parser.add_argument('password', type=str)
+            parser.add_argument('userId', type=str)
             args = parser.parse_args()
 
             _std_num = args['std_num']
