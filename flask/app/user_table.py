@@ -182,7 +182,7 @@ def user_Table(id_input, pw_input, user_id, db):
         temp_list = []
 
         tds = driver.find_all_by_tag_with_obj(trs[i], 'td') # 행 요소
-        checking = len(tds) - 1 - ths
+        checking = ths - len(tds) - 1
         if checking:
             number_of_subject = int(tds[count - checking].text)
             acquisition_credits = int(tds[got_credits  - checking].text)
