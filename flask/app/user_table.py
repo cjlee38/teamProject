@@ -305,7 +305,7 @@ def user_Table(id_input, pw_input, user_id, db):
             course_area = i[2]
             temp_dept = ""
             if course_area == "1전공":
-                tepm_dept = major_dict['1전공']
+                temp_dept = major_dict['1전공']
             elif course_area == "이중":
                 temp_dept = major_dict['이중전공']
             elif "부전" in course_area:
