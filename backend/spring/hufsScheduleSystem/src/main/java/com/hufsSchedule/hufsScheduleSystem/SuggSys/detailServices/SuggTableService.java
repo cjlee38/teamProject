@@ -9,11 +9,9 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 import org.springframework.data.relational.core.sql.In;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.cvtKorDayToEng;
-import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.splitClassTimes;
+import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
 
 public class SuggTableService {
 
@@ -80,7 +78,36 @@ public class SuggTableService {
         for (String time : times) {
             timeTable.put(time, day, instruction); // 정상처리
         }
+    }
+    public static List<Table<String, String, WeightInstruction>> getTopNTableResult(List<Table<String, String, WeightInstruction>> tables, Integer counts) {
+        List<Float> scores = new LinkedList<>();
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        for (Table<String, String, WeightInstruction> table : tables) {
+            Float score = new Float(0.0);
+            for ( String row : rows) {
+                for (String column : columns) {
+                    WeightInstruction cell = table.get(row, column);
+                    if (cell != null && ! isInstructionEmpty(cell)) {
+                        score += cell.getWeight();
+                    }
+                }
+            }
+            scores.add(score);
+        }
 
+        List<Integer> indices = new ArrayList<>();
+        for (Integer i = 0; i < counts; i++) {
+            Float value = Collections.max(scores);
+            Integer idx = scores.indexOf(value);
+            indices.add(idx);
+        }
 
+        List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();
+        for (Integer idx : indices) {
+            topNs.add(tables.get(idx));
+        }
+
+        return topNs;
     }
 }

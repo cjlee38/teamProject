@@ -89,7 +89,10 @@ public class MakeTimeTableService {
             List<TimetableDto.findInstructionCode> data = courseRepositorySupport.findInstructionCodeByMajor(area);
             dataset.add(data);
         }
-        List<Table<String, String, WeightInstruction>> tables = SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset);
+
+        List<Table<String, String, WeightInstruction>> tables = SuggTableService.getTopNTableResult(
+                SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset), 5
+        ) ;
         System.out.println("-- table results --");
         System.out.println(tables.size());
         System.out.println(tables.get(1000));

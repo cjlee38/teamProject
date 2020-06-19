@@ -6,6 +6,7 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
+import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Apriori;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.AssociationRule;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.AssociationRuleObj;
@@ -78,15 +79,15 @@ public class SuggInstructionService {
         for (List<TimetableDto.findInstructionCode> data : dataset) {
             applyAssociationRule(validInstruction, userInfo.getUserId(), data);
         }
-//        applyCrowdedInstructions(validInstruction);
+        applyCrowdedInstructions(validInstruction);
         applyNcssInstructions(remainCourses, validInstruction); // 전필
     }
 
-//    public static void applyCrowdedInstructions(List<WeightInstruction> validInstructions) {
-//        validInstructions.stream()
-//                .filter(x -> x.getInstruction().getNumberOfPeople() <= x.getInstruction().getChoosed() * 1.5)
-//                .forEach(x -> x.setWeight(x.getWeight()/2));
-//    }
+    public static void applyCrowdedInstructions(List<WeightInstruction> validInstructions) {
+        validInstructions.stream()
+                .filter(x -> GrdCondEct.getInteger(x.getInstruction().getNumberOfPeople()) <= x.getInstruction().getChoosed() * 1.5)
+                .forEach(x -> x.setWeight(x.getWeight()/2));
+    }
 
     public static Set<Set<String>> getTransactions(List<TimetableDto.findInstructionCode> dataset, Long userId) {
         Set<Set<String>> transactions = new HashSet<>();
