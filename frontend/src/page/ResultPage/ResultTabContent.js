@@ -15,7 +15,7 @@ export default function TabContent1(props) {
         if (isNaN(props.data.state.myCredit)) {
             props.data.state.myCredit = 0;
         }
-        Axios.post('http://127.0.0.1:1415/web/v1/makeTimeTable/try', {
+        Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/try', {
             "myCourse": props.data.state.myCourse,
             "myCredit": props.data.state.myCredit,
             "myFreetime": props.data.state.mytime,

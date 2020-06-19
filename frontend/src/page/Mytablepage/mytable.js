@@ -50,7 +50,7 @@ class LectureList extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('http://127.0.0.1:1415/web/v1/makeTimeTable/check', {
+    Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/check', {
       params: { userId: this.props.userId }
   }).then((response)=>{
     console.log(response.data)
