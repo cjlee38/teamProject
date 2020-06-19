@@ -134,12 +134,12 @@ def crawl_Table(rq_year, rq_semester, db):
                 # obj = Instruction.objects.filter(instruction_number = course_num)
                 if len(searched_row):
                     sql_update = sql_update.format(inst=course_num, area=area, year=year, subject=subject_name, url=syllabus, required = required, class_time=class_time,
-                    number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], rq_year = int(rq_year), rq_semester = int(rq_semester))
+                    number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_name, rq_year = int(rq_year), rq_semester = int(rq_semester))
                     update = db_class.execute_all(sql_update)
                     # print(update)
                 else:
                     sql_insert = sql_insert.format(area=area, year=year, instruction_number=course_num, subject=subject_name, url=syllabus, required = required, class_time=class_time,
-                    number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_list[k], rq_year = int(rq_year), rq_semester = int(rq_semester))
+                    number_of_people=restrict_num, note=note, time = time2, professor=prof, credit=credit, dept=dept_name, rq_year = int(rq_year), rq_semester = int(rq_semester))
                     insert_row = db_class.execute_all(sql_insert)
                     # print(sql_insert)
                     # db.commit()
