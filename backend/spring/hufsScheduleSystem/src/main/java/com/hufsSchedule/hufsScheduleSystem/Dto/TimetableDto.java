@@ -92,68 +92,10 @@ public class TimetableDto {
 
     @Getter
     public static class Result {
-        private ArrayList<Day> timeTable;
+        private ArrayList<Instruction> timeTable;
 
-        public Result(ArrayList<Day> timeTable) {
+        public Result(ArrayList<Instruction> timeTable) {
             this.timeTable = timeTable;
         }
     }
-
-    @Getter
-    public static class Data {
-        private String instruction;
-        private String instructor;
-        private Integer required;
-
-        public Data(String instruction, String instructor, Integer required){
-            this.instruction = instruction;
-            this.instructor = instructor;
-            this.required = required;
-        }
-    }
-    @Getter
-    public static class Day {
-        private ArrayList<Cell> cell;
-        public Day(ArrayList<Cell> cell) {
-            this.cell = cell;
-        }
-    }
-
-    @Getter
-    public static class Cell {
-
-        private Data data;
-        private Boolean is;
-
-        public Cell(Boolean is){
-            this.is = is;
-        }
-
-        public Cell(Data data){
-            this.data = data;
-        }
-    }
-    /*
-    예.
-        [
-            [[“자료구조“, “최정주“, 1], [“자료구조“, “최정주“, 1], [“자료구조“, “최정주“, 1], false, false, false, false, false, false, false, false, false],	# 월
-            [false, false, false, false, false, false,false, false, false, false, false, false],	# 화
-            [false, false, false, false, false, false,false, false, false, false, false, false],	# 수
-            [false, false, false, false, false, false,false, false, false, false, false, false],	# 목
-            [false, false, false, false, false, false,false, false, false, false, false, false],	# 금
-        ]
-    결과 테이블이 월 123 최정주의 자료구조이고 필수조건이 true이면 위와 같이 보냅니다.
-    테이블 형성 과정은 이렇습니다.
-    1. TimetableDto.Data data1 = new TimetableDto.Data("자료구조", "최정주", 1);
-    2. TimetableDto.Day monday = new TimeTableDto.Day(data1, );
-    3. for(int i = 0; i < 12; i++) {
-           monday.add(false);
-       }
-    4. monday.set(0, data1);
-       monday.set(1, data1);
-       monday.set(2, data1);
-
-      요런식으로 화수목금 채워서.... ㅎ
-      프론트에서 요구하는게 위와 같은 데이터 형식이라.....
-    * */
 }
