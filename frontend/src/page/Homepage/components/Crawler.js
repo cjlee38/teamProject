@@ -24,6 +24,7 @@ class crawler extends React.Component {
 
 
   handlingSubmit = async (event) => {
+    event.preventDefault()
     this.props.Change()
     event.preventDefault()
     this.setState({ loading: true });
@@ -41,7 +42,7 @@ class crawler extends React.Component {
 
     return (
 
-        <form onSubmit={this.handlingSubmit} method="POST" className="ccc">
+        <form onSubmit={()=>{if(window.confirm("종합정보시스템 개인정보이용에 동의하십니까?")){this.handlingSubmit()}}} method="POST" className="ccc">
 
           {this.state.loading ? <TextField
             className="input" margin="normal" disabled
