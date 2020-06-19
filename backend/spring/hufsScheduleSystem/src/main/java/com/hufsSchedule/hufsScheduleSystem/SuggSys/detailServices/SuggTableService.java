@@ -10,6 +10,8 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 import org.springframework.data.relational.core.sql.In;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
 
@@ -41,20 +43,26 @@ public class SuggTableService {
 
     public static void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction)  {
         String classTime = instruction.getInstruction().getClassTime();
-        String day = cvtKorDayToEng(classTime.substring(0,1));
-        List<String> times = splitClassTimes(classTime.substring(2));
+        List<String> times = extClassTimes(classTime);
 
         for (String time : times) {
-                timeTable.put(time, day, instruction);
+            System.out.println(classTime);
+            System.out.println(instruction.getInstruction().getSubject());
+            timeTable.put(time.substring(1,2) , cvtKorDayToEng(time.substring(0,1)), instruction);
         }
 
     }
 
-    public static void inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction, CreditRatio ratio)  {
+    public static Boolean inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction, CreditRatio ratio)  {
         String field = ratio.getFieldToMajor().get(instruction.getInstruction().getDept());
+        String classTime = instruction.getInstruction().getClassTime();
+        if (classTime == null || classTime.length() == 0) { // classtime 없으면 return
+            return false;
+        }
+        if (classTime.substring(0,1).equals("토")) { return false; }
         if (field != null) {
             if (ratio.getRatio().get(field) <=0) {
-                return; // ratio에서 이미 채웠으면 pass
+                return false; // ratio에서 이미 채웠으면 pass
             }
         }
 
@@ -62,22 +70,28 @@ public class SuggTableService {
             if (cell.getValue() != null
                     && ((WeightInstruction)cell.getValue()).getInstruction() != null
                     && cell.getValue().equals(instruction.getInstruction().getInstructionNumber().substring(0,6)))    {
-                return; // 같은 학수번호가 존재한다면 return
+                return false; // 같은 학수번호가 존재한다면 return
             }
         }
 
-        String classTime = instruction.getInstruction().getClassTime();
-        String day = cvtKorDayToEng(classTime.substring(0,1));
-        List<String> times = splitClassTimes(classTime.substring(2));
+//        System.out.println("classtime -----------------------");
+//        System.out.println(classTime);
+//        System.out.println(instruction.getInstruction().getInstructionNumber());
+//        System.out.println(instruction.getInstruction().getSubject());
+//        System.out.println("--------------------------------");
+
+        List<String> times = extClassTimes(classTime);
+
         for (String time : times) {
-            if ( timeTable.get(time,day) != null) { // 해당 시간에 null이 아닌 뭔가가 있으면 pass
-                return;
+            if (timeTable.get(time.substring(1,2), cvtKorDayToEng(time.substring(0,1))) != null) {// 해당 시간에 null이 아닌 뭔가가 있으면 pass
+                return false;
             }
         }
 
         for (String time : times) {
-            timeTable.put(time, day, instruction); // 정상처리
+            timeTable.put(time.substring(1,2), cvtKorDayToEng(time.substring(0,1)), instruction);
         }
+        return true;
     }
     public static List<Table<String, String, WeightInstruction>> getTopNTableResult(List<Table<String, String, WeightInstruction>> tables, Integer counts) {
         List<Float> scores = new LinkedList<>();
@@ -101,6 +115,7 @@ public class SuggTableService {
             Float value = Collections.max(scores);
             Integer idx = scores.indexOf(value);
             indices.add(idx);
+            scores.remove(idx);
         }
 
         List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();

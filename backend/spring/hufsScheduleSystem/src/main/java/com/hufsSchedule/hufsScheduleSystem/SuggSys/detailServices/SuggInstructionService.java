@@ -30,6 +30,7 @@ public class SuggInstructionService {
         }
 
 
+
         removeInstructions.addAll(entireInstructions.stream()
                 .filter(x -> !names.contains(x.getDept()))
                 .collect(Collectors.toList())
@@ -65,7 +66,7 @@ public class SuggInstructionService {
 
     public static List<Instruction> removeInstructionsByList(List<Instruction> entireInstructions, List<Instruction> removeInstructions) {
         List<String> removeCourseNumber = new ArrayList<>();
-        removeInstructions.stream().forEach(x -> removeCourseNumber.add(x.getInstructionNumber()));
+        removeInstructions.stream().forEach(x -> removeCourseNumber.add(x.getInstructionNumber().substring(0,6)));
         return entireInstructions.stream()
                 .filter(x -> !removeCourseNumber.contains(x.getInstructionNumber().substring(0,6)))
                 .collect(Collectors.toList()); // 기존에 선택한 과목들 삭제

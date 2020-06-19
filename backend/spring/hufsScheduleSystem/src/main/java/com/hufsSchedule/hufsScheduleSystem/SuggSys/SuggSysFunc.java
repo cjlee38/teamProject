@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class SuggSysFunc {
     public static boolean isInstructionEmpty(WeightInstruction instruction) {
-        if (instruction.getInstruction() == null) {
+        if (instruction.getWeight() == -1) {
             return true;
         } else {
             return false;
@@ -53,10 +53,10 @@ public class SuggSysFunc {
 
     }
 
-    public static List<String> splitClassTimes(String times) {
-        if (times.startsWith(" ")) {times = times.substring(1);}
-        return Arrays.stream(times.split(" ")).collect(Collectors.toList());
-    }
+//    public static List<String> splitClassTimes(String times) {
+//        if (times.startsWith(" ")) {times = times.substring(1);}
+//        return Arrays.stream(times.split(" ")).collect(Collectors.toList());
+//    }
 
     public static Table<String, String, WeightInstruction> copyTable(Table<String, String, WeightInstruction> table) {
         List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
@@ -68,6 +68,29 @@ public class SuggSysFunc {
 
     }
 
+    public static Boolean isDigit(String str) {
+        try {
+            Integer temp = Integer.parseInt(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static List<String> extClassTimes(String classTime) {
+        String times[] = classTime.split(" ");
+        String day = "";
+        List<String> realTimes = new ArrayList<>();
+        for (String time : times) {
+            if (!isDigit(time)) {
+                day = time;
+            } else {
+                realTimes.add(day+time);
+            }
+        }
+
+        return realTimes;
+    }
     public static List<WeightInstruction> copyInstructions(List<WeightInstruction> origin) {
         List<WeightInstruction> copied = new ArrayList<>();
         copied.addAll(origin);

@@ -31,8 +31,8 @@ public class MakeTimeTableController {
     }*/
 
     @PostMapping("/try")
-    public List<TimetableDto.Result> makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
-        List<TimetableDto.Result> results = makeTimeTableService.checkCondition(req);
+    public TimetableDto.Result makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
+        TimetableDto.Result results = makeTimeTableService.checkCondition(req);
         return results;
     }
 
@@ -49,7 +49,7 @@ public class MakeTimeTableController {
     }
 
     @GetMapping("/test")
-    public List<TimetableDto.findInstructionCode> test()throws Exception {
-        return courseRepositorySupport.findInstructionCodeByMajor();
+    public List<TimetableDto.findInstructionCode> test(String area)throws Exception {
+        return courseRepositorySupport.findInstructionCodeByMajor(area);
     }
 }
