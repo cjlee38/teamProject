@@ -22,6 +22,7 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.UserSelectsService;
+import com.querydsl.core.types.dsl.TimeTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -73,12 +74,17 @@ public class MakeTimeTableService {
 
 //
         UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
-
         SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
         GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
 
-        List<Table<String, String, WeightInstruction>> tables = SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo.getUserId());
+        List<String> userArea = SuggSysFunc.getUserArea(userInfo);
+        List<List<TimetableDto.findInstructionCode>> dataset = new ArrayList<>();
+        for (String area : userArea) {
+            List<TimetableDto.findInstructionCode> data = courseRepositorySupport.findInstructionCodeByMajor(area);
+            dataset.add(data);
+        }
+        List<Table<String, String, WeightInstruction>> tables = SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset);
         System.out.println("-- table results --");
         System.out.println(tables.size());
         System.out.println(tables.get(1000));

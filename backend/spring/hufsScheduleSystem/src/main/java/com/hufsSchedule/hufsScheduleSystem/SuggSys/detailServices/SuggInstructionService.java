@@ -70,11 +70,14 @@ public class SuggInstructionService {
                 .collect(Collectors.toList()); // 기존에 선택한 과목들 삭제
     }
 
-    public static void tuneInstructionWeights(List<WeightInstruction> validInstruction, Map<String, List<CourseEnums>> remainCourses, Long userId) {
+    public static void tuneInstructionWeights(List<WeightInstruction> validInstruction, Map<String, List<CourseEnums>> remainCourses,
+                                              User userInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
         // 1. apriori 결과
         // 2. choosed 배수 따라 조정
         // 3. 전필
-        applyAssociationRule(validInstruction, userId); // should be within loop
+        for (List<TimetableDto.findInstructionCode> data : dataset) {
+            applyAssociationRule(validInstruction, userInfo.getUserId(), data);
+        }
 //        applyCrowdedInstructions(validInstruction);
         applyNcssInstructions(remainCourses, validInstruction); // 전필
     }
@@ -91,7 +94,7 @@ public class SuggInstructionService {
         for (TimetableDto.findInstructionCode data : dataset) {
             Long id = data.getUserId();
             if ( ! id.equals(userId)) { Ids.add(data.getUserId()); }
-        } // get unique IDs without userID
+        } // get unique IDs without currentUserID
 
 
         for (Long id : Ids) {
@@ -117,39 +120,11 @@ public class SuggInstructionService {
         );
     }
 
-    public static List<TimetableDto.findInstructionCode> temp() {
-        List<TimetableDto.findInstructionCode> list = new ArrayList<>();
-        Set<String> a = new HashSet<>(Arrays.asList("컴퓨터프로그래밍1","운영체제","컴퓨터논리개론","소프트웨어공학","정보보안","컴퓨터구조","자료구조","데이터베이스","컴퓨터네트워크","컴퓨터프로그래밍2"));
-        Long aa = new Long(1);
-        for (String name : a) {
-            list.add(new TimetableDto.findInstructionCode(aa, name));
-        }
-        Long bb = new Long(2);
-        Set<String> b = new HashSet<>(Arrays.asList("컴퓨터프로그래밍1", "컴퓨터논리개론", "컴퓨터프로그래밍2", "자료구조","운영체제","알고리즘","객체지향프로그래밍","소프트웨어공학","컴퓨터네트워크","정보보안"));
-        for (String name : b) {
-            list.add(new TimetableDto.findInstructionCode(bb, name));
-        }
-        Long cc = new Long(3);
-        Set<String> c = new HashSet<>(Arrays.asList("컴퓨터구조","자료구조","데이터베이스"));
-        for (String name : c) {
-            list.add(new TimetableDto.findInstructionCode(cc, name));
-        }
-        Long dd = new Long(4);
+    public static void applyAssociationRule(List<WeightInstruction> instructions, Long userId, List<TimetableDto.findInstructionCode> data) {
 
-        Set<String> d = new HashSet<>(Arrays.asList("컴퓨터프로그래밍1","컴퓨터논리개론","공학설계","컴퓨터프로그래밍2","컴퓨터구조","자료구조","운영체제","알고리즘","객체지향프로그래밍","소프트웨어공학","컴퓨터네트워크","창업및기술경영","데이터베이스"));
-        for (String name : d) {
-            list.add(new TimetableDto.findInstructionCode(dd, name));
-        }
-
-        return list;
-    }
-    public static void applyAssociationRule(List<WeightInstruction> instructions, Long userId) {
-        //load dataset
-//        List<TimetableDto.findInstructionCode> dataset = courseRepositorySupport.findInstructionCodeByMajor(); // need to be fixed
-        List<TimetableDto.findInstructionCode> dataset = temp();
 
         // Apriori
-        Set<Set<String>> transactions = getTransactions(dataset, userId);
+        Set<Set<String>> transactions = getTransactions(data, userId);
 
         Float minSupport = (float)0.5;
         Apriori apriori = new Apriori(minSupport, transactions);
@@ -161,7 +136,7 @@ public class SuggInstructionService {
         AssociationRule associationRule = new AssociationRule(apriori.getResult(), metric, minLift);
         associationRule.run();
 
-        Set<String> userTransaction = getUserTransaction(dataset, userId);
+        Set<String> userTransaction = getUserTransaction(data, userId);
         Set<String> userNotTransaction = Sets.difference(apriori.createSet(transactions), userTransaction);
         Map<String, Float> confidenceMap = new HashMap<>();
         for (String item : userNotTransaction) { // 듣지 않은 강의 loop를 돌면서 confidence 평균을 map에 input

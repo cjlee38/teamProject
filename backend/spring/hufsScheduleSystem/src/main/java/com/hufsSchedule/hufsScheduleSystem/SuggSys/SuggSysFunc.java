@@ -105,4 +105,19 @@ public class SuggSysFunc {
         return sorted;
     }
 
+    public static List<String> getUserArea(User userInfo) {
+        List<String> userArea = new ArrayList<>();
+        userArea.add(userInfo.getMajor());
+
+        String secondMajor = userInfo.getSecondMajor();
+        String minor = userInfo.getMinor();
+        Boolean teaching = userInfo.getTeaching();
+
+        if (secondMajor != null) { userArea.add(secondMajor); }
+        if (minor != null) { userArea.add(minor); }
+        if (teaching == true) { userArea.add("교육학"); }
+
+        return userArea;
+    }
+
 }
