@@ -14,6 +14,8 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructio
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggCreditService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggRatioService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
+import io.lettuce.core.ScriptOutputType;
+
 import java.util.*;
 
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
@@ -41,25 +43,42 @@ public class SuggSysService {
         SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, userInfo, dataset); // void
         List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
+        System.out.println("----------------------------");
+//        for (WeightInstruction inst : suggSysObj.getValidInstructions()) {
+//            System.out.println(inst.getInstruction().getSubject() + inst.getWeight());
+//        }
+//        for (Integer idx = 0; idx <10; idx++) {
+//            System.out.println(sorted.get(idx).getInstruction().getSubject());
+//            System.out.println(sorted.get(idx).getInstruction().getInstructionNumber());
+//            System.out.println(sorted.get(idx).getWeight());
+//        }
+        System.out.println("-------------------------------");
+//        System.out.println(suggSysObj.getCreditRatio().getFieldToMajor());
+
+
+
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
         for (Integer idx = 0; idx < sorted.size(); idx++) {
             Table<String, String, WeightInstruction> table = suggSysObj.getTimeTable();
 
-            List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(sorted);
+//            List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(sorted);
             Integer maxCredit = suggSysObj.getCreditRange().getMaxCredit();
             CreditRatio ratio = SuggSysFunc.copyCreditRatio(suggSysObj.getCreditRatio());
 
-            backtracking(Instructions, table, maxCredit, ratio, tableList, idx);
+            backtracking(sorted, table, maxCredit, ratio, tableList, idx);
         }
+        System.out.println("after backtracking : " + tableList.size());
 
-        for (Table<String, String, WeightInstruction> table : tableList) {
-            Integer summed = SuggSysFunc.sumTableCredit(table);
-            if (summed <= suggSysObj.getCreditRange().getMaxCredit() - 2) {
-                for (WeightInstruction weightInstruction : sorted) {
-                    SuggTableService.inputInstructionToTable(table, weightInstruction);
-                }
-            }
-        }
+//        for (Table<String, String, WeightInstruction> table : tableList) {
+//            Integer summed = SuggSysFunc.sumTableCredit(table);
+//            if (summed <= suggSysObj.getCreditRange().getMaxCredit() - 2) {
+//                for (WeightInstruction weightInstruction : sorted) {
+//                    SuggTableService.inputInstructionToTable(table, weightInstruction);
+//                }
+//            }
+//        }
+
+        System.out.println("table list size : " + tableList.size());
 
         return tableList;
     }
@@ -82,17 +101,24 @@ public class SuggSysService {
             return 0;
         }
 
+
+
         WeightInstruction currentInstruction = instructions.get(idx);
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
         CreditRatio currentRatio = copyCreditRatio(ratio);
 
-        Boolean inputFlag = SuggTableService.inputInstructionToTable(currentTable, currentInstruction, ratio);
+        Boolean inputFlag = SuggTableService.inputInstructionToTable(currentTable, currentInstruction, currentRatio);
         if (inputFlag == true) {
             credit -= currentInstruction.getInstruction().getCredit();
             SuggRatioService.subtractRatio(currentRatio, currentInstruction);
+//            System.out.println(currentRatio.getRatio() + currentInstruction.getInstruction().getSubject());
         }
 
         idx++;
+
+        if (idx >= instructions.size()) {
+            tableList.add(currentTable);
+        }
 
         for (Integer iter = idx; iter < instructions.size(); iter++) {
             Integer flag = backtracking(instructions, currentTable,

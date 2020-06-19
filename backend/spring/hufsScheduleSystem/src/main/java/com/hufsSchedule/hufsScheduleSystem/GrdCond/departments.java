@@ -26,15 +26,15 @@ public enum departments {
     ASIA7("이란어","Persian"),
     ASIA8("몽골어","Mongolian"),
 
-    CHINESE1("중국언어문화학부", "ChinenseLanguage"),
-    CHINESE2("중국외교통상학부", "ChinenseDiplomacy"),
+    CHINESE1("중국언어문화학", "ChinenseLanguage"),
+    CHINESE2("중국외교통상학", "ChinenseDiplomacy"),
 
-    JAPANESE1("일본언어문화학부", "JapneseLanguage"),
-    JAPANESE2("융합일본지역학부", "JapaneseIntegrated"),
+    JAPANESE1("일본언어문화학", "JapneseLanguage"),
+    JAPANESE2("융합일본지역학", "JapaneseIntegrated"),
 
     SOCIALSCIENCE1("정치외교학", "PoliticsDiplomacy"),
     SOCIALSCIENCE2("행정학", "Administration"),
-    SOCIALSCIENCE3("미디어커뮤니케이션학부", "MediaCommunication"),
+    SOCIALSCIENCE3("미디어커뮤니케이션학", "MediaCommunication"),
     SOCIALSCIENCE4("광고.PR.브랜딩","AdPRBranding"),
     SOCIALSCIENCE5("방송.영상.뉴미디어", "BroadCastingFilmNewmedia"),
     SOCIALSCIENCE6("언론정보","JournalismInformation"),
@@ -59,7 +59,7 @@ public enum departments {
     LT1("LT학부", "LT"),
 
     CONVERGENCE1("융복합소프트웨어", "SoftwareConvergence"),
-    CONVERGENCE2("EU전공", "EU"),
+    CONVERGENCE2("EU", "EU"),
     CONVERGENCE3("브릭스", "BRICs"),
     CONVERGENCE4("국가리더", "NationalLeader"),
     CONVERGENCE5("동북아외교통상", "NEAsianDiplomacy"),

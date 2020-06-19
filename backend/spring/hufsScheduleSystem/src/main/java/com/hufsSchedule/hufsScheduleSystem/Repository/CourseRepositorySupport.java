@@ -26,7 +26,7 @@ public class CourseRepositorySupport extends QuerydslRepositorySupport {
         List<TimetableDto.findInstructionCode> dto = queryFactory
                 .select(Projections.bean(TimetableDto.findInstructionCode.class, course.user.userId, course.instruction.instructionNumber))
                 .from(course)
-                .where(course.courseArea.eq(area)) // 1전공 -> 실제 전공명으로 수정되야함
+                .where(course.dept.eq(area)) // 1전공 -> 실제 전공명으로 수정되야함
                 .fetch();
         return dto;
     }

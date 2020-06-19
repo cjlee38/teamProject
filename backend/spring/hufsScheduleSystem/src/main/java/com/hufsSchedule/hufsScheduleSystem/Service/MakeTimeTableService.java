@@ -56,26 +56,27 @@ public class MakeTimeTableService {
 
         User userInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         List<Instruction> userTakenCourses = condition.getInstructions();
+        System.out.println("userTakenCourses size : "+userTakenCourses.size());
         Credit userCredit = condition.getCredit();
 
-        ArrayList<Instruction> tester = req.getMyCourse();
-        for (Instruction instruction : tester) {
-            System.out.println(" -- maketimetable test --");
-            System.out.println(instruction.getInstructionId());
-            System.out.println(instruction.getInstructionNumber());
-            System.out.println(instruction.getProfessor());
-            System.out.println(instruction.getDept());
-            System.out.println(instruction.getArea());
-            System.out.println(instruction.getCredit());
-            System.out.println(instruction.getSubject());
-            System.out.println(instruction.getRqSemester());
-            System.out.println(instruction.getRqYear());
-            System.out.println(instruction.getTime());
-            System.out.println(instruction.getClassTime());
-            System.out.println(instruction.getNote());
-            System.out.println(instruction.getUrl());
-            System.out.println(" ------------------------");
-        }
+//        ArrayList<Instruction> tester = req.getMyCourse();
+//        for (Instruction instruction : tester) {
+//            System.out.println(" -- maketimetable test --");
+//            System.out.println(instruction.getInstructionId());
+//            System.out.println(instruction.getInstructionNumber());
+//            System.out.println(instruction.getProfessor());
+//            System.out.println(instruction.getDept());
+//            System.out.println(instruction.getArea());
+//            System.out.println(instruction.getCredit());
+//            System.out.println(instruction.getSubject());
+//            System.out.println(instruction.getRqSemester());
+//            System.out.println(instruction.getRqYear());
+//            System.out.println(instruction.getTime());
+//            System.out.println(instruction.getClassTime());
+//            System.out.println(instruction.getNote());
+//            System.out.println(instruction.getUrl());
+//            System.out.println(" ------------------------");
+//        }
 
 //
         UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getMyCredit(), req.getMyFreetime());
@@ -85,10 +86,14 @@ public class MakeTimeTableService {
 
         List<String> userArea = SuggSysFunc.getUserArea(userInfo);
         List<List<TimetableDto.findInstructionCode>> dataset = new ArrayList<>();
+
         for (String area : userArea) {
             List<TimetableDto.findInstructionCode> data = courseRepositorySupport.findInstructionCodeByMajor(area);
             dataset.add(data);
         }
+
+        System.out.println(dataset.get(0).get(0).getInstructionNumber());
+        System.out.println(dataset.get(0).get(0).getUserId());
 
         List<Table<String, String, WeightInstruction>> tables = SuggTableService.getTopNTableResult(
                 SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset), 5

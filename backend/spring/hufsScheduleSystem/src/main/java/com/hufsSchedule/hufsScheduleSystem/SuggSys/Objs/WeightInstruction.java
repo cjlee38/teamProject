@@ -21,9 +21,9 @@ public class WeightInstruction implements Comparable<WeightInstruction>{
     @Override
     public int compareTo(WeightInstruction o) {
         if (this.weight < o.getWeight()) {
-            return -1;
-        } else if (this.weight > o.getWeight()) {
             return 1;
+        } else if (this.weight > o.getWeight()) {
+            return -1;
         }
         return 0;
     }

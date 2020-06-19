@@ -24,12 +24,16 @@ public class Apriori {
         Integer level = 1;
         Integer maxLevel = itemset.size();
 
-        while (level <= maxLevel) {
-            Set<Set<String>> combinations = getCombinations(itemset, level);
-            Map<Set<String>, Float> supportedItemset = getSupportedItemset(combinations);
-            result.putAll(supportedItemset);
-            itemset = createSet(supportedItemset.keySet());
-            level++;
+        while (level < maxLevel) {
+            try {
+                Set<Set<String>> combinations = getCombinations(itemset, level);
+                Map<Set<String>, Float> supportedItemset = getSupportedItemset(combinations);
+                result.putAll(supportedItemset);
+                itemset = createSet(supportedItemset.keySet());
+                level++;
+            } catch (Exception e ) {
+                break;
+            }
 
             if (itemset.size() <= 1) {
                 break;

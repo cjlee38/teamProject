@@ -16,6 +16,8 @@ public class Course {
     private Long courseId;
     @Column(name="course_area")
     private String courseArea;
+    @Column(name="dept")
+    private String dept;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_course", insertable = false, updatable = false)

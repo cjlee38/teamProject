@@ -61,18 +61,36 @@ public class SuggTableService {
         }
         if (classTime.substring(0,1).equals("토")) { return false; }
         if (field != null) {
-            if (ratio.getRatio().get(field) <=0) {
+            if (ratio.getRatio().get(field) == null) {
+                return false; // 없다 = 채울게 애초에 없다.
+            }
+            else if (ratio.getRatio().get(field) <= 0) {
+                if (field.equals("secondMajor")) {
+                    System.out.println("when input --....");
+                    System.out.println(field + instruction.getInstruction().getSubject());
+                    System.out.println(ratio.getRatio());
+                }
+
+
                 return false; // ratio에서 이미 채웠으면 pass
+            }
+
+        }
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        for (String row : rows) {
+            for (String column : columns) {
+                WeightInstruction cell = timeTable.get(row, column);
+                if (cell != null && !isInstructionEmpty(cell)) {
+                    String instNumber = cell.getInstruction().getInstructionNumber().substring(0, 6);
+                    if (instNumber.equals(instruction.getInstruction().getInstructionNumber().substring(0, 6))) {
+                        return false; // 같은 학수번호가 존재한다면 return
+                    }
+                }
             }
         }
 
-        for (Table.Cell cell : timeTable.cellSet()) {
-            if (cell.getValue() != null
-                    && ((WeightInstruction)cell.getValue()).getInstruction() != null
-                    && cell.getValue().equals(instruction.getInstruction().getInstructionNumber().substring(0,6)))    {
-                return false; // 같은 학수번호가 존재한다면 return
-            }
-        }
+
 
 //        System.out.println("classtime -----------------------");
 //        System.out.println(classTime);
@@ -91,13 +109,28 @@ public class SuggTableService {
         for (String time : times) {
             timeTable.put(time.substring(1,2), cvtKorDayToEng(time.substring(0,1)), instruction);
         }
+
         return true;
     }
     public static List<Table<String, String, WeightInstruction>> getTopNTableResult(List<Table<String, String, WeightInstruction>> tables, Integer counts) {
-        List<Float> scores = new LinkedList<>();
+        //remove duplication
+        List<Table<String, String, WeightInstruction>> unq = new ArrayList<>();
+        for (Table<String, String, WeightInstruction> table : tables) {
+            if (!unq.contains(table)) {
+                unq.add(table);
+            }
+        }
+        System.out.println("duplicated size : " + tables.size());
+        System.out.println("unique size : " + unq.size());
+
+        if (unq.size() < counts) {
+            return unq;
+        }
+
+        List<Float> scores = new ArrayList<>();
         List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
-        for (Table<String, String, WeightInstruction> table : tables) {
+        for (Table<String, String, WeightInstruction> table : unq) {
             Float score = new Float(0.0);
             for ( String row : rows) {
                 for (String column : columns) {
@@ -109,18 +142,16 @@ public class SuggTableService {
             }
             scores.add(score);
         }
-
         List<Integer> indices = new ArrayList<>();
+        List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();
+
         for (Integer i = 0; i < counts; i++) {
             Float value = Collections.max(scores);
-            Integer idx = scores.indexOf(value);
-            indices.add(idx);
+            int idx = scores.indexOf(value);
             scores.remove(idx);
-        }
-
-        List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();
-        for (Integer idx : indices) {
-            topNs.add(tables.get(idx));
+            topNs.add(unq.get(idx));
+            unq.remove(idx);
+            System.out.println("suggTaleServbice, getTopN, score/idx" + value.toString() +" ~"+ idx);
         }
 
         return topNs;

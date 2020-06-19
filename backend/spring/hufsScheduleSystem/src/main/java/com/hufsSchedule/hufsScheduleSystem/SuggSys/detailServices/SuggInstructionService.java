@@ -29,8 +29,6 @@ public class SuggInstructionService {
             names.add("교육학");
         }
 
-
-
         removeInstructions.addAll(entireInstructions.stream()
                 .filter(x -> !names.contains(x.getDept()))
                 .collect(Collectors.toList())
@@ -77,11 +75,14 @@ public class SuggInstructionService {
         // 1. apriori 결과
         // 2. choosed 배수 따라 조정
         // 3. 전필
+
         for (List<TimetableDto.findInstructionCode> data : dataset) {
-            applyAssociationRule(validInstruction, userInfo.getUserId(), data);
+             applyAssociationRule(validInstruction, userInfo.getUserId(), data);
         }
         applyCrowdedInstructions(validInstruction);
         applyNcssInstructions(remainCourses, validInstruction); // 전필
+
+//        return validInstruction;
     }
 
     public static void applyCrowdedInstructions(List<WeightInstruction> validInstructions) {
@@ -92,41 +93,41 @@ public class SuggInstructionService {
 
     public static Set<Set<String>> getTransactions(List<TimetableDto.findInstructionCode> dataset, Long userId) {
         Set<Set<String>> transactions = new HashSet<>();
-        List<Long> Ids = new ArrayList<>();
+        Set<Long> Ids = new HashSet<>();
         for (TimetableDto.findInstructionCode data : dataset) {
             Long id = data.getUserId();
             if ( ! id.equals(userId)) { Ids.add(data.getUserId()); }
         } // get unique IDs without currentUserID
 
-
+        System.out.println("id size : " + Ids.size());
         for (Long id : Ids) {
-            transactions.add(
-                    dataset.stream()
-                            .filter(x -> x.getUserId().equals(id))
-                            .map(x -> x.getInstructionNumber().substring(0,6))
-//                            .map(TimetableDto.findInstructionCode::getInstructionNumber)
-                            .collect(Collectors.toSet())
-            );
+            Set<String> set = new HashSet<>();
+            for (TimetableDto.findInstructionCode data : dataset) {
+                if (data.getUserId().equals(id)) {
+                    set.add(data.getInstructionNumber().substring(0,6));
+                }
+            }
+            transactions.add(set);
         }
-
+        System.out.println(transactions.size());
         return transactions;
     }
 
     public static Set<String> getUserTransaction(List<TimetableDto.findInstructionCode> dataset, Long userId) {
-        return new HashSet<>(
-                dataset.stream()
-                        .filter(x -> x.getUserId().equals(userId))
-                        .map(x -> x.getInstructionNumber().substring(0,6))
-//                        .map(TimetableDto.findInstructionCode::getInstructionNumber)
-                        .collect(Collectors.toSet())
-        );
+        Set<String> set = new HashSet<>();
+        for (TimetableDto.findInstructionCode data : dataset) {
+            if (data.getUserId().equals(userId)) {
+                set.add(data.getInstructionNumber().substring(0,6));
+            }
+        }
+
+        return set;
     }
 
     public static void applyAssociationRule(List<WeightInstruction> instructions, Long userId, List<TimetableDto.findInstructionCode> data) {
-
-
         // Apriori
         Set<Set<String>> transactions = getTransactions(data, userId);
+        if (transactions.size() == 0) { return; }
 
         Float minSupport = (float)0.5;
         Apriori apriori = new Apriori(minSupport, transactions);
@@ -140,6 +141,10 @@ public class SuggInstructionService {
 
         Set<String> userTransaction = getUserTransaction(data, userId);
         Set<String> userNotTransaction = Sets.difference(apriori.createSet(transactions), userTransaction);
+
+        System.out.println(" real transaction : " + transactions);
+        System.out.println(" user transaction : " + userTransaction);
+        System.out.println(" user not transaction : " + userNotTransaction);
         Map<String, Float> confidenceMap = new HashMap<>();
         for (String item : userNotTransaction) { // 듣지 않은 강의 loop를 돌면서 confidence 평균을 map에 input
             Integer count = new Integer(0);
@@ -160,6 +165,7 @@ public class SuggInstructionService {
             Float value = confidenceMap.get(instructionNumber);
             if (value != null) { instruction.setWeight(value); }
         }
+
     }
 
     public static String getString(Set<String> set) {
