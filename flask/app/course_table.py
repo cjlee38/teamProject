@@ -49,6 +49,12 @@ def crawl_Table(rq_year, rq_semester, db):
         tbody = html.findAll('table')
         
         trs = tbody[-1].findAll('tr')[1:]
+        
+        dept_name = dept_list[k]
+        if '전공' in dept_name:
+            dept_name  = dept_name[:-2]
+        elif '학과' in dept_name or '학부' in dept_name or '과' in dept_name:
+            dept_name = dept_name[:-1]
 
         for i in trs:
             sql_insert = """INSERT INTO instruction 
