@@ -35,9 +35,10 @@ public class SuggSysService {
     }
 
     // 강의과목을 테이블에 추가
-    public static List<Table<String, String, WeightInstruction>> generateTimeTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses, Long userId) {
+    public static List<Table<String, String, WeightInstruction>> generateTimeTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses,
+                                                                                   User userInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
         System.out.println("valid instructions length : " + suggSysObj.getValidInstructions().size());
-        SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, userId); // void
+        SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, userInfo, dataset); // void
         List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
