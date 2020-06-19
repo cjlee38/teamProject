@@ -56,12 +56,12 @@ public class TimetableDto {
 
     @Getter
     @Setter
-    @NoArgsConstructor
+//    @NoArgsConstructor
     public static class findInstructionCode{
         private Long userId;
         private String instructionNumber;
 
-        @QueryProjection
+//        @QueryProjection
         public findInstructionCode(Long userId, String instructionNumber){
             this.userId = userId;
             this.instructionNumber = instructionNumber;

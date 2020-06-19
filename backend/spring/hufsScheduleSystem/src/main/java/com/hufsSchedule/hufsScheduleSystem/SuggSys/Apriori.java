@@ -7,29 +7,28 @@ import java.util.*;
 public class Apriori {
     private Float minSupport;
     private Set<Set<String>> dataset;
-    private Set<Set<String>> result;
+    private Map<Set<String>, Float> result;
 
     public Apriori(Float minSupport, Set<Set<String>> dataset) {
         this.minSupport = minSupport;
         this.dataset = dataset;
-        this.result = new HashSet<>();
+        this.result = new HashMap<>();
     }
 
-    public Set<Set<String>> getResult() {
+    public Map<Set<String>, Float> getResult() {
         return result;
     }
 
     public void run() {
-
         Set<String> itemset = createSet(dataset);
         Integer level = 1;
         Integer maxLevel = itemset.size();
 
         while (level <= maxLevel) {
             Set<Set<String>> combinations = getCombinations(itemset, level);
-            Set<Set<String>> supportedItemset = getSupportedItemset(combinations);
-            result.addAll(supportedItemset);
-            itemset = createSet(supportedItemset);
+            Map<Set<String>, Float> supportedItemset = getSupportedItemset(combinations);
+            result.putAll(supportedItemset);
+            itemset = createSet(supportedItemset.keySet());
             level++;
 
             if (itemset.size() <= 1) {
@@ -51,7 +50,6 @@ public class Apriori {
                 set.add(item);
             }
         }
-
         return set;
     }
 
@@ -65,16 +63,14 @@ public class Apriori {
         return occurence / ((float)dataset.size());
     }
 
-    public Set<Set<String>> getSupportedItemset(Set<Set<String>> itemset) {
+    public Map<Set<String>, Float> getSupportedItemset(Set<Set<String>> itemset) {
         Map<Set<String>, Float> map = new HashMap<>();
         for (Set<String> comb : itemset) {
             map.put(comb, calcSupport(comb));
         } // support 계산
 
-        map.entrySet().removeIf(x -> x.getValue() < minSupport); // minsupport보다 낮으면 제거
+        map.entrySet().removeIf(x -> x.getValue() < minSupport);
 
-
-
-        return map.keySet();
+        return map;
     }
 }

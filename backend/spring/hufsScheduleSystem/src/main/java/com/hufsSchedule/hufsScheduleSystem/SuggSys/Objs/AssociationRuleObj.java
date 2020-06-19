@@ -1,13 +1,15 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs;
 
+import lombok.Getter;
 import java.util.Set;
 
+@Getter
 public class AssociationRuleObj {
-    public Set<String> antecedent;
-    public Set<String> consequent;
-    public Float support;
-    public Float confidence;
-    public Float lift;
+    private Set<String> antecedent;
+    private Set<String> consequent;
+    private Float support;
+    private Float confidence;
+    private Float lift;
 
     public AssociationRuleObj(Set<String> antecedent, Set<String> consequent,
                               Float support, Float confidence, Float lift) {

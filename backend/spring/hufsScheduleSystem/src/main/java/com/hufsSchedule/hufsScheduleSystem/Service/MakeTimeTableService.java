@@ -11,6 +11,8 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
+import com.hufsSchedule.hufsScheduleSystem.Redis.RedisService;
+import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
 import com.hufsSchedule.hufsScheduleSystem.Repository.InstructionRepository;
 import com.hufsSchedule.hufsScheduleSystem.Repository.TimeTableRepository;
 import com.hufsSchedule.hufsScheduleSystem.Repository.TimeTableRepositorySupport;
@@ -34,6 +36,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class MakeTimeTableService {
+    private final CourseRepositorySupport courseRepositorySupport;
     private final ConditionCheckService conditionCheckService;
     private final InstructionRepository instructionRepository;
     private final UserRepository userRepository;
@@ -48,14 +51,13 @@ public class MakeTimeTableService {
     public List<TimetableDto.Result> checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
-
+//        List<TimetableDto.findInstructionCode> list = courseRepositorySupport.findInstructionCodeByMajor();
 
         User userInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         List<Instruction> userTakenCourses = condition.getInstructions();
         Credit userCredit = condition.getCredit();
 
         ArrayList<Instruction> tester = req.getMyCourse();
-
         for (Instruction instruction : tester) {
             System.out.println(" -- maketimetable test --");
             System.out.println(instruction.getInstructionId());
@@ -81,17 +83,16 @@ public class MakeTimeTableService {
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
         GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
 
-        List<Table<String, String, WeightInstruction>> tables = SuggSysService.addInstructionsToTable(suggSysObj, remainObj.getGrdCourse());
+        List<Table<String, String, WeightInstruction>> tables = SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo.getUserId());
         System.out.println("-- table results --");
         System.out.println(tables.size());
-        System.out.println(tables.indexOf(0));
+        System.out.println(tables.get(1000));
         System.out.println("-------------------");
 
         List<TimetableDto.Result> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
             results.add(SuggSysService.cvtTableToResult(table));
         }
-
 
 
         return results;
