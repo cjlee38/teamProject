@@ -69,11 +69,10 @@ class Table extends Component {
   }
   Formatter8(cell, row) {
     let a = row.optional
-    
     let sum = 0
     let values = Object.values(row)
     
-    if (!a){
+    if (a===null){
       return(<></>)
     }
     if (values[0] === "남은 학점"){

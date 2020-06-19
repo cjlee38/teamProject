@@ -167,12 +167,11 @@ def user_Table(id_input, pw_input, user_id, db):
     tables = driver.find_by_tag('table')    # 취득 현황 테이블
 
     trs = driver.find_all_by_tag_with_obj(tables, 'tr')     # 테이블 요소
-    ths = len(driver.find_all_by_tag_with_obj(trs[0], 'th')) - 2
     columns = trs[0].text.split()   # columns 구분
 
-    area = columns.index('교양영역') - 2
-    count = columns.index('취득과목수') - 2
-    got_credits = columns.index('취득학점') - 2
+    area = columns.index('교양영역') - 2    # 0
+    count = columns.index('취득과목수') - 2 # 2
+    got_credits = columns.index('취득학점') - 2 # 3
 
     credits_list = []   # 교양 영역 담길 리스트
 
@@ -181,10 +180,10 @@ def user_Table(id_input, pw_input, user_id, db):
             continue
         temp_list = []
 
-        tds = driver.find_all_by_tag_with_obj(trs[i], 'td') # 행 요소
-        checking = ths - len(tds) - 1
-        if checking:
-            number_of_subject = int(tds[count - checking].text)
+        tds = driver.find_all_by_tag_with_obj(trs[i], 'td') # 행 요소 -> 5(4)
+        checking = len(columns) - 1 - len(tds) - 1  # 6 - 4 - 1 
+        if checking > 0:
+            number_of_subject = int(tds[count - checking].text) # 2 - 1
             acquisition_credits = int(tds[got_credits  - checking].text)
         else:
             number_of_subject = int(tds[count].text)
