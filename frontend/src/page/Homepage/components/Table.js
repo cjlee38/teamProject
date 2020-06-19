@@ -72,6 +72,10 @@ class Table extends Component {
     
     let sum = 0
     let values = Object.values(row)
+    
+    if (!a){
+      return(<></>)
+    }
     if (values[0] === "남은 학점"){
     values.slice(1,8).map(function(val) {if (val > 0){sum += val}})
     if (values[9] - sum <= 0){
