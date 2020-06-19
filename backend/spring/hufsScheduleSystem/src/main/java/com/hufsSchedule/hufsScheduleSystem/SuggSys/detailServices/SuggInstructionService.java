@@ -1,5 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
+import com.google.common.collect.Sets;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
@@ -96,9 +97,10 @@ public class SuggInstructionService {
         for (Long id : Ids) {
             transactions.add(
                     dataset.stream()
-                    .filter(x -> x.getUserId().equals(id))
-                    .map(TimetableDto.findInstructionCode::getInstructionNumber)
-                    .collect(Collectors.toSet())
+                            .filter(x -> x.getUserId().equals(id))
+                            .map(x -> x.getInstructionNumber().substring(0,6))
+//                            .map(TimetableDto.findInstructionCode::getInstructionNumber)
+                            .collect(Collectors.toSet())
             );
         }
 
@@ -108,9 +110,10 @@ public class SuggInstructionService {
     public static Set<String> getUserTransaction(List<TimetableDto.findInstructionCode> dataset, Long userId) {
         return new HashSet<>(
                 dataset.stream()
-                .filter(x -> x.getUserId().equals(userId))
-                .map(TimetableDto.findInstructionCode::getInstructionNumber)
-                .collect(Collectors.toSet())
+                        .filter(x -> x.getUserId().equals(userId))
+                        .map(x -> x.getInstructionNumber().substring(0,6))
+//                        .map(TimetableDto.findInstructionCode::getInstructionNumber)
+                        .collect(Collectors.toSet())
         );
     }
 
@@ -159,31 +162,30 @@ public class SuggInstructionService {
         associationRule.run();
 
         Set<String> userTransaction = getUserTransaction(dataset, userId);
-        for (AssociationRuleObj rule : associationRule.getRules()) {
-            if (userTransaction.contains(rule.getAntecedent()) && !userTransaction.contains(rule.getConsequent())) {
-
-            }
-        }
-        // insturction : 들울 수 있는 강의 : consequent
-        for (WeightInstruction instruction : instructions) {
-            String instructionNumber = instruction.getInstruction().getInstructionNumber().substring(0,6);
+        Set<String> userNotTransaction = Sets.difference(apriori.createSet(transactions), userTransaction);
+        Map<String, Float> confidenceMap = new HashMap<>();
+        for (String item : userNotTransaction) { // 듣지 않은 강의 loop를 돌면서 confidence 평균을 map에 input
             Integer count = new Integer(0);
             Float sum = new Float(0.0);
             for (AssociationRuleObj rule : associationRule.getRules()) {
-                // userTransaction에 antecedent가 포함되고, getConsequent가 포함되지 않아야 count
-                if(userTransaction.contains(rule.getAntecedent()) && !userTransaction.contains(rule.getConsequent())) {
+                // 듣지않은 강의가 결과절이고, 조건절을 들은 적이 있다면
+                if (item.equals(getString(rule.getConsequent()))
+                        && userTransaction.contains(getString(rule.getAntecedent()))) {
                     sum += rule.getConfidence();
                     count++;
                 }
             }
-            if (count != 0) { instruction.setWeight(sum/(float)count); }
-
+            if (count != 0) { confidenceMap.put(item, sum/(float)count); }
         }
-        // antesequent : 내가 들은 것
-        // consequent : 들어야 할 것
 
-
+        for (WeightInstruction instruction : instructions) { // instruction을 돌면서 가중치 부여
+            String instructionNumber = instruction.getInstruction().getInstructionNumber().substring(0,6);
+            Float value = confidenceMap.get(instructionNumber);
+            if (value != null) { instruction.setWeight(value); }
+        }
     }
 
-
+    public static String getString(Set<String> set) {
+        return set.iterator().next();
+    }
 }
