@@ -92,13 +92,11 @@ public class MakeTimeTableService {
 
         List<Table<String, String, WeightInstruction>> tables = SuggTableService.getTopNTableResult(
                 SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset), 5
-        ) ;
-        System.out.println("-- table results --");
-        System.out.println(tables.size());
-        System.out.println(tables.get(1000));
-        System.out.println("-------------------");
+        );
 
-        List<TimetableDto.Result> results = new ArrayList<>();
+        System.out.println(tables.size());
+
+        ArrayList<TimetableDto.Result> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
             results.add(SuggSysService.cvtTableToResult(table));
         }

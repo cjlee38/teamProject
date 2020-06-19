@@ -49,7 +49,7 @@ public class MakeTimeTableController {
     }
 
     @GetMapping("/test")
-    public List<TimetableDto.findInstructionCode> test()throws Exception {
-        return courseRepositorySupport.findInstructionCodeByMajor();
+    public List<TimetableDto.findInstructionCode> test(String area)throws Exception {
+        return courseRepositorySupport.findInstructionCodeByMajor(area);
     }
 }

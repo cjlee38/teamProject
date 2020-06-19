@@ -92,13 +92,14 @@ public class TimetableDto {
 
     @Getter
     public static class Result {
-        private List<Day> timeTable;
+        private ArrayList<Day> timeTable;
 
-        public Result(List<Day> timeTable) {
+        public Result(ArrayList<Day> timeTable) {
             this.timeTable = timeTable;
         }
     }
 
+    @Getter
     public static class Data {
         private String instruction;
         private String instructor;
@@ -110,13 +111,15 @@ public class TimetableDto {
             this.required = required;
         }
     }
+    @Getter
     public static class Day {
-        private List<Cell> cell;
-        public Day(List<Cell> cell) {
+        private ArrayList<Cell> cell;
+        public Day(ArrayList<Cell> cell) {
             this.cell = cell;
         }
     }
 
+    @Getter
     public static class Cell {
 
         private Data data;

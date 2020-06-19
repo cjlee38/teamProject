@@ -42,7 +42,7 @@ public class SuggSysService {
         List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
         List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
-        for (Integer idx = 0; idx <= sorted.size(); idx++) {
+        for (Integer idx = 0; idx < sorted.size(); idx++) {
             Table<String, String, WeightInstruction> table = suggSysObj.getTimeTable();
 
             List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(sorted);
@@ -72,32 +72,42 @@ public class SuggSysService {
         }
     }
 
-    public static void backtracking(List<WeightInstruction> instructions, Table<String, String, WeightInstruction> table,
+    public static Integer backtracking(List<WeightInstruction> instructions, Table<String, String, WeightInstruction> table,
                              Integer credit, CreditRatio ratio, List<Table<String, String, WeightInstruction>> tableList, Integer idx) {
         if (!isPossible(credit)) {
             tableList.add(table);
-            return;
+            return 0;
+        }
+        if (tableList.size() > 30) {
+            return 0;
         }
 
         WeightInstruction currentInstruction = instructions.get(idx);
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
         CreditRatio currentRatio = copyCreditRatio(ratio);
 
-        SuggTableService.inputInstructionToTable(currentTable, currentInstruction, ratio);
-        SuggRatioService.subtractRatio(currentRatio, currentInstruction);
+        Boolean inputFlag = SuggTableService.inputInstructionToTable(currentTable, currentInstruction, ratio);
+        if (inputFlag == true) {
+            credit -= currentInstruction.getInstruction().getCredit();
+            SuggRatioService.subtractRatio(currentRatio, currentInstruction);
+        }
+
         idx++;
 
-        for (Integer iter = 0; iter <= instructions.size(); iter++) {
-            backtracking(instructions, currentTable,
-                    credit, currentRatio, tableList, idx);
+        for (Integer iter = idx; iter < instructions.size(); iter++) {
+            Integer flag = backtracking(instructions, currentTable,
+                    credit, currentRatio, tableList, iter);
+            if (flag == 0) { break; }
         }
+
+        return 0;
     }
 
     public static TimetableDto.Result cvtTableToResult(Table<String, String, WeightInstruction> table) {
         List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
 
-        List<TimetableDto.Day> days = new ArrayList<>();
+        ArrayList<TimetableDto.Day> days = new ArrayList<>();
         for (String column : columns) {
             ArrayList<TimetableDto.Cell> cells = new ArrayList<>();
             for (String row : rows) {
