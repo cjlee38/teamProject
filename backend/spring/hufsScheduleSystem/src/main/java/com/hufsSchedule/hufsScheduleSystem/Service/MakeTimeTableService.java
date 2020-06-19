@@ -6,14 +6,16 @@ import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.Timetable;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
 import com.hufsSchedule.hufsScheduleSystem.Redis.RedisService;
 import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
 import com.hufsSchedule.hufsScheduleSystem.Repository.InstructionRepository;
+import com.hufsSchedule.hufsScheduleSystem.Repository.TimeTableRepository;
+import com.hufsSchedule.hufsScheduleSystem.Repository.TimeTableRepositorySupport;
 import com.hufsSchedule.hufsScheduleSystem.Repository.UserRepository;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.SuggSysObj;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.UserSelectsObj;
@@ -25,6 +27,7 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.UserSelectsSer
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,12 +40,14 @@ public class MakeTimeTableService {
     private final ConditionCheckService conditionCheckService;
     private final InstructionRepository instructionRepository;
     private final UserRepository userRepository;
-    private final RedisService redisService;
+    private final TimeTableRepositorySupport timeTableRepositorySupport;
+    private final TimeTableRepository timeTableRepository;
     private GrdCondService grdCondService;
     private GrdCompareService grdCompareService;
     private TimetableDto.Res res;
     private SuggSysService suggSysService;
     private UserSelectsService userSelectsService;
+
     public List<TimetableDto.Result> checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
         ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L); //20년도 강의목록입니다.
@@ -103,5 +108,23 @@ public class MakeTimeTableService {
         // 자세 정보를 알고 싶다면, Dto/CondtionDto 의 courseIdRes를 체크.
         // 만든 결과물은 TimetableDto 내 res에 넣어야 함.
 
+    }
+    public TimetableDto.MyTimeTable checkTimeTable(Long userId){
+        List<Instruction> instructionList = timeTableRepositorySupport.findInstructionByUser(userId);
+        TimetableDto.MyTimeTable result = TimetableDto.MyTimeTable.builder().myCourse(instructionList).build();
+        return result;
+    }
+
+    public boolean saveTimeTable(TimetableDto.SaveTimeTable req){
+        User user = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
+        ArrayList<Timetable> dto = new ArrayList<>();
+        for (Instruction instruction: req.getMyCourse()){
+            Timetable timetable = new Timetable();
+            timetable.setUser(user);
+            timetable.setInstruction(instruction);
+            dto.add(timetable);
+        }
+        timeTableRepository.saveAll(dto);
+        return true;
     }
 }

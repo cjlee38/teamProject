@@ -55,6 +55,8 @@ public class Instruction implements Serializable {
     private String numberOfPeople;
     @Column(name="note")
     private String note;
+    @Column(name="choosed")
+    private int choosed;
 
     /*@OneToMany(mappedBy = "instruction", targetEntity = Timetable.class, fetch = FetchType.LAZY)
     private List<Timetable> timetables = new ArrayList<Timetable>();

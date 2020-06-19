@@ -36,8 +36,20 @@ public class MakeTimeTableController {
         return results;
     }
 
-    @GetMapping("/save")
-    public List<TimetableDto.findInstructionCode> saveTimeTable()throws Exception {
+    @PostMapping("/save")
+    public boolean saveTimeTable(@RequestBody TimetableDto.SaveTimeTable req)throws Exception {
+        makeTimeTableService.saveTimeTable(req);
+        return true;
+    }
+
+    @GetMapping("/check")
+    public TimetableDto.MyTimeTable checkTimeTable(@RequestParam(value = "userId", required =  true)Long userId)throws Exception {
+        TimetableDto.MyTimeTable result = makeTimeTableService.checkTimeTable(userId);
+        return result;
+    }
+
+    @GetMapping("/test")
+    public List<TimetableDto.findInstructionCode> test()throws Exception {
         return courseRepositorySupport.findInstructionCodeByMajor();
     }
 }
