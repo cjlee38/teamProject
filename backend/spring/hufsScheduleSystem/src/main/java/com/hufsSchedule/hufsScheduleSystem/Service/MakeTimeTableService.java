@@ -132,13 +132,18 @@ public class MakeTimeTableService {
     public boolean saveTimeTable(TimetableDto.SaveTimeTable req){
         User user = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         ArrayList<Timetable> dto = new ArrayList<>();
+        ArrayList<Instruction> instructions = new ArrayList<>();
         for (Instruction instruction: req.getMyCourse()){
+            instruction.setChoosed();
+            instructions.add(instruction);
             Timetable timetable = new Timetable();
             timetable.setUser(user);
             timetable.setInstruction(instruction);
             dto.add(timetable);
+
         }
         timeTableRepository.saveAll(dto);
+        instructionRepository.saveAll(instructions);
         return true;
     }
 }

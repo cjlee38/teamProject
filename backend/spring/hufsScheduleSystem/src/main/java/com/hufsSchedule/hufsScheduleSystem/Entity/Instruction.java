@@ -78,4 +78,8 @@ public class Instruction implements Serializable {
         }
     }*/
 
+    public void setChoosed() {
+        this.choosed ++;
+    }
+
 }
