@@ -57,17 +57,28 @@ public class SuggSysService {
 
 
 
-        List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
-        for (Integer idx = 0; idx < sorted.size(); idx++) {
+        int limitIndex = 0;
+        for (WeightInstruction i : suggSysObj.getValidInstructions()) {
+            if (i.getWeight().equals(new Float(0.0))) {
+                break;
+            }
+            limitIndex++;
+        }
+        System.out.println("sorted size : " + sorted.size());
+        System.out.println("backtracking starts : " + limitIndex);
+        int tableLimit = 10000/limitIndex;
+        List<Table<String, String, WeightInstruction>> entireTableList = new ArrayList<>();
+        for (Integer idx = 0; idx < limitIndex; idx++) {
+            List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
             Table<String, String, WeightInstruction> table = suggSysObj.getTimeTable();
 
-//            List<WeightInstruction> Instructions = SuggSysFunc.copyInstructions(sorted);
             Integer maxCredit = suggSysObj.getCreditRange().getMaxCredit();
             CreditRatio ratio = SuggSysFunc.copyCreditRatio(suggSysObj.getCreditRatio());
 
-            backtracking(sorted, table, maxCredit, ratio, tableList, idx);
+            backtracking(suggSysObj.getValidInstructions(), table, maxCredit, ratio, tableList, idx, tableLimit);
+            entireTableList.addAll(tableList);
         }
-        System.out.println("after backtracking : " + tableList.size());
+        System.out.println("after backtracking : " + entireTableList.size());
 
 //        for (Table<String, String, WeightInstruction> table : tableList) {
 //            Integer summed = SuggSysFunc.sumTableCredit(table);
@@ -78,9 +89,9 @@ public class SuggSysService {
 //            }
 //        }
 
-        System.out.println("table list size : " + tableList.size());
+//        System.out.println("table list size : " + tableList.size());
 
-        return tableList;
+        return entireTableList;
     }
 
     public static boolean isPossible(Integer credit) {
@@ -92,19 +103,14 @@ public class SuggSysService {
     }
 
     public static Integer backtracking(List<WeightInstruction> instructions, Table<String, String, WeightInstruction> table,
-                             Integer credit, CreditRatio ratio, List<Table<String, String, WeightInstruction>> tableList, Integer idx) {
+                             Integer credit, CreditRatio ratio, List<Table<String, String, WeightInstruction>> tableList, Integer idx, Integer tableLimit) {
         if (!isPossible(credit)) {
             tableList.add(table);
             return 0;
         }
-//        if (tableList.size() > 30) {
-//            return 0;
-//        }
-
-//        if (idx > instructions.size() - 1) {
-//            return 1;
-//        }
-
+        if (tableList.size() > tableLimit) {
+            return -1;
+        }
         WeightInstruction currentInstruction = instructions.get(idx);
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
         CreditRatio currentRatio = copyCreditRatio(ratio);
@@ -114,6 +120,7 @@ public class SuggSysService {
             credit -= currentInstruction.getInstruction().getCredit();
             SuggRatioService.subtractRatio(currentRatio, currentInstruction);
         }
+
         if (!isPossible(credit)) {
             tableList.add(table);
             return 1;
@@ -123,14 +130,14 @@ public class SuggSysService {
 
         if (idx >= instructions.size()) {
             tableList.add(currentTable);
+            return 0;
+        } else {
+            for (Integer iter = idx; iter < instructions.size(); iter++) {
+                Integer flag = backtracking(instructions, currentTable, credit, currentRatio, tableList, iter, tableLimit);
+                if (flag == 0) { break; }
+                if (flag == -1) { return -1; }
+            }
         }
-
-        for (Integer iter = idx; iter < instructions.size(); iter++) {
-            Integer flag = backtracking(instructions, currentTable,
-                    credit, currentRatio, tableList, iter);
-            if (flag == 0) { break; }
-        }
-
         return 0;
     }
 
