@@ -101,9 +101,9 @@ public class SuggSysService {
 //            return 0;
 //        }
 
-        if (idx > instructions.size() - 1) {
-            return 1;
-        }
+//        if (idx > instructions.size() - 1) {
+//            return 1;
+//        }
 
         WeightInstruction currentInstruction = instructions.get(idx);
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
@@ -113,7 +113,10 @@ public class SuggSysService {
         if (inputFlag == true) {
             credit -= currentInstruction.getInstruction().getCredit();
             SuggRatioService.subtractRatio(currentRatio, currentInstruction);
-//            System.out.println(currentRatio.getRatio() + currentInstruction.getInstruction().getSubject());
+        }
+        if (!isPossible(credit)) {
+            tableList.add(table);
+            return 1;
         }
 
         idx++;
