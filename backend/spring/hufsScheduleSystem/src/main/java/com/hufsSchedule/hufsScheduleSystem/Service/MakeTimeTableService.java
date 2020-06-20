@@ -145,7 +145,7 @@ public class MakeTimeTableService {
             timetable.setInstruction(instruction);
             timetables.add(timetable);
         }
-        timeTableRepository.deleteAllByUserTable(user);
+        timeTableRepository.deleteAllByUser(user);
         timeTableRepository.saveAll(timetables);
         instructionRepository.saveAll(instructions);
         return true;
