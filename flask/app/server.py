@@ -35,6 +35,7 @@ class RegistUser(Resource):
             parser.add_argument('std_num', type=str)
             parser.add_argument('password', type=str)
             parser.add_argument('userId', type=str)
+
             args = parser.parse_args()
 
             _std_num = args['std_num']
@@ -83,23 +84,23 @@ class ReigstInst(Resource):
 
         # rq_year = args['rq_year']
         # rq_sem = args['rq_sem']
-        crawl_Table('14', '1', db_class)
-        crawl_Table('14', '2', db_class)
+        # crawl_Table('14', '1', db_class)
+        # crawl_Table('14', '2', db_class)
 
-        crawl_Table('15', '1', db_class)
-        crawl_Table('15', '2', db_class)
+        # crawl_Table('15', '1', db_class)
+        # crawl_Table('15', '2', db_class)
 
-        crawl_Table('16', '1', db_class)
-        crawl_Table('16', '2', db_class)
+        # crawl_Table('16', '1', db_class)
+        # crawl_Table('16', '2', db_class)
 
-        crawl_Table('17', '1', db_class)
-        crawl_Table('17', '2', db_class)
+        # crawl_Table('17', '1', db_class)
+        # crawl_Table('17', '2', db_class)
 
-        crawl_Table('18', '1', db_class)
-        crawl_Table('18', '2', db_class)
+        # crawl_Table('18', '1', db_class)
+        # crawl_Table('18', '2', db_class)
 
-        crawl_Table('19', '1', db_class)
-        crawl_Table('19', '2', db_class)
+        # crawl_Table('19', '1', db_class)
+        # crawl_Table('19', '2', db_class)
 
         crawl_Table('20', '1', db_class)
 
