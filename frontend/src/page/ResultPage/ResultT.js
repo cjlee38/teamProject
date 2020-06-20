@@ -14,7 +14,7 @@ class LectureList extends React.Component {
       lectureForms: this.props.lectureLength,
       lectures: this.props.data,
       option: 'normal',
-      weekday: ['월', '화', '수', '목', '금'],
+      weekday: ['월', '화', '수', '목', '금', '토'],
       timeUnitAlphabet: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
       timeUnitString: [
         '1교시 9:00',
@@ -169,7 +169,7 @@ class LectureList extends React.Component {
                     <td  className="block-time" >
                       {time}
                     </td>
-                    {Array.from(Array(5).keys()).map((w) => {
+                    {Array.from(Array(6).keys()).map((w) => {
 
                       const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
                       return (

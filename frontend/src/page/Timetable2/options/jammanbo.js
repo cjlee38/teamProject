@@ -11,12 +11,12 @@ class snorlax {
       
 
       const hours=['1', '2','3']
-      const weekdays=['월', '화', '수', '목', '금']
+      const weekdays=['월', '화', '수', '목', '금', '토']
             // const key = `${weekday}${hours}`;
            
             for(let i=0; i<hours.length; i++){
               if ( hours) {
-                for(let j=0; j<5; j++){
+                for(let j=0; j<weekdays.length; j++){
                 const key = `${weekdays[j]}${hours[i]}`;
                 // result.push(key)
                 this.displayLectures = {
