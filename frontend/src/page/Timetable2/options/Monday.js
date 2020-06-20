@@ -16,7 +16,7 @@ class snorlax {
            
             for(let i=0; i<hours.length; i++){
               if ( hours) {
-                for(let j=0; j<5; j++){
+                for(let j=0; j<1; j++){
                 const key = `${weekdays[j]}${hours[i]}`;
                 // result.push(key)
                 this.displayLectures = {
