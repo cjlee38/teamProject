@@ -64,7 +64,7 @@ export default class Route1 extends Component{
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/Check">졸업요건</Nav.Link>
-            <Nav.Link href="/Recommend">시간표</Nav.Link>
+            <Nav.Link href="/Recommend">시간표추천</Nav.Link>
             
             {logged? <Nav.Link href="/mytable">내 시간표</Nav.Link>:<> </>}
           </Nav>
