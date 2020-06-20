@@ -11,12 +11,12 @@ class Kitakubu {
   // TODO: 강의 배치 로직 구현
   execute() {
     const hours=['9', '10', '11', '12', '13']
-    const weekdays=['월', '화', '수', '목', '금']
+    const weekdays=['월', '화', '수', '목', '금', '토']
           // const key = `${weekday}${hours}`;
          
           for(let i=0; i<hours.length; i++){
             if ( hours) {
-              for(let j=0; j<5; j++){
+              for(let j=0; j<weekdays.length; j++){
               const key = `${weekdays[j]}${hours[i]}`;
               // result.push(key)
               this.displayLectures = {
