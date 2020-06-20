@@ -106,6 +106,8 @@ public class MakeTimeTableService {
             results.add(SuggSysService.cvtTableToResult(table));
         }
 
+        System.out.println(results.size());
+
         TimetableDto.Result realResult = new TimetableDto.Result(results);
 
 
