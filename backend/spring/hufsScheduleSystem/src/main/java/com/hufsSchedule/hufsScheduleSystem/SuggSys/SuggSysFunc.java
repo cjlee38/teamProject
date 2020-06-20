@@ -38,6 +38,7 @@ public class SuggSysFunc {
         else if (korDay.equals("수")) { engDay = "Wednesday"; }
         else if (korDay.equals("목")) { engDay = "Thursday"; }
         else if (korDay.equals("금")) { engDay = "Friday"; }
+        else if (korDay.equals("토")) { engDay = "Saturday"; }
         else { engDay = null; }
 
         return engDay;
@@ -59,8 +60,8 @@ public class SuggSysFunc {
 //    }
 
     public static Table<String, String, WeightInstruction> copyTable(Table<String, String, WeightInstruction> table) {
-        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12", "13");
         Table<String, String, WeightInstruction> copied = ArrayTable.create(rows, columns);
 
         copied.putAll(table);

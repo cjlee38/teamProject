@@ -44,9 +44,9 @@ public class SuggSysService {
         List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
         System.out.println("----------------------------");
-//        for (WeightInstruction inst : suggSysObj.getValidInstructions()) {
-//            System.out.println(inst.getInstruction().getSubject() + inst.getWeight());
-//        }
+        for (WeightInstruction inst : suggSysObj.getValidInstructions()) {
+            System.out.println(inst.getInstruction().getSubject() + inst.getWeight());
+        }
 //        for (Integer idx = 0; idx <10; idx++) {
 //            System.out.println(sorted.get(idx).getInstruction().getSubject());
 //            System.out.println(sorted.get(idx).getInstruction().getInstructionNumber());
@@ -97,11 +97,13 @@ public class SuggSysService {
             tableList.add(table);
             return 0;
         }
-        if (tableList.size() > 30) {
-            return 0;
-        }
+//        if (tableList.size() > 30) {
+//            return 0;
+//        }
 
-
+//        if (idx > instructions.size() - 1) {
+//            return 1;
+//        }
 
         WeightInstruction currentInstruction = instructions.get(idx);
         Table<String, String, WeightInstruction> currentTable = copyTable(table);
@@ -111,7 +113,10 @@ public class SuggSysService {
         if (inputFlag == true) {
             credit -= currentInstruction.getInstruction().getCredit();
             SuggRatioService.subtractRatio(currentRatio, currentInstruction);
-//            System.out.println(currentRatio.getRatio() + currentInstruction.getInstruction().getSubject());
+        }
+        if (!isPossible(credit)) {
+            tableList.add(table);
+            return 1;
         }
 
         idx++;
@@ -158,8 +163,8 @@ public class SuggSysService {
 //    }
 
     public static ArrayList<Instruction> cvtTableToResult(Table<String, String, WeightInstruction> table) {
-        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12", "13");
 
         Set<Instruction> set = new HashSet<>();
         for (String column : columns) {
