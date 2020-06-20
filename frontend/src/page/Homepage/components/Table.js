@@ -83,7 +83,7 @@ class Table extends Component {
     }
     if (values[0] === "남은 학점"){
     values.slice(1,8).map(function(val) {if (val > 0){sum += val}})
-    if (values[9] - sum <= 0){
+    if (values[9] - sum <= 0 ){
       return (<>0</>)
     }
     return(<>{values[9] - sum}</>)}
@@ -98,10 +98,10 @@ class Table extends Component {
   }
   Formatter9(cell, row) {
     let a = row.total_credit
-    if (a < 0) {
+    if (a < row.temp) {
       
     return (
-      <>({a})</>
+      <>{row.temp}</>
     );}
     else{
     return (<>{a}</>)}
