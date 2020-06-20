@@ -19,6 +19,18 @@ export default function TabContent1(props) {
                 (accumulator, currentValue) => accumulator + currentValue,
                 0
             );
+            let temp =  JSON.parse(JSON.stringify(response.data.data.remainCredit))
+            let remain = temp.splice(0, 8).reduce(function(accumulator, currentValue) {
+                if (currentValue >= 0){
+                    return accumulator + currentValue;
+
+                }
+                else{
+                    return accumulator
+                }
+              }, 0
+            );
+            console.log(remain)
             setData([{
                 trow: '졸업 학점', first_major: response.data.data.grdCredit[0], second_major: response.data.data.grdCredit[1],
                 sub_major: response.data.data.grdCredit[2], minor: response.data.data.grdCredit[3], out_door: response.data.data.grdCredit[4],
@@ -36,7 +48,7 @@ export default function TabContent1(props) {
                 sub_major: response.data.data.remainCredit[2], minor: response.data.data.remainCredit[3], out_door: response.data.data.remainCredit[4],
                 liberal_arts: response.data.data.remainCredit[5], teaching: response.data.data.remainCredit[6], 
                 optional: response.data.data.remainCredit[7],
-                total_credit: response.data.data.remainCredit[8], average_score: "-"
+                total_credit: response.data.data.remainCredit[8], average_score: "-", temp:remain
             }])
             setData2([{
                 trow: "필수 과목", first_major: response.data.data.grdFirstMajorCourses, second_major: response.data.data.grdSecondMajorCourses
