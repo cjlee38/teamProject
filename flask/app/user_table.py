@@ -140,7 +140,7 @@ def user_Table(id_input, pw_input, user_id, db):
                 temp_list.append(i.text.strip())
             if temp_list[5] == "F":
                 continue
-            courses_list.append(temp_list[1:])
+            courses_list.append(temp_list[1:] + [score_year, score_semester])
 
         else:
             if '이수 학기' in major_dict.keys():
@@ -151,6 +151,7 @@ def user_Table(id_input, pw_input, user_id, db):
             score_time = tr[i].text.split()
             score_year = score_time[0][2:]
             score_semester = score_time[2]
+            print(score_year, score_semester)
 
 
     # 교양 영역별 취득 현황
@@ -313,6 +314,13 @@ def user_Table(id_input, pw_input, user_id, db):
                     db_class.execute(sql_course_insert)
                     continue
                 sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{dept}%%\";""".format(inst_num=inst_num, dept=major_dict['1전공'])
+            elif 'Y131' in inst_num:
+                if i[-1] == "1":
+                    sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area, dept) VALUES ({course_inst_num}, {user_id}, \"{course_area}\", \"{dept}\");""".format(course_inst_num=9231, user_id=user_id, course_area = course_area, dept = temp_dept)
+                else:
+                    sql_course_insert = """INSERT INTO course (course_inst_num, user_course, course_area, dept) VALUES ({course_inst_num}, {user_id}, \"{course_area}\", \"{dept}\");""".format(course_inst_num=9232, user_id=user_id, course_area = course_area, dept = temp_dept)
+                db_class.execute(sql_course_insert)
+                continue
             else:
                 sql_inst_search = """SELECT instruction_id FROM instruction WHERE instruction_number LIKE \"{inst_num}%\" and subject LIKE \"%%{sub}%%\";""".format(inst_num=inst_num, sub=i[1].split('(')[0].strip())
 
