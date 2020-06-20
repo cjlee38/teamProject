@@ -151,7 +151,6 @@ class LectureList extends React.Component {
 
   }
   render() {
-    
     const {
       option,
       weekday,

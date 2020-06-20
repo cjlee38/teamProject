@@ -49,21 +49,18 @@ class LectureList extends React.Component {
     });
   }
 
-  componentDidMount() {
+   componentDidMount() {
     Axios.get('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/check', {
       params: { userId: this.props.userId }
   }).then((response)=>{
-    console.log(response.data);
-    if (response.data.length){
-      console.log(response.data)
-      let lecture = response.data
-  
+    if (response.data.myCourse.length){
+      let lecture = response.data.myCourse
       let arr = Array(lecture.length);
         for (let i = 0; i < lecture.length; i++) {
             arr[i] = i;
         }
         let lectureForms = arr
-      this.setState({lecture : lecture, lectureForms:lectureForms})
+      this.setState({lectures : lecture, lectureForms:lectureForms})
       this.setTable(lecture, lectureForms)
     }
     else{
@@ -81,6 +78,7 @@ class LectureList extends React.Component {
 
 
   render() {
+    console.log(this.state.lectures)
     const {
       weekday,
       timeUnitAlphabet,
