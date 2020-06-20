@@ -47,11 +47,11 @@ function RecoAll(props) {
 
 
 
-      response.data.data.map(function (obj) {
-        if (obj.required) { obj.required = "O" }
-        else { obj.required = "" }
+      // response.data.data.map(function (obj) {
+      //   if (obj.required) { obj.required = "O" }
+      //   else { obj.required = "" }
 
-      })
+      // })
 
       response.data.lib.map(function (obj) {
         areaType[obj.area] = obj.area + "(교양)"
@@ -153,6 +153,7 @@ function RecoAll(props) {
   }
 
 function postUserset(){
+  console.log(mytime)
     return {myCourse : myCourse, myCredit : mycredit, mytime : mytime}
 
 
