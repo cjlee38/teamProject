@@ -125,24 +125,27 @@ public class MakeTimeTableService {
     }
     public TimetableDto.MyTimeTable checkTimeTable(Long userId){
         List<Instruction> instructionList = timeTableRepositorySupport.findInstructionByUser(userId);
+        for (Instruction  instruction: instructionList){
+            System.out.println(instruction.getSubject());
+        }
         TimetableDto.MyTimeTable result = TimetableDto.MyTimeTable.builder().myCourse(instructionList).build();
         return result;
     }
 
     public boolean saveTimeTable(TimetableDto.SaveTimeTable req){
         User user = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
-        ArrayList<Timetable> dto = new ArrayList<>();
+        ArrayList<Timetable> timetables = new ArrayList<>();
         ArrayList<Instruction> instructions = new ArrayList<>();
         for (Instruction instruction: req.getMyCourse()){
             instruction.setChoosed();
+            System.out.println(instruction.getSubject());
             instructions.add(instruction);
             Timetable timetable = new Timetable();
             timetable.setUser(user);
             timetable.setInstruction(instruction);
-            dto.add(timetable);
-
+            timetables.add(timetable);
         }
-        timeTableRepository.saveAll(dto);
+        timeTableRepository.saveAll(timetables);
         instructionRepository.saveAll(instructions);
         return true;
     }
