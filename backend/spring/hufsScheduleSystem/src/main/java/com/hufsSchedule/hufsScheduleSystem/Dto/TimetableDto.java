@@ -39,12 +39,10 @@ public class TimetableDto {
         private Long userId;
         private ArrayList<Instruction> myCourse;
 
-
         @Builder
         public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse){
             this.userId = userId;
             this.myCourse = myCourse;
-
         }
     }
 
