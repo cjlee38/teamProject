@@ -137,15 +137,17 @@ public class SuggInstructionService {
         Set<Set<String>> transactions = getTransactions(data, userId);
         if (transactions.size() == 0) { return; }
 
+        System.out.println("apriori starts");
         Float minSupport = (float)0.5;
         Apriori apriori = new Apriori(minSupport, transactions);
         apriori.run();
-
+        System.out.println("apriori done");
         // Association rule
         String metric = "lift";
         Float minLift = (float)1.0;
         AssociationRule associationRule = new AssociationRule(apriori.getResult(), metric, minLift);
         associationRule.run();
+        System.out.println("association done");
 
         Set<String> userTransaction = getUserTransaction(data, userId);
         Set<String> userNotTransaction = Sets.difference(apriori.createSet(transactions), userTransaction);

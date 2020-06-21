@@ -25,6 +25,9 @@ public class Apriori {
         Integer maxLevel = itemset.size();
 
         while (level < maxLevel) {
+            if (level > 2) {
+                break;
+            }
             try {
                 Set<Set<String>> combinations = getCombinations(itemset, level);
                 Map<Set<String>, Float> supportedItemset = getSupportedItemset(combinations);
@@ -34,6 +37,7 @@ public class Apriori {
             } catch (Exception e ) {
                 break;
             }
+
 
             if (itemset.size() <= 1) {
                 break;
