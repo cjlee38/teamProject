@@ -26,8 +26,10 @@ public class Instruction implements Serializable {
     @JsonProperty("instruction_number")
     private String instructionNumber;
     @Column(name="rq_year")
+    @JsonProperty("rq_year")
     private Long rqYear;
     @Column(name="rq_semester")
+    @JsonProperty("rq_semester")
     private Long rqSemester;
     @Column(name="dept")
     private String dept;

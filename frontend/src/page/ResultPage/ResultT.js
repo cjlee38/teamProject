@@ -111,7 +111,7 @@ class LectureList extends React.Component {
 
   saveTimetable(){
     // console.log(this.state.lectures)
-    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/save', {
+    Axios.post('http://127.0.0.1:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
      "myCourse" : this.state.lectures
     })
@@ -142,7 +142,8 @@ class LectureList extends React.Component {
         state: {
           myCourse:this.state.lectures,
           mytime : this.state.mytime,
-          myCredit : this.props.credit
+          myCredit : this.props.credit,
+          deletedCourse : this.state.deletedLecture
         }
       }}>
         <Button variant="contained" color="primary" >현재 조건으로 재생성</Button></Link>

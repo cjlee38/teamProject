@@ -36,11 +36,13 @@ public class TimetableDto {
     public static class SaveTimeTable{
         private Long userId;
         private ArrayList<Instruction> myCourse;
+        private ArrayList<Instruction> deletedCourse;
 
         @Builder
-        public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse){
+        public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse, ArrayList<Instruction> deletedCourse){
             this.userId = userId;
             this.myCourse = myCourse;
+            this.deletedCourse = deletedCourse;
         }
     }
 

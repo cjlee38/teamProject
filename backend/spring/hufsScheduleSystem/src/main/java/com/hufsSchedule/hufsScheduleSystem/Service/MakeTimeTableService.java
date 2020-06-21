@@ -140,7 +140,6 @@ public class MakeTimeTableService {
         ArrayList<Instruction> instructions = new ArrayList<>();
         for (Instruction instruction: req.getMyCourse()){
             instruction.setChoosed();
-            System.out.println(instruction.getSubject());
             instructions.add(instruction);
             Timetable timetable = new Timetable();
             timetable.setUser(user);
@@ -148,8 +147,8 @@ public class MakeTimeTableService {
             timetables.add(timetable);
         }
         timeTableRepository.deleteAllByUser(user);
-        timeTableRepository.saveAll(timetables);
         instructionRepository.saveAll(instructions);
+        timeTableRepository.saveAll(timetables);
         return true;
     }
 }
