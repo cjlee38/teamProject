@@ -133,6 +133,12 @@ public class SuggSysFunc {
         Boolean teaching = userInfo.getTeaching();
 
         userArea.add("교양");
+//        userArea.add("언어와문학");
+//        userArea.add("과학과기술");
+//        userArea.add("문화와예술");
+//        userArea.add("역사와철학");
+//        userArea.add("인간과사회");
+
 
         if (secondMajor != null) { userArea.add(secondMajor); }
         if (minor != null) { userArea.add(minor); }

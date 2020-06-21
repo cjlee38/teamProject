@@ -90,6 +90,9 @@ public class MakeTimeTableService {
         for (String area : userArea) {
             List<TimetableDto.findInstructionCode> data = courseRepositorySupport.findInstructionCodeByMajor(area);
             dataset.add(data);
+            if (area.equals("교양")) {
+                System.out.println("교양 data" + data);
+            }
         }
 
 //        System.out.println(dataset.get(0).get(0).getInstructionNumber());
