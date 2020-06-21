@@ -398,8 +398,11 @@ public interface CourseEnums {
     enum LibArts2015Enum implements CourseEnums {
         Y12101("미네르바인문(1)읽기와쓰기", "Minerva Humanities Reading and Writing"),
         Y12102("미네르바인문(2)읽기와토의.토론", "Minerva Humanities Reading and Discussion & Debate"),
-        U7618("신입생세미나", "Seminar for Freshmen"),
-        Y12104("HUFS Career Design 진로설정과취.창업경력개발", "HUFS Career Design (Defining Career Path & Development)");
+//        ("신입생세미나", "Seminar for Freshmen"),
+        Y12104("HUFS Career Design 진로설정과취.창업경력개발", "HUFS Career Design (Defining Career Path & Development)"),
+        FFFFFA("신입생세미나", "Seminar for Freshmen"),
+        FFFFFB("교양외국어(1)", "Communicative Foreign Language"),
+        FFFFFC("교양외국어(2)", "Communicative Foreign Language");
 
 //        Y13101("교양외국어", "Communicative English 1"),
 //        Y13102("교양영어2", "Communicative English 2"),

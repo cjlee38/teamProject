@@ -6,64 +6,71 @@ import { BootstrapTable, TableHeaderColumn } from
 class Table extends Component {
   Formatter1(cell, row) {
     let a = row.first_major
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter2(cell, row) {
     let a = row.second_major
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter3(cell, row) {
     let a = row.sub_major
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter4(cell, row) {
     let a = row.out_door
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter5(cell, row) {
     let a = row.liberal_arts
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter6(cell, row) {
     let a = row.minor
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter7(cell, row) {
     let a = row.teaching
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
@@ -71,29 +78,30 @@ class Table extends Component {
     let a = row.optional
     let sum = 0
     let values = Object.values(row)
-    
-    if (a===null){
+    if (isNaN(a)){
       return(<></>)
     }
     if (values[0] === "남은 학점"){
     values.slice(1,8).map(function(val) {if (val > 0){sum += val}})
-    if (values[9] - sum <= 0){
+    if (values[9] - sum <= 0 ){
       return (<>0</>)
     }
     return(<>{values[9] - sum}</>)}
 
-    if (a <= 0) {
-    return (
-      <>0</>
-    );}
+    if (a < 0) {
+      
+      return (
+        <>({a})</>
+      );}
     else{
     return (<>{a}</>)}
   }
   Formatter9(cell, row) {
     let a = row.total_credit
-    if (a <= 0) {
+    if (a < row.temp) {
+      
     return (
-      <>0</>
+      <>{row.temp}</>
     );}
     else{
     return (<>{a}</>)}

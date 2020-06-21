@@ -34,8 +34,8 @@ public class SuggTableService {
     }
 
     public static Table<String, String, WeightInstruction> getEmptyTimeTable() {
-        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12", "13");
         Table<String, String, WeightInstruction> timeTable = ArrayTable.create(rows, columns);
 
         return timeTable;
@@ -76,8 +76,8 @@ public class SuggTableService {
             }
 
         }
-        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Saturday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12", "13");
         for (String row : rows) {
             for (String column : columns) {
                 WeightInstruction cell = timeTable.get(row, column);
@@ -106,9 +106,18 @@ public class SuggTableService {
             }
         }
 
-        for (String time : times) {
-            timeTable.put(time.substring(1,2), cvtKorDayToEng(time.substring(0,1)), instruction);
+        try{
+            for (String time : times) {
+                timeTable.put(time.substring(1,2), cvtKorDayToEng(time.substring(0,1)), instruction);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(times);
+            System.out.println(instruction.getInstruction().getSubject());
+            System.out.println(instruction.getInstruction().getInstructionNumber());
+            throw new NullPointerException("shit");
         }
+
 
         return true;
     }
@@ -126,11 +135,42 @@ public class SuggTableService {
         if (unq.size() < counts) {
             return unq;
         }
+        unq = tables;
+
+
+        List<Integer> required = new ArrayList<>();
+        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12", "13");
+        for (Table<String, String, WeightInstruction> table : unq) {
+            Integer require = new Integer(0);
+            for ( String row : rows) {
+                for (String column : columns) {
+                    WeightInstruction cell = table.get(row, column);
+                    if (cell != null && ! isInstructionEmpty(cell)) {
+                        boolean rq = cell.getInstruction().isRequired();
+                        if (rq == true) {
+                            require += 1;
+                        }
+                    }
+                }
+            }
+            required.add(require);
+        }
+        System.out.println(required);
+//        List<Integer> indices = new ArrayList<>();
+        List<Table<String, String, WeightInstruction>> sorting = new ArrayList<>();
+        for (int i = 0; i < required.size(); i++) {
+            int val = Collections.max(required);
+            int idx = required.indexOf(val);
+            sorting.add(unq.get(idx));
+            required.remove(idx);
+            unq.remove(idx);
+        }
+
+
 
         List<Float> scores = new ArrayList<>();
-        List<String> columns = Lists.newArrayList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-        List<String> rows = Lists.newArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
-        for (Table<String, String, WeightInstruction> table : unq) {
+        for (Table<String, String, WeightInstruction> table : sorting) {
             Float score = new Float(0.0);
             for ( String row : rows) {
                 for (String column : columns) {
@@ -142,16 +182,18 @@ public class SuggTableService {
             }
             scores.add(score);
         }
-        List<Integer> indices = new ArrayList<>();
-        List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();
 
+        List<Table<String, String, WeightInstruction>> topNs = new ArrayList<>();
         for (Integer i = 0; i < counts; i++) {
+            if (scores.size() == 0) {
+                break;
+            }
             Float value = Collections.max(scores);
             int idx = scores.indexOf(value);
             scores.remove(idx);
-            topNs.add(unq.get(idx));
-            unq.remove(idx);
-            System.out.println("suggTaleServbice, getTopN, score/idx" + value.toString() +" ~"+ idx);
+            topNs.add(sorting.get(idx));
+            sorting.remove(idx);
+            System.out.println("suggTaleServbice, getTopN, score/idx" + value.toString() +" ~ "+ idx);
         }
 
         return topNs;

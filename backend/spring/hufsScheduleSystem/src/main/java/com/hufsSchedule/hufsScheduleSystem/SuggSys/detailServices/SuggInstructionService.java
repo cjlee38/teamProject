@@ -82,6 +82,12 @@ public class SuggInstructionService {
         applyCrowdedInstructions(validInstruction);
         applyNcssInstructions(remainCourses, validInstruction); // 전필
 
+        for (WeightInstruction inst : validInstruction) {
+            if (inst.getInstruction().getInstructionNumber().equals("T07403102")) {
+                inst.setWeight((float)1.2);
+            }
+        }
+
 //        return validInstruction;
     }
 

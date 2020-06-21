@@ -14,7 +14,7 @@ class LectureList extends React.Component {
       lectureForms: this.props.lectureLength,
       lectures: this.props.data,
       option: 'normal',
-      weekday: ['월', '화', '수', '목', '금'],
+      weekday: ['월', '화', '수', '목', '금', '토'],
       timeUnitAlphabet: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
       timeUnitString: [
         '1교시 9:00',
@@ -110,7 +110,8 @@ class LectureList extends React.Component {
   
 
   saveTimetable(){
-    Axios.post('http://localhost:1415/web/v1/makeTimeTable/save', {
+    // console.log(this.state.lectures)
+    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
      "myCourse" : this.state.lectures
     })
@@ -169,7 +170,7 @@ class LectureList extends React.Component {
                     <td  className="block-time" >
                       {time}
                     </td>
-                    {Array.from(Array(5).keys()).map((w) => {
+                    {Array.from(Array(6).keys()).map((w) => {
 
                       const displayLectureKey = `${weekday[w]}${timeUnitAlphabet[t]}`;
                       return (

@@ -92,19 +92,21 @@ public class MakeTimeTableService {
             dataset.add(data);
         }
 
-        System.out.println(dataset.get(0).get(0).getInstructionNumber());
-        System.out.println(dataset.get(0).get(0).getUserId());
+//        System.out.println(dataset.get(0).get(0).getInstructionNumber());
+//        System.out.println(dataset.get(0).get(0).getUserId());
 
         List<Table<String, String, WeightInstruction>> tables = SuggTableService.getTopNTableResult(
                 SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset), 5
         );
-
+//        List<Table<String, String, WeightInstruction>> tables = SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset);
         System.out.println(tables.size());
 
         ArrayList<ArrayList<Instruction>> results = new ArrayList<>();
         for (Table<String, String, WeightInstruction> table : tables) {
             results.add(SuggSysService.cvtTableToResult(table));
         }
+
+        System.out.println(results.size());
 
         TimetableDto.Result realResult = new TimetableDto.Result(results);
 
