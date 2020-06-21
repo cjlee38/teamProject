@@ -192,7 +192,8 @@ class LectureList extends React.Component {
         state: {
           myCourse:myCourse,
           mytime : mytime,
-          myCredit : myCredit
+          myCredit : myCredit,
+          deletedCourse: []
         }
       }}>
         <Button variant="contained" color="primary" >

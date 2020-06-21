@@ -11,6 +11,7 @@ export default function TabContent1(props) {
     const [Change, setChange] = useState(false)
 
     useEffect( () => {
+        console.log(props.data.state.deletedCourse)
         setIsData(false)
         if (isNaN(props.data.state.myCredit)) {
             props.data.state.myCredit = 0;
@@ -19,6 +20,7 @@ export default function TabContent1(props) {
             "myCourse": props.data.state.myCourse,
             "myCredit": props.data.state.myCredit,
             "myFreetime": props.data.state.mytime,
+            "deletedCourse" : props.data.state.deletedCourse,
             "userId": props.userId
         })
             .then(async (response) => {
