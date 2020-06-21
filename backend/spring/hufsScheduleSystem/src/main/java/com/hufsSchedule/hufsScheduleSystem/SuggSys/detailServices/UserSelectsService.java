@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserSelectsService {
-    public static UserSelectsObj initUserSelects(ArrayList<Instruction> takenInstructions, Long maxCredit, ArrayList<String> freetime) {
+    public static UserSelectsObj initUserSelects(ArrayList<Instruction> takenInstructions, ArrayList<Instruction> abandons, Long maxCredit, ArrayList<String> freetime) {
         CreditRange userSelectCredit = new CreditRange(0, maxCredit.intValue());
 
-        return new UserSelectsObj(takenInstructions, userSelectCredit, freetime);
+        return new UserSelectsObj(takenInstructions,abandons,userSelectCredit, freetime);
     }
 }

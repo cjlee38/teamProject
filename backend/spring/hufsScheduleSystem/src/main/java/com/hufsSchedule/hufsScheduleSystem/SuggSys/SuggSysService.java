@@ -30,7 +30,7 @@ public class SuggSysService {
     public static SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
         CreditRange creditRange = SuggCreditService.initTimeTableCredit(userSelectsObj.getUserSelectCredit(), userSelectsObj.getUserSelectCourses());
         Table<String, String, WeightInstruction> timeTable = SuggTableService.initTimeTable(userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserSelectFreeTime());
-        List<WeightInstruction> validInstructions = SuggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userInfo);
+        List<WeightInstruction> validInstructions = SuggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserAbandonCourses(), userInfo);
         CreditRatio creditRatio = SuggRatioService.initCreditRatio(userCredit, userInfo, creditRange);
 
         return new SuggSysObj(creditRange, timeTable, validInstructions, creditRatio);
@@ -66,7 +66,10 @@ public class SuggSysService {
         }
         System.out.println("sorted size : " + sorted.size());
         System.out.println("backtracking starts : " + limitIndex);
-        int tableLimit = 10000/limitIndex;
+        int tableLimit = 10000;
+        if (limitIndex != 0) {
+            tableLimit = 10000/limitIndex;
+        }
         List<Table<String, String, WeightInstruction>> entireTableList = new ArrayList<>();
         for (Integer idx = 0; idx < limitIndex; idx++) {
             List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();

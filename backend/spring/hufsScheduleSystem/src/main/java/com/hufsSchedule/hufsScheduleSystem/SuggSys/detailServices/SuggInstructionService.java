@@ -19,10 +19,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class SuggInstructionService {
-    public static List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions, List<Instruction> selectedInstructions, User userInfo) {
+    public static List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions,
+                                                                List<Instruction> selectedInstructions, List<Instruction> abandonInstructions, User userInfo) {
         List <Instruction> removeInstructions = new ArrayList<>();
         removeInstructions.addAll(takenInstructions);
         removeInstructions.addAll(selectedInstructions);
+        removeInstructions.addAll(abandonInstructions);
 
         List<String> names = new ArrayList<>(Arrays.asList(userInfo.getMajor(), userInfo.getSecondMajor(), userInfo.getMinor(), "교양"));
         if (userInfo.getTeaching()) {
