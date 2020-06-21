@@ -115,7 +115,7 @@ class LectureList extends React.Component {
       row['rq_year'] = row.rqYear
     row['rq_semester'] = row.rqSemester
     })
-    Axios.post('http://127.0.0.1:1415/web/v1/makeTimeTable/save', {
+    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
      "myCourse" : temp
     })
