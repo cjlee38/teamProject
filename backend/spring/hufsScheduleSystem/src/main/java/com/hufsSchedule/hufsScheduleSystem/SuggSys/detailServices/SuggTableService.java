@@ -135,7 +135,6 @@ public class SuggTableService {
         if (unq.size() < counts) {
             return unq;
         }
-        unq = tables;
 
 
         List<Integer> required = new ArrayList<>();

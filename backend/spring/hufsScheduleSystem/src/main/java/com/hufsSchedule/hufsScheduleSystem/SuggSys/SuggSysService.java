@@ -67,6 +67,7 @@ public class SuggSysService {
         if (limitIndex == 0) {
             limitIndex = 1;
         }
+
         System.out.println("sorted size : " + sorted.size());
         System.out.println("backtracking starts : " + limitIndex);
         int tableLimit = 10000/limitIndex;
