@@ -19,7 +19,7 @@ public class Timetable {
     private Long tableId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_table", insertable = false, updatable = false)
+    @JoinColumn(name = "user_table", insertable = true, updatable = true)
     private User user;
 
     public void setUser(User user) {
@@ -31,7 +31,7 @@ public class Timetable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "timetable_inst_num", insertable = false, updatable = false)
+    @JoinColumn(name = "timetable_inst_num", insertable = true, updatable = true)
     private Instruction instruction;
 
     public void setInstruction(Instruction instruction) {
