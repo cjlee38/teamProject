@@ -24,7 +24,7 @@ public class TimetableDto {
         private ArrayList<Instruction> deletedCourse;
 
         @Builder
-        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime, ArrayList<Instruction> deletedCourse){
+        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime,ArrayList<Instruction> deletedCourse ){
             this.userId = userId;
             this.myCourse = myCourse;
             this.myCredit = myCredit;
