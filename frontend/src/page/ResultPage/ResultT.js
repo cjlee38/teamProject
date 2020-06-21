@@ -110,10 +110,14 @@ class LectureList extends React.Component {
   
 
   saveTimetable(){
-    // console.log(this.state.lectures)
+    let temp = this.state.lectures
+    temp.forEach(function(row) {
+      row['rq_year'] = row.rqYear
+    row['rq_semester'] = row.rqSemester
+    })
     Axios.post('http://127.0.0.1:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
-     "myCourse" : this.state.lectures
+     "myCourse" : temp
     })
       .then((response) => {
         alert("저장되었습니다.")
