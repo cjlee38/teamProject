@@ -306,6 +306,8 @@ def user_Table(id_input, pw_input, user_id, db):
                 temp_dept = major_dict['전공심화(부전공)']
             else:
                 temp_dept = major_dict['부전공']
+        else:
+            temp_dept = course_area
         if inst_num:
             sql_inst_search = ""
             if 'U7618' in inst_num:
