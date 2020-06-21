@@ -132,6 +132,8 @@ public class SuggSysFunc {
         String minor = userInfo.getMinor();
         Boolean teaching = userInfo.getTeaching();
 
+        userArea.add("교양");
+
         if (secondMajor != null) { userArea.add(secondMajor); }
         if (minor != null) { userArea.add(minor); }
         if (teaching == true) { userArea.add("교육학"); }
