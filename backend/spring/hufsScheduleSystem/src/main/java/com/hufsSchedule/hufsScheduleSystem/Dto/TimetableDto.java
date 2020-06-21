@@ -21,13 +21,15 @@ public class TimetableDto {
         private ArrayList<Instruction> myCourse;
         private Long myCredit;
         private ArrayList<String> myFreetime;// 공강시간
+        private ArrayList<Instruction> deletedCourse;
 
         @Builder
-        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime){
+        public Req(Long userId, ArrayList<Instruction> myCourse, Long myCredit, ArrayList<String> myFreetime, ArrayList<Instruction> deletedCourse){
             this.userId = userId;
             this.myCourse = myCourse;
             this.myCredit = myCredit;
             this.myFreetime = myFreetime;
+            this.deletedCourse = deletedCourse;
         }
     }
 
@@ -36,13 +38,11 @@ public class TimetableDto {
     public static class SaveTimeTable{
         private Long userId;
         private ArrayList<Instruction> myCourse;
-        private ArrayList<Instruction> deletedCourse;
 
         @Builder
-        public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse, ArrayList<Instruction> deletedCourse){
+        public SaveTimeTable(Long userId, ArrayList<Instruction> myCourse){
             this.userId = userId;
             this.myCourse = myCourse;
-            this.deletedCourse = deletedCourse;
         }
     }
 
