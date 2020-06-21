@@ -142,7 +142,8 @@ class LectureList extends React.Component {
         state: {
           myCourse:this.state.lectures,
           mytime : this.state.mytime,
-          myCredit : this.props.credit
+          myCredit : this.props.credit,
+          deletedCourse : this.state.deletedLecture
         }
       }}>
         <Button variant="contained" color="primary" >현재 조건으로 재생성</Button></Link>
