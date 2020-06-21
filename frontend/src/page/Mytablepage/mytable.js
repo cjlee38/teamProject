@@ -78,7 +78,6 @@ class LectureList extends React.Component {
 
 
   render() {
-    console.log(this.state.lectures)
     const {
       weekday,
       timeUnitAlphabet,
