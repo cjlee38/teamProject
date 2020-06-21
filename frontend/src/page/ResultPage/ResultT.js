@@ -110,7 +110,7 @@ class LectureList extends React.Component {
   
 
   saveTimetable(){
-    Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/save', {
+    Axios.post('http://localhost:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
      "myCourse" : this.state.lectures
     })
@@ -119,7 +119,7 @@ class LectureList extends React.Component {
         
     })
       .catch(function (error) {
-        alert(error);
+        alert("??"+error);
       });
       
 
