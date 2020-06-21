@@ -114,7 +114,7 @@ class LectureList extends React.Component {
 
     Axios.post('http://ec2-13-209-184-168.ap-northeast-2.compute.amazonaws.com:1415/web/v1/makeTimeTable/save', {
      "userId" : this.props.userId,
-     "myCourse" : temp
+     "myCourse" : this.state.lectures
     })
       .then((response) => {
         alert("저장되었습니다.")
