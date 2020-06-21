@@ -64,12 +64,12 @@ public class SuggSysService {
             }
             limitIndex++;
         }
+        if (limitIndex == 0) {
+            limitIndex = 1;
+        }
         System.out.println("sorted size : " + sorted.size());
         System.out.println("backtracking starts : " + limitIndex);
-        int tableLimit = 10000;
-        if (limitIndex != 0) {
-            tableLimit = 10000/limitIndex;
-        }
+        int tableLimit = 10000/limitIndex;
         List<Table<String, String, WeightInstruction>> entireTableList = new ArrayList<>();
         for (Integer idx = 0; idx < limitIndex; idx++) {
             List<Table<String, String, WeightInstruction>> tableList = new ArrayList<>();
@@ -80,6 +80,10 @@ public class SuggSysService {
 
             backtracking(suggSysObj.getValidInstructions(), table, maxCredit, ratio, tableList, idx, tableLimit);
             entireTableList.addAll(tableList);
+        }
+
+        if (entireTableList.size() == 0) {
+            entireTableList.add(suggSysObj.getTimeTable());
         }
         System.out.println("after backtracking : " + entireTableList.size());
 
