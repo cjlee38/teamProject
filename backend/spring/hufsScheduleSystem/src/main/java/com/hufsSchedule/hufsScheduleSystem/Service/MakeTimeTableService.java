@@ -79,6 +79,7 @@ public class MakeTimeTableService {
 //        }
 
 //
+
         UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getDeletedCourse(), req.getMyCredit(), req.getMyFreetime());
         SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
         GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
