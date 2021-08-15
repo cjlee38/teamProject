@@ -14,7 +14,6 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructio
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggCreditService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggRatioService;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggTableService;
-import io.lettuce.core.ScriptOutputType;
 
 import java.util.*;
 

@@ -2,7 +2,6 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
 import com.google.common.collect.Sets;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
@@ -10,10 +9,7 @@ import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Apriori;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.AssociationRule;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.AssociationRuleObj;
-import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
-import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
-import org.springframework.data.relational.core.sql.In;
 
 import java.util.*;
 import java.util.stream.Collectors;

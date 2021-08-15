@@ -20,7 +20,7 @@ public class UserController {
     private final ResponseService responseService;
 
     @PostMapping("/Login")
-    public CommonResult login(@RequestBody UserDto.loginReq login)throws Exception {
+    public CommonResult login(@RequestBody UserDto.loginReq login) throws Exception {
         return responseService.getSingleResult(userService.login(login));
     }
 
@@ -28,4 +28,6 @@ public class UserController {
     public boolean signUp(@RequestBody UserDto.SignUpReq dto ) {
         return userService.signUp(dto);
     }
+
+    //jdbc:h2:tcp://localhost/~/noti
 }

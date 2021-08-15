@@ -7,7 +7,6 @@ import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
-import org.springframework.data.relational.core.sql.In;
 
 import java.util.*;
 import java.util.regex.Matcher;

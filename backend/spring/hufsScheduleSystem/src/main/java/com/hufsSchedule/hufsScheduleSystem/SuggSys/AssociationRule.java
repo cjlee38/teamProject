@@ -67,7 +67,8 @@ public class AssociationRule {
         for (Set<String> item : itemset.keySet()) {
             Float sAC = itemset.get(item);
             for (Integer idx = item.size()-1; idx > 0; idx--) {
-                Set<Set<String>> combination = Sets.combinations(item, idx);
+                Set<Set<String>> combination = new HashSet<>();
+//                Set<Set<String>> combination = Sets.combinations(item, idx);
                 for (Set<String> comb : combination) {
                     Set<String> antecedent  = comb;
                     Set<String> consequent = Sets.difference(item, comb);

@@ -47,7 +47,8 @@ public class Apriori {
     }
 
     public Set<Set<String>> getCombinations(Set<String> set, Integer level) {
-        return Sets.combinations(set, level);
+        return null;
+//        return Sets.combinations(set, level);
     }
 
     // 중복없는 데이터를 구하는 함수
