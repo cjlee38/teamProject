@@ -21,11 +21,12 @@ class UserRepositoryTest {
         User user = new User();
         user.setUsername("hello");
         user.setPassword("world");
+        userRepository.save(user);
 
         // when
-        userRepository.save(user);
-        // then
         Optional<User> findUser = userRepository.findById(user.getId());
+
+        // then
         assertTrue(findUser.isPresent());
         assertEquals(user.getUsername(), findUser.get().getUsername());
     }
