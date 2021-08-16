@@ -3,7 +3,7 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;

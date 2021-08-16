@@ -1,10 +1,12 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.table;
+package com.hufsSchedule.hufsScheduleSystem.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hufsSchedule.hufsScheduleSystem.Entity.embed.ApplyAndRestrictedNumber;
+import com.hufsSchedule.hufsScheduleSystem.domain.embed.ApplyAndRestrictedNumber;
+import com.hufsSchedule.hufsScheduleSystem.domain.type.DepartmentType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +19,7 @@ import java.io.Serializable;
 public class Instruction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique = true)
+    @Column(name="instruction_id", unique = true)
     @JsonProperty("instruction_id")
     private Long id;
 
@@ -31,9 +33,8 @@ public class Instruction implements Serializable {
     @JsonProperty("rq_semester")
     private Integer semester; // 강의 개설 학기
 
-    @JoinColumn(name = "department_ID")
-    @OneToOne
-    private Department department; // 학과
+    @Setter
+    private DepartmentType department; // 학과
 
     @Column(name="area")
 //    @Enumerated(EnumType.STRING)
@@ -72,9 +73,6 @@ public class Instruction implements Serializable {
     @Column(name="choosed")
     private int choosed; // 시스템에서 선택한(신청한) 인원
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public void setChoosed() {
         this.choosed ++;

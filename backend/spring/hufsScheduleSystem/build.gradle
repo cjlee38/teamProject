@@ -12,7 +12,6 @@ group = 'com.hufsSchedule'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 description = 'hufsScheduleSystem'
-//java.sourceCompatibility = JavaVersion.VERSION_1_8q
 
 repositories {
     mavenCentral()
@@ -43,6 +42,10 @@ dependencies {
 //    compileOnly 'org.springframework.boot:spring-boot-starter-tomcat'
 
     runtimeOnly 'com.h2database:h2'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 //tasks.withType(JavaCompile) {

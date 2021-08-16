@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import lombok.Getter;
 
 import java.io.Serializable;

@@ -2,8 +2,8 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
 import com.google.common.collect.Sets;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Apriori;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.AssociationRule;
@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class SuggInstructionService {
     public static List<WeightInstruction> initValidInstructions(List<Instruction> entireInstructions, List<Instruction> takenInstructions,
-                                                                List<Instruction> selectedInstructions, List<Instruction> abandonInstructions, Student studentInfo) {
-        List <Instruction> removeInstructions = new ArrayList<>();
+                                                                List<Instruction> selectedInstructions, List<Instruction> abandonInstructions, User userInfo) {
+        /*List <Instruction> removeInstructions = new ArrayList<>();
         removeInstructions.addAll(takenInstructions);
         removeInstructions.addAll(selectedInstructions);
         removeInstructions.addAll(abandonInstructions);
@@ -32,8 +32,8 @@ public class SuggInstructionService {
         ); // 1전공(e.g. 경영학전공), 이중전공(융복합소프트웨어전공), 부전공, 교육학, 교양에 포함되지 않는 과목돌은 삭제
         List<Instruction> removed =  removeInstructionsByList(entireInstructions, removeInstructions);
 
-        return addWeightToInstructions(removed, new Float(0));
-
+        return addWeightToInstructions(removed, new Float(0));*/
+        return null;
     }
 
     public static List<WeightInstruction> addWeightToInstructions(List<Instruction> instructions, Float weight) {
@@ -68,13 +68,13 @@ public class SuggInstructionService {
     }
 
     public static void tuneInstructionWeights(List<WeightInstruction> validInstruction, Map<String, List<CourseEnums>> remainCourses,
-                                              Student studentInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
+                                              User userInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
         // 1. apriori 결과
         // 2. choosed 배수 따라 조정
         // 3. 전필
 
         for (List<TimetableDto.findInstructionCode> data : dataset) {
-             applyAssociationRule(validInstruction, studentInfo.getId(), data);
+             applyAssociationRule(validInstruction, userInfo.getId(), data);
         }
         applyCrowdedInstructions(validInstruction);
         applyNcssInstructions(remainCourses, validInstruction); // 전필

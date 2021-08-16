@@ -3,8 +3,8 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys;
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 
@@ -121,8 +121,8 @@ public class SuggSysFunc {
         return sorted;
     }
 
-    public static List<String> getUserArea(Student studentInfo) {
-        List<String> userArea = new ArrayList<>();
+    public static List<String> getUserArea(User userInfo) {
+        /*List<String> userArea = new ArrayList<>();
         userArea.add(studentInfo.getMajor().toString());
 
         String secondMajor = studentInfo.getSecondMajor().toString();
@@ -141,7 +141,8 @@ public class SuggSysFunc {
         if (minor != null) { userArea.add(minor); }
         if (teaching) { userArea.add("교육학"); }
 
-        return userArea;
+        return userArea;*/
+        return null;
     }
 
 }

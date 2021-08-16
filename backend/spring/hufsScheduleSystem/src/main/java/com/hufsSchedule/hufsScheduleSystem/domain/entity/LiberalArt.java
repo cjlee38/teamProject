@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.table;
+package com.hufsSchedule.hufsScheduleSystem.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,20 +15,21 @@ import javax.persistence.*;
 public class LiberalArt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique = true)
+    @Column(name="liberal_art_id", unique = true)
     private Long id;
-
-    @Column(name="area")
-    private String area;
-
-    @Column(name="number_of_subject")
-    private Integer numberOfSubject;
-
-    @Column(name="acqusition_credits")
-    private Integer acqusitionCredits;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", insertable = false, updatable = false)
     @Setter
-    private Student student;
+    private User user;
+
+    @Column(name="area")
+    private String area; // what is this for?
+
+    @Column(name="number_of_subject")
+    private Integer numberOfSubject; // what is this for?
+
+    @Column(name="acqusition_credits")
+    private Integer acqusitionCredits; // what is this for?
+
 }

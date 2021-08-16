@@ -1,10 +1,10 @@
 package com.hufsSchedule.hufsScheduleSystem.Repository;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface InstructionRepository extends JpaRepository<Instruction, Long> {
-    ArrayList<Instruction> findAllByYear(Long year);
+    List<Instruction> findAllByYear(Long year);
 }

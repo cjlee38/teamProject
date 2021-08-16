@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.embed;
+package com.hufsSchedule.hufsScheduleSystem.domain.embed;
 
 import lombok.Getter;
 

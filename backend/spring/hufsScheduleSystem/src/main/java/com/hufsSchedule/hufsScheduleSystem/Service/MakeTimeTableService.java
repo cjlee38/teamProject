@@ -4,10 +4,10 @@ import com.google.common.collect.Table;
 import com.hufsSchedule.hufsScheduleSystem.Advice.Exception.UserNotFoundException;
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Timetable;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Timetable;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondService;
@@ -46,20 +46,20 @@ public class MakeTimeTableService {
 
     public TimetableDto.Result checkCondition(TimetableDto.Req req){
         ConditionDto.courseInstructionRes condition = conditionCheckService.checkConditionForTimeTable(req.getUserId());
-        ArrayList<Instruction> instructions = instructionRepository.findAllByYear(20L); //20년도 강의목록입니다.
+        List<Instruction> instructions = instructionRepository.findAllByYear(20L); //20년도 강의목록입니다.
 //        List<TimetableDto.findInstructionCode> list = courseRepositorySupport.findInstructionCodeByMajor();
 
-        Student studentInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
+        User userInfo = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         List<Instruction> userTakenCourses = condition.getInstructions();
         System.out.println("userTakenCourses size : "+userTakenCourses.size());
         Credit userCredit = condition.getCredit();
 
         UserSelectsObj userSelectsObj = UserSelectsService.initUserSelects(req.getMyCourse(), req.getDeletedCourse(), req.getMyCredit(), req.getMyFreetime());
-        SuggSysObj suggSysObj = suggSysService.initSuggSys(studentInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
-        GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(studentInfo);
-        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(studentInfo, condition.getInstructions(), userCredit, GrdObj);
+        SuggSysObj suggSysObj = suggSysService.initSuggSys(userInfo, userSelectsObj, userTakenCourses, userCredit, instructions);
+        GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(userInfo);
+        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(userInfo, condition.getInstructions(), userCredit, GrdObj);
 
-        List<String> userArea = SuggSysFunc.getUserArea(studentInfo);
+        List<String> userArea = SuggSysFunc.getUserArea(userInfo);
         List<List<TimetableDto.findInstructionCode>> dataset = new ArrayList<>();
 
         for (String area : userArea) {
@@ -71,7 +71,7 @@ public class MakeTimeTableService {
         }
 
         List<Table<String, String, WeightInstruction>> tables = SuggTableService.getTopNTableResult(
-                SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), studentInfo, dataset), 5
+                SuggSysService.generateTimeTable(suggSysObj, remainObj.getGrdCourse(), userInfo, dataset), 5
         );
         System.out.println(tables.size());
 
@@ -98,18 +98,18 @@ public class MakeTimeTableService {
     }
 
     public boolean saveTimeTable(TimetableDto.SaveTimeTable req){
-        Student student = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findById(req.getUserId()).orElseThrow(UserNotFoundException::new);
         ArrayList<Timetable> timetables = new ArrayList<>();
         ArrayList<Instruction> instructions = new ArrayList<>();
         for (Instruction instruction: req.getMyCourse()){
             instruction.setChoosed();
             instructions.add(instruction);
             Timetable timetable = new Timetable();
-            timetable.setStudent(student);
+            timetable.setUser(user);
             timetable.setInstruction(instruction);
             timetables.add(timetable);
         }
-        timeTableRepository.deleteAllByUser(student);
+//        timeTableRepository.deleteAllByUser(student);
         instructionRepository.saveAll(instructions);
         timeTableRepository.saveAll(timetables);
         return true;

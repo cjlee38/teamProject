@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;

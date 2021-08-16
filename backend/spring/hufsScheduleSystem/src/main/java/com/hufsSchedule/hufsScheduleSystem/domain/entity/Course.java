@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.table;
+package com.hufsSchedule.hufsScheduleSystem.domain.entity;
 
 import lombok.*;
 
@@ -16,20 +16,20 @@ public class Course {
     @Column(name="course_id")
     private Long courseId;
 
-    @Column(name="course_area")
-    private String courseArea;
-
-    @Column(name="dept")
-    private String department;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_course", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @Setter
-    private Student student;
-
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_inst_num", insertable = false, updatable = false)
+    @JoinColumn(name = "instruction_id", insertable = false, updatable = false)
     @Setter
     private Instruction instruction;
+
+    @Column(name="course_area")
+    private String courseArea; // what is this for?
+
+    @Column(name="department")
+    private String department; // what is this for?
+
 }

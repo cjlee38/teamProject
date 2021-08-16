@@ -1,7 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.embed.Major;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.embed.Major;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +86,7 @@ public class GrdCondEct {
     }
 
     public static Boolean getStudentBool(Major major) {
-        return getStudentBool(major.getMajor().getName());
+        return null;
+//        return getStudentBool(major.getMajor().getName());
     }
 }

@@ -3,9 +3,9 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.*;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices.SuggInstructionService;
@@ -24,20 +24,20 @@ public class SuggSysService {
     validCourseList -> 20-1 모든 과목에서 내가 수강한 과목  & 선택한 과목 제거. ( + 본인 전공 과목만 남길것인지? )
     creditRatio -> 지금까지 수강한 과목 학점 비율. & 1전공-전공명 / 이중전공 - 전공명 map
      */
-    public static SuggSysObj initSuggSys(Student studentInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
+    public static SuggSysObj initSuggSys(User userInfo, UserSelectsObj userSelectsObj, List<Instruction> userTakenCourses, Credit userCredit, List<Instruction> entireCourses) {
         CreditRange creditRange = SuggCreditService.initTimeTableCredit(userSelectsObj.getUserSelectCredit(), userSelectsObj.getUserSelectCourses());
         Table<String, String, WeightInstruction> timeTable = SuggTableService.initTimeTable(userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserSelectFreeTime());
-        List<WeightInstruction> validInstructions = SuggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserAbandonCourses(), studentInfo);
-        CreditRatio creditRatio = SuggRatioService.initCreditRatio(userCredit, studentInfo, creditRange);
+        List<WeightInstruction> validInstructions = SuggInstructionService.initValidInstructions(entireCourses, userTakenCourses, userSelectsObj.getUserSelectCourses(), userSelectsObj.getUserAbandonCourses(), userInfo);
+        CreditRatio creditRatio = SuggRatioService.initCreditRatio(userCredit, userInfo, creditRange);
 
         return new SuggSysObj(creditRange, timeTable, validInstructions, creditRatio);
     }
 
     // 강의과목을 테이블에 추가
     public static List<Table<String, String, WeightInstruction>> generateTimeTable(SuggSysObj suggSysObj, Map<String, List<CourseEnums>> remainCourses,
-                                                                                   Student studentInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
+                                                                                   User userInfo, List<List<TimetableDto.findInstructionCode>> dataset) {
         System.out.println("valid instructions length : " + suggSysObj.getValidInstructions().size());
-        SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, studentInfo, dataset); // void
+        SuggInstructionService.tuneInstructionWeights(suggSysObj.getValidInstructions(), remainCourses, userInfo, dataset); // void
         List<WeightInstruction> sorted = sortInstructionByWeight(suggSysObj.getValidInstructions());
 
         System.out.println("----------------------------");

@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.type;
+package com.hufsSchedule.hufsScheduleSystem.domain.type;
 
 import lombok.Getter;
 

@@ -10,17 +10,22 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-
 #    database: mysql
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    generate-ddl: true
-    show-sql: true
+#    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+#        show-sql: true
   cache: redis
   redis:
     host: hufsschedulesystemredis.kbfcki.ng.0001.apn2.cache.amazonaws.com
     port: 6379
 
-
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
 
 #    spring:
 #      datasource:

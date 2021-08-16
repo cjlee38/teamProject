@@ -1,6 +1,5 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,13 +34,13 @@ public class UserDto {
             this.name = name;
         }
 
-        public Student toEntity() {
-            return Student.builder()
-                    .number(this.studentNumber)
-                    .password(this.password)
-                    .name(this.name)
-                    .build();
-        }
+//        public Student toEntity() {
+//            return Student.builder()
+//                    .number(this.studentNumber)
+//                    .password(this.password)
+//                    .name(this.name)
+//                    .build();
+//        }
     }
 
     @Getter

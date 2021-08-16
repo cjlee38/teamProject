@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Repository;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.*;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.*;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -26,7 +26,7 @@ public class TimeTableRepositorySupport extends QuerydslRepositorySupport {
                         JPAExpressions
                                 .select(timetable.instruction.id)
                                 .from(timetable)
-                                .where(timetable.student.id.eq(userId))))
+                                .where(timetable.user.id.eq(userId))))
                 .fetch();
     }
 }

@@ -1,10 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCreditService;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRange;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
@@ -12,8 +9,9 @@ import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import java.util.*;
 
 public class SuggRatioService {
-    public static CreditRatio initCreditRatio(Credit userCredit, Student studentInfo, CreditRange creditRange) {
-        Map<String, String> mapper = connectFieldToMajor(studentInfo);
+    public static CreditRatio initCreditRatio(Credit userCredit, User userInfo, CreditRange creditRange) {
+        return null;
+       /* Map<String, String> mapper = connectFieldToMajor(studentInfo);
 
         Map<String, Float> ratio = new HashMap<>();
         CreditCondObj grdCredit = GrdCreditService.makeGrdCreditByInfo(GrdCondEct.getInteger(GrdCondEct.getStudentYear(studentInfo.getNumber())),
@@ -54,16 +52,17 @@ public class SuggRatioService {
         ratio.put("optional", (float)(grdCredit.getOptional() - userCredit.getOptional()) / total);
 
         ratio.replaceAll((k,v) -> v * creditRange.getMaxCredit()); // maxcredit 계산
-        return new CreditRatio(mapper, ratio);
+        return new CreditRatio(mapper, ratio);*/
     }
 
-    public static Map<String, String> connectFieldToMajor(Student studentInfo) {
-        Map<String, String> mapper = new HashMap<>();
+    public static Map<String, String> connectFieldToMajor(User userInfo) {
+        return null;
+        /*Map<String, String> mapper = new HashMap<>();
         mapper.put(studentInfo.getMajor().getMajor().getName(), "firstMajor");
         mapper.put(studentInfo.getSecondMajor().getMajor().getName(), "secondMajor");
         mapper.put("교양", "libArts");
 
-        return mapper;
+        return mapper;*/
     }
     public static void subtractRatio(CreditRatio creditRatio, WeightInstruction instruction) {
         Integer value = instruction.getInstruction().getCredit();

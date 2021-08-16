@@ -1,11 +1,9 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.User;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.LibArtsCond.IfcLibArts;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond.IfcMajors;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,8 +16,8 @@ import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.extractCour
 
 
 public class GrdCompareService {
-    public static GrdCondObj compareGrdAndUser(Student studentInfo, List<Instruction> userCourses, Credit credit, GrdCondObj grdCond) {
-        Map<String, List<CourseEnums>> remainCourseList = compareCourseList(studentInfo, extractCourseNumber(userCourses), grdCond.getGrdCourse());
+    public static GrdCondObj compareGrdAndUser(User userInfo, List<Instruction> userCourses, Credit credit, GrdCondObj grdCond) {
+        Map<String, List<CourseEnums>> remainCourseList = compareCourseList(userInfo, extractCourseNumber(userCourses), grdCond.getGrdCourse());
         CreditCondObj remainCredit = compareCredit(credit, grdCond.getGrdCredit());
         List<String> remainLibArtsFieldCredit = compareLibArtsFieldCredit(GrdCondEct.extractUserFieldCredit(userCourses), grdCond.getGrdCreditField());
 
@@ -38,12 +36,12 @@ public class GrdCompareService {
         return resultField;
     }
 
-    public static Map<String, List<CourseEnums>> compareCourseList(Student studentInfo, List<String> userCourseList, Map<String, List<CourseEnums>> grdCourseList) {
+    public static Map<String, List<CourseEnums>> compareCourseList(User userInfo, List<String> userCourseList, Map<String, List<CourseEnums>> grdCourseList) {
         Map<String, List<CourseEnums>> remainMap = new HashMap<>();
 
 
         // 전공, 이중전공, 교양 기본과목삭제
-        remainMap.put("firstMajor", GrdCondEct.removeCourseListByNumber(grdCourseList.get("firstMajor"), userCourseList));
+        /*remainMap.put("firstMajor", GrdCondEct.removeCourseListByNumber(grdCourseList.get("firstMajor"), userCourseList));
         remainMap.put("secondMajor", GrdCondEct.removeCourseListByNumber(grdCourseList.get("secondMajor"), userCourseList));
         remainMap.put("liberalArts", GrdCondEct.removeCourseListByNumber(grdCourseList.get("liberalArts"), userCourseList));
 
@@ -61,13 +59,14 @@ public class GrdCompareService {
         IfcLibArts libArts = GrdCourseService.makeLibArtsObjsByInfo(GrdCondEct.getInteger( GrdCondEct.getStudentYear(studentInfo.getNumber())));
         remainMap.put("liberalArts", libArts.modifySpecialCourseList(remainMap.get("liberalArts"), userCourseList));
 
-        return remainMap;
+        return remainMap;*/
+        return null;
     }
 
 
     public static CreditCondObj compareCredit(Credit userCredit, CreditCondObj grdCredit) {
 
-        CreditCondObj remainCredit = new CreditCondObj();
+        /*CreditCondObj remainCredit = new CreditCondObj();
 
         remainCredit.setFirstMajor(grdCredit.getFirstMajor() - userCredit.getFirstMajor());
         remainCredit.setSecondMajor(grdCredit.getSecondMajor() - userCredit.getSecondMajor());
@@ -80,7 +79,8 @@ public class GrdCompareService {
         remainCredit.setTotalCredit(grdCredit.getTotalCredit() - userCredit.getTotalCredit());
         remainCredit.setAverageScore((float)2.0);
 
-        return remainCredit;
+        return remainCredit;*/
+        return null;
     }
 
     public static List<String> extractKorName(List<CourseEnums> courseList) {

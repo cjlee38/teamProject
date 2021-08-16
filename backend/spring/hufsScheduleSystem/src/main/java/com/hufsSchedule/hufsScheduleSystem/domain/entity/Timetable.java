@@ -1,6 +1,5 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.table;
+package com.hufsSchedule.hufsScheduleSystem.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ public class Timetable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_table", insertable = true, updatable = true)
     @Setter
-    private Student student;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "timetable_inst_num", insertable = true, updatable = true)

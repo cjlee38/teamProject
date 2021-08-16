@@ -1,7 +1,7 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Credit;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.domain.entity.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRange;
 
 import java.util.List;

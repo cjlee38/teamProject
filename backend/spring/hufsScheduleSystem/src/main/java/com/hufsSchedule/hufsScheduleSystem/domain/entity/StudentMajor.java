@@ -1,6 +1,6 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity.table;
+package com.hufsSchedule.hufsScheduleSystem.domain.entity;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.embed.Major;
+import com.hufsSchedule.hufsScheduleSystem.domain.embed.Major;
 
 import javax.persistence.*;
 
@@ -10,6 +10,7 @@ public class StudentMajor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_major_id")
     private Long id;
 
     @Embedded
@@ -27,5 +28,11 @@ public class StudentMajor {
     @Embedded
     @AttributeOverride(name = "name", column = @Column(name = "minor_major"))
     private Major minor;
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }
