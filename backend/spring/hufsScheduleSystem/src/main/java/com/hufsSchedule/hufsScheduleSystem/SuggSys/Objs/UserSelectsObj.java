@@ -1,6 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
 import lombok.Getter;
 
 import java.util.List;

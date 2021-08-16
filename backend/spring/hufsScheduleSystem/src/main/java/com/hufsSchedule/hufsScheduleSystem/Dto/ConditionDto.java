@@ -1,15 +1,12 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConditionDto {

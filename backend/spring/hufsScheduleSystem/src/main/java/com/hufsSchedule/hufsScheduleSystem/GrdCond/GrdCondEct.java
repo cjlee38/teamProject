@@ -1,10 +1,9 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.embed.Major;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,22 +29,16 @@ public class GrdCondEct {
     }
 
     public static Boolean getStudentBool(String str) {
-        if (str == null || str.equals("0") || str.length() == 0) { // or length == 0?
-            return false;
-        } else {
-            return true;
-        }
+        return str != null && !str.equals("0") && str.length() != 0;
     }
 
     public static String getEngFromKorMajor(String korMajorName) {
 
-        String engMajorName = Stream.of(departments.values())
+        return Stream.of(departments.values())
                 .filter(s -> korMajorName.equals(s.getKorName()))
-                .map(s->s.getEngName())
+                .map(departments::getEngName)
                 .findFirst()
                 .orElse(null);
-
-        return engMajorName;
     }
 
     public static List<CourseEnums> removeCourseListByNumber(List<CourseEnums> courseList, List<String> removeList) {
@@ -61,7 +54,7 @@ public class GrdCondEct {
 
     public static List<String> extractCourseNumber(List<Instruction> userInstructions) {
         List<String> courseNumbers = new ArrayList<String>();
-        userInstructions.stream().forEach(i -> courseNumbers.add(i.getInstructionNumber().substring(0,6)));
+        userInstructions.stream().forEach(i -> courseNumbers.add(i.getCode().substring(0,6)));
 
         String seminar;
         seminar = courseNumbers.stream().filter(x -> x.startsWith("U7618")).findFirst().orElse(null);
@@ -90,5 +83,9 @@ public class GrdCondEct {
         courses.stream().forEach(x -> strings.add(x.getKorName()));
 
         return strings;
+    }
+
+    public static Boolean getStudentBool(Major major) {
+        return getStudentBool(major.getMajor().getName());
     }
 }

@@ -3,14 +3,12 @@ package com.hufsSchedule.hufsScheduleSystem.SuggSys.detailServices;
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.CreditRatio;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs.WeightInstruction;
 import com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.hufsSchedule.hufsScheduleSystem.SuggSys.SuggSysFunc.*;
 
@@ -53,7 +51,7 @@ public class SuggTableService {
     }
 
     public static Boolean inputInstructionToTable(Table<String, String, WeightInstruction> timeTable, WeightInstruction instruction, CreditRatio ratio)  {
-        String field = ratio.getFieldToMajor().get(instruction.getInstruction().getDept());
+        String field = ratio.getFieldToMajor().get(instruction.getInstruction().getDepartment());
         String classTime = instruction.getInstruction().getClassTime();
         if (classTime == null || classTime.length() == 0) { // classtime 없으면 return
             return false;
@@ -81,8 +79,8 @@ public class SuggTableService {
             for (String column : columns) {
                 WeightInstruction cell = timeTable.get(row, column);
                 if (cell != null && !isInstructionEmpty(cell)) {
-                    String instNumber = cell.getInstruction().getInstructionNumber().substring(0, 6);
-                    if (instNumber.equals(instruction.getInstruction().getInstructionNumber().substring(0, 6))) {
+                    String instNumber = cell.getInstruction().getCode().substring(0, 6);
+                    if (instNumber.equals(instruction.getInstruction().getCode().substring(0, 6))) {
                         return false; // 같은 학수번호가 존재한다면 return
                     }
                 }
@@ -113,7 +111,7 @@ public class SuggTableService {
             System.out.println(e);
             System.out.println(times);
             System.out.println(instruction.getInstruction().getSubject());
-            System.out.println(instruction.getInstruction().getInstructionNumber());
+            System.out.println(instruction.getInstruction().getCode());
             throw new NullPointerException("shit");
         }
 
@@ -145,8 +143,8 @@ public class SuggTableService {
                 for (String column : columns) {
                     WeightInstruction cell = table.get(row, column);
                     if (cell != null && ! isInstructionEmpty(cell)) {
-                        boolean rq = cell.getInstruction().isRequired();
-                        if (rq == true) {
+                        Boolean rq = cell.getInstruction().getRequired();
+                        if (rq) {
                             require += 1;
                         }
                     }

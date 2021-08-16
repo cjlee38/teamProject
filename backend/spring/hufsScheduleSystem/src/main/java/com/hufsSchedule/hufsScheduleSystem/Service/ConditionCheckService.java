@@ -2,9 +2,9 @@ package com.hufsSchedule.hufsScheduleSystem.Service;
 
 import com.hufsSchedule.hufsScheduleSystem.Advice.Exception.UserNotFoundException;
 import com.hufsSchedule.hufsScheduleSystem.Dto.ConditionDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.User;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Credit;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Student;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CreditCond.CreditCondObj;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCompareService;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
@@ -30,7 +30,7 @@ public class ConditionCheckService {
     private final UserRepository userRepository;
 
     public ConditionDto.ResultOfCondition checkCondition(Long userId){
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        Student student = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Credit credit = creditRepositorySupport.findByUser(userId);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
         List<String> takenFirstMajor = courseRepositorySupport.findInstructionByUserCourseArea(userId, "1전공").stream().map(Instruction::getSubject).collect(Collectors.toList());
@@ -45,9 +45,9 @@ public class ConditionCheckService {
         List<Integer> userRemainCredit = new ArrayList<>();
         List<Integer> userTakenCredit = new ArrayList<>();
 
-        userInfo.add(user.getMajor());
-        userInfo.add(user.getSecondMajor());
-        userInfo.add(user.getMinor());
+        userInfo.add(student.getMajor().toString());
+        userInfo.add(student.getSecondMajor().toString());
+        userInfo.add(student.getMinor().toString());
 
         userTakenCredit.add(credit.getFirstMajor());
         userTakenCredit.add(credit.getSecondMajor());
@@ -58,7 +58,7 @@ public class ConditionCheckService {
         userTakenCredit.add(credit.getTeaching());
         userTakenCredit.add(credit.getOptional());
 
-        GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(user);
+        GrdCondObj GrdObj = GrdCondService.makeGrdCondByUserInfo(student);
 //        List<String> gCourses = new ArrayList<>();
 
         GrdCondEct.extractStringFromEnums(GrdObj.getGrdCourse().get("secondMajor"));
@@ -76,7 +76,7 @@ public class ConditionCheckService {
         userGrdCredit.add(gCredit.getOptional());
         userGrdCredit.add(gCredit.getTotalCredit());
 
-        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(user, courses, credit, GrdObj);
+        GrdCondObj remainObj = GrdCompareService.compareGrdAndUser(student, courses, credit, GrdObj);
 //        List<String> remainCourses = new ArrayList<>();
 //
 //

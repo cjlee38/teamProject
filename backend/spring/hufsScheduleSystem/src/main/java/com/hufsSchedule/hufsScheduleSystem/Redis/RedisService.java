@@ -1,10 +1,9 @@
 package com.hufsSchedule.hufsScheduleSystem.Redis;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.RedisDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.Repository.InstructionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,11 @@ public class RedisService {
     private final RedisTemplate<String, Object> redisTemplate;
 
     public void InstallInstructions() {
-        ArrayList<Instruction> instructions = instructionRepository.findAllByRqYear(20L);
+        ArrayList<Instruction> instructions = instructionRepository.findAllByYear(20L);
         ValueOperations<String, Object> vop = redisTemplate.opsForValue();
         //get/set을 위한 객체
         for (Instruction instruction : instructions){
-            RedisDto setData = new RedisDto(instruction.getInstructionId(), instruction);
+            RedisDto setData = new RedisDto(instruction.getId(), instruction);
             vop.set("key", setData);
             RedisDto getData = (RedisDto) vop.get("key");
             System.out.println(getData.getInstructionId());

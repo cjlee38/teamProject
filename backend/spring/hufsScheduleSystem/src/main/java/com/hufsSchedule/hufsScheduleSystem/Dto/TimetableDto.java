@@ -1,16 +1,12 @@
 package com.hufsSchedule.hufsScheduleSystem.Dto;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
-import com.hufsSchedule.hufsScheduleSystem.Entity.User;
+import com.hufsSchedule.hufsScheduleSystem.Entity.table.Instruction;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondObj;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class TimetableDto {
 

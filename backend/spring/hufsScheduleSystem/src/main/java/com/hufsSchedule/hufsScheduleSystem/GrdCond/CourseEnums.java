@@ -1,7 +1,5 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
-
 public interface CourseEnums {
     public String getKorName();
     public String getEngName();

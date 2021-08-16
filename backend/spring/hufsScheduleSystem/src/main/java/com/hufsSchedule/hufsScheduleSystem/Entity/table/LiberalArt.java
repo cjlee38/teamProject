@@ -1,9 +1,9 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity;
+package com.hufsSchedule.hufsScheduleSystem.Entity.table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -17,22 +17,18 @@ public class LiberalArt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique = true)
     private Long id;
+
     @Column(name="area")
     private String area;
+
     @Column(name="number_of_subject")
-    private int numberOfSubject;
+    private Integer numberOfSubject;
+
     @Column(name="acqusition_credits")
-    private int acqusitionCredits;
+    private Integer acqusitionCredits;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", insertable = false, updatable = false)
-    private User user;
-
-    public void setUser(User user) {
-        this.user = user;
-
-        /*if(!user.getLiberalArts().contains(this)) {
-            user.getLiberalArts().add(this);
-        }*/
-    }
+    @Setter
+    private Student student;
 }

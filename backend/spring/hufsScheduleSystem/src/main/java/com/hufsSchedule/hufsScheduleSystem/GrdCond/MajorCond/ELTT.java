@@ -1,6 +1,5 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 

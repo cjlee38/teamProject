@@ -1,13 +1,10 @@
 package com.hufsSchedule.hufsScheduleSystem.SuggSys.Objs;
 
 import com.google.common.collect.Table;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Credit;
-import com.hufsSchedule.hufsScheduleSystem.Entity.Instruction;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter

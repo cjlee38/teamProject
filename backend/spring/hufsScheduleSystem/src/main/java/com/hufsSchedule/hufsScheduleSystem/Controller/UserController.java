@@ -1,7 +1,6 @@
 package com.hufsSchedule.hufsScheduleSystem.Controller;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.UserDto;
-import com.hufsSchedule.hufsScheduleSystem.Entity.User;
 import com.hufsSchedule.hufsScheduleSystem.ResultForm.CommonResult;
 import com.hufsSchedule.hufsScheduleSystem.Service.ResponseService;
 import com.hufsSchedule.hufsScheduleSystem.Service.UserService;
@@ -29,5 +28,4 @@ public class UserController {
         return userService.signUp(dto);
     }
 
-    //jdbc:h2:tcp://localhost/~/noti
 }

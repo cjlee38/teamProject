@@ -24,20 +24,14 @@ public class MakeTimeTableController {
     private final RedisService redisService;
     private final CourseRepositorySupport courseRepositorySupport;
 
-    /*@GetMapping("/selectInstruction")
-    public void makeTimeTable()throws Exception {
-        redisService.InstallInstructions();
-        return ;
-    }*/
-
     @PostMapping("/try")
-    public TimetableDto.Result makeTimeTable(@RequestBody TimetableDto.Req req)throws Exception {
+    public TimetableDto.Result makeTimeTable(@RequestBody TimetableDto.Req req) throws Exception {
         TimetableDto.Result results = makeTimeTableService.checkCondition(req);
         return results;
     }
 
     @PostMapping("/save")
-    public boolean saveTimeTable(@RequestBody TimetableDto.SaveTimeTable req)throws Exception {
+    public boolean saveTimeTable(@RequestBody TimetableDto.SaveTimeTable req) throws Exception {
         makeTimeTableService.saveTimeTable(req);
         return true;
     }

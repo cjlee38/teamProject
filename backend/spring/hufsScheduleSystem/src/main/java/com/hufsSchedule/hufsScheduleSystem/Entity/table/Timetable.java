@@ -1,9 +1,10 @@
-package com.hufsSchedule.hufsScheduleSystem.Entity;
+package com.hufsSchedule.hufsScheduleSystem.Entity.table;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -20,25 +21,11 @@ public class Timetable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_table", insertable = true, updatable = true)
-    private User user;
-
-    public void setUser(User user) {
-        this.user = user;
-
-        /*if(!user.getTimetables().contains(this)) {
-            user.getTimetables().add(this);
-        }*/
-    }
+    @Setter
+    private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "timetable_inst_num", insertable = true, updatable = true)
+    @Setter
     private Instruction instruction;
-
-    public void setInstruction(Instruction instruction) {
-        this.instruction = instruction;
-
-        /*if(!instruction.getTimetables().contains(this)) {
-            instruction.getTimetables().add(this);
-        }*/
-    }
 }

@@ -1,14 +1,11 @@
 package com.hufsSchedule.hufsScheduleSystem.GrdCond.MajorCond;
 
-import com.hufsSchedule.hufsScheduleSystem.Entity.Course;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.CourseEnums;
 import com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.hufsSchedule.hufsScheduleSystem.GrdCond.GrdCondEct.getCourseUniqueNumber;
 
 public class Vietnamese implements IfcMajors {
     @Override
