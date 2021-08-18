@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CourseRepositorySupportTest {
@@ -23,6 +26,9 @@ class CourseRepositorySupportTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private InstructionRepository instructionRepository;
+
     @Test
     public void getInstructionsWithUserId() throws Exception {
         // given
@@ -33,15 +39,19 @@ class CourseRepositorySupportTest {
 
         Instruction instruction = new Instruction();
         instruction.setDepartment(DepartmentType.BUSINESS);
+        instructionRepository.save(instruction);
 
         Course course = new Course();
         course.setInstruction(instruction);
         course.setUser(user);
-
         courseRepository.save(course);
+
         // when
+
         List<Instruction> instructions = courseRepositorySupport.findInstructionByUser(user.getId());
-        System.out.println(instructions);
+
         // then
+        assertEquals(1, instructions.size());
+        assertEquals(instructions.get(0).getDepartment(), DepartmentType.BUSINESS);
     }
 }

@@ -19,7 +19,8 @@ import java.io.Serializable;
 public class Instruction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="instruction_id", unique = true)
+    @Column(name="" +
+            "", unique = true)
     @JsonProperty("instruction_id")
     private Long id;
 
@@ -34,6 +35,7 @@ public class Instruction implements Serializable {
     private Integer semester; // 강의 개설 학기
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private DepartmentType department; // 학과
 
     @Column(name="area")

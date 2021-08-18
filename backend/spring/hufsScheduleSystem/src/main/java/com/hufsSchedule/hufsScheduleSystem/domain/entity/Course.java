@@ -17,13 +17,12 @@ public class Course {
     private Long courseId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @Setter
+    @JoinColumn(name = "user_id"/*, insertable = false, updatable = false*/)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "instruction_id", insertable = false, updatable = false)
-    @Setter
+    @JoinColumn(name = "instruction_id"/*, insertable = false, updatable = false*/)
+//    @Setter
     private Instruction instruction;
 
     @Column(name="course_area")
@@ -32,4 +31,12 @@ public class Course {
     @Column(name="department")
     private String department; // what is this for?
 
+    public void setUser(User user) {
+        this.user = user;
+        user.getCourse().add(this);
+    }
+
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
+    }
 }

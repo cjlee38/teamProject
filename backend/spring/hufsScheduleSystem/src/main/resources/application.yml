@@ -9,14 +9,15 @@ spring:
     url: jdbc:h2:tcp://localhost/~/hufsSchedule
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 #    database: mysql
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 #    generate-ddl: true
     properties:
       hibernate:
         format_sql: true
-#        show-sql: true
+        show-sql: true
+#        use_sql_comment: true
   cache: redis
   redis:
     host: hufsschedulesystemredis.kbfcki.ng.0001.apn2.cache.amazonaws.com
@@ -24,8 +25,12 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+        descriptor:
+          sql: trace
 
 #    spring:
 #      datasource:
