@@ -37,7 +37,7 @@ public class User {
     private Boolean isIntensiveMajor; // 전공심화 여부
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Course> course = new ArrayList<>(); // 수강 과목
 
     @OneToOne(mappedBy = "user")

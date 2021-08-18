@@ -31,7 +31,8 @@ public class CourseRepositorySupport extends QuerydslRepositorySupport {
         return null;
     }
 
-    public List<Instruction> findInstructionByUser(Long userId){
+    public List<Instruction>
+    findInstructionByUser(Long userId){
         QCourse course = new QCourse("course");
         QInstruction instruction = new QInstruction("instruction");
         return queryFactory

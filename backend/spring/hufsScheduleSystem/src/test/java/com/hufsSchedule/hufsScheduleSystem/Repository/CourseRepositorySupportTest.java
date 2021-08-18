@@ -7,6 +7,7 @@ import com.hufsSchedule.hufsScheduleSystem.domain.type.DepartmentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,7 @@ class CourseRepositorySupportTest {
     private InstructionRepository instructionRepository;
 
     @Test
-    public void getInstructionsWithUserId() throws Exception {
+    public void getInstructionsByUserWithRepository() throws Exception {
         // given
         User user = new User();
         user.setUsername("hello");
@@ -53,5 +54,34 @@ class CourseRepositorySupportTest {
         // then
         assertEquals(1, instructions.size());
         assertEquals(instructions.get(0).getDepartment(), DepartmentType.BUSINESS);
+    }
+
+    @Test
+    @Transactional
+    public void getInstructionsByUserWithEntity() throws Exception {
+        // given
+        User user = new User();
+        user.setUsername("hello");
+        user.setPassword("password");
+        userRepository.save(user);
+
+        Instruction instruction = new Instruction();
+        instruction.setDepartment(DepartmentType.BUSINESS);
+        instructionRepository.save(instruction);
+
+        Course course = new Course();
+        course.setInstruction(instruction);
+        course.setUser(user);
+        courseRepository.save(course);
+        // when
+
+        Optional<User> findUser = userRepository.findById(user.getId());
+        assertNotNull(findUser.get());
+        List<Course> findCourse = findUser.get().getCourse();
+
+        // then
+        for (Course c : findCourse) {
+            System.out.println(c.getInstruction().getDepartment());
+        }
     }
 }
