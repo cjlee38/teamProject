@@ -39,4 +39,11 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Course> course = new ArrayList<>(); // 수강 과목
+
+    @OneToOne(mappedBy = "user")
+    private Credit credit;
+
+    public void setCredit(Credit credit) {
+        this.credit = credit;
+    }
 }

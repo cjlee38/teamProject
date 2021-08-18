@@ -22,7 +22,6 @@ public class Course {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "instruction_id"/*, insertable = false, updatable = false*/)
-//    @Setter
     private Instruction instruction;
 
     @Column(name="course_area")

@@ -1,4 +1,4 @@
-package com.hufsSchedule.hufsScheduleSystem.Controller;
+package com.hufsSchedule.hufsScheduleSystem.controller;
 
 import com.hufsSchedule.hufsScheduleSystem.ResultForm.CommonResult;
 import com.hufsSchedule.hufsScheduleSystem.Service.ConditionCheckService;

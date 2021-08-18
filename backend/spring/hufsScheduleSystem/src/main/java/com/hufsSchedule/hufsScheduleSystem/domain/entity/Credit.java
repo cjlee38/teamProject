@@ -34,9 +34,15 @@ public class Credit {
 
     private Integer totalCredit; // 총 취득
 
+    @Setter
     private Double averageScore; // 총 평점
 
-    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, optional = false)
+    @OneToOne(fetch=FetchType.LAZY/*, cascade = CascadeType.PERSIST, optional = false*/)
     @JoinColumn(name="user_id"/*, referencedColumnName = "user_id"*/)
     private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+        this.user.setCredit(this);
+    }
 }

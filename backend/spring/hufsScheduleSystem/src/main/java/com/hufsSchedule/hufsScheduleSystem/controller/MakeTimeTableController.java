@@ -1,11 +1,10 @@
-package com.hufsSchedule.hufsScheduleSystem.Controller;
+package com.hufsSchedule.hufsScheduleSystem.controller;
 
 import com.hufsSchedule.hufsScheduleSystem.Dto.TimetableDto;
 import com.hufsSchedule.hufsScheduleSystem.Redis.RedisService;
 import com.hufsSchedule.hufsScheduleSystem.Repository.CourseRepositorySupport;
 import com.hufsSchedule.hufsScheduleSystem.Service.MakeTimeTableService;
 import com.hufsSchedule.hufsScheduleSystem.Service.ResponseService;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

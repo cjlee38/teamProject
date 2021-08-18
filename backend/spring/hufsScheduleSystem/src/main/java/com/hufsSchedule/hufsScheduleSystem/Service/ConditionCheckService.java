@@ -21,7 +21,8 @@ public class ConditionCheckService {
 
     public ConditionDto.ResultOfCondition checkCondition(Long userId){
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        Credit credit = creditRepository.findByUser(userId).orElseThrow(UserNotFoundException::new);
+        Credit credit = user.getCredit();
+//        Credit credit = creditRepository.findByUser(userId).orElseThrow(UserNotFoundException::new);
         List<Instruction> courses = courseRepositorySupport.findInstructionByUser(userId);
 
         /*
